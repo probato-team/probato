@@ -1,0 +1,18 @@
+---
+layout: page
+---
+
+{{content}}
+
+<div class="position-relative mt-5 pt-5">
+  {% if page.navigation.previous %}
+  <div class="position-absolute bottom-0 start-0">
+    <a href="{{ page.navigation.previous.link }}" > < {{ page.navigation.previous.name }}</a>
+  </div>
+  {% endif %}
+  {% if page.navigation.next %}
+  <div class="position-absolute bottom-0 end-0">
+    <a href="{{ page.navigation.next.link }}" >{{ page.navigation.next.name }} ></a>
+  </div>
+  {% endif %}
+</div>

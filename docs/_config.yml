@@ -1,0 +1,25 @@
+title: Probato
+description: Framework para automação de testes a nível funcional de software
+show_downloads: true
+google_analytics: G-XZR907P520
+theme: jekyll-theme-cayman
+markdown: kramdown
+highlighter: rouge
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+github:
+  is_project_page: true
+  is_user_page: true
+  repository_name: Probato
+  repository_url: https://github.com/probato-team/probato
+  owner_name: Probato Team
+  owner_url: https://github.com/probato-team

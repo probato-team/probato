@@ -1,0 +1,61 @@
+---
+---
+
+@import 'jekyll-theme-cayman';
+
+.page-header {
+    color: #fff;
+    text-align: center;
+    background-color: #474bc9;
+    background-image: linear-gradient(120deg, #155799, #159999);
+}
+
+.page-footer {
+    margin-top: 4rem !important;
+    color: #fff;
+    text-align: center;
+    background-color: #474bc9;
+    background-image: linear-gradient(120deg, #155799, #159999);
+}
+
+.site-footer-owner {
+    font-size: 0.7rem;
+    text-align: right;
+    line-height: 0;
+    font-weight: 500;
+}
+
+.site-footer-credits {
+    color: #fff;
+    font-size: 0.7rem;
+    text-align: right;
+    line-height: 0.5;
+    font-weight: 500;
+}
+
+a {
+    color: #75b9fd;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 64em) {
+    .page-header {
+        padding: 2rem 6rem;
+    }
+}
+
+.btn-card {
+
+    background-color: #2a7df8 !important;
+    color: white !important;
+}
+
+.card-tutorial {
+    min-height: 250px;
+
+    .btn-tutorial {
+        position: absolute;
+        right: 10px;
+        bottom: 0px;
+    }
+}
