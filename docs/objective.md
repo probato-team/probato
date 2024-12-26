@@ -3,8 +3,6 @@ layout: page
 description: Objetivo
 ---
 
-## **Propósito Principal**
-
 O principal objetivo do **Probato** é **simplificar** e **acelerar** o processo de automação de testes de software, fornecendo uma solução robusta e flexível para garantir a qualidade de sistemas complexos. A automação de testes tem se tornado indispensável à medida que as práticas de desenvolvimento de software evoluem para modelos mais ágeis, onde a validação contínua e rápida das funcionalidades é essencial. Este framework está sendo projetado para resolver os desafios comuns da automação e superar limitações frequentemente encontradas em outras ferramentas.
 
 ## **Propósitos Centrais**
