@@ -93,16 +93,16 @@ Se você vê essa saída, o Java está instalado e configurado corretamente! �
 Uma IDE (Ambiente de Desenvolvimento Integrado) facilita a escrita, execução e depuração do código Java.
 
 **Opção 1: Eclipse IDE**
-1. Baixe em: https://www.eclipse.org/downloads/.
+1. Baixe o <a href="https://www.eclipse.org/downloads/" >Eclipse</a>.
 2. Instale o Eclipse IDE for Java Developers.
 3. Abra o Eclipse, configure um workspace e comece a criar projetos.
 
 **Opção 2: IntelliJ IDEA**
-1. Baixe em: https://www.jetbrains.com/idea/download/.
+1. Baixe o <a href="https://www.jetbrains.com/idea/download/" >IntelliJ</a>.
 2. Escolha a versão Community (gratuita).
 3. Durante a primeira execução, configure o caminho do JDK.
 
 **Opção 3: VS Code**
-1. Baixe em: https://code.visualstudio.com/.
+1. Baixe o <a href="https://code.visualstudio.com/" >VS Code</a>.
 2. Instale a extensão Language Support for Java™ by Red Hat.
 3. Configure o JDK nas preferências.
