@@ -21,40 +21,6 @@ Os objetivos principais incluem:
 - **Facilidade de Integração e Extensibilidade**  
     Projetado para ser flexível, o **Probato** é facilmente integrável a ferramentas externas e pode ser estendido para atender necessidades específicas de diferentes projetos.
 
-## **Alinhamento com os Princípios F.I.R.S.T.**
-
-**Probato** foi desenvolvido com base no conceito **F.I.R.S.T.**, que é um acrônico um conjunto de boas práticas que visam garantir a qualidade dos testes. Ao seguir esses princípios, os testes tornam-se mais eficazes, fáceis de manter e confiáveis. A ferramenta facilita a adoção dos princípios F.I.R.S.T., que são:
-
-- **F - Fast (Rápido)**:
-    
-    - **Objetivo**: Testes devem ser rápidos para fornecer feedback imediato aos desenvolvedores e às equipes de QA. Testes lentos podem prejudicar o fluxo de trabalho e desincentivar sua execução frequente.
-    
-    - **Como o Probato ajuda**: Possui motor de execuções otimizado para executar testes de forma eficiente, suportando paralelização e integração com sistemas de CI/CD. Isso permite que os testes sejam executados em paralelo, reduzindo significativamente o tempo de execução total.
-    
-- **I - Independent (Independente)**:
-    
-    - **Objetivo**: Cada teste deve ser independente de outros testes. A execução de um teste não deve depender de outro teste ou de uma sequência específica de testes, garantindo que a falha de um não afete os resultados de outros.
-    
-    - **Como a ferramenta ajuda**: Incentiva a modularização dos testes, garantindo que cada teste funcione de maneira isolada. Com uma arquitetura clara de organização de testes, como o uso de padrões como **Page Object Model** (POM) e **camadas de abstração**, é possível escrever testes que não dependem uns dos outros.
-    
-- **R - Repeatable (Repetível)**:
-    
-    - **Objetivo**: Testes devem ser repetíveis em diferentes ambientes (local, teste, produção) sem que os resultados variem. Testes que falham ou passam aleatoriamente (testes flakys) devem ser evitados.
-    
-    - **Como a ferramenta ajuda**: Promove o uso de dados controlados e ambientes consistentes para garantir que os testes possam ser repetidos com os mesmos resultados. 
-    
-- **S - Self-Validating (Auto Validação)**:
-    
-    - **Objetivo**: Testes devem ser auto verificáveis, ou seja, devem ser capazes de determinar automaticamente se passaram ou falharam, sem exigir inspeção manual.
-    
-    - **Como a ferramenta ajuda**: Fornece um sistema robusto de asserções, que permite validar automaticamente os resultados dos testes. Além disso, ele gera relatórios detalhados, exibindo claramente quais testes passaram ou falharam, o motivo e onde os erros ocorreram, por meio de evidências.
-    
-- **T - Timely (Oportuno)**:
-    
-    - **Objetivo**: Testes devem ser escritos no momento certo, idealmente antes ou durante o desenvolvimento do código que será testado. Criar testes após o desenvolvimento pode levar a uma cobertura limitada ou a problemas imprevistos.
-    
-    - **Como a ferramenta ajuda**: Facilita a integração com o ciclo de desenvolvimento ágil, promovendo a criação de testes durante o desenvolvimento. Ele se integra perfeitamente em pipelines de **CI/CD**, o que incentiva a prática de **Test-Driven Development (TDD)** e **Behavior-Driven Development (BDD)**, onde os testes são escritos antes da implementação do código.
-
 ### **Foco em Agilidade e Integração Contínua**
 
 Outro objetivo central do **Probato** é proporcionar suporte a ambientes **ágil** e de **integração contínua** (CI), onde o ciclo de desenvolvimento é rápido e os testes devem acompanhar o ritmo das entregas.
