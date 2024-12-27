@@ -3,7 +3,7 @@ layout: page
 description: Objetivo
 ---
 
-O principal objetivo do **Probato** é **simplificar** e **acelerar** o processo de automação de testes de software, fornecendo uma solução robusta e flexível para garantir a qualidade de sistemas complexos. A automação de testes tem se tornado indispensável à medida que as práticas de desenvolvimento de software evoluem para modelos mais ágeis, onde a validação contínua e rápida das funcionalidades é essencial. Este framework está sendo projetado para resolver os desafios comuns da automação e superar limitações frequentemente encontradas em outras ferramentas.
+O principal objetivo do **Probato** é **simplificar** e **acelerar** o processo de automação de testes de software, fornecendo uma solução robusta e flexível para garantir a qualidade de sistemas complexos. A automação de testes tem se tornado indispensável à medida que as práticas de desenvolvimento de software evoluem para modelos mais ágeis, onde a validação contínua e rápida das funcionalidades é essencial. Este framework está sendo projetado para resolver os desafios comuns da automação e superar limitações frequentemente encontradas.
 
 ## **Propósitos Centrais**
 
@@ -25,9 +25,9 @@ Os objetivos principais incluem:
 
 Outro objetivo central do **Probato** é proporcionar suporte a ambientes **ágil** e de **integração contínua** (CI), onde o ciclo de desenvolvimento é rápido e os testes devem acompanhar o ritmo das entregas.
 
-- **Validação Rápida em Ambientes Ágeis**: Em ciclos ágeis, é essencial que as mudanças de código sejam validadas de forma rápida e eficaz. O framework permite que os testes sejam executados de forma contínua em cada mudança de código, garantindo que novas funcionalidades ou correções não introduzam novos defeitos.
+- **Validação Rápida em Ambientes Ágeis**: Em ciclos ágeis, é essencial que as mudanças de código sejam validadas de forma rápida e eficaz. O **Probato** permite que os testes sejam executados de forma contínua em cada mudança de código, garantindo que novas funcionalidades ou correções não introduzam novos defeitos.
 
-- **Suporte para Pipelines de CI/CD**: O framework é projetado para se integrar facilmente em pipelines de CI/CD, como Jenkins, GitLab CI, Travis CI, entre outros. Isso possibilita a execução automática dos testes a cada commit ou em momentos estratégicos do ciclo de desenvolvimento, garantindo que o código esteja sempre em conformidade com os padrões de qualidade estabelecidos.
+- **Suporte para Pipelines de CI/CD**: O **Probato** é projetado para se integrar facilmente em pipelines de CI/CD, como Jenkins, GitLab CI, Travis CI, entre outros. Isso possibilita a execução automática dos testes a cada commit ou em momentos estratégicos do ciclo de desenvolvimento, garantindo que o código esteja sempre em conformidade com os padrões de qualidade estabelecidos.
 
 ### **Redução de Custos e Esforço em Manutenção**
 
@@ -53,17 +53,15 @@ Outro objetivo importante é aumentar a **confiança** das equipes de desenvolvi
 
 ### **Facilidade de Uso**
 
-Além de ser poderoso, a ferramenta está foi projetado para ser **fácil de usar**, mesmo para aqueles que não têm muita experiência em automação de testes. Os objetivos relacionados à acessibilidade incluem:
+Além de ser poderoso, a ferramenta foi projetado para ser **fácil de usar**, mesmo para aqueles que não têm muita experiência em automação de testes. Os objetivos relacionados à acessibilidade incluem:
 
 - **Interface Simples e Intuitiva**: A aplicação de gerenciamento de resultados fornece uma interface simples, que permite a criação e execução de testes com pouca necessidade de conhecimento técnico profundo. Documentação detalhada e exemplos são fornecidos para ajudar os usuários a começarem rapidamente.
 
 - **Baixa Curva de Aprendizado**: A arquitetura modular e a sintaxe amigável tornam a ferramenta acessível para desenvolvedores com pouca experiência, ao mesmo tempo em que oferecem opções avançadas para desenvolvedores mais experientes.
 
-### **Escalabilidade e Flexibilidade**
+### **Flexibilidade**
 
 Finalmente, um dos objetivos essenciais da ferramenta é ser escalável e flexível, permitindo que ele cresça junto com o projeto e se adapte às mudanças nas necessidades de automação.
-
-* **Suporte a Execuções em Paralelo**: A ferramenta foi projetado para escalar horizontalmente, com suporte à execução de testes em paralelo, em diversos navegadores, reduzindo significativamente o tempo necessário para executar uma suíte completa de testes.
 
 * **Arquitetura Extensível**: A ferramenta permite a implementação de novos plugins para diversas partes do processo, como validações, browsers, bancos de dados, integrações, sem grandes modificações, tornando-o adaptável para diferentes projetos e necessidades futuras.
 
@@ -76,4 +74,4 @@ A ferramenta foi desenvolvido para:
 - Reduzir custos e esforços de manutenção com uma arquitetura flexível.
 - Proporcionar feedback rápido, aumentando a confiança no processo de deploy.
 - Ser fácil de usar, com baixa curva de aprendizado.
-- Ser escalável e flexível, suportando a execução em paralelo e a personalização.
+- Ser flexível, suportando a personalização.

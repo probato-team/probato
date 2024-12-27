@@ -5,7 +5,7 @@ description: O que é Probato?
 
 O nome **Probato** tem origem do latim _Probatus_, que significa "relativo à prova", "comprovativo", "experimental" ou "que serve para demonstrar qualidades necessárias para o desempenho de uma função". Esse termo é o particípio passado do verbo _probo_, que significa "provar".
 
-Trazendo para o contexto de qualidade de software, **Probato** reflete seu propósito central: Apoiar equipes de desenvolvimento na garantia de qualidade dos projetos, assegurando que estejam livres de defeitos de forma ágil, eficiente e segura.
+Trazendo para o contexto de qualidade de software, **Probato** reflete seu propósito central: Apoiar equipes de desenvolvimento na garantia de qualidade dos projetos através de testes automatizados, assegurando que estejam livres de defeitos de forma ágil, eficiente e segura.
 
 ## **O que é Teste Automatizado?**
 
@@ -76,7 +76,7 @@ O teste automatizado é um processo em que scripts ou ferramentas de software ex
 
 ## **Como o Probato contribue na automação de testes?**
 
-O **Probato** foi projetado para enfrentar muitos dos desafios mencionados, tornando o processo de automação de testes mais simples e eficiente. Ele oferece uma estrutura que abstrai a complexidade técnica, promovendo boas práticas de reutilização, padrões claros e ferramentas que facilitam o desenvolvimento e a manutenção dos testes automatizados.
+O **Probato** foi projetado para enfrentar muitos dos desafios mencionados, tornando o processo de automação de testes mais simples e eficiente. Ele oferece uma estrutura que abstrai a complexidade técnica, promovendo boas práticas de reutilização, padrões claros e ferramentas que facilitam o desenvolvimento e a manutenção dos testes automatizados. Além disso, por ser **Open Source**, o framework permite que a comunidade contribua com melhorias, novas funcionalidades e integrações, garantindo evolução contínua e adaptabilidade às diferentes necessidades do mercado.
 
 ### **Pontos a destacar do Probato**:
 
