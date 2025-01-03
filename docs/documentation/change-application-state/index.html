@@ -22,7 +22,7 @@
     
     
       
-        <title>Change application state - Probato</title>
+        <title>Alterando estado da aplicação - Probato</title>
       
     
     
@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#alterando-estado-da-aplicacao" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -115,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Change application state
+              Alterando estado da aplicação
             
           </span>
         </div>
@@ -475,7 +480,7 @@
         
   
   <span class="md-ellipsis">
-    Parameterize input data
+    Parametrizando dados de entrada
   </span>
   
 
@@ -498,16 +503,102 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Alterando estado da aplicação
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Change application state
+    Alterando estado da aplicação
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-dependencia-para-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adicionando dependência para database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-datasource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando datasource
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-arquivos-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando arquivos SQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-sql-ao-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adicionando SQL ao suite
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-sql-ao-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adicionando SQL ao script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consideracoes-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Considerações finais
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -581,19 +672,287 @@
   
 
 
-  <h1>Change application state</h1>
-
-<hr />
-<p>layout: documentation
-description: Guia do usuário - Alterando estado da aplicação
-navigation:
-    previous:
-        name: Parametrizando dados de entrada
-        link: /documentation/parameterize-input-data
-    next: 
-        name: Criando pontos de extensão
-        link: /documentation/create-extension-points</p>
-<hr />
+<h1 id="alterando-estado-da-aplicacao">Alterando estado da aplicação</h1>
+<p>Nesta seção, exploraremos como alterar o estado da aplicação para garantir que as pré-condições necessárias no banco de dados sejam satisfeitas antes do início da execução do objetivo principal dos testes. Abordaremos técnicas para configurar e manipular dados no banco de forma controlada e consistente, garantindo que os testes sejam executados em um ambiente previsível e alinhado com os cenários desejados.</p>
+<p>Além disso, discutiremos boas práticas para realizar essas alterações de maneira automatizada, minimizando interferências externas e otimizando a preparação do ambiente de teste.</p>
+<h2 id="adicionando-dependencia-para-database">Adicionando dependência para database</h2>
+<ol>
+<li>No arquivo <code>pom.xml</code> pode ser adicionada a dependência
+<div class="language-xml highlight"><span class="filename">pom.xml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;project</span><span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span><span class="w"> </span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="w"> </span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo.automation<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>my-project<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span><span class="w"> </span><span class="cm">&lt;!-- Versão atual do projeto alvo dos testes --&gt;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">&lt;properties&gt;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nt">&lt;probato.version&gt;</span>0.1.0<span class="nt">&lt;/testano.version&gt;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="cm">&lt;!-- Dependências do Probato --&gt;</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.probato<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>probato-api<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">            </span><span class="nt">&lt;version&gt;</span>${probato.version}<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.probato<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>probato-browser<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">            </span><span class="nt">&lt;version&gt;</span>${probato.version}<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.probato<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>probato-dataset-csv<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">            </span><span class="nt">&lt;version&gt;</span>${probato.version}<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="hll"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span></span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.probato<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>probato-database-sql<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;version&gt;</span>${probato.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span></span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="hll"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">        </span><span class="cm">&lt;!-- Dependência do banco de dados da aplicação --&gt;</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="hll"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span></span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.postgresql<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>postgresql<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;version&gt;</span>42.7.3<span class="nt">&lt;/version&gt;</span>
+</span></span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="hll"><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span></span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="hll"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="w">        </span><span class="cm">&lt;!-- Dependência do JUnit 5 --&gt;</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.junit.jupiter<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>junit-jupiter<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">            </span><span class="nt">&lt;version&gt;</span>5.9.3<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></div></li>
+</ol>
+<h2 id="configurando-datasource">Configurando datasource</h2>
+<ol>
+<li>No arquivo <code>configuration.yml</code> adicionar as configurações abaixo
+<div class="language-yaml highlight"><span class="filename">configuration.yml</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">datasources</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="nt">probato</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:postgresql://localhost:5444/testano</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.postgresql.Driver</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+</span></code></pre></div>
+  <strong>Propriedades:</strong><ul>
+<li><strong>datasources.[nome]:</strong> <br />
+Informa o nome do recurso que será acessado.</li>
+<li><strong>datasources.[nome].url:</strong> <br />
+Informa a URL do recurso que será acessado.</li>
+<li><strong>datasources.[nome].driver:</strong> <br />
+Informa o driver de conexão para o recurso que será acessado.</li>
+<li><strong>datasources.[nome].schema:</strong> <br />
+Informa o schema para o recurso que será acessado..</li>
+<li><strong>datasources.[*].dimension.width:</strong><br />
+Informa o usuário para o recurso que será acessado.</li>
+<li><strong>datasources.[*].dimension.height:</strong> <br />
+Informa a senha para o recurso que será acessado.</li>
+</ul>
+</li>
+<li>Caso seja executado o teste no estado atual o teste passará com sucesso. Note que agora na lista de execuções relizadas tem breve descrição do dimensionamento no qual o navegador aberto.</li>
+</ol>
+<h2 id="criando-arquivos-sql"><strong>Criando arquivos SQL</strong></h2>
+<ol>
+<li>Na pasta <code>src/test/resources/sql</code> vamos criar a nova pasta <code>init</code>.</li>
+<li>Na pasta <code>src/test/resources/sql</code> vamos criar a nova pasta <code>user</code>.</li>
+<li>Na pasta <code>src/test/resources/sql/init</code> vamos criar o arquivo chamado <code>init.sql</code>.</li>
+<li>Na pasta <code>src/test/resources/sql/user</code> vamos criar o arquivo chamado <code>insert-user.sql</code>.</li>
+<li>No arquivo <code>init.sql</code> vamos adicionar o conteúdo abaixo.
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">init.sql</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">testano_app</span><span class="p">.</span><span class="n">users</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div></li>
+<li>No arquivo <code>insert-user.sql</code> vamos adicionar o conteúdo abaixo.
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">insert-user.sql</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">testano_app</span><span class="p">.</span><span class="n">users</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;a02b03e6-c462-4980-9997-c1203a094c9d&#39;</span><span class="p">::</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;User 01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user01@probato.org&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$2a$10$Kml4nk3ADhnWrJg0GkStVeTJoslDBir/Fgyw2gkLR0FukujfIxZQ2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MALE&#39;</span><span class="p">,</span><span class="w">  </span><span class="k">true</span><span class="p">);</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">testano_app</span><span class="p">.</span><span class="n">users</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;bd84a2c8-d315-40ea-80aa-1841254b20c9&#39;</span><span class="p">::</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;User 02&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user02@probato.org&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$2a$10$oHZ7er1/2/xKjgOq0znXnOPcvoOXpX.in6XO/4mf2xf5ZV7OMyvq6&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MALE&#39;</span><span class="p">,</span><span class="w">  </span><span class="k">true</span><span class="p">);</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">testano_app</span><span class="p">.</span><span class="n">users</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;b86a08ac-2ee8-42c7-a46f-c589b1d26503&#39;</span><span class="p">::</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;User 03&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user03@probato.org&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$2a$10$81pSkjzZTqgn3/nU5DzxVemmr0rjJ7NHtK/UiGhzomEwTyHZgFliC&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MALE&#39;</span><span class="p">,</span><span class="w">  </span><span class="k">true</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div></li>
+</ol>
+<h2 id="adicionando-sql-ao-suite"><strong>Adicionando SQL ao suite</strong></h2>
+<ol>
+<li>Na classe <code>UC01_PerformLogin.java</code> vamos acionar a implementação abaixo.
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PerformLoginProcedure.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">org.probato.manager.automation.usecase.UC01</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.manager.automation.usecase.UC01.script.UC01TC01_PerformLoginSuccessfully</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.SQL</span><span class="p">;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.Suite</span><span class="p">;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.TestCase</span><span class="p">;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.TestSuite</span><span class="p">;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="hll"><span class="nd">@SQL</span><span class="p">(</span>
+</span></span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="hll"><span class="w">    </span><span class="n">datasource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;probato&quot;</span><span class="p">,</span><span class="w"> </span>
+</span></span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="hll"><span class="w">    </span><span class="n">scriptPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+</span></span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="hll"><span class="w">        </span><span class="s">&quot;sql/init/init.sql&quot;</span><span class="w"> </span>
+</span></span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="hll"><span class="w">    </span><span class="p">})</span>
+</span></span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="nd">@Suite</span><span class="p">(</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">    </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UC01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Perform login&quot;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This feature aims to allow the user to login to this application&quot;</span><span class="p">)</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="kd">class</span> <span class="nc">UC01_PerformLogin</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TestSuite</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19"></a>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">    </span><span class="nd">@TestCase</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UC01TC01_PerformLoginSuccessfully</span><span class="w"> </span><span class="n">uc01tc01</span><span class="p">;</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22"></a>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div></li>
+</ol>
+<h2 id="adicionando-sql-ao-script"><strong>Adicionando SQL ao script</strong></h2>
+<ol>
+<li>
+<p>Na classe <code>UC01TC01_PerformLoginSuccessfully.java</code> vamos acionar a implementação abaixo.
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PerformLoginProcedure.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span>
+<span class="normal"><a href="#__codelineno-5-36">36</a></span>
+<span class="normal"><a href="#__codelineno-5-37">37</a></span>
+<span class="normal"><a href="#__codelineno-5-38">38</a></span>
+<span class="normal"><a href="#__codelineno-5-39">39</a></span>
+<span class="normal"><a href="#__codelineno-5-40">40</a></span>
+<span class="normal"><a href="#__codelineno-5-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">org.probato.manager.automation.usecase.UC01.script</span><span class="p">;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.manager.automation.model.LoginModel</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.manager.automation.page.DashboardPage</span><span class="p">;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.manager.automation.page.LoginPage</span><span class="p">;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.Dataset</span><span class="p">;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.Page</span><span class="p">;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.Procedure</span><span class="p">;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.SQL</span><span class="p">;</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.probato.api.Script</span><span class="p">;</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="hll"><span class="nd">@SQL</span><span class="p">(</span>
+</span></span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="hll"><span class="w">    </span><span class="n">datasource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;probato&quot;</span><span class="p">,</span><span class="w"> </span>
+</span></span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="hll"><span class="w">    </span><span class="n">scriptPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+</span></span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="hll"><span class="w">        </span><span class="s">&quot;sql/user/insert-user.sql&quot;</span><span class="w"> </span>
+</span></span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="hll"><span class="w">    </span><span class="p">})</span>
+</span></span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="nd">@Dataset</span><span class="p">(</span><span class="s">&quot;dataset/UC01/UC01TC01.csv&quot;</span><span class="p">)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="nd">@Script</span><span class="p">(</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">    </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UC01TC01&quot;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Perform login successfully&quot;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This script aims to validate the user&#39;s login in the application successfully&quot;</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UC01TC01_PerformLoginSuccessfully</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">    </span><span class="nd">@Page</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LoginPage</span><span class="w"> </span><span class="n">loginPage</span><span class="p">;</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="w">    </span><span class="nd">@Page</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DashboardPage</span><span class="w"> </span><span class="n">dashboardPage</span><span class="p">;</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="w">    </span><span class="nd">@Procedure</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">procedure</span><span class="p">(</span><span class="n">LoginModel</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33"></a><span class="w">        </span><span class="n">loginPage</span><span class="p">.</span><span class="na">selectEnglishTranslate</span><span class="p">();</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34"></a><span class="w">        </span><span class="n">loginPage</span><span class="p">.</span><span class="na">checkPage</span><span class="p">();</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35"></a><span class="w">        </span><span class="n">loginPage</span><span class="p">.</span><span class="na">fillEmail</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="na">getEmail</span><span class="p">());</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36"></a><span class="w">        </span><span class="n">loginPage</span><span class="p">.</span><span class="na">fillPassword</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="na">getPassword</span><span class="p">());</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37"></a><span class="w">        </span><span class="n">loginPage</span><span class="p">.</span><span class="na">pressAccessButton</span><span class="p">();</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38"></a><span class="w">        </span><span class="n">dashboardPage</span><span class="p">.</span><span class="na">checkPage</span><span class="p">();</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40"></a>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Agora caso seja executado o teste no estado atual veremos que a pré-condição será satisfeitas e os testes serão executados com sucesso.</p>
+<p><img alt="execute test based" src="/documentation/img/sql-execution-database.png" /></p>
+</li>
+</ol>
+<h2 id="consideracoes-finais"><strong>Considerações finais</strong></h2>
+<p>Conseguimos implementar com sucesso o uso de SQL para alterar o estado da aplicação, atendendo assim às pré-condições necessárias para a execução dos testes propostos. Essa abordagem garante que cada teste possa começar em um estado controlado e previsível, tornando-os independentes entre si. Além disso, essa independência reduz a interferência entre os testes e melhora a confiabilidade dos resultados, permitindo identificar falhas específicas de forma mais clara.</p>
+<p><strong>Observações:</strong>        </p>
+<p>Partiremos do princípio de que a base de dados estará sempre vazia no início de cada execução, para fins de demonstração para teste guia. No entanto, você pode pressupor que haverá uma massa de dados inicial específica para configurar o ambiente de testes. Essa configuração será feita por meio de um arquivo <code>init.sql</code>, responsável por adicionar os registros necessários para a execução dos seus testes.</p>
+<p>A definição e o conteúdo desse arquivo ficam a seu critério, de acordo com a análise dos requisitos de cada caso de teste. É importante garantir que o <code>init.sql</code> inclua todos os dados essenciais para atender às pré-condições dos testes, promovendo um ambiente consistente e adequado para a validação das funcionalidades.</p>
+<p>Além disso, recomendamos adotar boas práticas na criação desse arquivo, como:</p>
+<ul>
+<li>Organizar os scripts de maneira clara e modular.</li>
+<li>Incluir comentários que expliquem a finalidade de cada registro.</li>
+<li>Garantir que o script seja idempotente, ou seja, possa ser executado repetidamente sem gerar inconsistências.</li>
+</ul>
+<p>Com essa abordagem, você terá maior controle sobre o estado inicial do banco de dados e poderá executar seus testes de maneira confiável e previsível.</p>
 
 
 
@@ -671,7 +1030,7 @@ navigation:
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../parameterize-input-data/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parameterize input data">
+          <a href="../parameterize-input-data/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parametrizando dados de entrada">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -681,7 +1040,7 @@ navigation:
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Parameterize input data
+                Parametrizando dados de entrada
               </div>
             </div>
           </a>

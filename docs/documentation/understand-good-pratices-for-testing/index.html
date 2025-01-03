@@ -627,26 +627,41 @@
           <li class="md-nav__item">
   <a href="#relacao-entre-pre-condicoes-procedimentos-e-pos-condicoes" class="md-nav__link">
     <span class="md-ellipsis">
-      Relação entre Pré-Condições, Procedimentos e Pós-Condições
+      Relação entre pré-condições, procedimentos e pós-condições
     </span>
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#exemplo-pratico-de-caso-de-uso-efetuar-login" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico-de-caso-de-uso" class="md-nav__link">
     <span class="md-ellipsis">
-      Exemplo prático de caso de uso: Efetuar Login
+      Exemplo prático de caso de uso
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Exemplo prático de caso de uso: Efetuar Login">
+    <nav class="md-nav" aria-label="Exemplo prático de caso de uso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fluxo-basico-efetuar-login-com-sucesso" class="md-nav__link">
+  <a href="#caso-de-uso-realizar-login" class="md-nav__link">
     <span class="md-ellipsis">
-      [Fluxo Básico] Efetuar login com sucesso:
+      Caso de uso: Realizar Login
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso de uso: Realizar Login">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-basico-realizar-login-com-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      [Fluxo Básico] Realizar login com sucesso:
     </span>
   </a>
   
@@ -800,6 +815,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#consideracoes-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Considerações finais
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -883,7 +907,7 @@
         
   
   <span class="md-ellipsis">
-    Parameterize input data
+    Parametrizando dados de entrada
   </span>
   
 
@@ -904,7 +928,7 @@
         
   
   <span class="md-ellipsis">
-    Change application state
+    Alterando estado da aplicação
   </span>
   
 
@@ -1114,10 +1138,14 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 <p>As pós-condições são os resultados esperados ou estados finais que devem ser verificados após a execução do teste. Elas confirmam que o teste atingiu seus objetivos e que o sistema respondeu conforme o esperado.</p>
 <h4 id="exemplos_2">Exemplos:</h4>
 <ul>
-<li><strong>Mudança de estado:</strong> Verificar que o usuário foi autenticado e está na página inicial.</li>
-<li><strong>Persistência de dados:</strong> Garantir que um novo registro foi adicionado ao banco de dados.</li>
-<li><strong>Saída visível:</strong> Validar que uma mensagem de sucesso foi exibida na tela.</li>
-<li><strong>Restauração do ambiente:</strong> Retornar o sistema ao estado inicial para que outros testes possam ser executados.</li>
+<li><strong>Mudança de estado:</strong>  <br />
+Verificar que o usuário foi autenticado e está na página inicial.</li>
+<li><strong>Persistência de dados:</strong>  <br />
+Garantir que um novo registro foi adicionado ao banco de dados.</li>
+<li><strong>Saída visível:</strong>  <br />
+Validar que uma mensagem de sucesso foi exibida na tela.</li>
+<li><strong>Restauração do ambiente:</strong>  <br />
+Retornar o sistema ao estado inicial para que outros testes possam ser executados.</li>
 </ul>
 <h4 id="boas-praticas_2">Boas práticas:</h4>
 <ul>
@@ -1127,7 +1155,7 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 <h4 id="exemplo-no-probato_1">Exemplo no Probato:</h4>
 <p>Após executar um teste, o framework pode captura de tela, vídeos e logs detalhados de execução, além de validar as condições de sucesso ou falha com base nos dados coletados.</p>
-<h3 id="relacao-entre-pre-condicoes-procedimentos-e-pos-condicoes"><strong>Relação entre Pré-Condições, Procedimentos e Pós-Condições</strong></h3>
+<h3 id="relacao-entre-pre-condicoes-procedimentos-e-pos-condicoes"><strong>Relação entre pré-condições, procedimentos e pós-condições</strong></h3>
 <p>Esses elementos formam uma estrutura lógica para qualquer teste:</p>
 <ul>
 <li>As pré-condições configuram o estado inicial do sistema.</li>
@@ -1135,16 +1163,11 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 <li>As pós-condições validam se o comportamento resultante foi conforme o esperado.</li>
 </ul>
 <p>Essa abordagem garante clareza e rastreabilidade nos testes, permitindo que os resultados sejam analisados de forma objetiva, além disso ajuda na análide do resultados a da classificação em Sucesso, Erro, Falha e Impeditivo, nesse último ocorren quando um teste não consegue checar até a execução do procedimento.</p>
-<p>Porém podemos resaltar alguns pontos importantes para nossa implementação atual:</p>
-<ol>
-<li>Não possui pre-condições nem pós-condições, todos os procedimentos estão sendo checados no procedure, caso ocorra algum erro de pré-condição não será distinguido se o erro é proveniente do escopo da funcionalidade alvo do teste.</li>
-<li>Os dados de entrada estão estáticos, então não seria possível exercitar a funcionalidade com mais dados de entrada para o mesmo script.</li>
-<li>O script de teste só será executado com sucesso caso exista e-mail e senha cadastrada na base de dados da aplicação alvo dos testes.</li>
-</ol>
-<p>implementado um script de testes básico. O <strong>Probato</strong> adota uma estrutura modular que inclui scripts, procedures, page objects e test suites, vamos iniciar pelo nosso test suite. Para exemplificar a automação de uma funcionalidade real, seguiremos com o desenvolvimento da automação da aplicação <strong>Probato Manager</strong>. O <strong>Probato Manager</strong> possui como tela principal a página de login, então partiremos desta funcionalidade para o desenvolvimento dos testes automatizados: <strong>Efetuar Login</strong></p>
-<h3 id="exemplo-pratico-de-caso-de-uso-efetuar-login"><strong>Exemplo prático de caso de uso: Efetuar Login</strong></h3>
+<h2 id="exemplo-pratico-de-caso-de-uso">Exemplo prático de caso de uso</h2>
+<p>Implementado um script de testes básico. O <strong>Probato</strong> adota uma estrutura modular que inclui scripts, procedures, page objects e suites, vamos iniciar pelo nosso test suite. Para exemplificar a automação de uma funcionalidade real, seguiremos com o desenvolvimento da automação da aplicação <strong>Probato Manager</strong>. O <strong>Probato Manager</strong> possui como tela principal a página de login, então partiremos desta funcionalidade para o desenvolvimento dos testes automatizados: <strong>Realizar Login</strong></p>
+<h3 id="caso-de-uso-realizar-login"><strong>Caso de uso: Realizar Login</strong></h3>
 <p>O caso de uso de realizar login na aplicação tem como objetivo permitir que o usuário, utilizando e-mail e senha previamente cadastrados, acesse as demais funcionalidades da aplicação. Essa funcionalidade inclui os seguintes fluxos:</p>
-<h4 id="fluxo-basico-efetuar-login-com-sucesso">[Fluxo Básico] Efetuar login com sucesso:</h4>
+<h4 id="fluxo-basico-realizar-login-com-sucesso">[Fluxo Básico] Realizar login com sucesso:</h4>
 <ul>
 <li>Pré-condições:  <ul>
 <li>Deve ter solicitada a página de login;</li>
@@ -1153,13 +1176,13 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 </li>
 <li>Procedimento:<ul>
-<li>Usuário informa campo 'E-mail' com valor '{{email}}';</li>
-<li>Usuário informa campo 'Senha' com valor '{{senha}}';</li>
+<li>Usuário preenche campo 'E-mail' com valor '{{email}}';</li>
+<li>Usuário preenche campo 'Senha' com valor '{{senha}}';</li>
 <li>Usuário aciona botão 'Acessar';</li>
 </ul>
 </li>
 <li>Pós-Condições:<ul>
-<li>Sistema exibe página 'Painel Principal' com sucesso</li>
+<li>Sistema exibe página 'Painel Principal' com sucesso;</li>
 </ul>
 </li>
 </ul>
@@ -1171,13 +1194,13 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 </li>
 <li>Procedimento:<ul>
-<li>Usuário informa campo 'E-mail' com valor '{{email}}';</li>
-<li>Usuário informa campo 'Senha' com valor '{{senha}}';</li>
+<li>Usuário preenche campo 'E-mail' com valor '{{email}}';</li>
+<li>Usuário preenche campo 'Senha' com valor '{{senha}}';</li>
 <li>Usuário aciona botão 'Acessar';</li>
 </ul>
 </li>
 <li>Pós-Condições:<ul>
-<li>Sistema exibe mensagem de aviso '{{usuario_nao_encontrado}}'</li>
+<li>Sistema exibe mensagem de aviso com texto '{{usuario_nao_encontrado}}'</li>
 </ul>
 </li>
 </ul>
@@ -1189,8 +1212,8 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 </li>
 <li>Procedimento:<ul>
-<li>Usuário informa campo 'E-mail' com valor '{{email}}';</li>
-<li>Usuário informa campo 'Senha' com valor '{{senha}}';</li>
+<li>Usuário preenche campo 'E-mail' com valor '{{email}}';</li>
+<li>Usuário preenche campo 'Senha' com valor '{{senha}}';</li>
 <li>Usuário aciona botão 'Acessar';</li>
 </ul>
 </li>
@@ -1208,13 +1231,13 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 </li>
 <li>Procedimento:<ul>
-<li>Usuário informa campo 'E-mail' com valor '{{email}}';</li>
-<li>Usuário informa campo 'Senha' com valor '{{senha}}';</li>
+<li>Usuário preenche campo 'E-mail' com valor '{{email}}';</li>
+<li>Usuário preenche campo 'Senha' com valor '{{senha}}';</li>
 <li>Usuário aciona botão 'Acessar';</li>
 </ul>
 </li>
 <li>Pós-Condições:<ul>
-<li>Sistema exibe mensagem de aviso '{{usuario_inativo}}'</li>
+<li>Sistema exibe mensagem de aviso com texto '{{usuario_inativo}}'</li>
 </ul>
 </li>
 </ul>
@@ -1229,8 +1252,8 @@ Verificar se APIs externas necessárias estão disponíveis.</li>
 </ul>
 </li>
 <li>Pós-Condições:<ul>
-<li>Sistema exibe mensagem de aviso '{{email_obrigatoria}}'</li>
-<li>Sistema exibe mensagem de aviso '{{senha_obrigatoria}}'</li>
+<li>Sistema exibe mensagem de aviso com texto '{{email_obrigatoria}}'</li>
+<li>Sistema exibe mensagem de aviso com texto '{{senha_obrigatoria}}'</li>
 </ul>
 </li>
 </ul>
@@ -1298,16 +1321,16 @@ Um grande volume de dados usado para testar a escalabilidade e desempenho do sis
 <p>A massa de dados pode ser obtida de várias formas, dependendo do contexto e da necessidade do teste:</p>
 <ol>
 <li>
-<p><strong>Dados simulados</strong> <br />
-São gerados artificialmente para simular entradas específicas, geralmente usando ferramentas ou scripts automatizados.</p>
-</li>
-<li>
 <p><strong>Dados reais</strong>  <br />
 Extraídos de ambientes de produção (com os devidos cuidados para anonimização e segurança) para representar situações reais.</p>
 </li>
 <li>
 <p><strong>Dados parametrizados</strong> <br />
 Criados com base em arquivos como CSV, JSON ou XML, ou até mesmo em bancos de dados específicos, permitindo reutilização e variação controlada.</p>
+</li>
+<li>
+<p><strong>Dados simulados</strong> <br />
+São gerados artificialmente para simular entradas específicas, geralmente usando ferramentas ou scripts automatizados.</p>
 </li>
 <li>
 <p><strong>Dados aleatórios</strong> <br />
@@ -1412,6 +1435,8 @@ Não inclua lógica desnecessária no Page Object. Ele deve ser um espelho da in
 </li>
 </ol>
 <p>O padrão <em>Page Object</em>, quando bem implementado, torna os testes automatizados mais robustos, flexíveis e fáceis de manter, facilitando a escalabilidade do projeto de automação.</p>
+<h2 id="consideracoes-finais">Considerações finais</h2>
+<p>Nesta seção, abordamos de forma resumida e introdutória alguns dos principais aspectos que devem ser considerados ao criar suítes, scripts de teste e as demais estruturas que compõem os testes automatizados. Esses pontos são fundamentais para garantir que os testes sejam bem estruturados, eficientes e alinhados com os objetivos da automação. No decorrer do material, exploraremos cada um desses elementos com maior profundidade, oferecendo diretrizes práticas e exemplos para facilitar a implementação no contexto do <strong>Probato</strong>.</p>
 
 
 
