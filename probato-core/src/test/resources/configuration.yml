@@ -44,7 +44,7 @@ browsers:
 
 datasources:
 
-   testano:
+   probato:
       url: jdbc:h2:mem:testdb
       schema: test
       driver: org.h2.Driver
