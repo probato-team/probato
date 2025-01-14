@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://probato.org/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/architecture/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/architecture/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/features/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/features/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/features/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/objective/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/objective/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/objective/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/target-audience/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/target-audience/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/target-audience/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/change-application-state/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/change-application-state/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/change-application-state/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/configure-browser-execution/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/configure-browser-execution/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/configure-browser-execution/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/configure-environment/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/configure-environment/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/configure-environment/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/create-extension-points/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/create-extension-points/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/create-extension-points/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/create-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/create-project/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/create-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/example-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/example-project/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/example-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/implement-basic-script/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/implement-basic-script/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/implement-basic-script/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/implement-browser-execution/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/implement-browser-execution/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/implement-browser-execution/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/parameterize-input-data/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/parameterize-input-data/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/parameterize-input-data/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/documentation/understand-good-pratices-for-testing/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/understand-good-pratices-for-testing/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/understand-good-pratices-for-testing/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/good-practices/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/good-practices/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/good-practices/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/quick-guide/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/quick-guide/configure-environment/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/configure-environment/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/configure-environment/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/quick-guide/configure-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/configure-project/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/configure-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/quick-guide/execution-result-analysis/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/execution-result-analysis/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/execution-result-analysis/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/quick-guide/implement-script/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/implement-script/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/implement-script/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/architecture/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/architecture/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/features/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/features/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/features/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/objective/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/objective/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/objective/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/target-audience/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/target-audience/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/target-audience/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/change-application-state/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/change-application-state/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/change-application-state/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/configure-browser-execution/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/configure-browser-execution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/configure-browser-execution/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/configure-environment/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/configure-environment/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/configure-environment/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/create-extension-points/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/create-extension-points/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/create-extension-points/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/create-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/create-project/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/create-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/example-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/example-project/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/example-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/implement-basic-script/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/implement-basic-script/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/implement-basic-script/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/implement-browser-execution/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/implement-browser-execution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/implement-browser-execution/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/parameterize-input-data/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/parameterize-input-data/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/parameterize-input-data/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/documentation/understand-good-pratices-for-testing/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/documentation/understand-good-pratices-for-testing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/documentation/understand-good-pratices-for-testing/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/good-practices/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/good-practices/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/good-practices/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/quick-guide/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/quick-guide/configure-environment/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/configure-environment/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/configure-environment/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/quick-guide/configure-project/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/configure-project/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/configure-project/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/quick-guide/execution-result-analysis/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/execution-result-analysis/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/execution-result-analysis/"/>
+    </url>
+    <url>
+        <loc>https://probato.org/pt-BR/quick-guide/implement-script/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://probato.org/pt-BR/quick-guide/implement-script/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://probato.org/quick-guide/implement-script/"/>
+    </url>
+</urlset>

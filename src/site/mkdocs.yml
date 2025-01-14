@@ -1,0 +1,153 @@
+site_name: Probato
+site_url: https://probato.org
+repo_name: probato-team/probato
+repo_url: https://github.com/probato-team/probato
+remote_branch: main
+site_dir: ../../docs
+
+copyright: <p> Copyright &copy; 2024-<script>document.write(new Date().getFullYear())</script> Probato</p>
+
+nav:
+
+  - Introduction: 
+    - index.md
+    - objective.md
+    - target-audience.md
+    - features.md
+    - architecture.md
+
+  - Good practices:
+    - good-practices\index.md
+
+  - Quick Guide:
+    - quick-guide\index.md
+    - quick-guide\configure-environment.md
+    - quick-guide\configure-project.md
+    - quick-guide\implement-script.md
+    - quick-guide\execution-result-analysis.md
+
+  - Documentation:
+    - documentation\index.md
+  #   - documentation\implement-basic-script.md
+  #   - documentation\configure-browser-execution.md
+  #   - documentation\implement-browser-execution.md
+  #   - documentation\parameterize-input-data.md
+  #   - documentation\change-application-state.md
+  #   - documentation\create-extension-points.md
+  #   - documentation\example-project.md
+
+theme:
+  name: material
+  language: en
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.ico
+
+  icon:
+    repo: fontawesome/brands/github
+  
+  features:
+    - navigation.expand
+    - navigation.path
+    - navigation.prune
+    - toc.follow
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.footer
+    - announce.dismiss
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+
+  palette: 
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: grey
+      accent: blue grey
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra:
+
+  analytics:
+    provider: google
+    property: G-XZR907P520
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: This page was helpful
+          data: 1
+          note: Thank you for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page can be improved
+          data: 0
+          note: Thank you for your feedback!
+
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/probato-team/probato
+    - icon: fontawesome/brands/youtube 
+      link: https://www.youtube.com/@probato
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: pt-BR
+          name: Português
+          build: true
+          theme:
+            palette:
+              primary: red
+          nav_translations:
+            Introduction: Introdução
+            Good practices: Boas práticas
+            Quick Guide: Guia rápido
+            Documentation: Documentação
