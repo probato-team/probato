@@ -1,0 +1,52 @@
+
+execution:
+
+    increment: 1
+    screen: PRINCIPAL
+
+    delay:
+        waitingTimeout: 1
+        actionInterval: 1
+
+    video:
+        enabled: TRUE
+        quality: HIGH
+        frameRate: 40
+
+    target:
+        url: http://google.com
+        version: 1.0.0
+
+    manager:
+        url: http://localhost:8099
+        token: 89caa226caa52436d25a0f94bb42ee7ef0ac92c42154c6fe775ba230ad83417b
+        submit: TRUE
+
+    directory:
+        temp: C:/temp
+
+browsers:
+
+-  type: CHROME
+   headless: TRUE
+   dimension:
+      mode: FULLSCREEN
+
+-  type: FIREFOX
+   dimension:
+      mode: MAXIMIZED
+
+-  type: EDGE
+   dimension:
+      mode: CUSTOM
+      width: 800
+      height: 600
+
+datasources:
+
+   testano:
+      url: jdbc:h2:mem:testdb
+      schema: test
+      driver: org.h2.Driver
+      username: sa
+      password: password
