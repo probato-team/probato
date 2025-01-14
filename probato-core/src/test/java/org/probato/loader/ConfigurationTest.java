@@ -107,7 +107,7 @@ class ConfigurationTest {
 
 		var configuration = Configuration.getInstance(getClass());
 		var datasources = configuration.getDatasources();
-		var datasourceName = "testano";
+		var datasourceName = "probato";
 		var datasource = datasources.get(datasourceName);
 
 		assertAll("Validate data", 

@@ -2,7 +2,7 @@ package org.probato.model;
 
 public class Directory {
 
-	private String temp = "/testano/temp";
+	private String temp = "/probato/temp";
 	
 	public Directory() {}
 
