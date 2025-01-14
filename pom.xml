@@ -12,6 +12,10 @@
 	<description>Probato Framework</description>
 	<url>hhtp://probato.org</url>
 
+	<modules>
+		<module>probato-core</module>
+	</modules>
+
 	<properties>
 
 		<maven.compiler.source>11</maven.compiler.source>
@@ -177,7 +181,4 @@
 		</plugins>
 	</build>
 
-	<modules>
-		<module>probato-core</module>
-	</modules>
 </project>

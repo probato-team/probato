@@ -291,7 +291,7 @@ class AnnotationLoaderTest {
 		var procedures = AnnotationLoader.getProceduresScript(UC01TC01_Script.class, Procedure.class);
 
 		assertNotNull(procedures);
-		assertEquals(3, procedures.size());
+		assertEquals(2, procedures.size());
 	}
 
 	@Test

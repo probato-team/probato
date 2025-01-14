@@ -1,0 +1,5 @@
+org.probato.validator.ConfigurationComponentValidator
+org.probato.validator.SuiteComponentValidator
+org.probato.validator.ScriptComponentValidator
+org.probato.validator.ProcedureComponentValidator
+org.probato.validator.PageObjectComponentValidator
