@@ -1,10 +1,10 @@
-package org.probato.util.suite;
+package org.probato.test.suite;
 
 import org.probato.api.SQL;
 import org.probato.api.SQLs;
 import org.probato.api.Suite;
 import org.probato.api.TestCase;
-import org.probato.util.script.UC01TC01_Script;
+import org.probato.test.script.UC01TC01_Script;
 
 @SQLs(
 	@SQL(

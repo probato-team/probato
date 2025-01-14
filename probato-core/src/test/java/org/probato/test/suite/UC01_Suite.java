@@ -1,8 +1,8 @@
-package org.probato.util.suite;
+package org.probato.test.suite;
 
 import org.probato.api.Suite;
 import org.probato.api.TestCase;
-import org.probato.util.script.UC01TC01_Script;
+import org.probato.test.script.UC01TC01_Script;
 
 @Suite(
 	code = "UC01", 

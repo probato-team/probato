@@ -1,7 +1,7 @@
-package org.probato.util.procedure;
+package org.probato.test.procedure;
 
 import org.probato.api.Run;
-import org.probato.util.datamodel.Data;
+import org.probato.test.datamodel.Data;
 
 public class ProcedureRunWithParam {
 

@@ -1,8 +1,8 @@
-package org.probato.util.procedure;
+package org.probato.test.procedure;
 
 import org.probato.api.Page;
 import org.probato.api.Run;
-import org.probato.util.page.PrincipalPage;
+import org.probato.test.page.PrincipalPage;
 
 public class ProcedureRun {
 

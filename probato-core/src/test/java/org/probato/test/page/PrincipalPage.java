@@ -1,4 +1,4 @@
-package org.probato.util.page;
+package org.probato.test.page;
 
 import org.probato.api.Action;
 import org.probato.api.Param;

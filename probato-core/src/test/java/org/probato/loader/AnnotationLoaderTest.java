@@ -19,12 +19,12 @@ import org.probato.api.Disabled;
 import org.probato.api.Ignore;
 import org.probato.api.Procedure;
 import org.probato.api.TestCase;
-import org.probato.util.page.PrincipalPage;
-import org.probato.util.procedure.ProcedureRun;
-import org.probato.util.script.UC01TC01_Script;
-import org.probato.util.script.UC10TC02_ScriptWithSql;
-import org.probato.util.suite.UC01_Suite;
-import org.probato.util.suite.UC10_SuiteWithSql;
+import org.probato.test.page.PrincipalPage;
+import org.probato.test.procedure.ProcedureRun;
+import org.probato.test.script.UC01TC01_Script;
+import org.probato.test.script.UC10TC02_ScriptWithSql;
+import org.probato.test.suite.UC01_Suite;
+import org.probato.test.suite.UC10_SuiteWithSql;
 
 @DisplayName("Test - AnnotationLoader")
 class AnnotationLoaderTest {

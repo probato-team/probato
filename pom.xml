@@ -29,6 +29,7 @@
 		<apache.commons>3.17.0</apache.commons>
 		<log4j.version>2.20.0</log4j.version>
 		<wiremock.version>3.9.1</wiremock.version>
+		<guava.version>33.3.1-jre</guava.version>
 
 	</properties>
 
@@ -70,7 +71,8 @@
 	<repositories>
 		<repository>
 			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+			<url>
+				https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
 		</repository>
 	</repositories>
 
@@ -154,6 +156,12 @@
 				<groupId>org.wiremock</groupId>
 				<artifactId>wiremock</artifactId>
 				<version>${wiremock.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
 			</dependency>
 
 		</dependencies>
