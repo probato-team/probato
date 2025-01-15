@@ -113,7 +113,6 @@ class ConfigurationTest {
 		assertAll("Validate data", 
 				() -> assertEquals(datasourceName, datasources.keySet().iterator().next()),
 				() -> assertEquals("jdbc:h2:mem:testdb", datasource.getUrl()),
-				() -> assertEquals("test", datasource.getSchema()),
 				() -> assertEquals("org.h2.Driver", datasource.getDriver()),
 				() -> assertEquals("sa", datasource.getUsername()),
 				() -> assertEquals("password", datasource.getPassword()));

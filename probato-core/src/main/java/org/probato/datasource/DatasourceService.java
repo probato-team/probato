@@ -20,12 +20,4 @@ public interface DatasourceService {
 				.collect(Collectors.toList());
 	}
 	
-	static boolean hasImplementation() {
-		return !ServiceLoader.load(DatasourceService.class)
-				.stream()
-				.map(Provider::type)
-				.collect(Collectors.toList())
-				.isEmpty();
-	}
-
 }

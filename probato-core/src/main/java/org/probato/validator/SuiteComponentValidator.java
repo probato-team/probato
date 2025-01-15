@@ -3,7 +3,6 @@ package org.probato.validator;
 import java.util.stream.Stream;
 
 import org.probato.api.Suite;
-import org.probato.datasource.DatasourceService;
 import org.probato.exception.IntegrityException;
 import org.probato.loader.AnnotationLoader;
 import org.probato.model.type.ComponentValidatorType;
@@ -22,7 +21,6 @@ public class SuiteComponentValidator extends ComponentValidator {
 	private static final String SUITE_NAME_LENGTH_MSG = "Suite name must be between {1} and {2} characters long: ''{0}''";
 	private static final String SUITE_DESCRIPTION_MAX_LENGTH_MSG = "Suite description must not be more than {1} characters in length: ''{0}''";
 	private static final String SUITE_CAN_TEST_CASE_MSG = "Suite must have at least 1 test case: ''{0}''";
-	private static final String SUITE_NOT_HAVE_SQL_IMPL_MSG = "Suite has @SQL or @SQLs annotation declares, although does not have any implementation for datasource service: ''{0}''";
 
 	@Override
 	public ComponentValidatorType getStrategy() {
@@ -43,10 +41,6 @@ public class SuiteComponentValidator extends ComponentValidator {
 		var suite = AnnotationLoader.getSuite(suiteClazz)
 			.orElseThrow(() -> new IntegrityException(SUITE_ANNOTATION_REQUIRED, suiteClazz.getName()));
 		
-		if (hasSql(suiteClazz) && !hasSqlImpl()) {
-			throw new IntegrityException(SUITE_NOT_HAVE_SQL_IMPL_MSG, getName(suiteClazz));
-		}
-
 		validateId(suite, suiteClazz);
 		validateName(suite, suiteClazz);
 		validateDescription(suite, suiteClazz);
@@ -88,14 +82,6 @@ public class SuiteComponentValidator extends ComponentValidator {
 
 	private boolean hasTestCase(Class<?> suiteClazz) {
 		return Stream.of(suiteClazz.getDeclaredFields()).anyMatch(AnnotationLoader::isTestCase);
-	}
-
-	private boolean hasSql(Class<?> suiteClazz) {
-		return Stream.of(suiteClazz).anyMatch(AnnotationLoader::hasSql);
-	}
-
-	private boolean hasSqlImpl() {
-		return DatasourceService.hasImplementation();
 	}
 
 	private boolean isValidIdMinLength(String id) {
