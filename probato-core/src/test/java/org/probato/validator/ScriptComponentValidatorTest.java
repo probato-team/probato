@@ -24,7 +24,6 @@ import org.probato.test.suite.UC08_SuiteScriptEmptyTestCase;
 import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC14_SuiteWithSQL;
-import org.probato.test.suite.UC28_SuiteWithScriptDataset;
 
 @DisplayName("Test - ScriptComponentValidator")
 class ScriptComponentValidatorTest {
@@ -83,9 +82,6 @@ class ScriptComponentValidatorTest {
 				Arguments.of(
 						UC14_SuiteWithSQL.class,
 						"Script has @SQL or @SQLs annotation declares, although does not have any implementation for datasource service: 'org.probato.test.script.UC014TC01_ScriptWithSQL'"),
-				Arguments.of(
-						UC28_SuiteWithScriptDataset.class,
-						"Script has @Dataset annotation declares, although does not have any implementation for dataset service: 'org.probato.test.script.UC28TC01_ScriptWithDataset'"),
 				Arguments.of(
 						UC02_SuiteIdMinLenght.class,
 						"Script ID must be between 3 and 40 characters long: 'org.probato.test.script.UC02TC01_ScriptIdMinLength'"),

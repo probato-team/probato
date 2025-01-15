@@ -6,7 +6,7 @@ import org.probato.api.TestCase;
 import org.probato.test.script.UC28TC01_ScriptWithDataset;
 
 @SQL(datasource = "probato", scriptPath = { "path/to/file.sql", "path/to/file2.sql" })
-@Suite(code = "UC14", name = "Suite 14", description = "This a simple test")
+@Suite(code = "UC28", name = "Suite 28", description = "This a simple test")
 public class UC28_SuiteWithScriptDataset {
 
 	@TestCase

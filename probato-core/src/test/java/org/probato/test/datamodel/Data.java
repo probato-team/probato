@@ -10,6 +10,10 @@ public class Data extends Datamodel {
 	private String name;
 	private ZonedDateTime dateTime;
 	
+	public Data() {
+		super();
+	}
+
 	public Data(String name, ZonedDateTime dateTime) {
 		this.name = name;
 		this.dateTime = dateTime;

@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.stream.Stream;
 
 import org.probato.api.Script;
-import org.probato.dataset.DatasetService;
 import org.probato.datasource.DatasourceService;
 import org.probato.exception.IntegrityException;
 import org.probato.loader.AnnotationLoader;
@@ -25,7 +24,6 @@ public class ScriptComponentValidator extends ComponentValidator {
 	private static final String SCRIPT_DESC_MAX_LENGTH_MSG = "Script description must not be more than {0} characters in length: ''{1}''";
 	private static final String SCRIPT_CAN_TEST_CASE_MSG = "Script must have at least 1 procedure: ''{0}''";
 	private static final String SCRIPT_NOT_HAVE_SQL_IMPL_MSG = "Script has @SQL or @SQLs annotation declares, although does not have any implementation for datasource service: ''{0}''";
-	private static final String SCRIPT_NOT_HAVE_DATASET_IMPL_MSG = "Script has @Dataset annotation declares, although does not have any implementation for dataset service: ''{0}''";
 
 	@Override
 	public ComponentValidatorType getStrategy() {
@@ -57,10 +55,6 @@ public class ScriptComponentValidator extends ComponentValidator {
 
 		var script = AnnotationLoader.getScript(scriptClazz)
 			.orElseThrow(() -> new IntegrityException(SCRIPT_ANNOTATION_REQUIRED, scriptClazz.getName()));
-		
-		if (hasDataset(scriptClazz) && !hasDatasetImpl()) {
-			throw new IntegrityException(SCRIPT_NOT_HAVE_DATASET_IMPL_MSG, getName(scriptClazz));
-		}
 		
 		if (hasSql(scriptClazz) && !hasSqlImpl()) {
 			throw new IntegrityException(SCRIPT_NOT_HAVE_SQL_IMPL_MSG, getName(scriptClazz));
@@ -119,14 +113,6 @@ public class ScriptComponentValidator extends ComponentValidator {
 		return DatasourceService.hasImplementation();
 	}
 	
-	private boolean hasDataset(Class<?> scriptClazz) {
-		return Stream.of(scriptClazz).anyMatch(AnnotationLoader::hasDataset);
-	}
-	
-	private boolean hasDatasetImpl() {
-		return DatasetService.hasImplementation();
-	}
-
 	private boolean isValidIdMinLength(String id) {
 		return id.length() < SCRIPT_ID_MIN_LEN;
 	}
