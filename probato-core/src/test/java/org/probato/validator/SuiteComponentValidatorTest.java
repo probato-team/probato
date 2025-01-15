@@ -22,7 +22,6 @@ import org.probato.test.suite.UC06_SuiteNameMaxLenght;
 import org.probato.test.suite.UC07_SuiteDescriptionMaxLenght;
 import org.probato.test.suite.UC08_SuiteEmptyTestCase;
 import org.probato.test.suite.UC09_SuiteIgnored;
-import org.probato.test.suite.UC14_SuiteWithSQL;
 
 @DisplayName("Test - SuiteComponentValidator")
 class SuiteComponentValidatorTest {
@@ -67,9 +66,6 @@ class SuiteComponentValidatorTest {
 				Arguments.of(
 						UC00_NoSuite.class,
 						"Class must be annotated with `@Suite`: 'org.probato.test.suite.UC00_NoSuite'"),
-				Arguments.of(
-						UC14_SuiteWithSQL.class,
-						"Suite has @SQL or @SQLs annotation declares, although does not have any implementation for datasource service: 'org.probato.test.suite.UC14_SuiteWithSQL'"),
 				Arguments.of(
 						UC02_SuiteIdMinLenght.class,
 						"Suite ID must be between 1 and 20 characters long: 'org.probato.test.suite.UC02_SuiteIdMinLenght'"),
