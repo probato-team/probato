@@ -5,8 +5,13 @@ import org.probato.api.Suite;
 import org.probato.api.TestCase;
 import org.probato.test.script.UC014TC01_ScriptWithSQL;
 
-@SQL(datasource = "probato", scriptPath = { "path/to/file.sql", "path/to/file2.sql" })
-@Suite(code = "UC14", name = "Suite 14", description = "This a simple test")
+@SQL(
+	datasource = "probato", 
+	scriptPath = { "data/sql/file.sql", "data/sql/file2.sql" })
+@Suite(
+	code = "UC14", 
+	name = "Suite 14", 
+	description = "This a simple test")
 public class UC14_SuiteWithSQL {
 
 	@TestCase

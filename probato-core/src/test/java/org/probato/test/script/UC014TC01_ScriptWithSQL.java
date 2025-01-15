@@ -13,7 +13,7 @@ import org.probato.test.procedure.ProcedureRunWithParam;
 @SQLs(
 	@SQL(
 		datasource = "probato", 
-		scriptPath = { "path/to/file.sql", "path/to/file2.sql" }))
+		scriptPath = { "data/sql/file.sql", "data/sql/file2.sql" }))
 @Script(
 	code = "UC14TC01", 
 	name = "Test case 01", 
