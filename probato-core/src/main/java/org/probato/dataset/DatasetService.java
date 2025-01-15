@@ -6,12 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
-import java.util.stream.Collectors;
-
-import javax.swing.text.AbstractDocument.Content;
 
 import org.probato.api.Dataset;
 import org.probato.exception.IntegrityException;
+import org.probato.model.Content;
 import org.probato.model.Datamodel;
 
 public interface DatasetService {
@@ -38,14 +36,6 @@ public interface DatasetService {
 				.orElse(newDefaultInstance());
 	}
 	
-	static boolean hasImplementation() {
-		return !ServiceLoader.load(DatasetService.class)
-				.stream()
-				.map(Provider::type)
-				.collect(Collectors.toList())
-				.isEmpty();
-	}
-
 	static DatasetService newDefaultInstance() {
 		return new DatasetService() {
 			
