@@ -13,7 +13,7 @@ import org.probato.test.datamodel.Data;
 import org.probato.test.script.UC10TC01_ScriptDataset;
 import org.probato.test.script.UC10TC01_ScriptDatasetNotFound;
 
-@DisplayName("Test - CsvDatasetService")
+@DisplayName("Test -> CsvDatasetService")
 class CsvDatasetServiceTest {
 
 	private DatasetService service;

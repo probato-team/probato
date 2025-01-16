@@ -11,7 +11,7 @@ import org.probato.exception.ImpeditiveException;
 import org.probato.test.suite.UC14_SuiteWithSQL;
 import org.probato.test.suite.UC21_SuiteDatasourceDriverNotFound;
 
-@DisplayName("Test - DatabaseSqlService")
+@DisplayName("Test -> DatabaseSqlService")
 class DatabaseSqlServiceTest {
 	
 	@Test

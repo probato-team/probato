@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.suite.UC01_Suite;
 
-@DisplayName("Test - ComponentValidator")
+@DisplayName("Test -> ComponentValidator")
 class ComponentValidatorTest {
 
 	@Test

@@ -19,7 +19,7 @@ import org.probato.test.suite.UC04_SuiteWithDatasetFileNotFound;
 import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 
-@DisplayName("Test - DatasetComponentValidator")
+@DisplayName("Test -> DatasetComponentValidator")
 class DatasetComponentValidatorTest {
 	
 	@Test

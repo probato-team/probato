@@ -6,3 +6,4 @@ org.probato.validator.PageObjectComponentValidator
 org.probato.validator.DatasetComponentValidator
 org.probato.validator.DatasourceSqlComponentValidator
 org.probato.validator.DatabaseSqlComponentValidator
+org.probato.validator.ManagerConfigurationComponentValidator

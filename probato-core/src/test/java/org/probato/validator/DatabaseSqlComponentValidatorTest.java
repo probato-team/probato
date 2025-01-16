@@ -23,7 +23,7 @@ import org.probato.test.suite.UC25_SuiteWithSQLBlankPath;
 import org.probato.test.suite.UC26_SuiteWithSQLNotFound;
 import org.probato.test.suite.UC27_SuiteWithInvalidSQL;
 
-@DisplayName("Test - DatabaseSqlComponentValidator")
+@DisplayName("Test -> DatabaseSqlComponentValidator")
 class DatabaseSqlComponentValidatorTest {
 	
 	@Test

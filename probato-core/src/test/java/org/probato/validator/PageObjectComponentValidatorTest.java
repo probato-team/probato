@@ -20,7 +20,7 @@ import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
 import org.probato.test.suite.UC23_SuiteWithProcedurePage;
 
-@DisplayName("Test - PageObjectComponentValidator")
+@DisplayName("Test -> PageObjectComponentValidator")
 class PageObjectComponentValidatorTest {
 	
 	@Test
