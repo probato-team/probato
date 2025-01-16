@@ -23,7 +23,7 @@ import org.probato.test.suite.UC07_SuiteDescriptionMaxLenght;
 import org.probato.test.suite.UC08_SuiteEmptyTestCase;
 import org.probato.test.suite.UC09_SuiteIgnored;
 
-@DisplayName("Test - SuiteComponentValidator")
+@DisplayName("Test -> SuiteComponentValidator")
 class SuiteComponentValidatorTest {
 	
 	@Test

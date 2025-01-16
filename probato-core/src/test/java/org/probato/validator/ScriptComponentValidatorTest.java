@@ -24,7 +24,7 @@ import org.probato.test.suite.UC08_SuiteScriptEmptyTestCase;
 import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 
-@DisplayName("Test - ScriptComponentValidator")
+@DisplayName("Test -> ScriptComponentValidator")
 class ScriptComponentValidatorTest {
 
 	@Test

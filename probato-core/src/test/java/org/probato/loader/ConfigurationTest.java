@@ -13,7 +13,7 @@ import org.probato.model.type.DimensionMode;
 import org.probato.model.type.Quality;
 import org.probato.model.type.Screen;
 
-@DisplayName("Test - Configuration")
+@DisplayName("Test -> Configuration")
 class ConfigurationTest {
 
 	@BeforeEach
@@ -49,9 +49,8 @@ class ConfigurationTest {
 
 		assertAll("Validate data", 
 				() -> assertTrue(execution.getManager().isSubmit()),
-				() -> assertEquals("http://localhost:8099", execution.getManager().getUrl()),
+				() -> assertEquals("http://localhost:9999", execution.getManager().getUrl()),
 				() -> assertEquals("89caa226caa52436d25a0f94bb42ee7ef0ac92c42154c6fe775ba230ad83417b", execution.getManager().getToken()),
-				() -> assertEquals(1L, execution.getIncrement()),
 				() -> assertEquals(Screen.PRINCIPAL, execution.getScreen()));
 	}
 

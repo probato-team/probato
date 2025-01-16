@@ -1,7 +1,6 @@
 
 execution:
 
-    increment: 1
     screen: PRINCIPAL
 
     delay:
@@ -18,7 +17,7 @@ execution:
         version: 1.0.0
 
     manager:
-        url: http://localhost:8099
+        url: http://localhost:9999
         token: 89caa226caa52436d25a0f94bb42ee7ef0ac92c42154c6fe775ba230ad83417b
         submit: TRUE
 

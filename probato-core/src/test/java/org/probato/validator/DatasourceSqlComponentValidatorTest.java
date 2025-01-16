@@ -24,7 +24,7 @@ import org.probato.test.suite.UC19_SuiteWithoutUsername;
 import org.probato.test.suite.UC20_SuiteWithoutPassword;
 import org.probato.test.suite.UC21_SuiteDatasourceDriverNotFound;
 
-@DisplayName("Test - DatasourceComponentValidator")
+@DisplayName("Test -> DatasourceComponentValidator")
 class DatasourceSqlComponentValidatorTest {
 	
 	@Test

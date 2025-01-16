@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,11 +28,20 @@ import org.probato.model.type.BrowserType;
 import org.probato.model.type.ComponentValidatorType;
 import org.probato.model.type.Quality;
 import org.probato.model.type.Screen;
-import org.probato.test.suite.UC00_NoSuite;
 import org.probato.test.suite.UC01_Suite;
 
-@DisplayName("Test -> ConfigurationComponentValidator")
-class ConfigurationComponentValidatorTest {
+@TestInstance(Lifecycle.PER_CLASS)
+@DisplayName("Test -> ManagerConfigurationComponentValidator")
+class ManagerConfigurationComponentValidatorTest {
+	
+	@AfterAll
+	void destroy() throws Exception {
+		
+		var config = Configuration.getInstance(UC01_Suite.class);
+		var instance = config.getClass().getDeclaredField("instance");
+		instance.setAccessible(Boolean.TRUE);
+		instance.set(config, null);
+	}
 
 	@Test
 	@DisplayName("Should execute validator successfully")
@@ -55,7 +67,7 @@ class ConfigurationComponentValidatorTest {
 		var validators = ComponentValidator.getInstance(ComponentValidatorType.CONFIGURATION);
 
 		var exception = assertThrows(IntegrityException.class,
-				() -> validators.forEach(validator -> validator.execute(UC00_NoSuite.class)));
+				() -> validators.forEach(validator -> validator.execute(UC01_Suite.class)));
 
 		assertEquals(message, exception.getMessage());
 
@@ -66,104 +78,68 @@ class ConfigurationComponentValidatorTest {
 		return Stream.of(
 				Arguments.of(
 						getConfiguration()
-						.execution(null)
-						.build(),
+							.execution(null)
+							.build(),
 						"Property 'execution' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
 							.execution(Execution.builder()
-								.screen(null)
+								.delay(Delay.builder()
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(null)
 								.build())
 							.build(),
-							"Property 'execution.screen' should be declared in 'configuration.yml' file"),
+						"Property 'execution.manager' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
-						.execution(Execution.builder()
-							.target(Target.builder()
-								.url("http://localhost:8080")
-								.version("V1.0.0")
-								.build())
-							.manager(Manager.builder()
-								.submit(Boolean.TRUE)
-								.url("http://localhost:8080")
-								.token("token")
-								.build())
-							.build())
-						.build(),
-						"Property 'execution.delay.actionInterval' should be declared in 'configuration.yml' file"),
-				Arguments.of(
-						getConfiguration()
-						.execution(Execution.builder()
-							.target(Target.builder()
-								.url("http://localhost:8080")
-								.version("V1.0.0")
-								.build())
-							.manager(Manager.builder()
-								.submit(Boolean.TRUE)
-								.url("http://localhost:8080")
-								.token("token")
-								.build())
-							.delay(Delay.builder().build())
-							.build())
-						.build(),
-						"Property 'execution.delay.actionInterval' should be declared in 'configuration.yml' file"),
-				Arguments.of(
-						getConfiguration()
-						.execution(Execution.builder()
-							.target(Target.builder()
-								.url("http://localhost:8080")
-								.version("V1.0.0")
-								.build())
-							.manager(Manager.builder()
-								.submit(Boolean.TRUE)
-								.url("http://localhost:8080")
-								.token("token")
-								.build())
-							.delay(Delay.builder()
-								.actionInterval(1000)
-								.build())
-							.build())
-						.build(),
-						"Property 'execution.delay.waitingTimeout' should be declared in 'configuration.yml' file"),
-				Arguments.of(
-						getConfiguration()
-						.execution(Execution.builder()
-								.target(Target.builder()
-										.url("http://localhost:8080")
-										.version("V1.0.0")
-										.build())
-								.manager(Manager.builder()
-										.submit(Boolean.TRUE)
-										.url("http://localhost:8080")
-										.token("token")
-										.build())
+							.execution(Execution.builder()
 								.delay(Delay.builder()
-										.actionInterval(1000)
-										.waitingTimeout(1000)
-										.build())
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(Manager.builder()
+									.submit(Boolean.TRUE)
+									.build())
 								.build())
-						.build(),
-						"Property 'execution.directory.temp' should be declared in 'configuration.yml' file"),
+							.build(),
+						"Property 'execution.manager.url' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
-						.execution(Execution.builder()
-								.target(Target.builder()
-										.url("http://localhost:8080")
-										.version("V1.0.0")
-										.build())
-								.manager(Manager.builder()
-										.submit(Boolean.TRUE)
-										.url("http://localhost:8080")
-										.token("token")
-										.build())
+							.execution(Execution.builder()
 								.delay(Delay.builder()
-										.actionInterval(1000)
-										.waitingTimeout(1000)
-										.build())
-								.directory(Directory.builder().build())
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(Manager.builder()
+									.submit(Boolean.TRUE)
+									.url("http://localhost:8080")
+									.build())
 								.build())
-						.build(),
-						"Property 'execution.directory.temp' should be declared in 'configuration.yml' file"));
+							.build(),
+						"Property 'execution.manager.token' should be declared in 'configuration.yml' file"));
 	}
 
 	private static ConfigurationBuilder getConfiguration() {
@@ -190,7 +166,7 @@ class ConfigurationComponentValidatorTest {
 								.quality(Quality.MEDIUM)
 								.build())
 						.directory(Directory.builder()
-								.temp("/testano/temp")
+								.temp("/probato/temp")
 								.build())
 						.build())
 				.browsers(new Browser[] { 

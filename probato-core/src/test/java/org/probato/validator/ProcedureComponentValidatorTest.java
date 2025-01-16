@@ -20,7 +20,7 @@ import org.probato.test.suite.UC11_SuiteWithInvalidProcedureMethod;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
 
-@DisplayName("Test - ProcedureComponentValidator")
+@DisplayName("Test -> ProcedureComponentValidator")
 class ProcedureComponentValidatorTest {
 	
 	@Test
