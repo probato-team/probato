@@ -15,6 +15,7 @@
 	<modules>
 		<module>probato-core</module>
 		<module>probato-browser</module>
+		<module>probato-api</module>
 	</modules>
 
 	<properties>
