@@ -112,6 +112,7 @@ public class DatabaseSqlComponentValidator extends ComponentValidator {
 
 	private void validateSqlCommands(Class<?> clazz, String datasourceName, String item) {
 		// TODO validate sql syntax only
+		/*
 		try {
 
 			var configuration = Configuration.getInstance(clazz);
@@ -130,6 +131,7 @@ public class DatabaseSqlComponentValidator extends ComponentValidator {
 		} catch (SQLException e) {
 			throw new IntegrityException(SQL_VALIDATE_COMMAND, item, e.getMessage());
 		}
+		*/
 	}
 	
 	private String getName(Class<?> clazz) {

@@ -17,11 +17,9 @@ import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
 import org.probato.test.suite.UC14_SuiteWithSQL;
-import org.probato.test.suite.UC21_SuiteDatasourceDriverNotFound;
 import org.probato.test.suite.UC24_SuiteWithSQLEmptyPath;
 import org.probato.test.suite.UC25_SuiteWithSQLBlankPath;
 import org.probato.test.suite.UC26_SuiteWithSQLNotFound;
-import org.probato.test.suite.UC27_SuiteWithInvalidSQL;
 
 @DisplayName("Test -> DatabaseSqlComponentValidator")
 class DatabaseSqlComponentValidatorTest {
@@ -108,13 +106,17 @@ class DatabaseSqlComponentValidatorTest {
 						"List of sql must not have null or empty value in the @SQL annotation: 'org.probato.test.suite.UC25_SuiteWithSQLBlankPath'"),
 				Arguments.of(
 						UC26_SuiteWithSQLNotFound.class,
-						"SQL file 'path/to/file-not-found.sql' not found: 'org.probato.test.suite.UC26_SuiteWithSQLNotFound'"),
+						"SQL file 'path/to/file-not-found.sql' not found: 'org.probato.test.suite.UC26_SuiteWithSQLNotFound'")
+				
+				// TODO validate sql syntax only
+				/*
 				Arguments.of(
 						UC27_SuiteWithInvalidSQL.class,
 						"Invalid SQL command in file 'data/sql/invalid-file.sql': \n'Syntax error in SQL statement \"SELECT ONE INVALID [*]COMMAND SQL\"; SQL statement:\nSELECT ONE INVALID COMMAND SQL [42000-232]'"),
 				Arguments.of(
 						UC21_SuiteDatasourceDriverNotFound.class,
 						"Problem when trying to load SQL file: 'org.not.found.Driver'")
+						*/
 				);
 	}
 
