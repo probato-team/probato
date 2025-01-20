@@ -1,7 +1,9 @@
-package org.probato.engine;
+package org.probato.engine.execution;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.probato.engine.execution.builder.Step;
 
 public class ExecutionContextHolder {
 
@@ -15,8 +17,7 @@ public class ExecutionContextHolder {
 	private static ThreadLocal<List<Step>> actions = new ThreadLocal<>();
 	private static ThreadLocal<List<Step>> steps = new ThreadLocal<>();
 
-	private ExecutionContextHolder() {
-	}
+	private ExecutionContextHolder() {}
 
 	public static void setContent(Object content) {
 		ExecutionContextHolder.content = content;

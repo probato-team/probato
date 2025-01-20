@@ -17,11 +17,9 @@ import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
 import org.probato.test.suite.UC14_SuiteWithSQL;
-import org.probato.test.suite.UC21_SuiteDatasourceDriverNotFound;
 import org.probato.test.suite.UC24_SuiteWithSQLEmptyPath;
 import org.probato.test.suite.UC25_SuiteWithSQLBlankPath;
 import org.probato.test.suite.UC26_SuiteWithSQLNotFound;
-import org.probato.test.suite.UC27_SuiteWithInvalidSQL;
 
 @DisplayName("Test -> DatabaseSqlComponentValidator")
 class DatabaseSqlComponentValidatorTest {

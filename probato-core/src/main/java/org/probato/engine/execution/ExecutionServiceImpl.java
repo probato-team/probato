@@ -1,10 +1,13 @@
-package org.probato.engine;
+package org.probato.engine.execution;
 
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.probato.engine.execution.builder.Execution;
+import org.probato.engine.execution.builder.Script;
+import org.probato.engine.execution.builder.Suite;
 import org.probato.exception.ExecutionException;
 import org.probato.loader.Configuration;
 import org.probato.model.Dimension;
@@ -12,7 +15,7 @@ import org.probato.record.RecordService;
 import org.probato.util.ConverterUtil;
 import org.probato.util.FileUtil;
 
-class ExecutionService {
+class ExecutionServiceImpl implements ExecutionService {
 
 	private static final String DIRECTORY = "{0}/{1}/{2}";
 	private static final String SUITE_FILE_JSON = "000-{0}.json";
@@ -26,16 +29,13 @@ class ExecutionService {
 	private final Configuration configuration;
 	private final Optional<RecordService> recordService;
 
-	private ExecutionService(Class<?> clazz) {
+	protected ExecutionServiceImpl(Class<?> clazz) {
 		this.executionId = UUID.randomUUID();
 		this.configuration = Configuration.getInstance(clazz);
 		this.recordService = RecordService.getInstance();
 	}
 
-	public static ExecutionService getInstance(Class<?> clazz) {
-		return new ExecutionService(clazz);
-	}
-
+	@Override
 	public void save(Suite suite, Script script, Execution execution) {
 		try {
 
@@ -55,6 +55,7 @@ class ExecutionService {
 		}
 	}
 
+	@Override
 	public UUID captureScreen(Dimension dimension) {
 		UUID ret = null;
 		try {
@@ -82,6 +83,7 @@ class ExecutionService {
 		return ret;
 	}
 	
+	@Override
 	public UUID startRecording(Dimension dimension) {
 		UUID ret = null;
 		try {
@@ -110,6 +112,7 @@ class ExecutionService {
 		return ret;
 	}
 
+	@Override
 	public void endRecording() {
 		try {
 
@@ -120,6 +123,7 @@ class ExecutionService {
 		}
 	}
 	
+	@Override
 	public UUID getExecutionId() {
 		return executionId;
 	}

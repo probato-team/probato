@@ -1,4 +1,4 @@
-package org.probato.engine;
+package org.probato.engine.execution;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.probato.dataset.DatasetService;
+import org.probato.engine.execution.proxy.PageProxy;
 import org.probato.loader.AnnotationLoader;
 import org.probato.model.PageObject;
 
@@ -13,15 +14,15 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.InvocationHandlerAdapter;
 import net.bytebuddy.matcher.ElementMatchers;
 
-class ProcedureExecutionService {
+public class ProcedureExecutionService {
 
 	private InicializerExecutionService inicializerExecutionService;
 
-	ProcedureExecutionService() {
+	public ProcedureExecutionService() {
 		this.inicializerExecutionService = new InicializerExecutionService();
 	}
 
-	void execute(Object driver, Class<?> scriptClazz, Integer datasetLine, List<Object> procedures) throws Throwable {
+	public void execute(Object driver, Class<?> scriptClazz, Integer datasetLine, List<Object> procedures) throws Throwable {
 		ExecutionContextHolder.cleanActions();
 		ExecutionContextHolder.cleanSteps();
 		for (Object procedure : procedures) {

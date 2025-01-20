@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.probato.engine.execution.ExecutionContextHolder;
+import org.probato.engine.execution.proxy.PageProxy;
 import org.probato.loader.Configuration;
 import org.probato.test.page.PrincipalPage;
 

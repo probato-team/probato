@@ -1,4 +1,4 @@
-package org.probato.engine;
+package org.probato.engine.execution.builder;
 
 import java.io.Serializable;
 
@@ -26,7 +26,7 @@ public class Step implements Serializable {
 		return text;
 	}
 
-	static class StepBuilder {
+	public static class StepBuilder {
 
 		private Integer sequence;
 		private String text;
