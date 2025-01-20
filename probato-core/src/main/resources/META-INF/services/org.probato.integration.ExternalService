@@ -1,0 +1,4 @@
+org.probato.integration.manager.HealthCheckApiService
+org.probato.integration.manager.LoadIncrementExecutionApiService
+org.probato.integration.manager.SubmitExecutionDataApiService
+org.probato.integration.manager.DeleteExecutionDataFileService

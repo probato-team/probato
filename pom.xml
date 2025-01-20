@@ -8,10 +8,15 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-
 	<name>Probato</name>
 	<description>Probato Framework</description>
-	<url>www.probato.org</url>
+	<url>hhtp://probato.org</url>
+
+	<modules>
+		<module>probato-core</module>
+		<module>probato-browser</module>
+		<module>probato-api</module>
+	</modules>
 
 	<properties>
 
@@ -30,6 +35,8 @@
 		<apache.commons>3.17.0</apache.commons>
 		<log4j.version>2.20.0</log4j.version>
 		<wiremock.version>3.9.1</wiremock.version>
+		<guava.version>33.3.1-jre</guava.version>
+		<h2.version>2.3.232</h2.version>
 
 	</properties>
 
@@ -63,6 +70,7 @@
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
+			<name>Central Repository OSSRH</name>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
@@ -70,12 +78,19 @@
 	<repositories>
 		<repository>
 			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+			<url>
+				https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
 		</repository>
 	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
+
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.opentest4j</groupId>
@@ -154,6 +169,19 @@
 				<groupId>org.wiremock</groupId>
 				<artifactId>wiremock</artifactId>
 				<version>${wiremock.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+				<scope>test</scope>
 			</dependency>
 
 		</dependencies>

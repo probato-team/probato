@@ -1,2 +1,7 @@
-.settings/org.eclipse.m2e.core.prefs
+
 .project
+.settings
+.classpath
+target/
+
+docs/CNAME
