@@ -30,7 +30,9 @@ class BrowserServiceTest {
 
 		Configuration.getInstance(getClass());
 		
-		BrowserService.getInstance(browser).run();
+		var service = BrowserService.getInstance(browser);
+		service.run();
+		service.destroy();
 
 		assertTrue(Boolean.TRUE);
 	}
