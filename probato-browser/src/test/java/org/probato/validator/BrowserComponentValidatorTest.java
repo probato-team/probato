@@ -28,10 +28,12 @@ import org.probato.model.type.Quality;
 import org.probato.model.type.Screen;
 import org.probato.test.suite.UC00_NoSuite;
 import org.probato.test.suite.UC01_Suite;
+import org.probato.test.util.IgnoreIfWorkflow;
 
 @DisplayName("Test - BrowserComponentValidator")
 class BrowserComponentValidatorTest {
 
+	@IgnoreIfWorkflow
 	@Test
 	@DisplayName("Should execute validator successfully")
 	void shouldExecuteValidatorSuccessfully() {
