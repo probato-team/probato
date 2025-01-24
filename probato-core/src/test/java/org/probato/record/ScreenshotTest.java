@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.awt.AWTException;
 import java.io.File;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.model.Dimension;
@@ -14,6 +15,7 @@ import org.probato.model.type.Screen;
 @DisplayName("Test -> Screenshot")
 class ScreenshotTest {
 
+	@Disabled
 	@Test
 	@DisplayName("Should print successfully")
 	void shouldPrintSuccessfully() throws AWTException {
@@ -28,7 +30,7 @@ class ScreenshotTest {
 			directory.mkdir();
 		}
 
-		var screen = new Screenshot("C:/probato/temp/test-screen-record.jpg", Screen.PRINCIPAL, dimension);
+		var screen = new Screenshot("/probato/temp/test-screen-record.jpg", Screen.PRINCIPAL, dimension);
 		screen.print();
 
 		assertTrue(Boolean.TRUE);

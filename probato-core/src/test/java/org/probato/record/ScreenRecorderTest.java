@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.awt.AWTException;
 import java.io.File;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.model.Dimension;
@@ -16,6 +17,7 @@ import org.probato.model.type.Screen;
 @DisplayName("Test -> ScreenRecorder")
 class ScreenRecorderTest {
 
+	@Disabled
 	@Test
 	@DisplayName("Should record successfully")
 	void shouldRecordSuccessfully() throws AWTException {

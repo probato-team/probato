@@ -26,7 +26,7 @@ jobs:
             GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
          run: |
             echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-            echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --edit-key <ID_CHAVE> trust quit
+            echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --edit-key 6EC20A933374F16AA09BC340FD480C23BF56B005 trust quit
 
       -  name: Setup Maven Settings
          run: |
