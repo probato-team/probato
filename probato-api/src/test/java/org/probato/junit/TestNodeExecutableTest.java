@@ -17,10 +17,12 @@ import org.probato.model.type.DimensionMode;
 import org.probato.node.TestNodeExecutable;
 import org.probato.test.script.UC01TC01_Script;
 import org.probato.test.suite.UC01_Suite;
+import org.probato.test.util.IgnoreIfWorkflow;
 
 @DisplayName("Test - TestNodeExecutable")
 class TestNodeExecutableTest {
 
+	@IgnoreIfWorkflow
 	@ParameterizedTest
 	@MethodSource("getBrowsers")
 	@DisplayName("Should execute test successfully")
