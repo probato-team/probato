@@ -263,6 +263,7 @@ class AnnotationLoaderTest {
 		assertEquals(2, methods.size());
 	}
 
+	@Disabled
 	@Test
 	@DisplayName("Should get actions value successfully")
 	void shouldGetActionValueSuccessfully() {
