@@ -24,6 +24,6 @@ jobs:
             cache: maven
 
       -  name: Run tests
-         run: 
-            mvn clean package -DskipTests 
+         run: |
+            mvn clean package -DskipTests
             mvn test -Dworkflow=Github
