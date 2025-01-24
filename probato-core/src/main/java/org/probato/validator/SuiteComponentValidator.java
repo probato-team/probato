@@ -19,7 +19,7 @@ public class SuiteComponentValidator extends ComponentValidator {
 	private static final String SUITE_ID_LENGTH_MSG = "Suite ID must be between {1} and {2} characters long: ''{0}''";
 	private static final String SUITE_ID_SPECIAL_CHAR_MSG = "Suite ID should contain only letters and numbers: ''{0}''";
 	private static final String SUITE_NAME_LENGTH_MSG = "Suite name must be between {1} and {2} characters long: ''{0}''";
-	private static final String SUITE_DESCRIPTION_MAX_LENGTH_MSG = "Suite description must not be more than {1} characters in length: ''{0}''";
+	private static final String SUITE_DESCRIPTION_MAX_LENGTH_MSG = "Suite description must not be more than {1,number,#} characters in length: ''{0}''";
 	private static final String SUITE_CAN_TEST_CASE_MSG = "Suite must have at least 1 test case: ''{0}''";
 
 	@Override

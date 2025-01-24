@@ -1,6 +1,6 @@
 package org.probato.exception;
 
-public class IntegrationException extends PrrobatoException {
+public class IntegrationException extends ProbatoException {
 
 	private static final long serialVersionUID = -2666298530730967591L;
 

@@ -1,0 +1,45 @@
+name: Deploy Artifacts to Maven Central
+
+on:
+   pull_request:
+      types: opened
+
+jobs:
+   deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+      
+      -  name: Checkout code
+         uses: actions/checkout@v3
+
+      -  name: Configure JDK 11
+         uses: actions/setup-java@v3
+         with:
+            java-version: '11'
+            distribution: temurin
+            cache: maven
+
+      -  name: Import GPG key
+         env:
+            GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+            GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+         run: |
+            echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+            echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --edit-key <ID_CHAVE> trust quit
+
+      -  name: Setup Maven Settings
+         run: |
+            mkdir -p ~/.m2
+            echo "<settings>
+                    <servers>
+                        <server>
+                            <id>ossrh</id>
+                            <username>${{ secrets.OSSRH_USERNAME }}</username>
+                            <password>${{ secrets.OSSRH_PASSWORD }}</password>
+                        </server>
+                    </servers>
+                </settings>" > ~/.m2/settings.xml
+
+      -  name: Deploy to Maven Central
+         run: mvn clean deploy -P release --settings ~/.m2/settings.xml -DskipTests

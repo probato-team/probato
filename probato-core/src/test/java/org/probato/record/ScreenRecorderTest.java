@@ -34,7 +34,7 @@ class ScreenRecorderTest {
 			directory.mkdir();
 		}
 
-		var screen = new ScreenRecorder("C:/probato/temp/test-screen-record.mp4", Screen.PRINCIPAL, video, dimension);
+		var screen = new ScreenRecorder("/probato/temp/test-screen-record.mp4", Screen.PRINCIPAL, video, dimension);
 		screen.startCapture();
 		screen.stopCapture();
 
