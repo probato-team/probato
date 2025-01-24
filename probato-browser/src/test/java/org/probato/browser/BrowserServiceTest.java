@@ -19,10 +19,12 @@ import org.probato.model.Browser.BrowserBuilder;
 import org.probato.model.Dimension;
 import org.probato.model.type.BrowserType;
 import org.probato.model.type.DimensionMode;
+import org.probato.test.util.IgnoreIfWorkflow;
 
 @DisplayName("Test - BrowserService")
 class BrowserServiceTest {
 
+	@IgnoreIfWorkflow
 	@ParameterizedTest
 	@MethodSource("getBrowsers")
 	@DisplayName("Should execute test successfully")

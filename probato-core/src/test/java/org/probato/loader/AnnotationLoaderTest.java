@@ -25,6 +25,7 @@ import org.probato.test.script.UC01TC01_Script;
 import org.probato.test.script.UC10TC02_ScriptWithSql;
 import org.probato.test.suite.UC01_Suite;
 import org.probato.test.suite.UC10_SuiteWithSql;
+import org.probato.test.util.IgnoreIfWorkflow;
 
 @DisplayName("Test -> AnnotationLoader")
 class AnnotationLoaderTest {
@@ -263,7 +264,7 @@ class AnnotationLoaderTest {
 		assertEquals(2, methods.size());
 	}
 
-	@org.junit.jupiter.api.Disabled
+	@IgnoreIfWorkflow
 	@Test
 	@DisplayName("Should get actions value successfully")
 	void shouldGetActionValueSuccessfully() {
