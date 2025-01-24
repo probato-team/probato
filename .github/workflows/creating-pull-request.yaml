@@ -1,8 +1,11 @@
 name: Creating a pull request
 
 on:
-   pull_request:
-      types: opened
+   push:
+     branches:
+       - main
+       - deploy
+       - 'feature/**'
 
 jobs:
    deploy:

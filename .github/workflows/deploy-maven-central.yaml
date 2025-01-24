@@ -1,8 +1,11 @@
 name: Deploy Artifacts to Maven Central
 
 on:
-   pull_request:
-      types: opened
+   push:
+     branches:
+       - main
+       - deploy
+       - 'feature/**'
 
 jobs:
    deploy:
@@ -25,8 +28,7 @@ jobs:
             GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
             GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
          run: |
-            echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-            echo 5
+            echo "$GPG_PRIVATE_KEY" | gpg --batch --import && echo 5
             echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --edit-key 6EC20A933374F16AA09BC340FD480C23BF56B005 trust quit
 
       -  name: Setup Maven Settings
