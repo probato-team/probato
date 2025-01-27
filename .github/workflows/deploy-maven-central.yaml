@@ -28,21 +28,33 @@ jobs:
             GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
             GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
          run: |
-            echo "$GPG_PRIVATE_KEY" | gpg --batch --import --always-trust
+            echo "$GPG_PRIVATE_KEY" | gpg --batch --import --yes and --always-trust
             echo "$GPG_PASSPHRASE" | gpg --batch --passphrase-fd 0 --edit-key 6EC20A933374F16AA09BC340FD480C23BF56B005 trust quit
 
       -  name: Setup Maven Settings
          run: |
             mkdir -p ~/.m2
             echo "<settings>
-                    <servers>
+                     <servers>
                         <server>
-                            <id>ossrh</id>
+                            <id>central</id>
                             <username>${{ secrets.OSSRH_USERNAME }}</username>
                             <password>${{ secrets.OSSRH_PASSWORD }}</password>
                         </server>
-                    </servers>
-                </settings>" > ~/.m2/settings.xml
+                     </servers>
+                     <profiles>
+                        <profile>
+                           <id>central</id>
+                           <activation>
+                              <activeByDefault>true</activeByDefault>
+                           </activation>
+                           <properties>
+                              <gpg.executable>gpg</gpg.executable>
+                              <gpg.passphrase>${{ secrets.GPG_PASSPHRASE }}</gpg.passphrase>
+                           </properties>
+                        </profile>
+                     </profiles>
+                  </settings>" > ~/.m2/settings.xml
 
       -  name: Deploy to Maven Central
          run: mvn clean deploy -P release --settings ~/.m2/settings.xml -DskipTests
