@@ -7,7 +7,7 @@
 	
 	<groupId>org.probato</groupId>
 	<artifactId>probato</artifactId>
-	<version>0.0.0</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 
 	<name>Probato</name>
