@@ -58,4 +58,4 @@ jobs:
                   </settings>" > ~/.m2/settings.xml
 
       -  name: Deploy to Maven Central
-         run: mvn clean deploy -P release --settings ~/.m2/settings.xml -DskipTests
+         run: mvn clean deploy --settings ~/.m2/settings.xml -DskipTests
