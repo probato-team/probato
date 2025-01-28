@@ -7,7 +7,7 @@
 	
 	<groupId>org.probato</groupId>
 	<artifactId>probato</artifactId>
-	<version>0.0.0</version>
+	<version>0.1.0</version>
 	<packaging>pom</packaging>
 
 	<name>Probato</name>
@@ -39,8 +39,12 @@
 
 	<repositories>
 		<repository>
-			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+			<id>dcm4che repository</id>
+			<url>http://www.dcm4che.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>dcm4che 2 repository</id>
+			<url>https://maven.dcm4che.org/</url>
 		</repository>
 	</repositories>
 
@@ -175,7 +179,7 @@
 
 		</dependencies>
 	</dependencyManagement>
-
+	
 	<build>
 		<plugins>
 
@@ -222,6 +226,12 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<gpgArguments>
+						<arg>--pinentry-mode</arg>
+						<arg>loopback</arg>
+					</gpgArguments>
+				</configuration>
 			</plugin>
 
 			<plugin>

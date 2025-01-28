@@ -12,7 +12,9 @@ import org.probato.model.Video;
 import org.probato.model.type.DimensionMode;
 import org.probato.model.type.Quality;
 import org.probato.model.type.Screen;
+import org.probato.test.util.IgnoreIfWorkflow;
 
+@IgnoreIfWorkflow
 @DisplayName("Test -> ScreenRecorder")
 class ScreenRecorderTest {
 
@@ -34,7 +36,7 @@ class ScreenRecorderTest {
 			directory.mkdir();
 		}
 
-		var screen = new ScreenRecorder("C:/probato/temp/test-screen-record.mp4", Screen.PRINCIPAL, video, dimension);
+		var screen = new ScreenRecorder("/probato/temp/test-screen-record.mp4", Screen.PRINCIPAL, video, dimension);
 		screen.startCapture();
 		screen.stopCapture();
 

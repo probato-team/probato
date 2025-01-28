@@ -95,7 +95,7 @@ class ScriptComponentValidatorTest {
 						"Script name must be between 3 and 250 characters long: 'org.probato.test.script.UC06TC01_ScriptNameMaxLength'"),
 				Arguments.of(
 						UC07_SuiteDescriptionMaxLenght.class,
-						"Script description must not be more than 2.000 characters in length: 'org.probato.test.script.UC07TC01_ScriptDescriptionMaxLength'"),
+						"Script description must not be more than 2000 characters in length: 'org.probato.test.script.UC07TC01_ScriptDescriptionMaxLength'"),
 				Arguments.of(
 						UC08_SuiteScriptEmptyTestCase.class,
 						"Script must have at least 1 procedure: 'org.probato.test.script.UC08TC01_ScriptEmptyProcedure'"));

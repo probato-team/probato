@@ -20,7 +20,7 @@ public class ScriptComponentValidator extends ComponentValidator {
 	private static final String SCRIPT_ID_LEN_MSG = "Script ID must be between {0} and {1} characters long: ''{2}''";
 	private static final String SCRIPT_ID_SPECIAL_CHAR_MSG = "Script ID should contain only letters and numbers: ''{0}''";
 	private static final String SCRIPT_NAME_LEN_MSG = "Script name must be between {0} and {1} characters long: ''{2}''";
-	private static final String SCRIPT_DESC_MAX_LENGTH_MSG = "Script description must not be more than {0} characters in length: ''{1}''";
+	private static final String SCRIPT_DESC_MAX_LENGTH_MSG = "Script description must not be more than {0,number,#} characters in length: ''{1}''";
 	private static final String SCRIPT_CAN_TEST_CASE_MSG = "Script must have at least 1 procedure: ''{0}''";
 
 	@Override

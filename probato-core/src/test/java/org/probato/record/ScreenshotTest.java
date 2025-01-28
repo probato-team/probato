@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.probato.model.Dimension;
 import org.probato.model.type.DimensionMode;
 import org.probato.model.type.Screen;
+import org.probato.test.util.IgnoreIfWorkflow;
 
+@IgnoreIfWorkflow
 @DisplayName("Test -> Screenshot")
 class ScreenshotTest {
 
@@ -28,7 +30,7 @@ class ScreenshotTest {
 			directory.mkdir();
 		}
 
-		var screen = new Screenshot("C:/probato/temp/test-screen-record.jpg", Screen.PRINCIPAL, dimension);
+		var screen = new Screenshot("/probato/temp/test-screen-record.jpg", Screen.PRINCIPAL, dimension);
 		screen.print();
 
 		assertTrue(Boolean.TRUE);

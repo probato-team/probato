@@ -1,6 +1,6 @@
 package org.probato.exception;
 
-public class ImpeditiveException extends PrrobatoException {
+public class ImpeditiveException extends ProbatoException {
 
 	private static final long serialVersionUID = 3424356316617614187L;
 
