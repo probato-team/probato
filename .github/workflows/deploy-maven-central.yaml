@@ -1,11 +1,8 @@
 name: Deploy artifacts to Maven Central
 
 on:
-   push:
-     branches:
-       - main
-       - deploy
-       - 'feature/**'
+   release:
+     types: created
 
 jobs:
    deploy:
