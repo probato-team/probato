@@ -39,6 +39,10 @@
 
 	<repositories>
 		<repository>
+			<id>xuggle repo</id>
+			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+		</repository>
+		<repository>
 			<id>dcm4che repository</id>
 			<url>http://www.dcm4che.org/maven2/</url>
 		</repository>
