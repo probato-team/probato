@@ -2,10 +2,10 @@ package org.probato.validator;
 
 import java.util.Objects;
 
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Execution;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.Configuration;
-import org.probato.model.Execution;
-import org.probato.model.type.ComponentValidatorType;
 import org.probato.util.StringUtil;
 
 public class ConfigurationComponentValidator extends ComponentValidator {

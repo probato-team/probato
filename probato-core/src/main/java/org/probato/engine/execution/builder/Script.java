@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.type.Complexity;
-import org.probato.model.type.Flow;
-import org.probato.model.type.Relevance;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.Complexity;
+import org.probato.entity.type.Flow;
+import org.probato.entity.type.Relevance;
 
 public class Script implements Serializable {
 

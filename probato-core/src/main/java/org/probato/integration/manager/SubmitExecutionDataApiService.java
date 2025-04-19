@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.integration.manager.dto.RecordFileExecutionRequest;
-import org.probato.model.type.ExecutionPhase;
 import org.probato.util.ConverterUtil;
 import org.probato.util.FileUtil;
 

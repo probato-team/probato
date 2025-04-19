@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Browser;
+import org.probato.entity.model.Dimension;
+import org.probato.entity.model.Browser.BrowserBuilder;
+import org.probato.entity.type.BrowserType;
+import org.probato.entity.type.DimensionMode;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.Configuration;
-import org.probato.model.Browser;
-import org.probato.model.Browser.BrowserBuilder;
-import org.probato.model.Dimension;
-import org.probato.model.type.BrowserType;
-import org.probato.model.type.DimensionMode;
 import org.probato.test.util.IgnoreIfWorkflow;
 
 @DisplayName("Test - BrowserService")

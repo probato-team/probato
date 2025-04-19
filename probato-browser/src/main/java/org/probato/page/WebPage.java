@@ -2,7 +2,7 @@ package org.probato.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.probato.model.PageObject;
+import org.probato.entity.model.PageObject;
 
 public abstract class WebPage implements PageObject {
 

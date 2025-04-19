@@ -11,10 +11,10 @@ import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Execution;
 import org.probato.exception.IntegrationException;
 import org.probato.integration.ExternalService;
-import org.probato.loader.Configuration;
-import org.probato.model.Execution;
 import org.probato.util.ConverterUtil;
 
 public abstract class AbstractApiService implements ExternalService {

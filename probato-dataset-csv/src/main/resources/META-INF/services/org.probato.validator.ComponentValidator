@@ -1,0 +1,3 @@
+org.probato.validator.ConfigurationComponentValidator
+org.probato.validator.CsvDatasetComponentValidator
+org.probato.validator.ManagerConfigurationComponentValidator

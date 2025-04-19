@@ -3,9 +3,9 @@ package org.probato.test.script;
 import org.probato.api.Ignore;
 import org.probato.api.Run;
 import org.probato.api.Script;
-import org.probato.model.type.Complexity;
-import org.probato.model.type.Flow;
-import org.probato.model.type.Relevance;
+import org.probato.entity.type.Complexity;
+import org.probato.entity.type.Flow;
+import org.probato.entity.type.Relevance;
 
 @Ignore
 @Script(

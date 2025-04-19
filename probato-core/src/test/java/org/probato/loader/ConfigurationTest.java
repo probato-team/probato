@@ -8,10 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.probato.model.type.BrowserType;
-import org.probato.model.type.DimensionMode;
-import org.probato.model.type.Quality;
-import org.probato.model.type.Screen;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.BrowserType;
+import org.probato.entity.type.DimensionMode;
+import org.probato.entity.type.Quality;
+import org.probato.entity.type.Screen;
 
 @DisplayName("Test -> Configuration")
 class ConfigurationTest {

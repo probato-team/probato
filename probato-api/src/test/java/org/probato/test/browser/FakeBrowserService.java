@@ -1,8 +1,8 @@
 package org.probato.test.browser;
 
 import org.probato.browser.BrowserService;
-import org.probato.model.Browser;
-import org.probato.model.type.BrowserType;
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.BrowserType;
 
 public class FakeBrowserService implements BrowserService {
 

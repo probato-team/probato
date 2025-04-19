@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.text.MessageFormat;
 
 import org.junit.jupiter.api.DisplayNameGenerator;
-import org.probato.loader.AnnotationLoader;
+import org.probato.core.loader.AnnotationLoader;
 
 public final class SuiteFactoryDisplayNameGenerator implements DisplayNameGenerator {
 

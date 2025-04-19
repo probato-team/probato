@@ -3,7 +3,7 @@ package org.probato.browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.probato.model.type.BrowserType;
+import org.probato.entity.type.BrowserType;
 
 public class FirefoxBrowser extends BrowserServiceTemplate {
 

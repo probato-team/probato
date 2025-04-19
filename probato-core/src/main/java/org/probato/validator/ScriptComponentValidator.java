@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 import java.util.stream.Stream;
 
 import org.probato.api.Script;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.model.type.ComponentValidatorType;
 import org.probato.util.StringUtil;
 
 public class ScriptComponentValidator extends ComponentValidator {

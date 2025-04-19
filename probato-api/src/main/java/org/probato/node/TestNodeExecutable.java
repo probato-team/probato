@@ -2,7 +2,7 @@ package org.probato.node;
 
 import org.junit.jupiter.api.function.Executable;
 import org.probato.engine.ScriptExecutor;
-import org.probato.model.Browser;
+import org.probato.entity.model.Browser;
 
 public class TestNodeExecutable implements Executable {
 

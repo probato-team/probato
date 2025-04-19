@@ -5,10 +5,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.probato.dataset.DatasetService;
+import org.probato.core.loader.AnnotationLoader;
 import org.probato.engine.execution.proxy.PageProxy;
-import org.probato.loader.AnnotationLoader;
-import org.probato.model.PageObject;
+import org.probato.entity.model.PageObject;
+import org.probato.service.DatasetService;
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.InvocationHandlerAdapter;

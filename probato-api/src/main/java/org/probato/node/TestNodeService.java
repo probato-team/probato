@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.probato.api.Script;
-import org.probato.model.Browser;
+import org.probato.entity.model.Browser;
 
 public interface TestNodeService {
 

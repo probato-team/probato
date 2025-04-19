@@ -4,9 +4,9 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.util.Objects;
 
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.exception.IntegrationException;
 import org.probato.integration.manager.dto.HealthCheckResponse;
-import org.probato.model.type.ExecutionPhase;
 
 public class HealthCheckApiService extends AbstractApiService {
 

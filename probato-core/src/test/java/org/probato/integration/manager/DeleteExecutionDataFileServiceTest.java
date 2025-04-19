@@ -15,9 +15,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.integration.ExternalService;
-import org.probato.loader.Configuration;
-import org.probato.model.type.ExecutionPhase;
 import org.probato.util.FileUtil;
 
 import com.github.tomakehurst.wiremock.WireMockServer;

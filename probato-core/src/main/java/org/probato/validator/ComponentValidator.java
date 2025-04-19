@@ -7,8 +7,8 @@ import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 import java.util.stream.Collectors;
 
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.model.type.ComponentValidatorType;
 
 public abstract class ComponentValidator {
 

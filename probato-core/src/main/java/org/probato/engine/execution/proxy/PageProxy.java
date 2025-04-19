@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 
 import org.probato.api.Action;
 import org.probato.api.Param;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
 import org.probato.engine.execution.ExecutionContextHolder;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
 
 public class PageProxy implements InvocationHandler {
 

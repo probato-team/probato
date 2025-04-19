@@ -1,7 +1,7 @@
 package org.probato.test.page;
 
 import org.probato.api.Action;
-import org.probato.model.PageObject;
+import org.probato.entity.model.PageObject;
 
 public class PageInvalidParam implements PageObject {
 

@@ -6,7 +6,7 @@ import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 import java.util.stream.Collectors;
 
-import org.probato.dataset.DatasetService;
+import org.probato.service.DatasetService;
 
 public interface DatasourceService {
 

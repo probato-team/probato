@@ -5,9 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.probato.model.type.Complexity;
-import org.probato.model.type.Flow;
-import org.probato.model.type.Relevance;
+import org.probato.entity.type.Complexity;
+import org.probato.entity.type.Flow;
+import org.probato.entity.type.Relevance;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

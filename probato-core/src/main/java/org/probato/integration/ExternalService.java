@@ -6,7 +6,7 @@ import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 import java.util.stream.Collectors;
 
-import org.probato.model.type.ExecutionPhase;
+import org.probato.entity.type.ExecutionPhase;
 
 public interface ExternalService {
 	

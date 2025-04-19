@@ -12,16 +12,16 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.probato.dataset.DatasetService;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
 import org.probato.engine.execution.ExecutionContextHolder;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.Browser;
-import org.probato.model.type.Complexity;
-import org.probato.model.type.DimensionMode;
-import org.probato.model.type.Evaluation;
-import org.probato.model.type.Flow;
-import org.probato.model.type.Relevance;
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.Complexity;
+import org.probato.entity.type.DimensionMode;
+import org.probato.entity.type.Evaluation;
+import org.probato.entity.type.Flow;
+import org.probato.entity.type.Relevance;
+import org.probato.service.DatasetService;
 
 public class Execution implements Serializable {
 

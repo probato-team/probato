@@ -4,11 +4,11 @@ import java.awt.GraphicsEnvironment;
 import java.lang.reflect.Array;
 import java.util.Objects;
 
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.ComponentValidatorType;
+import org.probato.entity.type.DimensionMode;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.Configuration;
-import org.probato.model.Browser;
-import org.probato.model.type.ComponentValidatorType;
-import org.probato.model.type.DimensionMode;
 
 public class BrowserComponentValidator extends ComponentValidator {
 

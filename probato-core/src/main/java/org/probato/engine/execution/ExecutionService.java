@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.probato.engine.execution.builder.Execution;
 import org.probato.engine.execution.builder.Script;
 import org.probato.engine.execution.builder.Suite;
-import org.probato.model.Dimension;
+import org.probato.entity.model.Dimension;
 
 public interface ExecutionService {
 

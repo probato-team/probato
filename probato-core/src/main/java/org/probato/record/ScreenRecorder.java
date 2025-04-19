@@ -7,10 +7,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.probato.entity.model.Dimension;
+import org.probato.entity.model.Video;
+import org.probato.entity.type.Screen;
 import org.probato.exception.ExecutionException;
-import org.probato.model.Dimension;
-import org.probato.model.Video;
-import org.probato.model.type.Screen;
 
 import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;

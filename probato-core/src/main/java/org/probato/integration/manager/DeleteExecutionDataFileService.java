@@ -3,7 +3,7 @@ package org.probato.integration.manager;
 import java.io.File;
 import java.util.List;
 
-import org.probato.model.type.ExecutionPhase;
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.util.FileUtil;
 
 public class DeleteExecutionDataFileService extends AbstractApiService {

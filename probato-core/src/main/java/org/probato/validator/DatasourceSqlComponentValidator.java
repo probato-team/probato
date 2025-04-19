@@ -3,10 +3,10 @@ package org.probato.validator;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.type.ComponentValidatorType;
 import org.probato.util.SqlUtil;
 import org.probato.util.StringUtil;
 

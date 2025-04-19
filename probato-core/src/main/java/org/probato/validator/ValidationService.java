@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.probato.model.type.ComponentValidatorType;
+import org.probato.entity.type.ComponentValidatorType;
 
 public class ValidationService {
 	

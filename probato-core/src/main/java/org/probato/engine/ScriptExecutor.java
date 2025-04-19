@@ -2,7 +2,7 @@ package org.probato.engine;
 
 import org.probato.engine.browser.BrowserScriptExecutionService;
 import org.probato.engine.desktop.DesktopScriptExecutionService;
-import org.probato.model.Browser;
+import org.probato.entity.model.Browser;
 
 public abstract class ScriptExecutor {
 

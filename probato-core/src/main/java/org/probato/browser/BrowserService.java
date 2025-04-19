@@ -4,9 +4,9 @@ import java.util.Comparator;
 import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.BrowserType;
 import org.probato.exception.IntegrityException;
-import org.probato.model.Browser;
-import org.probato.model.type.BrowserType;
 
 public interface BrowserService {
 

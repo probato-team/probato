@@ -3,7 +3,7 @@ package org.probato.browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.probato.model.type.BrowserType;
+import org.probato.entity.type.BrowserType;
 
 public class EdgeBrowser extends BrowserServiceTemplate {
 

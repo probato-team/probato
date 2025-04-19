@@ -4,9 +4,9 @@ import java.net.URI;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
-import org.probato.model.Browser;
-import org.probato.model.Dimension;
-import org.probato.model.type.DimensionMode;
+import org.probato.entity.model.Browser;
+import org.probato.entity.model.Dimension;
+import org.probato.entity.type.DimensionMode;
 
 public class BrowserTestNode extends TestNode {
 

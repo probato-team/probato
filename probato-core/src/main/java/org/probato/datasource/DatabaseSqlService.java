@@ -1,9 +1,9 @@
 package org.probato.datasource;
 
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Datasource;
 import org.probato.exception.ImpeditiveException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.Datasource;
 import org.probato.util.SqlUtil;
 
 public class DatabaseSqlService implements DatasourceService {

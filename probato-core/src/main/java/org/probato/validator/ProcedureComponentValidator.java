@@ -5,10 +5,10 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
 
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.entity.model.Datamodel;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.model.Datamodel;
-import org.probato.model.type.ComponentValidatorType;
 
 public class ProcedureComponentValidator extends ComponentValidator {
 

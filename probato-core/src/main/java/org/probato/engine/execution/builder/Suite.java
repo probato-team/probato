@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
 
 public class Suite implements Serializable {
 

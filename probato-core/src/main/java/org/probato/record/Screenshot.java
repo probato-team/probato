@@ -9,9 +9,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.probato.entity.model.Dimension;
+import org.probato.entity.type.Screen;
 import org.probato.exception.ExecutionException;
-import org.probato.model.Dimension;
-import org.probato.model.type.Screen;
 
 public final class Screenshot extends AbstractScreen {
 

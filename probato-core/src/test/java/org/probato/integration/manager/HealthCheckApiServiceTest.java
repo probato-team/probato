@@ -20,10 +20,10 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.exception.IntegrationException;
 import org.probato.integration.ExternalService;
-import org.probato.loader.Configuration;
-import org.probato.model.type.ExecutionPhase;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;

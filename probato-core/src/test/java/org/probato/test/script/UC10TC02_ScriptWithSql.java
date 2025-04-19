@@ -4,9 +4,9 @@ import org.probato.api.Dataset;
 import org.probato.api.Procedure;
 import org.probato.api.SQL;
 import org.probato.api.Script;
-import org.probato.model.type.Complexity;
-import org.probato.model.type.Flow;
-import org.probato.model.type.Relevance;
+import org.probato.entity.type.Complexity;
+import org.probato.entity.type.Flow;
+import org.probato.entity.type.Relevance;
 
 @Dataset("path/to/file-not-found.csv")
 @SQL(

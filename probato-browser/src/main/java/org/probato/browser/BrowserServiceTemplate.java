@@ -13,9 +13,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.probato.loader.Configuration;
-import org.probato.model.Browser;
-import org.probato.model.type.Screen;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.Screen;
 
 abstract class BrowserServiceTemplate implements BrowserService {
 

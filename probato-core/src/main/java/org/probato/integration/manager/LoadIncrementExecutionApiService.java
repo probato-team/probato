@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.integration.manager.dto.NextIncrementExecutionResponse;
-import org.probato.loader.Configuration;
-import org.probato.model.type.ExecutionPhase;
 
 public class LoadIncrementExecutionApiService extends AbstractApiService {
 

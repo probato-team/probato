@@ -5,12 +5,12 @@ import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.probato.core.loader.Configuration;
 import org.probato.engine.execution.builder.Execution;
 import org.probato.engine.execution.builder.Script;
 import org.probato.engine.execution.builder.Suite;
+import org.probato.entity.model.Dimension;
 import org.probato.exception.ExecutionException;
-import org.probato.loader.Configuration;
-import org.probato.model.Dimension;
 import org.probato.record.RecordService;
 import org.probato.util.ConverterUtil;
 import org.probato.util.FileUtil;

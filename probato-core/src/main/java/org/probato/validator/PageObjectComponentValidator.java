@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.probato.api.Param;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.entity.model.PageObject;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.model.PageObject;
-import org.probato.model.type.ComponentValidatorType;
 
 public class PageObjectComponentValidator extends ComponentValidator {
 

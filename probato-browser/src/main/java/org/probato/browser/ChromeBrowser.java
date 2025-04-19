@@ -3,7 +3,7 @@ package org.probato.browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.probato.model.type.BrowserType;
+import org.probato.entity.type.BrowserType;
 
 public class ChromeBrowser extends BrowserServiceTemplate {
 

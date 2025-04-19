@@ -2,9 +2,9 @@ package org.probato.record;
 
 import java.util.Optional;
 
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Dimension;
 import org.probato.exception.ExecutionException;
-import org.probato.loader.Configuration;
-import org.probato.model.Dimension;
 
 public class RecordServiceImpl implements RecordService {
 	

@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.type.ComponentValidatorType;
 import org.probato.util.FileUtil;
 import org.probato.util.SqlUtil;
 import org.probato.util.StringUtil;

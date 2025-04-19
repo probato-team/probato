@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.probato.model.Dimension;
-import org.probato.model.type.DimensionMode;
-import org.probato.model.type.Screen;
+import org.probato.entity.model.Dimension;
+import org.probato.entity.type.DimensionMode;
+import org.probato.entity.type.Screen;
 
 abstract class AbstractScreen {
 

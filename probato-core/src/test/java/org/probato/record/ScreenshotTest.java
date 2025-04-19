@@ -7,9 +7,9 @@ import java.io.File;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.probato.model.Dimension;
-import org.probato.model.type.DimensionMode;
-import org.probato.model.type.Screen;
+import org.probato.entity.model.Dimension;
+import org.probato.entity.type.DimensionMode;
+import org.probato.entity.type.Screen;
 import org.probato.test.util.IgnoreIfWorkflow;
 
 @IgnoreIfWorkflow

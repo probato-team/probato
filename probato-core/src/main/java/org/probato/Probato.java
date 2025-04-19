@@ -7,12 +7,12 @@ import java.util.stream.Stream;
 
 import org.probato.api.Dataset;
 import org.probato.api.Script;
-import org.probato.dataset.DatasetService;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.core.loader.Configuration;
+import org.probato.entity.model.Browser;
+import org.probato.entity.type.ExecutionPhase;
 import org.probato.integration.ExternalService;
-import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
-import org.probato.model.Browser;
-import org.probato.model.type.ExecutionPhase;
+import org.probato.service.DatasetService;
 import org.probato.validator.ValidationService;
 
 public class Probato {

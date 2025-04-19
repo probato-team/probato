@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 
-import org.probato.model.Dimension;
+import org.probato.entity.model.Dimension;
 
 public interface RecordService {
 

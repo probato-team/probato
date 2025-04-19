@@ -3,9 +3,9 @@ package org.probato.validator;
 import java.util.stream.Stream;
 
 import org.probato.api.Suite;
+import org.probato.core.loader.AnnotationLoader;
+import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.AnnotationLoader;
-import org.probato.model.type.ComponentValidatorType;
 import org.probato.util.StringUtil;
 
 public class SuiteComponentValidator extends ComponentValidator {
