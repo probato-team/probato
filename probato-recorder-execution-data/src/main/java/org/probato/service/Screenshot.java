@@ -1,11 +1,10 @@
-package org.probato.record;
+package org.probato.service;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -13,7 +12,7 @@ import org.probato.entity.model.Dimension;
 import org.probato.entity.type.Screen;
 import org.probato.exception.ExecutionException;
 
-public final class Screenshot extends AbstractScreen {
+final class Screenshot extends AbstractScreen {
 
 	private static final String ERROR_DEFAULT_MSG = "An error occurred while trying to screenshot the execution: {0}";
 	public static final String FORMAT_JPG = "JPG";
@@ -36,7 +35,7 @@ public final class Screenshot extends AbstractScreen {
 			File file = new File(outputFile);
 			ImageIO.write(bgrScreen, FORMAT_JPG, file);
 
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());
 		}
 	}

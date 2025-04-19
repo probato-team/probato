@@ -10,21 +10,15 @@
 		<version>0.1.0</version>
 	</parent>
 
-	<artifactId>probato-datasource-sql</artifactId>
-	<name>Probato :: Database SQL</name>
-	<description>Probato Database SQL</description>
+	<artifactId>probato-recorder-execution-data</artifactId>
+		<name>Probato :: Recorder Execution Data</name>
+	<description>Probato Recorder Execution Data</description>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.probato</groupId>
 			<artifactId>probato-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>

@@ -53,6 +53,7 @@
 		<module>probato-dataset-csv</module>
 		<module>probato-datasource-sql</module>
 		<module>probato-integrator-manager</module>
+		<module>probato-recorder-execution-data</module>
 		<module>probato-browser</module>
 		<module>probato-api</module>
 	</modules>

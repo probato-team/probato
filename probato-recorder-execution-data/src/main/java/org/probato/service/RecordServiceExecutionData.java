@@ -1,26 +1,25 @@
-package org.probato.record;
+package org.probato.service;
 
 import java.util.Optional;
 
 import org.probato.core.loader.Configuration;
 import org.probato.entity.model.Dimension;
 import org.probato.exception.ExecutionException;
-import org.probato.service.RecordService;
 
-public class RecordServiceImpl implements RecordService {
-	
+public class RecordServiceExecutionData implements RecordService {
+
 	private static final String ERROR_DEFAULT_MSG = "An error occurred while trying to record screen the execution: {0}";
-	
+
 	private ScreenRecorder recorder;
-	
+
 	@Override
 	public void start(String outputFile, Dimension dimension) {
 		try {
-			
+
 			var configuration = Configuration.getInstance();
 			var screen = configuration.getExecution().getScreen();
 			var video = configuration.getExecution().getVideo();
-			
+
 			if (video.isEnabled()) {
 				recorder = new ScreenRecorder(outputFile, screen, video, dimension);
 				recorder.startCapture();
@@ -34,11 +33,11 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public void stop() {
-		
+
 		var configuration = Configuration.getInstance();
 		var video = configuration.getExecution().getVideo();
 		if (video.isEnabled()) {
-			
+
 			Optional.ofNullable(recorder)
 				.ifPresent(ScreenRecorder::stopCapture);
 		}
@@ -47,15 +46,15 @@ public class RecordServiceImpl implements RecordService {
 	@Override
 	public void screenshot(String outputFile, Dimension dimension) {
 		try {
-			
+
 			var configuration = Configuration.getInstance();
 			var screen = configuration.getExecution().getScreen();
-			
+
 			new Screenshot(outputFile, screen, dimension).print();
 
 		} catch (Exception ex) {
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());
 		}
 	}
-	
+
 }

@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>probato-integrator-manager</artifactId>
-	<name>Probato Integrator Manager</name>
+	<name>Probato :: Integrator Manager</name>
 	<description>Probato Integrator Manager</description>
 
 	<dependencies>

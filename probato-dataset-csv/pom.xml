@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>probato-dataset-csv</artifactId>
-	<name>Probato Dataset CSV</name>
+	<name>Probato :: Dataset CSV</name>
 	<description>Probato Dataset CSV</description>
 
 	<dependencies>

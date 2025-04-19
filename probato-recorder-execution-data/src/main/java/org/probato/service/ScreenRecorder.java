@@ -1,4 +1,4 @@
-package org.probato.record;
+package org.probato.service;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -16,7 +16,7 @@ import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.xuggler.ICodec;
 
-public final class ScreenRecorder extends AbstractScreen implements Runnable {
+final class ScreenRecorder extends AbstractScreen implements Runnable {
 
 	private static final String ERROR_DEFAULT_MSG = "An error occurred while trying to record screen the execution: {0}";
 

@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>probato-core</artifactId>
-	<name>Probato Core</name>
+	<name>Probato :: Core</name>
 	<description>Probato Core</description>
 
 	<dependencies>
