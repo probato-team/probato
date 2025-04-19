@@ -9,7 +9,6 @@ import org.probato.api.Precondition;
 import org.probato.api.Procedure;
 import org.probato.browser.BrowserService;
 import org.probato.core.loader.AnnotationLoader;
-import org.probato.datasource.DatasourceService;
 import org.probato.engine.ScriptExecutor;
 import org.probato.engine.execution.ExecutionContextHolder;
 import org.probato.engine.execution.ExecutionService;
@@ -23,6 +22,7 @@ import org.probato.engine.execution.builder.Suite.SuiteBuilder;
 import org.probato.entity.model.Browser;
 import org.probato.entity.type.Evaluation;
 import org.probato.exception.ImpeditiveException;
+import org.probato.service.DatasourceService;
 
 public class BrowserScriptExecutionService extends ScriptExecutor {
 

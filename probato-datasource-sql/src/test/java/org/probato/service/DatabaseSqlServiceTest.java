@@ -1,4 +1,4 @@
-package org.probato.datasource;
+package org.probato.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.exception.ImpeditiveException;
+import org.probato.service.DatasourceService;
 import org.probato.test.suite.UC14_SuiteWithSQL;
 import org.probato.test.suite.UC21_SuiteDatasourceDriverNotFound;
 

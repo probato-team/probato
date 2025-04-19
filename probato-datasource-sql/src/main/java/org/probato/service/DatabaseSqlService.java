@@ -1,4 +1,4 @@
-package org.probato.datasource;
+package org.probato.service;
 
 import org.probato.core.loader.AnnotationLoader;
 import org.probato.core.loader.Configuration;

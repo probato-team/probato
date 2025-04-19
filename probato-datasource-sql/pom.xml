@@ -3,15 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.probato</groupId>
 		<artifactId>probato</artifactId>
 		<version>0.1.0</version>
 	</parent>
-	<artifactId>probato-api</artifactId>
 
-	<name>Probato API</name>
-	<description>Probato API</description>
+	<artifactId>probato-datasource-sql</artifactId>
+	<name>Probato Database SQL</name>
+	<description>Probato Database SQL</description>
 
 	<dependencies>
 
@@ -21,23 +22,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.probato</groupId>
-			<artifactId>probato-dataset-csv</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.probato</groupId>
-			<artifactId>probato-datasource-sql</artifactId>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>

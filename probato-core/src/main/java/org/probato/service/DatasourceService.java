@@ -1,12 +1,10 @@
-package org.probato.datasource;
+package org.probato.service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
 import java.util.stream.Collectors;
-
-import org.probato.service.DatasetService;
 
 public interface DatasourceService {
 
