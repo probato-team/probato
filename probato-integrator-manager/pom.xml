@@ -10,9 +10,9 @@
 		<version>0.1.0</version>
 	</parent>
 
-	<artifactId>probato-integration-manager</artifactId>
-	<name>Probato Manager</name>
-	<description>Probato Manager</description>
+	<artifactId>probato-integrator-manager</artifactId>
+	<name>Probato Integrator Manager</name>
+	<description>Probato Integrator Manager</description>
 
 	<dependencies>
 

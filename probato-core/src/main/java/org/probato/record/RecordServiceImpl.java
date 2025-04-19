@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.probato.core.loader.Configuration;
 import org.probato.entity.model.Dimension;
 import org.probato.exception.ExecutionException;
+import org.probato.service.RecordService;
 
 public class RecordServiceImpl implements RecordService {
 	

@@ -11,7 +11,7 @@ import org.probato.engine.execution.builder.Script;
 import org.probato.engine.execution.builder.Suite;
 import org.probato.entity.model.Dimension;
 import org.probato.exception.ExecutionException;
-import org.probato.record.RecordService;
+import org.probato.service.RecordService;
 import org.probato.util.ConverterUtil;
 import org.probato.util.FileUtil;
 

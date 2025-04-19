@@ -38,9 +38,9 @@ class BrowserConfigurationComponentValidatorTest {
 
 		validators.forEach(validator -> validator.execute(UC01_Suite.class));
 
-		assertEquals(3, validators.size());
+		assertEquals(2, validators.size());
 	}
-	
+
 	@ParameterizedTest
 	@MethodSource("getInvalidConfigurationData")
 	@DisplayName("Should validate configuration data")
@@ -118,7 +118,7 @@ class BrowserConfigurationComponentValidatorTest {
 								.temp("/testano/temp")
 								.build())
 						.build())
-				.browsers(new Browser[] { 
+				.browsers(new Browser[] {
 						Browser.builder()
 						.type(BrowserType.CHROME)
 						.headless(Boolean.TRUE)

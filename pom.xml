@@ -50,11 +50,11 @@
 
 	<modules>
 		<module>probato-core</module>
-		<module>probato-browser</module>
 		<module>probato-dataset-csv</module>
 		<module>probato-datasource-sql</module>
+		<module>probato-integrator-manager</module>
+		<module>probato-browser</module>
 		<module>probato-api</module>
-		<module>probato-integration-manager</module>
 	</modules>
 
 	<properties>
