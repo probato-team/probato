@@ -4,12 +4,12 @@ import org.probato.api.SQL;
 import org.probato.api.Suite;
 
 @SQL(
-	datasource = "probato", 
+	datasource = "probato",
 	scriptPath = { "data/sql/invalid-file.sql" })
 @Suite(
-	code = "UC27", 
-	name = "Suite 27", 
+	code = "UC10",
+	name = "Suite 10",
 	description = "This a simple test")
-public class UC27_SuiteWithInvalidSQL {
+public class UC10_SuiteWithInvalidSQL {
 
 }

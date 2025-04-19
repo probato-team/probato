@@ -9,16 +9,16 @@ import org.probato.entity.type.Relevance;
 
 @Ignore
 @Script(
-	code = "UC02TC02", 
-	name = "Test case 02", 
-	description = "This a simple test", 
-	flow = Flow.ALTERNATIVE, 
-	complexity = Complexity.AVERAGE, 
+	code = "UC03TC01",
+	name = "Test case 01",
+	description = "Test case 01",
+	flow = Flow.ALTERNATIVE,
+	complexity = Complexity.AVERAGE,
 	relevance = Relevance.AVERAGE)
-public class UC09TC01_ScriptIgnored {
-	
+public class UC03TC01_ScriptIgnored {
+
 	@Ignore
 	@Run
 	public void run() {}
-	
+
 }

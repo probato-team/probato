@@ -12,16 +12,16 @@ import org.probato.test.procedure.ProcedureRunWithParam;
 
 @SQLs(
 	@SQL(
-		datasource = "probato", 
+		datasource = "probato",
 		scriptPath = { "data/sql/file.sql", "data/sql/file2.sql" }))
 @Script(
-	code = "UC14TC01", 
-	name = "Test case 01", 
-	description = "This a simple test", 
-	flow = Flow.MAIN, 
-	complexity = Complexity.AVERAGE, 
+	code = "UC01TC01",
+	name = "Test case 01",
+	description = "Test case 01",
+	flow = Flow.MAIN,
+	complexity = Complexity.AVERAGE,
 	relevance = Relevance.AVERAGE)
-public class UC014TC01_ScriptWithSQL {
+public class UC01TC01_ScriptWithSQL {
 
 	@Procedure
 	private ProcedureRun run;

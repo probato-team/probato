@@ -4,12 +4,12 @@ import org.probato.api.SQL;
 import org.probato.api.Suite;
 
 @SQL(
-	datasource = "probato", 
+	datasource = "probato",
 	scriptPath = { "path/to/file-not-found.sql" })
 @Suite(
-	code = "UC26", 
-	name = "Suite 26", 
+	code = "UC09",
+	name = "Suite 09",
 	description = "This a simple test")
-public class UC26_SuiteWithSQLNotFound {
+public class UC09_SuiteWithSQLNotFound {
 
 }

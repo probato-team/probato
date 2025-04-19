@@ -4,12 +4,12 @@ import org.probato.api.SQL;
 import org.probato.api.Suite;
 
 @SQL(
-	datasource = "", 
+	datasource = "without-driver",
 	scriptPath = {})
 @Suite(
-	code = "UC16", 
-	name = "Suite 16", 
+	code = "UC14",
+	name = "Suite 14",
 	description = "This a simple test")
-public class UC16_SuiteWithoutDatasourceName {
+public class UC14_SuiteWithoutDriver {
 
 }

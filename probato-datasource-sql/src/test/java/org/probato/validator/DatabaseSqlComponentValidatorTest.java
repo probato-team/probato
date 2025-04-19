@@ -13,17 +13,17 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.probato.entity.type.ComponentValidatorType;
 import org.probato.exception.IntegrityException;
-import org.probato.test.suite.UC09_SuiteIgnored;
-import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
-import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
-import org.probato.test.suite.UC14_SuiteWithSQL;
-import org.probato.test.suite.UC24_SuiteWithSQLEmptyPath;
-import org.probato.test.suite.UC25_SuiteWithSQLBlankPath;
-import org.probato.test.suite.UC26_SuiteWithSQLNotFound;
+import org.probato.test.suite.UC03_SuiteIgnored;
+import org.probato.test.suite.UC04_SuiteWithIgnoredScript;
+import org.probato.test.suite.UC05_SuiteWithIgnoredProcedure;
+import org.probato.test.suite.UC01_SuiteWithSQL;
+import org.probato.test.suite.UC07_SuiteWithSQLEmptyPath;
+import org.probato.test.suite.UC08_SuiteWithSQLBlankPath;
+import org.probato.test.suite.UC09_SuiteWithSQLNotFound;
 
 @DisplayName("Test -> DatabaseSqlComponentValidator")
 class DatabaseSqlComponentValidatorTest {
-	
+
 	@Test
 	@DisplayName("Should execute validator successfully")
 	void shouldExecuteValidadorSuccessfully() {
@@ -33,11 +33,11 @@ class DatabaseSqlComponentValidatorTest {
 				.filter(DatabaseSqlComponentValidator.class::isInstance)
 				.collect(Collectors.toList());
 
-		validators.forEach(validator -> validator.execute(UC14_SuiteWithSQL.class));
+		validators.forEach(validator -> validator.execute(UC01_SuiteWithSQL.class));
 
 		assertEquals(1, validators.size());
 	}
-	
+
 	@Test
 	@DisplayName("Should ignore validate suite successfully")
 	void shouldIgnoreValidateSuiteSuccessfully() {
@@ -47,7 +47,7 @@ class DatabaseSqlComponentValidatorTest {
 				.filter(DatabaseSqlComponentValidator.class::isInstance)
 				.collect(Collectors.toList());
 
-		validators.forEach(validator -> validator.execute(UC09_SuiteIgnored.class));
+		validators.forEach(validator -> validator.execute(UC03_SuiteIgnored.class));
 
 		assertEquals(1, validators.size());
 	}
@@ -61,7 +61,7 @@ class DatabaseSqlComponentValidatorTest {
 				.filter(DatabaseSqlComponentValidator.class::isInstance)
 				.collect(Collectors.toList());
 
-		validators.forEach(validator -> validator.execute(UC12_SuiteWithIgnoredScript.class));
+		validators.forEach(validator -> validator.execute(UC04_SuiteWithIgnoredScript.class));
 
 		assertEquals(1, validators.size());
 	}
@@ -75,7 +75,7 @@ class DatabaseSqlComponentValidatorTest {
 				.filter(DatabaseSqlComponentValidator.class::isInstance)
 				.collect(Collectors.toList());
 
-		validators.forEach(validator -> validator.execute(UC13_SuiteWithIgnoredProcedure.class));
+		validators.forEach(validator -> validator.execute(UC05_SuiteWithIgnoredProcedure.class));
 
 		assertEquals(1, validators.size());
 	}
@@ -99,19 +99,19 @@ class DatabaseSqlComponentValidatorTest {
 	private static Stream<Arguments> getInvalidSql() {
 		return Stream.of(
 				Arguments.of(
-						UC24_SuiteWithSQLEmptyPath.class,
-						"List of sql must have at least 1 item in the @SQL annotation: 'org.probato.test.suite.UC24_SuiteWithSQLEmptyPath'"),
+						UC07_SuiteWithSQLEmptyPath.class,
+						"List of sql must have at least 1 item in the @SQL annotation: 'org.probato.test.suite.UC07_SuiteWithSQLEmptyPath'"),
 				Arguments.of(
-						UC25_SuiteWithSQLBlankPath.class,
-						"List of sql must not have null or empty value in the @SQL annotation: 'org.probato.test.suite.UC25_SuiteWithSQLBlankPath'"),
+						UC08_SuiteWithSQLBlankPath.class,
+						"List of sql must not have null or empty value in the @SQL annotation: 'org.probato.test.suite.UC08_SuiteWithSQLBlankPath'"),
 				Arguments.of(
-						UC26_SuiteWithSQLNotFound.class,
-						"SQL file 'path/to/file-not-found.sql' not found: 'org.probato.test.suite.UC26_SuiteWithSQLNotFound'")
-				
+						UC09_SuiteWithSQLNotFound.class,
+						"SQL file 'path/to/file-not-found.sql' not found: 'org.probato.test.suite.UC09_SuiteWithSQLNotFound'")
+
 				// TODO validate sql syntax only
 				/*
 				Arguments.of(
-						UC27_SuiteWithInvalidSQL.class,
+						UC10_SuiteWithInvalidSQL.class,
 						"Invalid SQL command in file 'data/sql/invalid-file.sql': \n'Syntax error in SQL statement \"SELECT ONE INVALID [*]COMMAND SQL\"; SQL statement:\nSELECT ONE INVALID COMMAND SQL [42000-232]'"),
 				Arguments.of(
 						UC21_SuiteDatasourceDriverNotFound.class,

@@ -4,12 +4,12 @@ import org.probato.api.SQL;
 import org.probato.api.Suite;
 
 @SQL(
-	datasource = "without-username", 
+	datasource = "without-username",
 	scriptPath = {})
 @Suite(
-	code = "UC19", 
-	name = "Suite 19", 
+	code = "UC15",
+	name = "Suite 15",
 	description = "This a simple test")
-public class UC19_SuiteWithoutUsername {
+public class UC15_SuiteWithoutUsername {
 
 }
