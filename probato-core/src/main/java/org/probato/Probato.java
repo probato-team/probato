@@ -11,15 +11,15 @@ import org.probato.core.loader.AnnotationLoader;
 import org.probato.core.loader.Configuration;
 import org.probato.entity.model.Browser;
 import org.probato.entity.type.ExecutionPhase;
-import org.probato.integration.ExternalService;
 import org.probato.service.DatasetService;
+import org.probato.service.IntegrationService;
 import org.probato.validator.ValidationService;
 
 public class Probato {
 
 	private static ValidationService validationService;
 	private static DatasetService datasetService;
-	private static List<ExternalService> integrationsService;
+	private static List<IntegrationService> integrationsService;
 
 	private Probato() {}
 
@@ -72,7 +72,7 @@ public class Probato {
 		}
 		
 		if (Objects.isNull(integrationsService)) {
-			integrationsService = ExternalService.getInstance();
+			integrationsService = IntegrationService.getInstance();
 		}
 	}
 
@@ -83,7 +83,7 @@ public class Probato {
 	private static void runIntegration(ExecutionPhase type) {
 		integrationsService.stream()
 			.filter(service -> service.accepted(type))
-			.forEach(ExternalService::run);
+			.forEach(IntegrationService::run);
 	}
 
 }

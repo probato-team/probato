@@ -1,4 +1,4 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.probato.core.loader.Configuration;
+import org.probato.dto.NextIncrementExecutionResponse;
 import org.probato.entity.type.ExecutionPhase;
-import org.probato.integration.manager.dto.NextIncrementExecutionResponse;
 
 public class LoadIncrementExecutionApiService extends AbstractApiService {
 

@@ -1,4 +1,4 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -23,7 +23,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.probato.core.loader.Configuration;
 import org.probato.entity.type.ExecutionPhase;
 import org.probato.exception.IntegrationException;
-import org.probato.integration.ExternalService;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -56,14 +55,14 @@ class HealthCheckApiServiceTest {
 	@DisplayName("Should integration successfully")
 	void shouldIntegrationSuccessfully() {
 
-		ExternalService.getInstance()
+		IntegrationService.getInstance()
 				.stream()
 				.filter(service -> service.accepted(ExecutionPhase.BEFORE_EACH))
-				.forEach(ExternalService::run);
+				.forEach(IntegrationService::run);
 
 		assertTrue(Boolean.TRUE);
 	}
-	
+
 	@ParameterizedTest
 	@NullSource
 	@ValueSource(strings = {
@@ -73,29 +72,29 @@ class HealthCheckApiServiceTest {
 	})
 	@DisplayName("Should integration failure")
 	void shouldIntegrationFailure(String response) {
-		
+
 		stubFor(get(urlEqualTo("/health"))
                 .willReturn(aResponse()
                         .withBody(response)));
-		
-		var exception = assertThrows(IntegrationException.class, 
-				() -> ExternalService.getInstance()
+
+		var exception = assertThrows(IntegrationException.class,
+				() -> IntegrationService.getInstance()
 						.stream()
 						.filter(apiService -> apiService.accepted(ExecutionPhase.BEFORE_EACH))
-						.forEach(ExternalService::run));
-		
+						.forEach(IntegrationService::run));
+
 		assertEquals("An error occurred when trying to invoke the web application: Web application is currently unavailable", exception.getMessage());
 	}
-	
+
 	@AfterEach
 	void clear() {
 		wireMockServer.resetAll();
 		Configuration.clear();
 	}
-	
+
 	@AfterAll
 	void destroy() {
 		wireMockServer.stop();
 	}
-	
+
 }

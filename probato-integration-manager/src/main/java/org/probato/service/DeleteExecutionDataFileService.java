@@ -1,4 +1,4 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import java.io.File;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import static java.net.HttpURLConnection.HTTP_CREATED;
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -14,25 +14,24 @@ import java.util.UUID;
 import org.probato.core.loader.Configuration;
 import org.probato.entity.model.Execution;
 import org.probato.exception.IntegrationException;
-import org.probato.integration.ExternalService;
 import org.probato.util.ConverterUtil;
 
-public abstract class AbstractApiService implements ExternalService {
+public abstract class AbstractApiService implements IntegrationService {
 
 	private static final String API_INVOKE_MSG = "Unable to access application: {0} - {1}";
 	private static final String ERRO_INVOKE_MSG = "An error occurred when trying to invoke the web application: {0}";
 	protected static final String X_PROJECT_TOKEN = "X-Project-Token";
-	
+
 	protected abstract void execute() throws Exception;
 
 	@Override
 	public void run() {
 		try {
-			
+
 			if (!isSubmit()) return;
-			
+
 			execute();
-			
+
 		} catch (Exception ex) { // NOSONAR
 			throw new IntegrationException(ERRO_INVOKE_MSG, ex.getMessage());
 		}
@@ -55,13 +54,13 @@ public abstract class AbstractApiService implements ExternalService {
 				.map(execution -> execution.getManager().getToken())
 				.orElse(null);
 	}
-	
+
 	protected Long getIncrement() {
 		return Optional.ofNullable(Configuration.getInstance().getExecution())
 				.map(Execution::getIncrement)
 				.orElse(null);
 	}
-	
+
 	protected UUID getProjectId() {
 		return Optional.ofNullable(Configuration.getInstance().getExecution())
 				.map(execution -> execution.getTarget().getProjectId())
@@ -79,7 +78,7 @@ public abstract class AbstractApiService implements ExternalService {
 				.map(execution -> execution.getDirectory().getTemp())
 				.orElse(null);
 	}
-	
+
 	protected String buildUrl(String pattern, Object ... params) {
 		return MessageFormat.format(pattern, params);
 	}

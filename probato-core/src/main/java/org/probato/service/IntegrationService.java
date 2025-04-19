@@ -1,4 +1,4 @@
-package org.probato.integration;
+package org.probato.service;
 
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.probato.entity.type.ExecutionPhase;
 
-public interface ExternalService {
+public interface IntegrationService {
 	
 	void run();
 	
@@ -18,11 +18,11 @@ public interface ExternalService {
 		return getExecutionPhase().equals(type);
 	}
 
-	public static List<ExternalService> getInstance() {
+	public static List<IntegrationService> getInstance() {
 		return ServiceLoader
-				.load(ExternalService.class)
+				.load(IntegrationService.class)
 				.stream()
-				.sorted(Comparator.comparing(service -> service.getClass().getPackageName().equals(ExternalService.class.getClass().getPackageName()), Comparator.reverseOrder()))
+				.sorted(Comparator.comparing(service -> service.getClass().getPackageName().equals(IntegrationService.class.getClass().getPackageName()), Comparator.reverseOrder()))
 				.map(Provider::get)
 				.collect(Collectors.toList());
 	}

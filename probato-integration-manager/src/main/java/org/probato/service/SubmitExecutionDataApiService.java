@@ -1,4 +1,4 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.probato.dto.RecordFileExecutionRequest;
 import org.probato.entity.type.ExecutionPhase;
-import org.probato.integration.manager.dto.RecordFileExecutionRequest;
 import org.probato.util.ConverterUtil;
 import org.probato.util.FileUtil;
 
 public class SubmitExecutionDataApiService extends AbstractApiService {
-	
+
 	private static final String SUBMIT_SUITE_ENDPOINT = "{0}/core/suites";
 	private static final String SUBMIT_SCRIPT_ENDPOINT = "{0}/core/scripts";
 	private static final String SUBMIT_EXECUTION_ENDPOINT = "{0}/core/executions";
@@ -31,7 +31,7 @@ public class SubmitExecutionDataApiService extends AbstractApiService {
 	public ExecutionPhase getExecutionPhase() {
 		return ExecutionPhase.AFTER_EACH;
 	}
-	
+
 	public void execute() throws Exception {
 
 		var files = getExecutionFiles();
@@ -122,18 +122,18 @@ public class SubmitExecutionDataApiService extends AbstractApiService {
 
 		send(request);
 	}
-	
+
 	private List<File> getExecutionFiles() {
 		var path = buildUrl(DIRECTORY, getTempDir(), getProjectId(), getProjectVersion());
 		return FileUtil.loadFiles(path);
 	}
-	
+
 	private String converterRequest(Object object) {
 		return ConverterUtil.toJson(object);
 	}
-	
+
 	private static HttpRequest.BodyPublisher ofMimeMultipartData(Map<Object, Object> data, String boundary) throws IOException {
-		
+
 		var byteArrays = new ArrayList<byte[]>();
 		var separator = ("--" + boundary + "\r\nContent-Disposition: form-data; name=").getBytes(StandardCharsets.UTF_8);
 		for (var entry : data.entrySet()) {
@@ -147,9 +147,9 @@ public class SubmitExecutionDataApiService extends AbstractApiService {
 				byteArrays.add(("\"" + entry.getKey() + "\"; filename=\"" + path.getFileName() + "\"\r\nContent-Type: " + mimeType + "\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 				byteArrays.add(java.nio.file.Files.readAllBytes(path));
 				byteArrays.add("\r\n".getBytes(StandardCharsets.UTF_8));
-				
+
 			} else {
-				
+
 				byteArrays.add(("\"" + entry.getKey() + "\"; filename=\"" + entry.getKey() + "\"\r\nContent-Type: " + "application/json" + "\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 				byteArrays.add(entry.getValue().toString().getBytes());
 				byteArrays.add("\r\n".getBytes(StandardCharsets.UTF_8));

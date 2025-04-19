@@ -1,4 +1,4 @@
-package org.probato.integration.manager.dto;
+package org.probato.dto;
 
 import java.util.UUID;
 

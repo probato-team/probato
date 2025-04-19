@@ -1,12 +1,12 @@
-package org.probato.integration.manager;
+package org.probato.service;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.util.Objects;
 
+import org.probato.dto.HealthCheckResponse;
 import org.probato.entity.type.ExecutionPhase;
 import org.probato.exception.IntegrationException;
-import org.probato.integration.manager.dto.HealthCheckResponse;
 
 public class HealthCheckApiService extends AbstractApiService {
 
@@ -20,7 +20,7 @@ public class HealthCheckApiService extends AbstractApiService {
 	}
 
 	public void execute() throws Exception {
-		
+
 		var request = HttpRequest.newBuilder()
 				.GET()
 				.uri(URI.create(buildUrl(HEALTHCHECK_ENDPOINT, getBaseUrl())))
