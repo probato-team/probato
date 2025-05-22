@@ -52,9 +52,9 @@
 		<module>probato-core</module>
 		<module>probato-dataset-csv</module>
 		<module>probato-datasource-sql</module>
-		<module>probato-integrator-manager</module>
-		<module>probato-recorder-execution-data</module>
-		<module>probato-browser</module>
+		<module>probato-integration-manager</module>
+		<module>probato-execution-data-recorder</module>
+		<module>probato-selenium-browser</module>
 		<module>probato-api</module>
 	</modules>
 

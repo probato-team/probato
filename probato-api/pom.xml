@@ -10,8 +10,8 @@
 	</parent>
 	<artifactId>probato-api</artifactId>
 
-	<name>Probato :: API</name>
-	<description>Probato API</description>
+	<name>Probato : API</name>
+	<description>Probato - API</description>
 
 	<dependencies>
 

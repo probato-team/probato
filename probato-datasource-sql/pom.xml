@@ -11,8 +11,8 @@
 	</parent>
 
 	<artifactId>probato-datasource-sql</artifactId>
-	<name>Probato :: Database SQL</name>
-	<description>Probato Database SQL</description>
+	<name>Probato : Database SQL</name>
+	<description>Probato - Database SQL</description>
 
 	<dependencies>
 

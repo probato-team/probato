@@ -10,9 +10,9 @@
 		<version>0.1.0</version>
 	</parent>
 
-	<artifactId>probato-recorder-execution-data</artifactId>
-		<name>Probato :: Recorder Execution Data</name>
-	<description>Probato Recorder Execution Data</description>
+	<artifactId>probato-integration-manager</artifactId>
+	<name>Probato : Integration manager</name>
+	<description>Probato - Integration manager</description>
 
 	<dependencies>
 
@@ -30,6 +30,12 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock</artifactId>
 			<scope>test</scope>
 		</dependency>
 
