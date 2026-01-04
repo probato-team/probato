@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.probato</groupId>
+		<artifactId>probato</artifactId>
+		<version>0.0.0</version>
+	</parent>
+
+	<artifactId>probato-core-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>CORE</name>
+
+	<modules>
+		<module>probato-core-api</module>
+		<module>probato-core</module>
+	</modules>
+
+	<!-- IMPORT DO BOM -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>
