@@ -64,14 +64,14 @@ public class Dimension {
 
 	private void validateMode(int index) {
 		if (Objects.isNull(getMode())) {
-			throw new IntegrityException("Property ''browsers[{0}].dimension.mode'' should be declared in ''configuration.yaml'' file", index);
+			throw new IntegrityException("Property ''browsers.[{0}].dimension.mode'' should be declared in ''configuration.yaml'' file", index);
 		}
 	}
 
 	private void validateCustomMode(int index) {
 		if (DimensionMode.CUSTOM.equals(getMode())
 				&& (Objects.isNull(getHeight()) || Objects.isNull(getWidth()))) {
-			throw new IntegrityException("Property ''browsers[{0}].dimension.height'' and ''browsers[{0}].dimension.width'' should be declared in ''configuration.yaml'' file when ''browsers[{0}].dimension.mode'' equals CUSTOM", index);
+			throw new IntegrityException("Property ''browsers.[{0}].dimension.height'' and ''browsers.[{0}].dimension.width'' should be declared in ''configuration.yaml'' file when ''browsers.[{0}].dimension.mode'' equals CUSTOM", index);
 		}
 	}
 

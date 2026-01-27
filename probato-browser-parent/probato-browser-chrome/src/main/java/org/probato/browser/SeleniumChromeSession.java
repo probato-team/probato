@@ -60,7 +60,7 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 		}
 
 		var browserName = "Google Chrome";
-		var dimensionMode = browser.getDimension().getMode().getDescription();
+		var dimensionMode = browser.getDimension().getMode().description();
 		var size = driver.manage().window().getSize();
 
 		var width = Optional
@@ -78,8 +78,8 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 
 	@Override
 	public String version() {
-		if (driver instanceof RemoteWebDriver remote) {
-			return remote.getCapabilities().getBrowserVersion();
+		if (driver instanceof RemoteWebDriver) {
+			return ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion();
 		}
 		return "unknown";
 	}

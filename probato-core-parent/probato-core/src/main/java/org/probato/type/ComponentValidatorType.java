@@ -1,6 +1,6 @@
 package org.probato.type;
 
-public enum ComponentValidatorType {
+public enum ComponentValidatorType { // TODO Remover?
 
 	CONFIGURATION,
 	SUITE,

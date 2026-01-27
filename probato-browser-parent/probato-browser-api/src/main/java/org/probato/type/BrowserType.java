@@ -13,35 +13,35 @@ public enum BrowserType {
 	/**
 	 * Google Chrome browser.
 	 */
-	CHROME,
+	CHROME("Chrome"),
 
 	/**
 	 * Mozilla Firefox browser.
 	 */
-	FIREFOX,
+	FIREFOX("Firefox"),
 
 	/**
 	 * Microsoft Edge browser.
 	 */
-	EDGE,
+	EDGE("Edge"),
 
 	/**
 	 * Apple Safari browser.
 	 */
-	SAFARI,
+	// TODO SAFARI("Safari"),
 
 	/**
 	 * Opera browser.
 	 */
-	OPERA,
-
-	/**
-	 * @deprecated Internet Explorer is deprecated and should not be used in new implementations.
-	 */
-	@Deprecated
-	IE,
+	// TODO OPERA("Opera"),
 
 	;
+
+	private BrowserType(String description) {
+		this.description = description;
+	}
+
+	private String description;
 
 	/**
 	 * Parses a browser type from its textual representation.
@@ -63,6 +63,10 @@ public enum BrowserType {
 		} catch (Exception ex) {
 			throw new IntegrityException("Invalid value for BrowserType property: {0}", value);
 		}
+	}
+
+	public String description() {
+		return description;
 	}
 
 }

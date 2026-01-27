@@ -8,6 +8,7 @@ public enum ExecutionStatus {
 	PASSED,
 	FAILED,
 	SKIPPED,
+	DISABLED,
 
 	;
 

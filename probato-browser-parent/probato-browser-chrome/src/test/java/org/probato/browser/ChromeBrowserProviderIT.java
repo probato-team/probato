@@ -1,5 +1,6 @@
 package org.probato.browser;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,6 +29,7 @@ class ChromeBrowserProviderIT {
 
 	@BeforeEach
     void backupSystemProperties() {
+
         originalProperties = (Properties) System.getProperties().clone();
 
         System.setProperty("execution.current", "0");
@@ -52,22 +54,27 @@ class ChromeBrowserProviderIT {
 
 		var provider = new ChromeBrowserProvider();
 
-		assertNotNull(provider);
-        assertEquals(BrowserType.CHROME, provider.getType());
+		assertAll("Validate provider",
+				() -> assertNotNull(provider),
+				() -> assertEquals(BrowserType.CHROME, provider.getType()),
+				() -> assertEquals(BrowserType.CHROME.description(), provider.getType().description()));
 
         var session = provider.createSession();
-        assertNotNull(session);
-        assertNotNull(session.description());
-        assertNotNull(session.version());
+
+        assertAll("Validate session",
+        		() -> assertNotNull(session),
+        		() -> assertNotNull(session.description()),
+        		() -> assertNotNull(session.version()));
 
         session.run();
         session.run();
 
 		var navigation = (NativeBrowserSession<WebDriver>) session;
 
-        assertNotNull(navigation.driver());
-        assertNotNull(session.description());
-        assertNotNull(session.version());
+		assertAll("Validate navigation",
+				() -> assertNotNull(navigation.driver()),
+				() -> assertNotNull(session.description()),
+				() -> assertNotNull(session.version()));
 
         session.destroy();
 	}
@@ -83,22 +90,26 @@ class ChromeBrowserProviderIT {
 
 		var provider = new ChromeBrowserProvider();
 
-		assertNotNull(provider);
-        assertEquals(BrowserType.CHROME, provider.getType());
+        assertAll("Validate provider",
+				() -> assertNotNull(provider),
+				() -> assertEquals(BrowserType.CHROME, provider.getType()),
+				() -> assertEquals(BrowserType.CHROME.description(), provider.getType().description()));
 
         var session = provider.createSession();
-        assertNotNull(session);
-        assertNotNull(session.description());
-        assertNotNull(session.version());
+        assertAll("Validate session",
+        		() -> assertNotNull(session),
+        		() -> assertNotNull(session.description()),
+        		() -> assertNotNull(session.version()));
 
         session.run();
         session.run();
 
         var navigation = (NativeBrowserSession<Page>) session;
 
-        assertNotNull(navigation.driver());
-        assertNotNull(session.description());
-        assertNotNull(session.version());
+        assertAll("Validate navigation",
+				() -> assertNotNull(navigation.driver()),
+				() -> assertNotNull(session.description()),
+				() -> assertNotNull(session.version()));
 
         session.destroy();
 	}
@@ -113,8 +124,10 @@ class ChromeBrowserProviderIT {
 
 		var provider = new ChromeBrowserProvider();
 
-		assertNotNull(provider);
-        assertEquals(BrowserType.CHROME, provider.getType());
+		assertAll("Validate provider",
+				() -> assertNotNull(provider),
+				() -> assertEquals(BrowserType.CHROME, provider.getType()),
+				() -> assertEquals(BrowserType.CHROME.description(), provider.getType().description()));
 
        var exception = assertThrows(IntegrityException.class, provider::createSession);
 
@@ -153,18 +166,18 @@ class ChromeBrowserProviderIT {
 				Arguments.of(
 					Map.of(
 						"browsers.[0].dimension.mode", DimensionMode.FULLSCREEN.toString()),
-					"Property 'browsers[0].type' should be declared in 'configuration.yaml' file"
+					"Property 'browsers.[0].type' should be declared in 'configuration.yaml' file"
 				),
 				Arguments.of(
 					Map.of(
 						"browsers.[0].dimension.mode", "OTHER"),
 					"Invalid value for DimensionMode property: OTHER"
-					),
+				),
 				Arguments.of(
 					Map.of(
 						"browsers.[0].type", BrowserType.CHROME.toString(),
 						"browsers.[0].headless", "true"),
-					"Property 'browsers[0].dimension.mode' should be declared in 'configuration.yaml' file"
+					"Property 'browsers.[0].dimension.mode' should be declared in 'configuration.yaml' file"
 				),
 				Arguments.of(
 					Map.of(
@@ -178,7 +191,7 @@ class ChromeBrowserProviderIT {
 						"browsers.[0].headless", "true",
 						"browsers.[0].dimension.mode", DimensionMode.CUSTOM.toString(),
 						"browsers.[0].dimension.height", "850"),
-					"Property 'browsers[0].dimension.height' and 'browsers[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers[0].dimension.mode' equals CUSTOM"
+					"Property 'browsers.[0].dimension.height' and 'browsers.[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers.[0].dimension.mode' equals CUSTOM"
 				),
 				Arguments.of(
 					Map.of(
@@ -186,7 +199,7 @@ class ChromeBrowserProviderIT {
 						"browsers.[0].headless", "true",
 						"browsers.[0].dimension.mode", DimensionMode.CUSTOM.toString(),
 						"browsers.[0].dimension.width", "1200"),
-					"Property 'browsers[0].dimension.height' and 'browsers[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers[0].dimension.mode' equals CUSTOM"
+					"Property 'browsers.[0].dimension.height' and 'browsers.[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers.[0].dimension.mode' equals CUSTOM"
 				));
 	}
 

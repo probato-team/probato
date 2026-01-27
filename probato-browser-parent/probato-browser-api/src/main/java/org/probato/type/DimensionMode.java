@@ -39,7 +39,7 @@ public enum DimensionMode {
 	 *
 	 * @return a textual description of the dimension mode
 	 */
-	public String getDescription() {
+	public String description() {
 		return this.description;
 	}
 

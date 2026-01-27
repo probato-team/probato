@@ -86,7 +86,7 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 		}
 
 		var browserName = "Google Chrome";
-		var dimensionMode = browser.getDimension().getMode().getDescription();
+		var dimensionMode = browser.getDimension().getMode().description();
 		var size = driver.viewportSize();
 
 		var windowSize = getWindowSize();

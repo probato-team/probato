@@ -60,7 +60,7 @@ public class Browser {
 
 	private void validateType(int index) {
 		if (Objects.isNull(getType())) {
-			throw new IntegrityException("Property ''browsers[{0}].type'' should be declared in ''configuration.yaml'' file", index);
+			throw new IntegrityException("Property ''browsers.[{0}].type'' should be declared in ''configuration.yaml'' file", index);
 		}
 	}
 
