@@ -1,9 +1,5 @@
 package org.probato.model;
 
-import java.util.Objects;
-
-import org.probato.configuration.ConfigurationResolver;
-import org.probato.exception.IntegrityException;
 import org.probato.type.BrowserType;
 
 /**
@@ -14,8 +10,6 @@ import org.probato.type.BrowserType;
  *
  * <p><strong>Note:</strong> The default constructor reads configuration
  * values from JVM system properties and validates them on instantiation.</p>
- *
- * @throws IntegrityException if required configuration properties are missing or invalid
  */
 public class Browser {
 
@@ -23,45 +17,37 @@ public class Browser {
 	private boolean headless;
 	private Dimension dimension;
 
-	public Browser() {
+	public Browser() {}
 
-		var current = ConfigurationResolver.currentExecutionIndex();
-
-		this.type = ConfigurationResolver
-				.browserProperty(current, "type")
-				.map(BrowserType::fromString)
-				.orElse(null);
-
-		this.headless = ConfigurationResolver
-				.browserProperty(current, "headless")
-				.map(Boolean::valueOf)
-				.orElse(Boolean.FALSE);
-
-		this.dimension = new Dimension();
-
-		validate(current);
+	public Browser(BrowserType type, boolean headless, Dimension dimension) {
+		this();
+		this.type = type;
+		this.headless = headless;
+		this.dimension = dimension;
 	}
 
 	public BrowserType getType() {
 		return type;
 	}
 
+	public void setType(BrowserType type) {
+		this.type = type;
+	}
+
 	public boolean isHeadless() {
 		return headless;
+	}
+
+	public void setHeadless(boolean headless) {
+		this.headless = headless;
 	}
 
 	public Dimension getDimension() {
 		return dimension;
 	}
 
-	private void validate(int index) {
-		validateType(index);
-	}
-
-	private void validateType(int index) {
-		if (Objects.isNull(getType())) {
-			throw new IntegrityException("Property ''browsers.[{0}].type'' should be declared in ''configuration.yaml'' file", index);
-		}
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
 	}
 
 }

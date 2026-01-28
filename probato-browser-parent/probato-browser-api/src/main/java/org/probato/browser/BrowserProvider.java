@@ -26,8 +26,7 @@ public interface BrowserProvider {
      * </p>
      *
      * @return a new {@link BrowserSession}
-     * @throws IntegrityException if the browser configuration is invalid
      */
-	BrowserSession createSession();
+	BrowserSession createSession(BrowserSessionData data);
 
 }

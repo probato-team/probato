@@ -96,13 +96,13 @@ public class Configuration {
 
 		if (Objects.isNull(instance.getExecution())) {
 			instance.setExecution(Execution.builder()
-//					.screen(Screen.PRIMARY)
+					.screen(Screen.PRIMARY)
 					.build());
 		}
 
-//		if (Objects.isNull(instance.getExecution().getDelay())) {
-//			instance.getExecution().setDelay(new Delay());
-//		}
+		if (Objects.isNull(instance.getExecution().getDelay())) {
+			instance.getExecution().setDelay(new Delay());
+		}
 
 		if (Objects.isNull(instance.getExecution().getVideo())) {
 			instance.getExecution().setVideo(new Video());

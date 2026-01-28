@@ -15,9 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.probato.configuration.ConfigurationResolver;
-import org.probato.model.Browser;
-import org.probato.model.Delay;
 import org.probato.type.Screen;
 
 /**
@@ -25,26 +22,12 @@ import org.probato.type.Screen;
  */
 final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 
-	private final String url;
-	private final Screen screen;
-	private final Browser browser;
-	private final Delay delay;
+	private final BrowserSessionData data;
 
 	private WebDriver driver;
 
-	public SeleniumChromeSession() {
-
-		this.url = ConfigurationResolver
-				.executionProperty("execution.target.url")
-				.orElse(null);
-
-		this.screen = ConfigurationResolver
-				.executionProperty("execution.screen")
-				.map(Screen::fromString)
-				.orElse(Screen.PRIMARY);
-
-		this.browser = new Browser();
-		this.delay = new Delay();
+	public SeleniumChromeSession(BrowserSessionData data) {
+		this.data = data;
 	}
 
 	@Override
@@ -60,7 +43,7 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 		}
 
 		var browserName = "Google Chrome";
-		var dimensionMode = browser.getDimension().getMode().description();
+		var dimensionMode = data.getBrowser().getDimension().getMode().description();
 		var size = driver.manage().window().getSize();
 
 		var width = Optional
@@ -109,7 +92,7 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 
 	private ChromeOptions getOptions() {
 		var options = new ChromeOptions();
-		if (browser.isHeadless()) {
+		if (data.getBrowser().isHeadless()) {
 			options.addArguments("--headless=new");
 		}
 		return options;
@@ -123,14 +106,14 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 	}
 
 	private void configureUrl() {
-		driver.get(this.url);
+		driver.get(data.getUrl());
 	}
 
 	private void configureTimeouts() {
 		driver
 			.manage()
 			.timeouts()
-			.implicitlyWait(Duration.ofMillis(delay.getWaiting()));
+			.implicitlyWait(Duration.ofMillis(data.getDelay().getWaiting()));
 	}
 
 	private void configurePositionOnScreen() {
@@ -141,7 +124,7 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 	}
 
 	private void configureResize() {
-		switch (browser.getDimension().getMode()) {
+		switch (data.getBrowser().getDimension().getMode()) {
 
 			case CUSTOM:
 
@@ -149,8 +132,8 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 					.manage()
 					.window()
 					.setSize(new Dimension(
-							browser.getDimension().getWidth(),
-							browser.getDimension().getHeight()));
+							data.getBrowser().getDimension().getWidth(),
+							data.getBrowser().getDimension().getHeight()));
 
 				break;
 
@@ -177,9 +160,9 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 
 		var x = 0;
 		var y = 0;
-		var screenBounds = getScreenBounds(this.screen);
+		var screenBounds = getScreenBounds(data.getScreen());
 		if (Objects.nonNull(screenBounds)) {
-			if (isSecondary(this.screen)) {
+			if (isSecondary(data.getScreen())) {
 
 				var screenBoundsPrincipal = getScreenBounds(Screen.PRIMARY);
 				if (Objects.nonNull(screenBoundsPrincipal)) {

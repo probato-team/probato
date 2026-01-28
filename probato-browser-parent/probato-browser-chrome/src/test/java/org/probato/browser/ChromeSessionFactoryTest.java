@@ -4,40 +4,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.exception.IntegrityException;
+import org.probato.model.Browser;
+import org.probato.model.Delay;
+import org.probato.model.Dimension;
 import org.probato.type.BrowserType;
 import org.probato.type.DimensionMode;
+import org.probato.type.Screen;
 
 @DisplayName("UT - Chrome session factory")
 class ChromeSessionFactoryTest {
 
-	private static final String ENGINE_PROPERTY = "execution.engine";
-
-	@BeforeEach
-	void setup() {
-
-		System.setProperty("execution.current", "0");
-		System.setProperty("execution.screen", "PRIMARY");
-		System.setProperty("browsers.[0].type", BrowserType.CHROME.toString());
-		System.setProperty("browsers.[0].headless", "true");
-		System.setProperty("browsers.[0].dimension.mode", DimensionMode.FULLSCREEN.toString());
-	}
-
-	@AfterEach
-	void restoreSystemProperty() {
-		System.clearProperty(ENGINE_PROPERTY);
-	}
-
 	@Test
 	void shouldCreatePlaywrightSessionWhenEngineIsPlaywright() {
 
-		System.setProperty(ENGINE_PROPERTY, "playwright");
+		var url = "https://google.com";
+		var delay = new Delay(30_000, 1_000);
+		var data = new BrowserSessionData(
+				"playwright",
+				url,
+				Screen.PRIMARY,
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
+				delay);
 
-		var session = ChromeSessionFactory.create();
+		var session = ChromeSessionFactory.create(data);
 
 		assertNotNull(session);
 		assertTrue(session instanceof PlaywrightChromeSession,
@@ -47,9 +39,16 @@ class ChromeSessionFactoryTest {
 	@Test
 	void shouldCreateSeleniumSessionWhenEngineIsSelenium() {
 
-		System.setProperty(ENGINE_PROPERTY, "selenium");
+		var url = "https://google.com";
+		var delay = new Delay(30_000, 1_000);
+		var data = new BrowserSessionData(
+				"selenium",
+				url,
+				Screen.PRIMARY,
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
+				delay);
 
-		var session = ChromeSessionFactory.create();
+		var session = ChromeSessionFactory.create(data);
 
 		assertNotNull(session);
 		assertTrue(session instanceof SeleniumChromeSession,
@@ -58,9 +57,17 @@ class ChromeSessionFactoryTest {
 
 	@Test
 	void shouldCreateSeleniumSessionWhenEngineIsNotDefined() {
-		System.clearProperty(ENGINE_PROPERTY);
 
-		var session = ChromeSessionFactory.create();
+		var url = "https://google.com";
+		var delay = new Delay(30_000, 1_000);
+		var data = new BrowserSessionData(
+				null,
+				url,
+				Screen.PRIMARY,
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
+				delay);
+
+		var session = ChromeSessionFactory.create(data);
 
 		assertNotNull(session);
 		assertTrue(session instanceof SeleniumChromeSession,
@@ -70,9 +77,16 @@ class ChromeSessionFactoryTest {
 	@Test
 	void shouldFailWhenEngineIsInvalid() {
 
-		System.setProperty(ENGINE_PROPERTY, "invalid-engine");
+		var url = "https://google.com";
+		var delay = new Delay(30_000, 1_000);
+		var data = new BrowserSessionData(
+				"invalid-engine",
+				url,
+				Screen.PRIMARY,
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
+				delay);
 
-		var exception = assertThrows(IntegrityException.class, ChromeSessionFactory::create);
+		var exception = assertThrows(IntegrityException.class, () -> ChromeSessionFactory.create(data));
 
 		assertTrue(exception.getMessage().contains("execution.engine"),
 				"Error message should reference execution.engine property");

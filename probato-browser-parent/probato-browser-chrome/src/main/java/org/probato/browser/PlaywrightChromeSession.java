@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.probato.configuration.ConfigurationResolver;
-import org.probato.model.Delay;
 import org.probato.type.DimensionMode;
 
 import com.microsoft.playwright.Browser;
@@ -22,23 +20,15 @@ import com.microsoft.playwright.Playwright;
  */
 final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 
-	private final String url;
-	private final org.probato.model.Browser browser;
-	private final Delay delay;
+	private final BrowserSessionData data;
 
 	private Page driver;
 	private Playwright playwright;
 	private Browser browserInstance;
 	private BrowserContext context;
 
-	public PlaywrightChromeSession() {
-
-		this.url = ConfigurationResolver
-				.executionProperty("execution.target.url")
-				.orElse(null);
-
-		this.browser = new org.probato.model.Browser();
-		this.delay = new Delay();
+	public PlaywrightChromeSession(BrowserSessionData data) {
+		this.data = data;
 	}
 
 	@Override
@@ -86,7 +76,7 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 		}
 
 		var browserName = "Google Chrome";
-		var dimensionMode = browser.getDimension().getMode().description();
+		var dimensionMode = data.getBrowser().getDimension().getMode().description();
 		var size = driver.viewportSize();
 
 		var windowSize = getWindowSize();
@@ -122,23 +112,23 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 		var args = configureBrowser();
 		browserInstance = playwright.chromium()
 				.launch(new BrowserType.LaunchOptions()
-						.setHeadless(browser.isHeadless())
+						.setHeadless(data.getBrowser().isHeadless())
 						.setArgs(args));
 
 		var contextOptions = new Browser.NewContextOptions();
 		if (args.isEmpty()) {
 
 			contextOptions.setViewportSize(
-					browser.getDimension().getWidth(),
-					browser.getDimension().getHeight());
+					data.getBrowser().getDimension().getWidth(),
+					data.getBrowser().getDimension().getHeight());
 
 		} else {
 			contextOptions.setViewportSize(null);
 		}
 
 	    context = browserInstance.newContext(contextOptions);
-		context.setDefaultTimeout(delay.getActionInterval());
-		context.setDefaultNavigationTimeout(delay.getWaiting());
+		context.setDefaultTimeout(data.getDelay().getActionInterval());
+		context.setDefaultNavigationTimeout(data.getDelay().getWaiting());
 
 		driver = context.newPage();
 	}
@@ -148,7 +138,7 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 	}
 
 	private void configureUrl() {
-		driver.navigate(url);
+		driver.navigate(data.getUrl());
 	}
 
 	private List<String> configureBrowser() {
@@ -162,7 +152,7 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 	}
 
 	private boolean shouldStartMaximized() {
-	    return browser.getDimension().getMode() != DimensionMode.CUSTOM;
+	    return data.getBrowser().getDimension().getMode() != DimensionMode.CUSTOM;
 	}
 
 	@SuppressWarnings("unchecked")

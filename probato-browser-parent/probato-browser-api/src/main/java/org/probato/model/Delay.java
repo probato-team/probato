@@ -1,7 +1,5 @@
 package org.probato.model;
 
-import org.probato.configuration.ConfigurationResolver;
-
 /**
  * Defines timeout and delay settings used during browser execution.
  *
@@ -12,25 +10,28 @@ public class Delay {
 	private Integer waiting;
 	private Integer actionInterval;
 
-	public Delay() {
+	public Delay() {}
 
-		this.waiting =  ConfigurationResolver
-				.executionProperty("execution.timeout.waiting")
-				.map(Integer::valueOf)
-				.orElse(10_000);
-
-		this.actionInterval =  ConfigurationResolver
-				.executionProperty("execution.timeout.actionInterval")
-				.map(Integer::valueOf)
-				.orElse(100);
+	public Delay(Integer waiting, Integer actionInterval) {
+		this();
+		this.waiting = waiting;
+		this.actionInterval = actionInterval;
 	}
 
 	public Integer getWaiting() {
 		return waiting;
 	}
 
+	public void setWaiting(Integer waiting) {
+		this.waiting = waiting;
+	}
+
 	public Integer getActionInterval() {
 		return actionInterval;
+	}
+
+	public void setActionInterval(Integer actionInterval) {
+		this.actionInterval = actionInterval;
 	}
 
 }

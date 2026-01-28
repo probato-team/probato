@@ -1,5 +1,7 @@
 package org.probato.browser;
 
+import java.util.Optional;
+
 import org.probato.exception.IntegrityException;
 
 /**
@@ -24,19 +26,21 @@ final class ChromeSessionFactory {
 	 *
 	 * @throws IntegrityException if the configured execution engine is not supported
 	 */
-	public static BrowserSession create() {
-		switch (resolveEngine().toLowerCase()) {
+	public static BrowserSession create(BrowserSessionData data) {
+		switch (resolveEngine(data)) {
 		case "playwright":
-			return new PlaywrightChromeSession();
+			return new PlaywrightChromeSession(data);
 		case "selenium":
-			return new SeleniumChromeSession();
+			return new SeleniumChromeSession(data);
 		default:
-			throw new IntegrityException("Invalid value ''{0}'' for property ''execution.engine''.", resolveEngine());
+			throw new IntegrityException("Invalid value ''{0}'' for property ''execution.engine''.", resolveEngine(data));
 		}
 	}
 
-	private static String resolveEngine() {
-		return System.getProperty("execution.engine", "selenium");
+	private static String resolveEngine(BrowserSessionData data) {
+		return Optional.ofNullable(data.getEngine())
+				.map(String::toLowerCase)
+				.orElse("selenium");
 	}
 
 }

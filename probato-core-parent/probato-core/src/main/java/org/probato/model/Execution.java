@@ -1,25 +1,37 @@
 package org.probato.model;
 
+import org.probato.type.Screen;
+
 public class Execution {
 
+	private String engine;
 	private Long increment;
-//	private Screen screen = Screen.PRINCIPAL;
+	private Screen screen = Screen.PRIMARY;
 	private Target target;
 	private Manager manager;
-//	private Delay delay;
+	private Delay delay;
 	private Video video;
 	private Directory directory;
 
 	public Execution() {}
 
 	public Execution(ExecutionBuilder builder) {
+		this.engine = builder.engine;
 		this.increment = builder.increment;
-//		this.screen = builder.screen;
+		this.screen = builder.screen;
 		this.target = builder.target;
 		this.manager = builder.manager;
-//		this.delay = builder.delay;
+		this.delay = builder.delay;
 		this.video = builder.video;
 		this.directory = builder.directory;
+	}
+
+	public String getEngine() {
+		return engine;
+	}
+
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
 
 	public Long getIncrement() {
@@ -30,13 +42,13 @@ public class Execution {
 		this.increment = increment;
 	}
 
-//	public Screen getScreen() {
-//		return screen;
-//	}
-//
-//	public void setScreen(Screen screen) {
-//		this.screen = screen;
-//	}
+	public Screen getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
 
 	public Target getTarget() {
 		return target;
@@ -54,13 +66,13 @@ public class Execution {
 		this.manager = manager;
 	}
 
-//	public Delay getDelay() {
-//		return delay;
-//	}
-//
-//	public void setDelay(Delay delay) {
-//		this.delay = delay;
-//	}
+	public Delay getDelay() {
+		return delay;
+	}
+
+	public void setDelay(Delay delay) {
+		this.delay = delay;
+	}
 
 	public Video getVideo() {
 		return video;
@@ -84,26 +96,31 @@ public class Execution {
 
 	public static class ExecutionBuilder {
 
+		private String engine;
 		private Long increment;
-//		private Screen screen = Screen.PRINCIPAL;
+		private Screen screen = Screen.PRIMARY;
 		private Target target;
 		private Manager manager;
-//		private Delay delay;
+		private Delay delay;
 		private Video video;
 		private Directory directory;
 
-		private ExecutionBuilder() {
-		}
+		private ExecutionBuilder() {}
 
 		public ExecutionBuilder increment(Long increment) {
 			this.increment = increment;
 			return this;
 		}
 
-//		public ExecutionBuilder screen(Screen screen) {
-//			this.screen = screen;
-//			return this;
-//		}
+		public ExecutionBuilder engine(String engine) {
+			this.engine = engine;
+			return this;
+		}
+
+		public ExecutionBuilder screen(Screen screen) {
+			this.screen = screen;
+			return this;
+		}
 
 		public ExecutionBuilder target(Target target) {
 			this.target = target;
@@ -115,10 +132,10 @@ public class Execution {
 			return this;
 		}
 
-//		public ExecutionBuilder delay(Delay delay) {
-//			this.delay = delay;
-//			return this;
-//		}
+		public ExecutionBuilder delay(Delay delay) {
+			this.delay = delay;
+			return this;
+		}
 
 		public ExecutionBuilder video(Video video) {
 			this.video = video;
