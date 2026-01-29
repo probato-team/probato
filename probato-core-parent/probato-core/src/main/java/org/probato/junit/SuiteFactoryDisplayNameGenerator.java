@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.text.MessageFormat;
 
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.probato.loader.AnnotationLoader;
 
 public final class SuiteFactoryDisplayNameGenerator implements DisplayNameGenerator {
 
@@ -13,11 +14,9 @@ public final class SuiteFactoryDisplayNameGenerator implements DisplayNameGenera
 
 	@Override
 	public String generateDisplayNameForClass(Class<?> suiteClazz) {
-//		return AnnotationLoader.getSuite(suiteClazz)
-//				.map(suite -> buildText(SUITE_TEXT, suite.code(), suite.name()))
-//				.orElse(suiteClazz.getSimpleName());
-
-		return null;
+		return AnnotationLoader.getSuite(suiteClazz)
+				.map(suite -> buildText(SUITE_TEXT, suite.code(), suite.name()))
+				.orElse(suiteClazz.getSimpleName());
 	}
 
 	@Override

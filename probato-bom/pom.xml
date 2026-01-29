@@ -34,40 +34,38 @@
 	<repositories>
 		<repository>
 			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+			<url>
+				https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
 		</repository>
 	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
 
+			<!-- Base -->
 			<dependency>
 				<groupId>org.probato</groupId>
-				<artifactId>probato-core-api</artifactId>
+				<artifactId>probato-core-base</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-browser-base</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- Core -->
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- Browser -->
 			<dependency>
 				<groupId>org.probato</groupId>
 				<artifactId>probato-browser-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.probato</groupId>
-				<artifactId>probato-database-sql-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.probato</groupId>
-				<artifactId>probato-database-nosql-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.probato</groupId>
-				<artifactId>probato-datasets-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -78,6 +76,8 @@
 				<version>${junit.version}</version>
 			</dependency>
 
+
+			<!-- JUnit 5 -->
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
@@ -90,7 +90,7 @@
 				<version>${junit.version}</version>
 			</dependency>
 
-			<!-- Browser -->
+			<!-- Executor -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-java</artifactId>

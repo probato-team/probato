@@ -10,12 +10,15 @@
 		<version>0.2.0</version>
 	</parent>
 
-	<artifactId>probato-core-parent</artifactId>
+	<artifactId>probato-dataset-parent</artifactId>
 	<packaging>pom</packaging>
-	<name>CORE</name>
+	<name>DATASETS</name>
 
 	<modules>
-		<module>probato-core</module>
+		<module>probato-dataset-api</module>
+		<module>probato-dataset-json</module>
+		<module>probato-dataset-csv</module>
+		<module>probato-dataset-yaml</module>
 	</modules>
 
 	<!-- IMPORT DO BOM -->

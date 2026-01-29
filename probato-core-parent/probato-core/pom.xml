@@ -17,22 +17,12 @@
 
 		<dependency>
 			<groupId>org.probato</groupId>
-			<artifactId>probato-browser-api</artifactId>
+			<artifactId>probato-core-base</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.probato</groupId>
-			<artifactId>probato-database-sql-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.probato</groupId>
-			<artifactId>probato-database-nosql-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.probato</groupId>
-			<artifactId>probato-datasets-api</artifactId>
+			<artifactId>probato-browser-base</artifactId>
 		</dependency>
 
 		<dependency>

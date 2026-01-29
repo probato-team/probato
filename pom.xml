@@ -39,9 +39,10 @@
 
 	<modules>
 		<module>probato-bom</module>
+		<module>probato-base-parent</module>
 		<module>probato-browser-parent</module>
 		<module>probato-database-parent</module>
-		<module>probato-datasets-parent</module>
+		<module>probato-dataset-parent</module>
 		<module>probato-core-parent</module>
 	</modules>
 

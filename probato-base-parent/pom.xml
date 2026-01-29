@@ -10,12 +10,16 @@
 		<version>0.2.0</version>
 	</parent>
 
-	<artifactId>probato-core-parent</artifactId>
+	<artifactId>probato-base-parent</artifactId>
 	<packaging>pom</packaging>
-	<name>CORE</name>
+	<name>BASE</name>
 
 	<modules>
-		<module>probato-core</module>
+		<module>probato-core-base</module>
+		<module>probato-browser-base</module>
+		<module>probato-dataset-base</module>
+		<module>probato-sql-base</module>
+		<module>probato-nosql-base</module>
 	</modules>
 
 	<!-- IMPORT DO BOM -->
