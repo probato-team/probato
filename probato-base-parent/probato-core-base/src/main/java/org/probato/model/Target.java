@@ -7,10 +7,11 @@ public class Target {
 	private UUID projectId;
 	private String url;
 	private String version;
-	
+
 	public Target() {}
 
 	public Target(TargetBuilder builder) {
+		this();
 		this.projectId = builder.projectId;
 		this.url = builder.url;
 		this.version = builder.version;
@@ -43,20 +44,20 @@ public class Target {
 	public static TargetBuilder builder() {
 		return new TargetBuilder();
 	}
-	
+
 	public static class TargetBuilder {
-		
+
 		private UUID projectId;
 		private String url;
 		private String version;
-		
+
 		private TargetBuilder() {}
-		
+
 		public TargetBuilder projectId(UUID projectId) {
 			this.projectId = projectId;
 			return this;
 		}
-		
+
 		public TargetBuilder url(String url) {
 			this.url = url;
 			return this;

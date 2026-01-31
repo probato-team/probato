@@ -26,6 +26,13 @@ public class Dimension {
 		this.mode = mode;
 	}
 
+	public Dimension(DimensionBuilder builder) {
+		this();
+		this.width = builder.width;
+		this.height = builder.height;
+		this.mode = builder.mode;
+	}
+
 	public Integer getWidth() {
 		return width;
 	}
@@ -48,6 +55,38 @@ public class Dimension {
 
 	public void setMode(DimensionMode mode) {
 		this.mode = mode;
+	}
+
+	public static DimensionBuilder builder() {
+		return new DimensionBuilder();
+	}
+
+	public static class DimensionBuilder {
+
+		private Integer width;
+		private Integer height;
+		private DimensionMode mode;
+
+		private DimensionBuilder() {}
+
+		public DimensionBuilder width(Integer width) {
+			this.width = width;
+			return this;
+		}
+
+		public DimensionBuilder height(Integer height) {
+			this.height = height;
+			return this;
+		}
+
+		public DimensionBuilder mode(DimensionMode mode) {
+			this.mode = mode;
+			return this;
+		}
+
+		public Dimension build() {
+			return new Dimension(this);
+		}
 	}
 
 }

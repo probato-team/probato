@@ -10,7 +10,15 @@ public class Video {
 
 	public Video() {}
 
+	public Video(double frameRate, Boolean enabled, Quality quality) {
+		this();
+		this.frameRate = frameRate;
+		this.enabled = enabled;
+		this.quality = quality;
+	}
+
 	public Video(VideoBuilder builder) {
+		this();
 		this.frameRate = builder.frameRate;
 		this.enabled = builder.enabled;
 		this.quality = builder.quality;

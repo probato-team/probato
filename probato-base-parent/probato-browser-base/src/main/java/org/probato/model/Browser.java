@@ -26,6 +26,13 @@ public class Browser {
 		this.dimension = dimension;
 	}
 
+	public Browser(BrowserBuilder builder) {
+		this();
+		this.type = builder.type;
+		this.headless = builder.headless;
+		this.dimension = builder.dimension;
+	}
+
 	public BrowserType getType() {
 		return type;
 	}
@@ -48,6 +55,38 @@ public class Browser {
 
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
+	}
+
+	public static BrowserBuilder builder() {
+		return new BrowserBuilder();
+	}
+
+	public static class BrowserBuilder {
+
+		private BrowserType type;
+		private boolean headless;
+		private Dimension dimension;
+
+		private BrowserBuilder() {}
+
+		public BrowserBuilder type(BrowserType type) {
+			this.type = type;
+			return this;
+		}
+
+		public BrowserBuilder headless(boolean headless) {
+			this.headless = headless;
+			return this;
+		}
+
+		public BrowserBuilder dimension(Dimension dimension) {
+			this.dimension = dimension;
+			return this;
+		}
+
+		public Browser build() {
+			return new Browser(this);
+		}
 	}
 
 }

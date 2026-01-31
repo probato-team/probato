@@ -3,10 +3,16 @@ package org.probato.model;
 public class Directory {
 
 	private String temp = "/probato/temp";
-	
+
 	public Directory() {}
 
+	public Directory(String temp) {
+		this();
+		this.temp = temp;
+	}
+
 	public Directory(DirectoryBuilder builder) {
+		this();
 		this.temp = builder.temp;
 	}
 
@@ -21,13 +27,13 @@ public class Directory {
 	public static DirectoryBuilder builder() {
 		return new DirectoryBuilder();
 	}
-	
+
 	public static class DirectoryBuilder {
-		
+
 		private String temp;
-		
+
 		private DirectoryBuilder() {}
-		
+
 		public DirectoryBuilder temp(String temp) {
 			this.temp = temp;
 			return this;

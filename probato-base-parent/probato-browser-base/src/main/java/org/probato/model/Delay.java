@@ -7,23 +7,29 @@ package org.probato.model;
  */
 public class Delay {
 
-	private Integer waiting;
+	private Integer waitingTimeout;
 	private Integer actionInterval;
 
 	public Delay() {}
 
-	public Delay(Integer waiting, Integer actionInterval) {
+	public Delay(Integer waitingTimeout, Integer actionInterval) {
 		this();
-		this.waiting = waiting;
+		this.waitingTimeout = waitingTimeout;
 		this.actionInterval = actionInterval;
 	}
 
-	public Integer getWaiting() {
-		return waiting;
+	public Delay(DelayBuilder builder) {
+		this();
+		this.waitingTimeout = builder.waitingTimeout;
+		this.actionInterval = builder.actionInterval;
 	}
 
-	public void setWaiting(Integer waiting) {
-		this.waiting = waiting;
+	public Integer getWaitingTimeout() {
+		return waitingTimeout;
+	}
+
+	public void setWaitingTimeout(Integer waitingTimeout) {
+		this.waitingTimeout = waitingTimeout;
 	}
 
 	public Integer getActionInterval() {
@@ -32,6 +38,32 @@ public class Delay {
 
 	public void setActionInterval(Integer actionInterval) {
 		this.actionInterval = actionInterval;
+	}
+
+	public static DelayBuilder builder() {
+		return new DelayBuilder();
+	}
+
+	public static class DelayBuilder {
+
+		private Integer waitingTimeout;
+		private Integer actionInterval;
+
+		private DelayBuilder() {}
+
+		public DelayBuilder waitingTimeout(Integer waitingTimeout) {
+			this.waitingTimeout = waitingTimeout;
+			return this;
+		}
+
+		public DelayBuilder actionInterval(Integer actionInterval) {
+			this.actionInterval = actionInterval;
+			return this;
+		}
+
+		public Delay build() {
+			return new Delay(this);
+		}
 	}
 
 }
