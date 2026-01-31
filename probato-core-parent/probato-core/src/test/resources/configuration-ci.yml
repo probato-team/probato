@@ -1,0 +1,4 @@
+execution:
+  delay:
+    waitingTimeout: 1000
+    actionInterval: 1

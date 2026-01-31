@@ -15,7 +15,29 @@ public class Execution {
 
 	public Execution() {}
 
+	public Execution(
+			String engine,
+			Long increment,
+			Screen screen,
+			Target target,
+			Manager manager,
+			Delay delay,
+			Video video,
+			Directory directory) {
+
+		this();
+		this.engine = engine;
+		this.increment = increment;
+		this.screen = screen;
+		this.target = target;
+		this.manager = manager;
+		this.delay = delay;
+		this.video = video;
+		this.directory = directory;
+	}
+
 	public Execution(ExecutionBuilder builder) {
+		this();
 		this.engine = builder.engine;
 		this.increment = builder.increment;
 		this.screen = builder.screen;

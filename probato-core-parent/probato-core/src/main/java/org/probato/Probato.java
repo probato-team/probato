@@ -1,7 +1,5 @@
 package org.probato;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -10,7 +8,7 @@ import org.probato.api.Script;
 //import org.probato.dataset.DatasetService;
 //import org.probato.integration.ExternalService;
 import org.probato.loader.AnnotationLoader;
-import org.probato.loader.Configuration;
+import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
 import org.probato.type.ExecutionPhase;
 //import org.probato.validator.ValidationService;
@@ -46,7 +44,7 @@ public class Probato {
 	}
 
 	public static Stream<Browser> loadBrowsers(Class<?> scriptClazz) {
-		return Stream.of(Configuration.getInstance(scriptClazz).getBrowsers());
+		return Stream.of(ConfigurationContext.get(scriptClazz).getBrowsers());
 	}
 
 	public static Optional<Script> loadScript(Class<?> scriptClazz) {

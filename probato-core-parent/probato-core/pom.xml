@@ -15,6 +15,7 @@
 
 	<dependencies>
 
+		<!-- Base -->
 		<dependency>
 			<groupId>org.probato</groupId>
 			<artifactId>probato-core-base</artifactId>
@@ -24,6 +25,23 @@
 			<groupId>org.probato</groupId>
 			<artifactId>probato-browser-base</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-dataset-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-sql-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-nosql-base</artifactId>
+		</dependency>
+
+		<!-- Review -->
 
 		<dependency>
 			<groupId>org.yaml</groupId>
