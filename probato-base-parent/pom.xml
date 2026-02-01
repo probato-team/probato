@@ -20,6 +20,7 @@
 		<module>probato-dataset-base</module>
 		<module>probato-sql-base</module>
 		<module>probato-nosql-base</module>
+		<module>probato-utils</module>
 	</modules>
 
 	<!-- IMPORT DO BOM -->

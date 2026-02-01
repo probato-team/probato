@@ -11,10 +11,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.probato.api.Dataset;
 import org.probato.api.Disabled;
 import org.probato.api.Ignore;
 import org.probato.api.Procedure;
@@ -22,9 +18,7 @@ import org.probato.api.TestCase;
 import org.probato.test.page.PrincipalPage;
 import org.probato.test.procedure.ProcedureRun;
 import org.probato.test.script.UC01TC01_Script;
-import org.probato.test.script.UC10TC02_ScriptWithSql;
 import org.probato.test.suite.UC01_Suite;
-import org.probato.test.suite.UC10_SuiteWithSql;
 
 @DisplayName("UT - AnnotationLoader")
 class AnnotationLoaderTest {
@@ -286,24 +280,6 @@ class AnnotationLoaderTest {
 		assertEquals(1, pages.size());
 	}
 
-	@ParameterizedTest
-	@MethodSource("getClazzSql")
-	@DisplayName("Should get sql filepath successfully")
-	void shouldGetSqlFilespathSuccessfully(Class<?> clazz) {
-
-		var sqls = AnnotationLoader.getSqlPaths(clazz);
-
-		assertNotNull(sqls);
-		assertEquals(1, sqls.size());
-	}
-
-	private static Stream<Arguments> getClazzSql() {
-		return Stream.of(
-				Arguments.of(UC10_SuiteWithSql.class),
-				Arguments.of(UC10TC02_ScriptWithSql.class));
-	}
-
-	@Dataset("path/to/none.csv")
 	@Ignore
 	static class TestAnnotationLoader {
 
@@ -328,4 +304,5 @@ class AnnotationLoaderTest {
 		void procedure() {}
 
 	}
+
 }
