@@ -15,9 +15,15 @@
 
 	<dependencies>
 
+		<!-- Base -->
 		<dependency>
 			<groupId>org.probato</groupId>
 			<artifactId>probato-dataset-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-utils</artifactId>
 		</dependency>
 
 		<!-- Test -->
