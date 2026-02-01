@@ -17,6 +17,7 @@ import org.probato.exception.IntegrityException;
 import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
 import org.probato.model.Configuration;
+import org.probato.model.Configuration.ConfigurationBuilder;
 import org.probato.model.Delay;
 import org.probato.model.Dimension;
 import org.probato.model.Directory;
@@ -24,27 +25,24 @@ import org.probato.model.Execution;
 import org.probato.model.Manager;
 import org.probato.model.Target;
 import org.probato.model.Video;
-import org.probato.model.Configuration.ConfigurationBuilder;
+import org.probato.test.suite.UC01_Suite;
 import org.probato.type.BrowserType;
 import org.probato.type.ComponentValidatorType;
-import org.probato.type.DimensionMode;
 import org.probato.type.Quality;
 import org.probato.type.Screen;
-import org.probato.test.suite.UC00_NoSuite;
-import org.probato.test.suite.UC01_Suite;
 
-@DisplayName("Test - BrowserComponentValidator")
-class BrowserComponentValidatorTest {
+@DisplayName("UT - ManagerConfigurationComponentValidator")
+class ManagerConfigurationComponentValidatorTest {
 
 	@Test
 	@DisplayName("Should execute validator successfully")
 	void shouldExecuteValidatorSuccessfully() {
 
-		var validators = ComponentValidator.getInstance(ComponentValidatorType.BROWSER);
+		var validators = ComponentValidator.getInstance(ComponentValidatorType.CONFIGURATION);
 
 		validators.forEach(validator -> validator.execute(UC01_Suite.class));
 
-		assertEquals(1, validators.size());
+		assertEquals(2, validators.size());
 	}
 
 	@ParameterizedTest
@@ -56,10 +54,10 @@ class BrowserComponentValidatorTest {
 
 			mocked.when(() -> ConfigurationContext.get(any())).thenReturn(configuration);
 
-			var validators = ComponentValidator.getInstance(ComponentValidatorType.BROWSER);
+			var validators = ComponentValidator.getInstance(ComponentValidatorType.CONFIGURATION);
 
 			var exception = assertThrows(IntegrityException.class,
-					() -> validators.forEach(validator -> validator.execute(UC00_NoSuite.class)));
+					() -> validators.forEach(validator -> validator.execute(UC01_Suite.class)));
 
 			assertEquals(message, exception.getMessage());
 		}
@@ -69,56 +67,68 @@ class BrowserComponentValidatorTest {
 		return Stream.of(
 				Arguments.of(
 						getConfiguration()
-							.browsers(new Browser[] {})
+							.execution(null)
 							.build(),
-						"Property 'browsers' should be declared in 'configuration.yaml' file"),
+						"Property 'execution' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
-						.browsers(null)
-						.build(),
-						"Property 'browsers' should be declared in 'configuration.yaml' file"),
+							.execution(Execution.builder()
+								.delay(Delay.builder()
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(null)
+								.build())
+							.build(),
+						"Property 'execution.manager' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(null, Boolean.TRUE, new Dimension())
-							})
+							.execution(Execution.builder()
+								.delay(Delay.builder()
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(Manager.builder()
+									.submit(Boolean.TRUE)
+									.build())
+								.build())
 							.build(),
-						"Property 'browsers.[0].type' should be declared in 'configuration.yaml' file"),
+						"Property 'execution.manager.url' should be declared in 'configuration.yml' file"),
 				Arguments.of(
 						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(BrowserType.CHROME, Boolean.TRUE, null)
-							})
+							.execution(Execution.builder()
+								.delay(Delay.builder()
+									.actionInterval(1)
+									.waitingTimeout(1)
+									.build())
+								.directory(Directory.builder()
+									.temp("/probato/temp")
+									.build())
+								.target(Target.builder()
+									.url("http://localhost:8080")
+									.version("V1.0.0")
+									.build())
+								.manager(Manager.builder()
+									.submit(Boolean.TRUE)
+									.url("http://localhost:8080")
+									.build())
+								.build())
 							.build(),
-						"Property 'browsers.[0].dimension.mode' should be declared in 'configuration.yaml' file"),
-				Arguments.of(
-						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension())
-							})
-							.build(),
-						"Property 'browsers.[0].dimension.mode' should be declared in 'configuration.yaml' file"),
-				Arguments.of(
-						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.CUSTOM))
-							})
-							.build(),
-						"Property 'browsers.[0].dimension.height' and 'browsers.[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers.[0].dimension.mode' equals CUSTOM"),
-				Arguments.of(
-						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(800, null, DimensionMode.CUSTOM))
-							})
-							.build(),
-						"Property 'browsers.[0].dimension.height' and 'browsers.[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers.[0].dimension.mode' equals CUSTOM"),
-				Arguments.of(
-						getConfiguration()
-							.browsers(new Browser[] {
-								new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, 600, DimensionMode.CUSTOM))
-							})
-							.build(),
-						"Property 'browsers.[0].dimension.height' and 'browsers.[0].dimension.width' should be declared in 'configuration.yaml' file when 'browsers.[0].dimension.mode' equals CUSTOM"));
+						"Property 'execution.manager.token' should be declared in 'configuration.yml' file"));
 	}
 
 	private static ConfigurationBuilder getConfiguration() {
@@ -135,18 +145,25 @@ class BrowserComponentValidatorTest {
 								.token("token")
 								.submit(Boolean.TRUE)
 								.build())
-						.delay(new Delay(1, 1))
+						.delay(Delay.builder()
+								.waitingTimeout(1)
+								.actionInterval(1)
+								.build())
 						.video(Video.builder()
 								.enabled(Boolean.FALSE)
 								.frameRate(10D)
 								.quality(Quality.MEDIUM)
 								.build())
 						.directory(Directory.builder()
-								.temp("/testano/temp")
+								.temp("/probato/temp")
 								.build())
 						.build())
 				.browsers(new Browser[] {
-					new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension())
+						Browser.builder()
+						.type(BrowserType.CHROME)
+						.headless(Boolean.TRUE)
+						.dimension(new Dimension())
+						.build()
 				})
 				.datasources(null);
 	}

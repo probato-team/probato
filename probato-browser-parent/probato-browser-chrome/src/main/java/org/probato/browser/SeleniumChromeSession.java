@@ -113,7 +113,7 @@ final class SeleniumChromeSession implements NativeBrowserSession<WebDriver> {
 		driver
 			.manage()
 			.timeouts()
-			.implicitlyWait(Duration.ofMillis(data.getDelay().getWaiting()));
+			.implicitlyWait(Duration.ofMillis(data.getDelay().getWaitingTimeout()));
 	}
 
 	private void configurePositionOnScreen() {

@@ -7,10 +7,11 @@ import org.probato.loader.ConfigurationContext;
 import org.probato.model.Configuration;
 import org.probato.model.Execution;
 import org.probato.type.ComponentValidatorType;
+import org.probato.utils.StringUtils;
 
-public class BrowserConfigurationComponentValidator extends ComponentValidator {
+public class ManagerConfigurationComponentValidator extends ComponentValidator {
 
-	private static final String PROPERTIE_NOT_FOUND_MSG = "Property ''{0}'' should be declared in ''configuration.yaml'' file";
+	private static final String PROPERTIE_NOT_FOUND_MSG = "Property ''{0}'' should be declared in ''configuration.yml'' file";
 
 	@Override
 	public ComponentValidatorType getStrategy() {
@@ -26,29 +27,34 @@ public class BrowserConfigurationComponentValidator extends ComponentValidator {
 	public void execute(Class<?> suiteClazz) {
 
 		var configuration = ConfigurationContext.get(suiteClazz);
+
 		validateExecution(configuration);
 
 		chain(suiteClazz);
 	}
 
 	private void validateExecution(Configuration configuration) {
-
 		var execution = configuration.getExecution();
-		if (Objects.isNull(execution)) {
-			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution");
-		}
-
-		validateTarget(execution);
+		validateManager(execution);
 	}
 
-	private void validateTarget(Execution execution) {
-		var target = execution.getTarget();
-		if (Objects.isNull(target) || Objects.isNull(target.getUrl()) || target.getUrl().isBlank()) {
-			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.target.url");
+	private void validateManager(Execution execution) {
+
+		var manager = execution.getManager();
+
+		if (Objects.isNull(manager)) {
+			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.manager");
 		}
 
-		if (Objects.isNull(target.getVersion()) || target.getVersion().isBlank()) {
-			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.target.version");
+		if (manager.isSubmit()) {
+
+			if (StringUtils.isBlank(manager.getUrl())) {
+				throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.manager.url");
+			}
+
+			if (StringUtils.isBlank(manager.getToken())) {
+				throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.manager.token");
+			}
 		}
 	}
 

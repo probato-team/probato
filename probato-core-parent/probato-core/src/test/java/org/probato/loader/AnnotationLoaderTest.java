@@ -26,7 +26,7 @@ import org.probato.test.script.UC10TC02_ScriptWithSql;
 import org.probato.test.suite.UC01_Suite;
 import org.probato.test.suite.UC10_SuiteWithSql;
 
-@DisplayName("Test -> AnnotationLoader")
+@DisplayName("UT -> AnnotationLoader")
 class AnnotationLoaderTest {
 
 	@Test

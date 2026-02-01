@@ -29,7 +29,7 @@ class BrowserSessionDataTest {
 		browser.setDimension(dimension);
 
 		var delay = new Delay(30_000, 1_000);
-		delay.setWaiting(30_000);
+		delay.setWaitingTimeout(30_000);
 		delay.setActionInterval(1_000);
 
 		var data = new BrowserSessionData("selenium", "http://google.com", Screen.PRIMARY, browser, delay);
@@ -40,7 +40,7 @@ class BrowserSessionDataTest {
 				() -> assertEquals(Screen.PRIMARY, data.getScreen()),
 				() -> assertEquals(browser, data.getBrowser()),
 				() -> assertEquals(delay, data.getDelay()),
-				() -> assertEquals(delay.getWaiting(), data.getDelay().getWaiting()),
+				() -> assertEquals(delay.getWaitingTimeout(), data.getDelay().getWaitingTimeout()),
 				() -> assertEquals(delay.getActionInterval(), data.getDelay().getActionInterval()));
 	}
 

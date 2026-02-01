@@ -5,8 +5,9 @@ import java.lang.reflect.Array;
 import java.util.Objects;
 
 import org.probato.exception.IntegrityException;
-import org.probato.loader.Configuration;
+import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
+import org.probato.model.Configuration;
 import org.probato.type.ComponentValidatorType;
 import org.probato.type.DimensionMode;
 
@@ -30,7 +31,7 @@ public class BrowserComponentValidator extends ComponentValidator {
 	@Override
 	public void execute(Class<?> suiteClazz) {
 
-		var configuration = Configuration.getInstance(suiteClazz);
+		var configuration = ConfigurationContext.get(suiteClazz);
 		validateBrowsers(configuration);
 
 		chain(suiteClazz);

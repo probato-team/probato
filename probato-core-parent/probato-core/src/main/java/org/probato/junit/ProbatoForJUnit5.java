@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.probato.Probato;
 
-public final class TestanoForJUnit5
+public final class ProbatoForJUnit5
 		implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback, AfterAllCallback, ExecutionCondition {
 
 	@Override

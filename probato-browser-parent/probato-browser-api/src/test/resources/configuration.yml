@@ -11,7 +11,7 @@ execution:
   directory:
     temp: 'D:/temp'
   delay:
-    waiting: 1
+    waitingTimeout: 1
     actionInterval: 1
   video:
     enabled: true
@@ -31,7 +31,7 @@ browsers:
       width: 800
       height: 600
 datasources:
-  testano:
+  probato:
     url: 'jdbc:h2:mem:testdb'
     schema: test
     driver: org.h2.Driver

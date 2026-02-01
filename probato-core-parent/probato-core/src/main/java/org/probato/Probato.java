@@ -1,5 +1,6 @@
 package org.probato;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -11,11 +12,11 @@ import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
 import org.probato.type.ExecutionPhase;
-//import org.probato.validator.ValidationService;
+import org.probato.validator.ValidationService;
 
 public class Probato {
 
-//	private static ValidationService validationService;
+	private static ValidationService validationService;
 //	private static DatasetService datasetService;
 //	private static List<ExternalService> integrationsService;
 
@@ -61,10 +62,10 @@ public class Probato {
 
 	private static void loadExtesions() {
 
-//		if (Objects.isNull(validationService)) {
-//			validationService = ValidationService.getInstance();
-//		}
-//
+		if (Objects.isNull(validationService)) {
+			validationService = ValidationService.getInstance();
+		}
+
 //		if (Objects.isNull(datasetService)) {
 //			datasetService = DatasetService.getInstance();
 //		}
@@ -75,7 +76,7 @@ public class Probato {
 	}
 
 	private static void validate(Class<?> clazz) {
-//		validationService.execute(clazz);
+		validationService.execute(clazz);
 	}
 
 	private static void runIntegration(ExecutionPhase type) {

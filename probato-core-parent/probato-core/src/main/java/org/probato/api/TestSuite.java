@@ -16,10 +16,10 @@ import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.probato.Probato;
 import org.probato.junit.SuiteFactoryDisplayNameGenerator;
-import org.probato.junit.TestanoForJUnit5;
+import org.probato.junit.ProbatoForJUnit5;
 
 @DisplayNameGeneration(SuiteFactoryDisplayNameGenerator.class)
-@ExtendWith(TestanoForJUnit5.class)
+@ExtendWith(ProbatoForJUnit5.class)
 public interface TestSuite {
 
 	@TestFactory

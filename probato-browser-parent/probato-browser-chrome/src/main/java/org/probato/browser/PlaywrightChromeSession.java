@@ -128,7 +128,7 @@ final class PlaywrightChromeSession implements NativeBrowserSession<Page> {
 
 	    context = browserInstance.newContext(contextOptions);
 		context.setDefaultTimeout(data.getDelay().getActionInterval());
-		context.setDefaultNavigationTimeout(data.getDelay().getWaiting());
+		context.setDefaultNavigationTimeout(data.getDelay().getWaitingTimeout());
 
 		driver = context.newPage();
 	}

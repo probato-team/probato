@@ -14,7 +14,7 @@ import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-class ConfigurationLoader {
+public class ConfigurationLoader {
 
 	private static final String SYS_PROP_PREFIX = "probato.";
 	private static final String BASE_FILE = "configuration.yml";

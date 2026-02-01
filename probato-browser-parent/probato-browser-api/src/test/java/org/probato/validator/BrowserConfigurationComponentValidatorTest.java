@@ -2,6 +2,8 @@ package org.probato.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mockStatic;
 
 import java.util.stream.Stream;
 
@@ -10,10 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.MockedStatic;
 import org.probato.exception.IntegrityException;
-import org.probato.loader.Configuration;
-import org.probato.loader.Configuration.ConfigurationBuilder;
+import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
+import org.probato.model.Configuration;
 import org.probato.model.Delay;
 import org.probato.model.Dimension;
 import org.probato.model.Directory;
@@ -21,6 +24,7 @@ import org.probato.model.Execution;
 import org.probato.model.Manager;
 import org.probato.model.Target;
 import org.probato.model.Video;
+import org.probato.model.Configuration.ConfigurationBuilder;
 import org.probato.test.suite.UC01_Suite;
 import org.probato.type.BrowserType;
 import org.probato.type.ComponentValidatorType;
@@ -38,7 +42,7 @@ class BrowserConfigurationComponentValidatorTest {
 
 		validators.forEach(validator -> validator.execute(UC01_Suite.class));
 
-		assertEquals(1, validators.size());
+		assertEquals(3, validators.size());
 	}
 
 	@ParameterizedTest
@@ -46,19 +50,17 @@ class BrowserConfigurationComponentValidatorTest {
 	@DisplayName("Should validate configuration data")
 	void shouldValidateConfigurationData(Configuration configuration, String message) throws Exception {
 
-		var config = Configuration.getInstance(UC01_Suite.class);
-		var instance = config.getClass().getDeclaredField("instance");
-		instance.setAccessible(Boolean.TRUE);
-		instance.set(config, configuration);
+		try (MockedStatic<ConfigurationContext> mocked = mockStatic(ConfigurationContext.class)) {
 
-		var validators = ComponentValidator.getInstance(ComponentValidatorType.CONFIGURATION);
+			mocked.when(() -> ConfigurationContext.get(any())).thenReturn(configuration);
 
-		var exception = assertThrows(IntegrityException.class,
-				() -> validators.forEach(validator -> validator.execute(UC01_Suite.class)));
+			var validators = ComponentValidator.getInstance(ComponentValidatorType.CONFIGURATION);
 
-		assertEquals(message, exception.getMessage());
+			var exception = assertThrows(IntegrityException.class,
+					() -> validators.forEach(validator -> validator.execute(UC01_Suite.class)));
 
-		instance.set(configuration, null);
+			assertEquals(message, exception.getMessage());
+		}
 	}
 
 	private static Stream<Arguments> getInvalidConfigurationData() {

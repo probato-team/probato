@@ -8,11 +8,11 @@ import org.probato.test.script.UC01TC01_Script;
 
 @SQLs(
 	@SQL(
-		datasource = "probato", 
+		datasource = "probato",
 		scriptPath = { "path/to/file.sql", "path/to/file2.sql" }))
 @Suite(
-	code = "UC10", 
-	name = "Suite 10", 
+	code = "UC10",
+	name = "Suite 10",
 	description = "Suite with sql")
 public class UC10_SuiteWithSql {
 
