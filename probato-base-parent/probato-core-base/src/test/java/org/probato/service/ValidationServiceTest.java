@@ -11,8 +11,8 @@ import org.probato.exception.IntegrityException;
 class ValidationServiceTest {
 
 	@Test
-	@DisplayName("Should execute validator service successfully")
-	void shouldExecuteValidatorSuccessfully() {
+	@DisplayName("Should validate when not validator service implement")
+	void shouldValidateNotExistValidatorImplement() {
 
 		var exception = assertThrows(IntegrityException.class, ValidationService::getInstance);
 
