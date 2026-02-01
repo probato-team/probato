@@ -87,6 +87,13 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<!-- Dataset -->
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-dataset-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<!-- Test -->
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
@@ -144,6 +151,12 @@
 				<groupId>org.yaml</groupId>
 				<artifactId>snakeyaml</artifactId>
 				<version>${snakeyaml.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.opencsv</groupId>
+				<artifactId>opencsv</artifactId>
+				<version>${opencsv.version}</version>
 			</dependency>
 
 			<dependency>

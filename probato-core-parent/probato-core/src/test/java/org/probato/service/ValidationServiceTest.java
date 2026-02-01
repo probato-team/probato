@@ -1,4 +1,4 @@
-package org.probato.validator;
+package org.probato.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

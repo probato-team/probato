@@ -26,7 +26,7 @@ import org.probato.test.script.UC10TC02_ScriptWithSql;
 import org.probato.test.suite.UC01_Suite;
 import org.probato.test.suite.UC10_SuiteWithSql;
 
-@DisplayName("UT -> AnnotationLoader")
+@DisplayName("UT - AnnotationLoader")
 class AnnotationLoaderTest {
 
 	@Test
@@ -222,25 +222,6 @@ class AnnotationLoaderTest {
 		var isProcedure = AnnotationLoader.isProcedure(TestAnnotationLoader.class.getDeclaredMethod("procedure"));
 
 		assertTrue(isProcedure);
-	}
-
-	@Test
-	@DisplayName("Should verify dataset successfully")
-	void shouldVefifyDatasetSuccessfully() {
-
-		var hasDataset = AnnotationLoader.hasDataset(TestAnnotationLoader.class);
-
-		assertTrue(hasDataset);
-	}
-
-	@Test
-	@DisplayName("Should get dataset successfully")
-	void shouldGetDatasetSuccessfully() throws Exception {
-
-		var dataset = AnnotationLoader.getDataset(TestAnnotationLoader.class)
-				.orElseThrow(() -> new Exception("Not found"));
-
-		assertEquals("path/to/none.csv", dataset.value()[0]);
 	}
 
 	@Test

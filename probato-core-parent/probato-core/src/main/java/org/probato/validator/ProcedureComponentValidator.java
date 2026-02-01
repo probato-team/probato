@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import org.probato.exception.IntegrityException;
 import org.probato.loader.AnnotationLoader;
+import org.probato.loader.DatasetLoader;
 import org.probato.model.Datamodel;
 import org.probato.type.ComponentValidatorType;
 
@@ -79,7 +80,7 @@ public class ProcedureComponentValidator extends ComponentValidator {
 			throw new IntegrityException(PROCEDURE_TYPE_NON_RUN_METHOD_MSG, procedureClazz.getName());
 		}
 
-		if (hasParams(procedureMethod) && !AnnotationLoader.hasDataset(scriptClazz)) {
+		if (hasParams(procedureMethod) && !DatasetLoader.hasDataset(scriptClazz)) {
 			throw new IntegrityException(PROCEDURE_METHOD_INVALID_PARAM_MSG, procedureClazz.getName(), procedureMethod.getName());
 		}
 

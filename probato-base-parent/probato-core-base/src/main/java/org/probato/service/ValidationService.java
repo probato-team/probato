@@ -1,10 +1,11 @@
-package org.probato.validator;
+package org.probato.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.probato.type.ComponentValidatorType;
+import org.probato.validator.ComponentValidator;
 
 public class ValidationService {
 

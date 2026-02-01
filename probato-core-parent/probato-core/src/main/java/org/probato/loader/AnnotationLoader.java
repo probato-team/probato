@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.probato.api.Action;
-import org.probato.api.Dataset;
 import org.probato.api.Disabled;
 import org.probato.api.Ignore;
 import org.probato.api.Page;
@@ -149,14 +148,6 @@ public class AnnotationLoader {
 		return method.isAnnotationPresent(Postcondition.class);
 	}
 
-	public static boolean hasDataset(Class<?> clazz) {
-		return clazz.isAnnotationPresent(Dataset.class);
-	}
-
-	public static Optional<Dataset> getDataset(Class<?> clazz) {
-		return Optional.ofNullable(clazz.getAnnotation(Dataset.class));
-	}
-
 	public static Method getRunMethod(Class<?> procedureClazz) {
 		return Stream.of(procedureClazz.getDeclaredMethods())
 			.filter(method -> method.isAnnotationPresent(Run.class))
@@ -165,7 +156,7 @@ public class AnnotationLoader {
 	}
 
 	public static List<Method> getActionMethods(Class<?> pageObjectClazz) {
-		
+
 		var methods = new ArrayList<Method>();
 		if (Objects.nonNull(pageObjectClazz) && PageObject.class.isAssignableFrom(pageObjectClazz)) {
 			methods.addAll(getActionMethods(pageObjectClazz.getSuperclass()));
@@ -205,7 +196,7 @@ public class AnnotationLoader {
 
 		return list;
 	}
-	
+
 	public static List<Field> getPages(Class<?> scriptClazz) {
 
 		var list = new ArrayList<Field>();
@@ -218,7 +209,7 @@ public class AnnotationLoader {
 
 		return list;
 	}
-	
+
 	public static Map<String, List<String>> getSqlPaths(Class<?> clazz) {
 
 		var map = new LinkedHashMap<String, List<String>>();
@@ -252,7 +243,7 @@ public class AnnotationLoader {
 	}
 
 	private static boolean hasExecutionCondition(Method method, Class<? extends Annotation> procedureClazz) {
-		return method.isAnnotationPresent(procedureClazz) 
+		return method.isAnnotationPresent(procedureClazz)
 				&& !(method.isAnnotationPresent(Ignore.class) || method.getDeclaringClass().isAnnotationPresent(Ignore.class));
 	}
 

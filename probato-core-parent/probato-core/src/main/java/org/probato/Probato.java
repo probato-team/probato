@@ -10,9 +10,10 @@ import org.probato.api.Script;
 //import org.probato.integration.ExternalService;
 import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
+import org.probato.loader.DatasetLoader;
 import org.probato.model.Browser;
 import org.probato.type.ExecutionPhase;
-import org.probato.validator.ValidationService;
+import org.probato.service.ValidationService;
 
 public class Probato {
 
@@ -53,7 +54,7 @@ public class Probato {
 	}
 
 	public static Optional<Dataset> loadDataset(Class<?> scriptClazz) {
-		return AnnotationLoader.getDataset(scriptClazz);
+		return DatasetLoader.getDataset(scriptClazz);
 	}
 
 	public static int getCsvCounterLines(Dataset dataset) {
