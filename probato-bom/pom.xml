@@ -73,6 +73,12 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-utils</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<!-- Core -->
 			<dependency>
 				<groupId>org.probato</groupId>
@@ -142,6 +148,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>xuggle</groupId>
 				<artifactId>xuggle-xuggler</artifactId>
 				<version>5.4</version>
@@ -169,6 +181,13 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j2-impl</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+				<scope>test</scope>
 			</dependency>
 
 		</dependencies>

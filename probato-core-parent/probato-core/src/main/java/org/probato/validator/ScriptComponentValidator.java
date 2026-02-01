@@ -35,14 +35,14 @@ public class ScriptComponentValidator extends ComponentValidator {
 
 	@Override
 	public void execute(Class<?> suiteClazz) {
-		
+
 		boolean ignored = AnnotationLoader.isIgnore(suiteClazz);
 		if (ignored) return;
-		
+
 		AnnotationLoader.getTestCaseField(suiteClazz).stream()
 			.map(Field::getType)
 			.forEach(this::validateScript);
-		
+
 		chain(suiteClazz);
 	}
 
@@ -59,7 +59,7 @@ public class ScriptComponentValidator extends ComponentValidator {
 		validateDescription(script, scriptClazz);
 		validateProcedure(scriptClazz);
 	}
-	
+
 	private void validateId(Script script, Class<?> scriptClazz) {
 		var code = script.code();
 		if (isValidIdMinLength(code) || isValidIdMaxLength(code)) {
@@ -98,7 +98,7 @@ public class ScriptComponentValidator extends ComponentValidator {
 	private boolean hasFieldProcedure(Class<?> scriptClazz) {
 		return Stream.of(scriptClazz.getDeclaredFields()).anyMatch(AnnotationLoader::isProcedure);
 	}
-	
+
 	private boolean isValidIdMinLength(String id) {
 		return id.length() < SCRIPT_ID_MIN_LEN;
 	}
@@ -118,7 +118,7 @@ public class ScriptComponentValidator extends ComponentValidator {
 	private boolean isValidDescriptionMaxLength(String description) {
 		return description.length() > SCRIPT_DESC_MAX_LENGTH;
 	}
-	
+
 	private String getName(Class<?> scritpClazz) {
 		return scritpClazz.getName();
 	}
