@@ -13,15 +13,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.probato.test.script.UC02TC02_ScriptWithSql;
 import org.probato.test.suite.UC01_SuiteWithSql;
 
-@DisplayName("UT - SqlLoader")
-class SqlLoaderTest {
+@DisplayName("UT - NoSqlLoader")
+class NoSqlLoaderTest {
 
 	@ParameterizedTest
 	@MethodSource("getClazzSql")
 	@DisplayName("Should get sql filepath successfully")
 	void shouldHasSqlSuccessfully(Class<?> clazz) {
 
-		var result = SqlLoader.hasSql(clazz);
+		var result = NoSqlLoader.hasNoSql(clazz);
 
 		assertEquals(Boolean.TRUE, result);
 	}
@@ -30,7 +30,7 @@ class SqlLoaderTest {
 	@DisplayName("Should get sql filepath successfully")
 	void shouldHasNoSqlSuccessfully() {
 
-		var result = SqlLoader.hasSql(SqlLoaderTest.class);
+		var result = NoSqlLoader.hasNoSql(NoSqlLoaderTest.class);
 
 		assertEquals(Boolean.FALSE, result);
 	}
@@ -40,7 +40,7 @@ class SqlLoaderTest {
 	@DisplayName("Should get sql filepath successfully")
 	void shouldGetSqlFilespathSuccessfully(Class<?> clazz) {
 
-		var sqls = SqlLoader.getSqlPaths(clazz);
+		var sqls = NoSqlLoader.getNoSqlPaths(clazz);
 
 		assertNotNull(sqls);
 		assertEquals(1, sqls.size());

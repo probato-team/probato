@@ -11,13 +11,13 @@ import org.probato.type.Relevance;
 	datasource = "probato",
 	scriptPath = { "path/to/file.sql", "path/to/file2.sql" })
 @Script(
-	code = "UC10TC01",
-	name = "Test case 10",
+	code = "UC02TC01",
+	name = "Test case 02",
 	description = "This a simple test",
 	flow = Flow.MAIN,
 	complexity = Complexity.MEDIUM,
 	relevance = Relevance.MEDIUM)
-public class UC10TC02_ScriptWithSql {
+public class UC02TC02_ScriptWithSql {
 
 	@Procedure
 	void procedure() {
