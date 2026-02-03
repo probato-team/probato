@@ -33,7 +33,7 @@ class DatasetServiceTest {
 			}
 		};
 
-		var service = DatasetService.getInstance();
+		var service = DatasetService.get();
 
 		service.getDatamodel(dataset, Data.class, 0);
 		service.getDatamodel(dataset, Data.class, 0);
@@ -52,7 +52,7 @@ class DatasetServiceTest {
 	@DisplayName("Should validate when instance no datamodel object")
 	void shouldValidateInstanceDatamodel() {
 
-		var service = DatasetService.getInstance();
+		var service = DatasetService.get();
 
 		var exception = assertThrows(IntegrityException.class,
 				() -> service.getDatamodel(null, DatasetServiceTest.class, 0));

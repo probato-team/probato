@@ -32,7 +32,7 @@ import org.probato.type.Quality;
 import org.probato.type.Screen;
 
 @DisplayName("Test - BrowserConfigurationComponentValidator")
-class BrowserConfigurationComponentValidatorTest {
+class BrowserConfigurationValidationComponentTest {
 
 	@Test
 	@DisplayName("Should execute validator successfully")

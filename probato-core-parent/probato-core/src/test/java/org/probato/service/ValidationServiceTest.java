@@ -13,7 +13,7 @@ class ValidationServiceTest {
 	@DisplayName("Should execute validator service successfully")
 	void shouldExecuteValidatorSuccessfully() {
 
-		var service = ValidationService.getInstance();
+		var service = ValidationService.get();
 
 		service.execute(UC01_Suite.class);
 

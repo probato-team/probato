@@ -1,7 +1,5 @@
 package org.probato.engine;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,36 +14,42 @@ public class ScriptDiscovery {
 
 	public static List<ExecutableDefinition> discover(Class<?> scriptClass) {
 
+		int order = 0;
         var list = new ArrayList<ExecutableDefinition>();
-        int order = 0;
 
-        for (Method method : scriptClass.getDeclaredMethods()) {
+        for (var method : scriptClass.getDeclaredMethods()) {
+
             if (method.isAnnotationPresent(Precondition.class)) {
-                list.add(ExecutableDefinition.forMethod(
-                        PhaseType.PRECONDITION, method, order++));
+                list.add(ExecutableDefinition
+                		.forMethod(PhaseType.PRECONDITION, method, order++));
             }
+
             if (method.isAnnotationPresent(Procedure.class)) {
-                list.add(ExecutableDefinition.forMethod(
-                        PhaseType.PROCEDURE, method, order++));
+                list.add(ExecutableDefinition
+                		.forMethod(PhaseType.PROCEDURE, method, order++));
             }
+
             if (method.isAnnotationPresent(Postcondition.class)) {
-                list.add(ExecutableDefinition.forMethod(
-                        PhaseType.POSTCONDITION, method, order++));
+                list.add(ExecutableDefinition
+                		.forMethod(PhaseType.POSTCONDITION, method, order++));
             }
         }
 
-        for (Field field : scriptClass.getDeclaredFields()) {
+        for (var field : scriptClass.getDeclaredFields()) {
+
             if (field.isAnnotationPresent(Precondition.class)) {
-                list.add(ExecutableDefinition.forField(
-                        PhaseType.PRECONDITION, field, order++));
+                list.add(ExecutableDefinition
+                		.forField(PhaseType.PRECONDITION, field, order++));
             }
+
             if (field.isAnnotationPresent(Procedure.class)) {
-                list.add(ExecutableDefinition.forField(
-                        PhaseType.PROCEDURE, field, order++));
+                list.add(ExecutableDefinition
+                		.forField(PhaseType.PROCEDURE, field, order++));
             }
+
             if (field.isAnnotationPresent(Postcondition.class)) {
-                list.add(ExecutableDefinition.forField(
-                        PhaseType.POSTCONDITION, field, order++));
+                list.add(ExecutableDefinition
+                		.forField(PhaseType.POSTCONDITION, field, order++));
             }
         }
 

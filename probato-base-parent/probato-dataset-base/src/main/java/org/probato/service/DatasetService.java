@@ -27,7 +27,7 @@ public interface DatasetService {
 	
 	public Content getContent(Dataset dataset, int index);
 	
-	static DatasetService getInstance() {
+	static DatasetService get() {
 		return ServiceLoader.load(DatasetService.class)
 				.stream()
 				.map(Provider::get)

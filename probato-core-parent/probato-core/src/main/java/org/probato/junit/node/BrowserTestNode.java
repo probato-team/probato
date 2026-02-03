@@ -4,9 +4,6 @@ import java.net.URI;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
-import org.probato.engine.ExecutionContext;
-import org.probato.engine.ExecutionEngine;
-import org.probato.engine.ExecutionRecord;
 import org.probato.model.Browser;
 import org.probato.type.DimensionMode;
 

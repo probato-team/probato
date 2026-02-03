@@ -33,7 +33,7 @@ import org.probato.type.Quality;
 import org.probato.type.Screen;
 
 @DisplayName("UT - ConfigurationComponentValidator")
-class ConfigurationComponentValidatorTest {
+class ConfigurationValidationComponentTest {
 
 	@Test
 	@DisplayName("Should execute validator successfully")

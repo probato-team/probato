@@ -14,7 +14,7 @@ class ValidationServiceTest {
 	@DisplayName("Should validate when not validator service implement")
 	void shouldValidateNotExistValidatorImplement() {
 
-		var exception = assertThrows(IntegrityException.class, ValidationService::getInstance);
+		var exception = assertThrows(IntegrityException.class, ValidationService::get);
 
 		assertEquals("Component validator implementation not found", exception.getMessage());
 	}

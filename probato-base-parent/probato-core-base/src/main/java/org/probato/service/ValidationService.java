@@ -29,7 +29,7 @@ public class ValidationService {
 		validator = ComponentValidator.link(validators);
 	}
 
-	public static  ValidationService getInstance() {
+	public static  ValidationService get() {
 		return new ValidationService();
 	}
 

@@ -29,6 +29,7 @@
 		<dependency>
 			<groupId>org.probato</groupId>
 			<artifactId>probato-dataset-base</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

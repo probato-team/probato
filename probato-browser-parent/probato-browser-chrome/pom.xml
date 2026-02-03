@@ -17,6 +17,11 @@
 
 		<dependency>
 			<groupId>org.probato</groupId>
+			<artifactId>probato-browser-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
 			<artifactId>probato-browser-api</artifactId>
 		</dependency>
 

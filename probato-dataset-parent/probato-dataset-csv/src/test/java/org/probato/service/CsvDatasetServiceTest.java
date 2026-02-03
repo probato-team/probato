@@ -20,7 +20,7 @@ class CsvDatasetServiceTest {
 
 	@BeforeEach
 	void init() {
-		service = DatasetService.getInstance();
+		service = DatasetService.get();
 	}
 
 	@Test

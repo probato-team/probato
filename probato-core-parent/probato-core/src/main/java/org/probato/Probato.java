@@ -10,13 +10,14 @@ import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
 import org.probato.loader.DatasetLoader;
 import org.probato.model.Browser;
+import org.probato.service.DatasetService;
 import org.probato.service.ValidationService;
 import org.probato.type.ExecutionPhase;
 
 public class Probato {
 
 	private static ValidationService validationService;
-//	private static DatasetService datasetService;
+	private static DatasetService datasetService;
 //	private static List<ExternalService> integrationsService;
 
 	private Probato() {}
@@ -56,19 +57,19 @@ public class Probato {
 	}
 
 	public static int getCsvCounterLines(Dataset dataset) {
-		return 0;// datasetService.counterLines(dataset);
+		return datasetService.counterLines(dataset);
 	}
 
 	private static void loadExtesions() {
 
 		if (Objects.isNull(validationService)) {
-			validationService = ValidationService.getInstance();
+			validationService = ValidationService.get();
 		}
 
-//		if (Objects.isNull(datasetService)) {
-//			datasetService = DatasetService.getInstance();
-//		}
-//
+		if (Objects.isNull(datasetService)) {
+			datasetService = DatasetService.get();
+		}
+
 //		if (Objects.isNull(integrationsService)) {
 //			integrationsService = ExternalService.getInstance();
 //		}

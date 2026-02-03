@@ -16,11 +16,15 @@ public class ExecutionEngine {
 
 		try {
 
-			var scriptInstance = context.getScriptClass().getDeclaredConstructor().newInstance();
+			var scriptInstance = context.getScriptClass()
+					.getDeclaredConstructor()
+					.newInstance();
 
-			List<ExecutableUnit> units = ScriptDiscovery.discover(context.getScriptClass()).stream()
-					.map(def -> buildUnit(def, scriptInstance))
-					.sorted(Comparator.comparingInt(ExecutableUnit::getOrder)).collect(Collectors.toList());
+			var units = ScriptDiscovery.discover(context.getScriptClass())
+					.stream()
+					.map(definition -> buildUnit(definition, scriptInstance))
+					.sorted(Comparator.comparingInt(ExecutableUnit::getOrder))
+					.collect(Collectors.toList());
 
 			if (executePhase(units, PhaseType.PRECONDITION, record, true)) {
 				record.markFinished(ExecutionStatus.SKIPPED);
@@ -52,7 +56,7 @@ public class ExecutionEngine {
 			ExecutionRecord record,
 			boolean skipOnFailure) {
 
-		for (ExecutableUnit unit : units) {
+		for (var unit : units) {
 
 			if (unit.getPhase() != phase) {
 				continue;
@@ -67,8 +71,10 @@ public class ExecutionEngine {
 				record.addStep(step);
 				return true;
 			}
+
 			record.addStep(step);
 		}
+
 		return false;
 	}
 
@@ -80,12 +86,11 @@ public class ExecutionEngine {
 				return new ExecutableUnit(def.getPhase(), def.getOrder(), scriptInstance, def.getMethod());
 			}
 
-			def.getField().setAccessible(true);
-			Object fieldInstance = def.getField().getType().getDeclaredConstructor().newInstance();
-
+			def.getField().setAccessible(Boolean.TRUE);
+			var fieldInstance = def.getField().getType().getDeclaredConstructor().newInstance();
 			def.getField().set(scriptInstance, fieldInstance);
 
-			Method runMethod = findRunMethod(fieldInstance.getClass());
+			var runMethod = findRunMethod(fieldInstance.getClass());
 
 			return new ExecutableUnit(def.getPhase(), def.getOrder(), fieldInstance, runMethod);
 
@@ -95,7 +100,7 @@ public class ExecutionEngine {
 	}
 
 	private Method findRunMethod(Class<?> clazz) {
-		for (Method method : clazz.getDeclaredMethods()) {
+		for (var method : clazz.getDeclaredMethods()) {
 			if (method.isAnnotationPresent(org.probato.api.Run.class)) {
 				return method;
 			}

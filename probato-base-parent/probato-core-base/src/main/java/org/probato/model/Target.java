@@ -10,6 +10,13 @@ public class Target {
 
 	public Target() {}
 
+	public Target(UUID projectId, String url, String version) {
+		this();
+		this.projectId = projectId;
+		this.url = url;
+		this.version = version;
+	}
+
 	public Target(TargetBuilder builder) {
 		this();
 		this.projectId = builder.projectId;
