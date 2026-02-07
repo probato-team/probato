@@ -96,26 +96,26 @@ class ChromeBrowserProviderIT {
 		return Stream.of(
 				Arguments.of(
 					new BrowserSessionData(
+						new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 						"selenium",
 						url,
 						Screen.PRIMARY,
-						new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 						delay)
 				),
 				Arguments.of(
 					new BrowserSessionData(
+						new Browser(BrowserType.CHROME, Boolean.FALSE, new Dimension(null, null, DimensionMode.MAXIMIZED)),
 						"playwright",
 						url,
 						Screen.SECONDARY,
-						new Browser(BrowserType.CHROME, Boolean.FALSE, new Dimension(null, null, DimensionMode.MAXIMIZED)),
 						delay)
 				),
 				Arguments.of(
 					new BrowserSessionData(
+						new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(1200, 850, DimensionMode.CUSTOM)),
 						"selenium",
 						url,
 						Screen.PRIMARY,
-						new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(1200, 850, DimensionMode.CUSTOM)),
 						delay)
 				));
 	}

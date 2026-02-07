@@ -1,4 +1,4 @@
-package org.probato.engine;
+package org.probato.engine.procedure;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -7,20 +7,31 @@ import java.util.List;
 
 import org.probato.type.ExecutionStatus;
 
-public class ExecutionRecord {
+public class ExecutionResult {
 
-	private final Instant start = Instant.now();
+	private final Instant start;
+	private final List<StepResult> steps;
+
 	private Instant end;
-	private final List<StepResult> steps = new ArrayList<>();
 	private ExecutionStatus status;
 
-	public void addStep(StepResult step) {
+	public ExecutionResult() {
+		start = Instant.now();
+		steps = new ArrayList<>();
+	}
+
+	public StepResult addStep(StepResult step) {
 		steps.add(step);
+		return step;
 	}
 
 	public void markFinished(ExecutionStatus status) {
 		this.status = status;
 		this.end = Instant.now();
+	}
+
+	public List<StepResult> getSteps() {
+		return steps;
 	}
 
 	public Duration getRuntime() {

@@ -17,10 +17,10 @@ public class BrowserTestNode extends TestNode {
 	private final Browser browser;
 	private final Integer datasetLine;
 
-	public BrowserTestNode(Class<?> suiteClazz, Class<?> scriptClazz, Browser browser, Integer datasetLine) {
+	public BrowserTestNode(Browser browser, Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {
+		this.browser = browser;
 		this.suiteClazz = suiteClazz;
 		this.scriptClazz = scriptClazz;
-		this.browser = browser;
 		this.datasetLine = datasetLine;
 	}
 
@@ -56,7 +56,7 @@ public class BrowserTestNode extends TestNode {
 	}
 
 	private TestNodeExecutable buildTestExecutable() {
-		return new TestNodeExecutable(suiteClazz, scriptClazz, browser, datasetLine);
+		return new TestNodeExecutable(browser, suiteClazz, scriptClazz, datasetLine);
 	}
 
 }

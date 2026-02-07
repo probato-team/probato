@@ -32,7 +32,7 @@ class BrowserSessionDataTest {
 		delay.setWaitingTimeout(30_000);
 		delay.setActionInterval(1_000);
 
-		var data = new BrowserSessionData("selenium", "http://google.com", Screen.PRIMARY, browser, delay);
+		var data = new BrowserSessionData(browser, "selenium", "http://google.com", Screen.PRIMARY, delay);
 
 		assertAll("Validate value",
 				() -> assertEquals("selenium", data.getEngine()),

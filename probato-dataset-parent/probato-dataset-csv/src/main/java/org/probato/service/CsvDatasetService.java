@@ -42,9 +42,11 @@ public class CsvDatasetService implements DatasetService {
 	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
 		var models = new ArrayList<T>();
 		for (var path: dataset.value()) {
-			try (FileReader reader = readFile(path)) {
+			try (var reader = readFile(path)) {
+
 				models.addAll(getObjectMapperBuilder(reader, clazz).parse());
-			} catch (Exception ex) {
+			}
+			catch (Exception ex) {
 				throw new IntegrityException(MSG_LOAD_ERROR, path, ex.getMessage());
 			}
 		}

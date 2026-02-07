@@ -10,14 +10,14 @@ public class TestNodeExecutable implements Executable {
 	private final ExecutionEngine engine;
 	private final ExecutionContext context;
 
-	public TestNodeExecutable(Class<?> suiteClazz, Class<?> scriptClazz, Browser browser, Integer datasetLine) {
-		engine = new ExecutionEngine();
-		context = new ExecutionContext(suiteClazz, scriptClazz, browser, datasetLine);
+	public TestNodeExecutable(Browser browser, Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {
+		engine = ExecutionEngine.get();
+		context = new ExecutionContext(browser, suiteClazz, scriptClazz, datasetLine);
 	}
 
 	@Override
 	public void execute() throws Throwable {
-		var record = engine.execute(context);
+		engine.execute(context);
 	}
 
 }

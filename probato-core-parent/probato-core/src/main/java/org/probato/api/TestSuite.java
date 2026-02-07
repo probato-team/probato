@@ -59,7 +59,7 @@ public interface TestSuite {
 
 		var list = new ArrayList<DynamicNode>();
 		Probato.loadBrowsers(getClass())
-				.map(browser -> createBrowserTestNode(getClass(), scriptClazz, browser, datasetLine))
+				.map(browser -> createBrowserTestNode(browser, getClass(), scriptClazz, datasetLine))
 				.forEach(list::add);
 
 		return list;

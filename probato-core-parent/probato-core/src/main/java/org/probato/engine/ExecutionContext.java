@@ -1,21 +1,23 @@
 package org.probato.engine;
 
+import org.probato.model.Browser;
+
 public class ExecutionContext {
 
+	private final Browser browser;
 	private final Class<?> suiteClass;
 	private final Class<?> scriptClass;
-	private final Object browser;
 	private final int datasetLine;
 
 	public ExecutionContext(
+			Browser browser,
 			Class<?> suiteClass,
 			Class<?> scriptClass,
-			Object browser,
 			int datasetLine) {
 
+		this.browser = browser;
 		this.suiteClass = suiteClass;
 		this.scriptClass = scriptClass;
-		this.browser = browser;
 		this.datasetLine = datasetLine;
 	}
 
@@ -27,7 +29,7 @@ public class ExecutionContext {
 		return scriptClass;
 	}
 
-	public Object getBrowser() {
+	public Browser getBrowser() {
 		return browser;
 	}
 

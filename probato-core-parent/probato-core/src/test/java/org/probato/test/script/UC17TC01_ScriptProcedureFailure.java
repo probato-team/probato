@@ -1,27 +1,24 @@
 package org.probato.test.script;
 
-import org.probato.api.Dataset;
 import org.probato.api.Postcondition;
 import org.probato.api.Precondition;
 import org.probato.api.Procedure;
 import org.probato.api.Script;
-import org.probato.test.datamodel.LoginData;
 import org.probato.test.procedure.PostconditionRun;
 import org.probato.test.procedure.PreconditionRun;
-import org.probato.test.procedure.ProcedureRun;
+import org.probato.test.procedure.ProcedureFailureRun;
 import org.probato.type.Complexity;
 import org.probato.type.Flow;
 import org.probato.type.Relevance;
 
-@Dataset("data/csv/UC01TC01.csv")
 @Script(
-	code = "UC01TC01",
-	name = "Test case 01",
+	code = "UC17TC01",
+	name = "Test case 17",
 	description = "This a simple test",
 	flow = Flow.MAIN,
 	complexity = Complexity.MEDIUM,
 	relevance = Relevance.MEDIUM)
-public class UC01TC01_Script {
+public class UC17TC01_ScriptProcedureFailure {
 
 	@Precondition
 	private PreconditionRun preconditionRun;
@@ -32,10 +29,10 @@ public class UC01TC01_Script {
 	}
 
 	@Procedure
-	private ProcedureRun run;
+	private ProcedureFailureRun run;
 
 	@Procedure
-	void procedure(LoginData data) {
+	void procedure() {
 		// Procedure implements
 	}
 

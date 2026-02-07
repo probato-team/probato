@@ -20,8 +20,8 @@ public interface TestNodeService {
 		return new DatasetTestNode(numberLine, subList.stream()).create();
 	}
 
-	public static DynamicNode createBrowserTestNode(Class<?> suiteClazz, Class<?> scriptClazz, Browser browser, Integer datasetLine) {
-		return new BrowserTestNode(suiteClazz, scriptClazz, browser, datasetLine).create();
+	public static DynamicNode createBrowserTestNode(Browser browser, Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {
+		return new BrowserTestNode(browser, suiteClazz, scriptClazz, datasetLine).create();
 	}
 
 	public static DynamicNode createDesktopTestNode(Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {

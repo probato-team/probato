@@ -23,10 +23,10 @@ class ChromeSessionFactoryTest {
 		var url = "https://google.com";
 		var delay = new Delay(30_000, 1_000);
 		var data = new BrowserSessionData(
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				"playwright",
 				url,
 				Screen.PRIMARY,
-				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				delay);
 
 		var session = ChromeSessionFactory.create(data);
@@ -42,10 +42,10 @@ class ChromeSessionFactoryTest {
 		var url = "https://google.com";
 		var delay = new Delay(30_000, 1_000);
 		var data = new BrowserSessionData(
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				"selenium",
 				url,
 				Screen.PRIMARY,
-				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				delay);
 
 		var session = ChromeSessionFactory.create(data);
@@ -61,10 +61,10 @@ class ChromeSessionFactoryTest {
 		var url = "https://google.com";
 		var delay = new Delay(30_000, 1_000);
 		var data = new BrowserSessionData(
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				null,
 				url,
 				Screen.PRIMARY,
-				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				delay);
 
 		var session = ChromeSessionFactory.create(data);
@@ -80,10 +80,10 @@ class ChromeSessionFactoryTest {
 		var url = "https://google.com";
 		var delay = new Delay(30_000, 1_000);
 		var data = new BrowserSessionData(
+				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				"invalid-engine",
 				url,
 				Screen.PRIMARY,
-				new Browser(BrowserType.CHROME, Boolean.TRUE, new Dimension(null, null, DimensionMode.FULLSCREEN)),
 				delay);
 
 		var exception = assertThrows(IntegrityException.class, () -> ChromeSessionFactory.create(data));

@@ -4,7 +4,7 @@ import org.probato.api.Page;
 import org.probato.api.Run;
 import org.probato.test.page.PrincipalPage;
 
-public class ProcedureRun {
+public class PostconditionRun {
 
 	@Page
 	private PrincipalPage page;

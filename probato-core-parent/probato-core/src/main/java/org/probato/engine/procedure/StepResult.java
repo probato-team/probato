@@ -1,4 +1,4 @@
-package org.probato.engine;
+package org.probato.engine.procedure;
 
 import java.time.Instant;
 
@@ -27,11 +27,28 @@ public class StepResult {
 		this.end = Instant.now();
 	}
 
-	public boolean isFailed() {
+	public Boolean isFailed() {
 		return error != null;
+	}
+
+	public PhaseType getPhase() {
+		return phase;
+	}
+
+	public Integer getOrder() {
+		return order;
+	}
+
+	public Instant getStart() {
+		return start;
+	}
+
+	public Instant getEnd() {
+		return end;
 	}
 
 	public Throwable getError() {
 		return error;
 	}
+
 }

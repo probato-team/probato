@@ -8,16 +8,16 @@ public abstract class WebPage implements PageObject {
 
 	private WebDriver driver;
 
-	public void setDriver(Object driver) {
+	public final void setDriver(Object driver) {
 		this.driver = (WebDriver) driver;
 		setup();
 	}
 
-	public WebDriver driver() {
+	public final WebDriver driver() {
 		return driver;
 	}
 
-	private void setup() {
+	private final void setup() {
 		PageFactory.initElements(driver(), this);
 	}
 
