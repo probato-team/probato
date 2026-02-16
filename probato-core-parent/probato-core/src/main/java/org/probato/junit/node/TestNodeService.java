@@ -24,8 +24,4 @@ public interface TestNodeService {
 		return new BrowserTestNode(browser, suiteClazz, scriptClazz, datasetLine).create();
 	}
 
-	public static DynamicNode createDesktopTestNode(Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {
-		return new DesktopTestNode(suiteClazz, scriptClazz, datasetLine).create();
-	}
-
 }

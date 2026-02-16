@@ -21,11 +21,11 @@ import org.probato.loader.AnnotationLoader;
 
 @DisplayNameGeneration(SuiteFactoryDisplayNameGenerator.class)
 @ExtendWith(ProbatoForJUnit5.class)
-public interface TestSuite {
+public abstract class TestSuite {
 
 	@TestFactory
 	@DisplayName("Test cases")
-	default Stream<DynamicNode> buildTestCase() {
+	Stream<DynamicNode> buildTestCase() {
 		return Probato.getTestsCase(getClass())
 				.sorted((scriptClazzA, scriptClazzB) -> {
 					var scriptA = AnnotationLoader.getScript(scriptClazzA).get();
@@ -35,19 +35,19 @@ public interface TestSuite {
 				.map(this::buildScriptTestNode);
 	}
 
-	default DynamicNode buildScriptTestNode(Class<?> scriptClazz) {
+	DynamicNode buildScriptTestNode(Class<?> scriptClazz) {
 		return Probato.loadScript(scriptClazz)
 			.map(item -> createScriptTestNode(item, getClass(), buildDatasetTestNode(scriptClazz)))
 			.orElse(createScriptTestNode(scriptClazz, buildDatasetTestNode(scriptClazz)));
 	}
 
-	default List<DynamicNode> buildDatasetTestNode(Class<?> scriptClazz) {
+	List<DynamicNode> buildDatasetTestNode(Class<?> scriptClazz) {
 		return Probato.loadDataset(scriptClazz)
 			.map(dataset -> buildDatasetTestNode(scriptClazz, dataset))
 			.orElse(buildTestNode(scriptClazz, 0));
 	}
 
-	default List<DynamicNode> buildDatasetTestNode(Class<?> scriptClazz, Dataset dataset) {
+	List<DynamicNode> buildDatasetTestNode(Class<?> scriptClazz, Dataset dataset) {
 
 		var list = new ArrayList<DynamicNode>();
 		IntStream.range(0, Probato.getCsvCounterLines(dataset))
@@ -61,7 +61,7 @@ public interface TestSuite {
 		return list;
 	}
 
-	default List<DynamicNode> buildTestNode(Class<?> scriptClazz, Integer datasetLine) {
+	List<DynamicNode> buildTestNode(Class<?> scriptClazz, Integer datasetLine) {
 
 		var list = new ArrayList<DynamicNode>();
 		Probato.loadBrowsers(getClass())
