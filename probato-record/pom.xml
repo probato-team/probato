@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.probato</groupId>
+		<artifactId>probato</artifactId>
+		<version>0.2.0</version>
+	</parent>
+
+	<artifactId>probato-record</artifactId>
+
+	<repositories>
+		<repository>
+			<id>xuggle repo</id>
+			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+		</repository>
+	</repositories>
+
+	<!-- IMPORT DO BOM -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-core-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
+			<artifactId>probato-browser-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>xuggle</groupId>
+			<artifactId>xuggle-xuggler</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

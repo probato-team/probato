@@ -21,9 +21,9 @@ public class ExecutableProcedureMethod implements ExecutableUnit {
 	}
 
 	@Override
-	public void execute(Object driver, Integer datasetLine) throws Exception {
+	public void execute(Object driver, Integer datasetLine, ExecutionResult result) throws Exception {
 		var object = inicializer.newInstance(method.getDeclaringClass());
-		initializePagesObject(driver, method.getDeclaringClass(), object);
+		initializePagesObject(driver, method.getDeclaringClass(), object, result);
 		executeMethod(scriptClazz, datasetLine, object, method);
 	}
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -74,11 +75,20 @@ class BrowserConfigurationValidationComponentTest {
 						getConfiguration()
 							.execution(Execution.builder().build())
 							.build(),
-						"Property 'execution.target.url' should be declared in 'configuration.yaml' file"),
+						"Property 'execution.target.projectId' should be declared in 'configuration.yaml' file"),
 				Arguments.of(
 						getConfiguration()
 							.execution(Execution.builder()
 								.target(Target.builder().build())
+								.build())
+						.build(),
+						"Property 'execution.target.projectId' should be declared in 'configuration.yaml' file"),
+				Arguments.of(
+						getConfiguration()
+						.execution(Execution.builder()
+								.target(Target.builder()
+									.projectId(UUID.randomUUID())
+									.build())
 								.build())
 						.build(),
 						"Property 'execution.target.url' should be declared in 'configuration.yaml' file"),
@@ -86,6 +96,7 @@ class BrowserConfigurationValidationComponentTest {
 						getConfiguration()
 							.execution(Execution.builder()
 								.target(Target.builder()
+									.projectId(UUID.randomUUID())
 									.url("http://localhost:8080")
 									.build())
 								.build())
@@ -99,6 +110,7 @@ class BrowserConfigurationValidationComponentTest {
 						.increment(1L)
 						.screen(Screen.PRIMARY)
 						.target(Target.builder()
+								.projectId(UUID.randomUUID())
 								.url("http://localhost:8080")
 								.version("V1.0.0")
 								.build())

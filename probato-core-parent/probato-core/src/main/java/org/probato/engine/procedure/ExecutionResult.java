@@ -6,23 +6,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.probato.type.ExecutionStatus;
+import org.probato.type.PhaseType;
 
 public class ExecutionResult {
 
-	private final Instant start;
-	private final List<StepResult> steps;
+	private final List<StepResult> collecedSteps;
+	private final List<StepResult> executedSteps;
 
+	private boolean collectMode;
+	private Instant start;
 	private Instant end;
 	private ExecutionStatus status;
+	private PhaseType currentPhase;
 
 	public ExecutionResult() {
-		start = Instant.now();
-		steps = new ArrayList<>();
+		collecedSteps = new ArrayList<>();
+		executedSteps = new ArrayList<>();
 	}
 
-	public StepResult addStep(StepResult step) {
-		steps.add(step);
+	public StepResult addCollectedStep(StepResult step) {
+		collecedSteps.add(step);
 		return step;
+	}
+
+	public StepResult addExecutedStep(StepResult step) {
+		executedSteps.add(step);
+		return step;
+	}
+
+	public void currentPhase(PhaseType currentPhase) {
+		this.currentPhase = currentPhase;
+	}
+
+	public void start() {
+		start = Instant.now();
+	}
+
+	public void startCollectMode() {
+		collectMode = Boolean.TRUE;
+	}
+
+	public void stopCollectMode() {
+		collectMode = Boolean.FALSE;
 	}
 
 	public void markFinished(ExecutionStatus status) {
@@ -30,16 +55,36 @@ public class ExecutionResult {
 		this.end = Instant.now();
 	}
 
-	public List<StepResult> getSteps() {
-		return steps;
-	}
-
 	public Duration getRuntime() {
 		return Duration.between(start, end);
 	}
 
+	public List<StepResult> getCollecedSteps() {
+		return collecedSteps;
+	}
+
+	public List<StepResult> getExecutedSteps() {
+		return executedSteps;
+	}
+
+	public boolean isCollectMode() {
+		return collectMode;
+	}
+
+	public Instant getStart() {
+		return start;
+	}
+
+	public Instant getEnd() {
+		return end;
+	}
+
 	public ExecutionStatus getStatus() {
 		return status;
+	}
+
+	public PhaseType getCurrentPhase() {
+		return currentPhase;
 	}
 
 }

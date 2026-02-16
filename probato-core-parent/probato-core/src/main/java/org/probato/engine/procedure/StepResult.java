@@ -1,42 +1,74 @@
 package org.probato.engine.procedure;
 
+import java.lang.reflect.Method;
 import java.time.Instant;
+import java.util.Objects;
 
 import org.probato.type.PhaseType;
 
 public class StepResult {
 
-	private final PhaseType phase;
-	private final int order;
-	private final Instant start;
+	private int sequence;
+	private Method method;
+	private String actionValue;
+	private String stepValue;
+	private Instant start;
 	private Instant end;
 	private Throwable error;
+	private PhaseType phase;
 
-	public StepResult(PhaseType phase, int order) {
+	public StepResult(Method method, PhaseType phase) {
+		this.method = method;
 		this.phase = phase;
-		this.order = order;
+	}
+
+	public void start() {
 		this.start = Instant.now();
 	}
 
-	public void markSuccess() {
+	public void stop() {
 		this.end = Instant.now();
 	}
 
-	public void markFailure(Throwable error) {
+	public void error(Throwable error) {
 		this.error = error;
 		this.end = Instant.now();
 	}
 
-	public Boolean isFailed() {
-		return error != null;
+	public void sequence(int sequence) {
+		this.sequence = sequence;
 	}
 
-	public PhaseType getPhase() {
-		return phase;
+	public void actionValue(String actionValue) {
+		this.actionValue = actionValue;
 	}
 
-	public Integer getOrder() {
-		return order;
+	public void stepValue(String stepValue) {
+		this.stepValue = stepValue;
+	}
+
+	public void phase(PhaseType phase) {
+		this.phase = phase;
+	}
+
+	public Boolean hasSuccess() {
+		return Objects.isNull(error);
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public Method getMethod() {
+		return method;
+	}
+
+	public String getActionValue() {
+		return actionValue;
+	}
+
+	public String getStepValue() {
+		return stepValue;
 	}
 
 	public Instant getStart() {
@@ -49,6 +81,10 @@ public class StepResult {
 
 	public Throwable getError() {
 		return error;
+	}
+
+	public PhaseType getPhase() {
+		return phase;
 	}
 
 }

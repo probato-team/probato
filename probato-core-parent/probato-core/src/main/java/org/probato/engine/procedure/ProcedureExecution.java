@@ -20,9 +20,10 @@ public class ProcedureExecution {
 		var result = new ExecutionResult();
 		try {
 
-			executePreconditions(context, driver, executableUnits, result);
-			executeProcedures(context, driver, executableUnits, result);
-			executePostconditions(context, driver, executableUnits, result);
+			result.start();
+
+			collectData(context, driver, executableUnits, result);
+			execute(context, driver, executableUnits, result);
 
 			result.markFinished(ExecutionStatus.PASSED);
 
@@ -31,6 +32,24 @@ public class ProcedureExecution {
 		}
 
 		return result;
+	}
+
+	private void collectData(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
+
+		result.startCollectMode();
+
+		executePreconditions(context, driver, executableUnits, result);
+		executeProcedures(context, driver, executableUnits, result);
+		executePostconditions(context, driver, executableUnits, result);
+	}
+
+	private void execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
+
+		result.stopCollectMode();
+
+		executePreconditions(context, driver, executableUnits, result);
+		executeProcedures(context, driver, executableUnits, result);
+		executePostconditions(context, driver, executableUnits, result);
 	}
 
 	private void executePreconditions(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
@@ -52,18 +71,18 @@ public class ProcedureExecution {
 			PhaseType phase,
 			ExecutionResult result) throws Throwable { // NOSONAR
 
+		result.currentPhase(phase);
 		for (var unit : getUnits(phase, units)) {
-
-			var step = result.addStep(new StepResult(phase, unit.getOrder()));
 			try {
 
-				unit.execute(driver, context.getDatasetLine());
-				step.markSuccess();
+				unit.execute(driver, context.getDatasetLine(), result);
 
 			} catch (Throwable ex) { // NOSONAR
-				step.markFailure(ex);
+				result.markFinished(ExecutionStatus.FAILED);
 				throw ex;
 			}
+
+			result.markFinished(ExecutionStatus.PASSED);
 		}
 	}
 

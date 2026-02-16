@@ -15,8 +15,9 @@ import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.probato.Probato;
-import org.probato.junit.SuiteFactoryDisplayNameGenerator;
 import org.probato.junit.ProbatoForJUnit5;
+import org.probato.junit.SuiteFactoryDisplayNameGenerator;
+import org.probato.loader.AnnotationLoader;
 
 @DisplayNameGeneration(SuiteFactoryDisplayNameGenerator.class)
 @ExtendWith(ProbatoForJUnit5.class)
@@ -26,12 +27,17 @@ public interface TestSuite {
 	@DisplayName("Test cases")
 	default Stream<DynamicNode> buildTestCase() {
 		return Probato.getTestsCase(getClass())
+				.sorted((scriptClazzA, scriptClazzB) -> {
+					var scriptA = AnnotationLoader.getScript(scriptClazzA).get();
+					var scriptB = AnnotationLoader.getScript(scriptClazzB).get();
+					return scriptA.code().compareTo(scriptB.code());
+				})
 				.map(this::buildScriptTestNode);
 	}
 
 	default DynamicNode buildScriptTestNode(Class<?> scriptClazz) {
 		return Probato.loadScript(scriptClazz)
-			.map(item -> createScriptTestNode(item, buildDatasetTestNode(scriptClazz)))
+			.map(item -> createScriptTestNode(item, getClass(), buildDatasetTestNode(scriptClazz)))
 			.orElse(createScriptTestNode(scriptClazz, buildDatasetTestNode(scriptClazz)));
 	}
 

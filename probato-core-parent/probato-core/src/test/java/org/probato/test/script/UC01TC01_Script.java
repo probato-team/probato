@@ -1,11 +1,13 @@
 package org.probato.test.script;
 
 import org.probato.api.Dataset;
+import org.probato.api.Page;
 import org.probato.api.Postcondition;
 import org.probato.api.Precondition;
 import org.probato.api.Procedure;
 import org.probato.api.Script;
 import org.probato.test.datamodel.LoginData;
+import org.probato.test.page.PrincipalPage;
 import org.probato.test.procedure.PostconditionRun;
 import org.probato.test.procedure.PreconditionRun;
 import org.probato.test.procedure.ProcedureRun;
@@ -22,6 +24,9 @@ import org.probato.type.Relevance;
 	complexity = Complexity.MEDIUM,
 	relevance = Relevance.MEDIUM)
 public class UC01TC01_Script {
+
+	@Page
+	private PrincipalPage page;
 
 	@Precondition
 	private PreconditionRun preconditionRun;

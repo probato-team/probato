@@ -11,16 +11,19 @@ import java.util.regex.Pattern;
 
 import org.probato.api.Action;
 import org.probato.api.Param;
-//import org.probato.engine.execution.ExecutionContextHolder;
 import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
 
 public class PageProxy implements InvocationHandler {
 
-	private Object target;
+	private static final String REPLACE_PARAM = "\\{\\{%s\\}\\}";
 
-	public PageProxy(Object target) {
+	private Object target;
+	private ExecutionResult result;
+
+	public PageProxy(Object target, ExecutionResult result) {
 		this.target = target;
+		this.result = result;
 	}
 
 	@Override
@@ -28,66 +31,85 @@ public class PageProxy implements InvocationHandler {
 
 		String actionValue = null;
 		String stepValue = null;
-		Object result = null;
+		Object data = null;
+		var step = new StepResult(method, result.getCurrentPhase());
 
 		try {
 
-//			if (!ExecutionContextHolder.isCollectionMode()) {
+			step.start();
+
+			if (!result.isCollectMode()) {
 				var configuration = ConfigurationContext.get();
 				TimeUnit.MILLISECONDS.sleep(configuration.getExecution().getDelay().getActionInterval());
-				result = method.invoke(target, args);
-//			}
-
-		} catch (Throwable ex) {
-
-			if (Objects.nonNull(ex.getCause())) {
-//				ExecutionContextHolder.setThrowable(ex.getCause());
-				throw ex.getCause();
-			} else {
-//				ExecutionContextHolder.setThrowable(ex);
-				throw ex;
+				data = method.invoke(target, args);
 			}
+
+			step.stop();
+
+		} catch (Throwable ex) { // NOSONAR
+
+			throwsError(step, ex);
 
 		} finally {
 
 			if (method.isAnnotationPresent(Action.class)) {
-
-				var params = new HashMap<String, String>();
-				var paramAnottations = method.getParameterAnnotations();
-				for (int i = 0; i < paramAnottations.length; i++) {
-					for (Annotation annotation : paramAnottations[i]) {
-						if (annotation instanceof Param) {
-							var key = ((Param) annotation).value();
-							var valueArg = args[i];
-							if (Objects.isNull(valueArg)) {
-								valueArg = "[null]";
-							}
-							params.put(key, valueArg.toString());
-						}
-					}
-				}
-
 				actionValue = stepValue = AnnotationLoader.getActionValue(method);
-				for (Entry<String, String> item: params.entrySet()) {
+				for (Entry<String, String> item: getParams(method, args).entrySet()) {
 					stepValue = replaceParam(actionValue, item.getKey(), item.getValue());
 				}
 			}
 		}
 
-		addStepAction(method, actionValue, stepValue);
+		addStepAction(step, method, actionValue, stepValue);
 
-		return result;
+		return data;
 	}
 
-	private void addStepAction(Method method, String actionValue, String stepValue) {
+	private HashMap<String, String> getParams(Method method, Object[] args) {
+		var params = new HashMap<String, String>();
+		var paramAnottations = method.getParameterAnnotations();
+		for (int i = 0; i < paramAnottations.length; i++) {
+			for (Annotation annotation : paramAnottations[i]) {
+				if (annotation instanceof Param) {
+					var key = ((Param) annotation).value();
+					var valueArg = args[i];
+					if (Objects.isNull(valueArg)) {
+						valueArg = "[null]";
+					}
+					params.put(key, valueArg.toString());
+				}
+			}
+		}
+		return params;
+	}
+
+	private void throwsError(StepResult step, Throwable ex) throws Throwable { // NOSONAR
+		if (Objects.nonNull(ex.getCause())) {
+			step.error(ex.getCause());
+			throw ex.getCause();
+		} else {
+
+			step.error(ex);
+			throw ex;
+		}
+	}
+
+	private void addStepAction(StepResult step, Method method, String actionValue, String stepValue) {
 		if (method.isAnnotationPresent(Action.class)) {
-//			ExecutionContextHolder.addAction(actionValue);
-//			ExecutionContextHolder.addStep(stepValue);
+			if (result.isCollectMode()) {
+				step.actionValue(actionValue);
+				step.stepValue(stepValue);
+				result.addCollectedStep(step);
+			} else {
+				step.actionValue(actionValue);
+				step.stepValue(stepValue);
+				result.addExecutedStep(step);
+			}
 		}
 	}
 
 	private static String replaceParam(String content, String key, String value) {
-		return replace(content, "\\{\\{%s\\}\\}", key, value);
+		return replace(content, REPLACE_PARAM, key, value);
 	}
 
 	private static String replace(String content, String pattern, String key, String value) {

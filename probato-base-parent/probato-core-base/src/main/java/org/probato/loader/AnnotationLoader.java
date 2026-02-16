@@ -68,8 +68,16 @@ public class AnnotationLoader {
 				.collect(Collectors.toList());
 	}
 
+	public static boolean isSuite(Class<?> clazz) {
+		return clazz.isAnnotationPresent(Suite.class);
+	}
+
 	public static Optional<Suite> getSuite(Class<?> clazz) {
 		return Optional.ofNullable(clazz.getAnnotation(Suite.class));
+	}
+
+	public static boolean isScript(Class<?> clazz) {
+		return clazz.isAnnotationPresent(Script.class);
 	}
 
 	public static Optional<Script> getScript(Class<?> clazz) {

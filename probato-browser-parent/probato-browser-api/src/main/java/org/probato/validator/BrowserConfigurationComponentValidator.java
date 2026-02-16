@@ -42,8 +42,13 @@ public class BrowserConfigurationComponentValidator extends ComponentValidator {
 	}
 
 	private void validateTarget(Execution execution) {
+
 		var target = execution.getTarget();
-		if (Objects.isNull(target) || Objects.isNull(target.getUrl()) || target.getUrl().isBlank()) {
+		if (Objects.isNull(target) || Objects.isNull(target.getProjectId())) {
+			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.target.projectId");
+		}
+
+		if (Objects.isNull(target.getUrl()) || target.getUrl().isBlank()) {
 			throw new IntegrityException(PROPERTIE_NOT_FOUND_MSG, "execution.target.url");
 		}
 

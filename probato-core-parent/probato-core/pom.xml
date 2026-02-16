@@ -44,8 +44,39 @@
 
 		<dependency>
 			<groupId>org.probato</groupId>
+			<artifactId>probato-record</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.probato</groupId>
 			<artifactId>probato-utils</artifactId>
 		</dependency>
+
+		<!-- JUnit 5 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+		</dependency>
+
+<!--		<dependency>-->
+<!--	        <groupId>org.junit.jupiter</groupId>-->
+<!--	        <artifactId>junit-jupiter</artifactId>-->
+<!--	    </dependency>-->
+
+<!--		<dependency>-->
+<!--		    <groupId>org.junit.platform</groupId>-->
+<!--		    <artifactId>junit-platform-engine</artifactId>-->
+<!--		</dependency>-->
 
 		<!-- Utils -->
 		<dependency>
@@ -87,21 +118,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
 		</dependency>
 
 	</dependencies>

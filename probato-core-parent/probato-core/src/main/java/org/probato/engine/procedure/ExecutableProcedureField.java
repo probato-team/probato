@@ -30,7 +30,7 @@ public class ExecutableProcedureField implements ExecutableUnit {
 	}
 
 	@Override
-	public void execute(Object driver, Integer datasetLine) throws Exception {
+	public void execute(Object driver, Integer datasetLine, ExecutionResult result) throws Exception {
 
 		var type = field.getType();
 		var method = AnnotationLoader.getRunMethod(type);
@@ -41,7 +41,7 @@ public class ExecutableProcedureField implements ExecutableUnit {
 		field.setAccessible(Boolean.TRUE); // NOSONAR
 		field.set(objectScript, objectProcedure); // NOSONAR
 
-		initializePagesObject(driver, type, objectProcedure);
+		initializePagesObject(driver, type, objectProcedure, result);
 		executeMethod(scriptClazz, datasetLine, objectProcedure, method);
 	}
 

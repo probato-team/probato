@@ -5,7 +5,7 @@ public abstract class ExecutionEngine {
 	public void execute(ExecutionContext context) {
 		init(context);
 		run(context);
-		finish();
+		finish(context);
 	}
 
 	public static ExecutionEngine get() {
@@ -16,6 +16,6 @@ public abstract class ExecutionEngine {
 
 	protected abstract void run(ExecutionContext context);
 
-	protected abstract void finish();
+	protected abstract void finish(ExecutionContext context);
 
 }

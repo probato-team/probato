@@ -16,7 +16,7 @@
 	<name>BOM</name>
 
 	<properties>
-		<junit.version>5.11.3</junit.version>
+		<junit.version>5.9.3</junit.version>
 		<mockito.version>5.21.0</mockito.version>
 		<opentest.version>1.3.0</opentest.version>
 		<selenium.version>4.40.0</selenium.version>
@@ -29,15 +29,9 @@
 		<log4j.version>2.20.0</log4j.version>
 		<wiremock.version>3.9.1</wiremock.version>
 		<guava.version>33.3.1-jre</guava.version>
+		<xuggler.version>5.4</xuggler.version>
 		<h2.version>2.3.232</h2.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
-		</repository>
-	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
@@ -75,6 +69,12 @@
 
 			<dependency>
 				<groupId>org.probato</groupId>
+				<artifactId>probato-record</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.probato</groupId>
 				<artifactId>probato-utils</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -100,14 +100,13 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- Test -->
+			<!-- JUnit 5 -->
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
 
-			<!-- JUnit 5 -->
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
@@ -119,6 +118,15 @@
 				<artifactId>junit-jupiter-params</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
+
+
+<!--			<dependency>-->
+<!--				<groupId>org.junit</groupId>-->
+<!--				<artifactId>junit-bom</artifactId>-->
+<!--				<version>${junit.version}</version>-->
+<!--				<type>pom</type>-->
+<!--				<scope>import</scope>-->
+<!--			</dependency>-->
 
 			<!-- Mockito -->
 			<dependency>
@@ -141,7 +149,6 @@
 			</dependency>
 
 			<!-- Utils -->
-
 			<dependency>
 				<groupId>net.bytebuddy</groupId>
 				<artifactId>byte-buddy</artifactId>
@@ -163,7 +170,7 @@
 			<dependency>
 				<groupId>xuggle</groupId>
 				<artifactId>xuggle-xuggler</artifactId>
-				<version>5.4</version>
+				<version>${xuggler.version}</version>
 			</dependency>
 
 			<dependency>

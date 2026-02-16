@@ -63,17 +63,36 @@ class ProcedureServiceTest {
 		var result = service.execute(context, UC01TC01_Script.class, executableUnits);
 
 		assertAll("Validate data",
+				() -> assertNotNull(result.getStatus()),
+				() -> assertNotNull(result.getStart()),
+				() -> assertNotNull(result.getEnd()),
 				() -> assertNotNull(result.getRuntime()),
-				() -> assertNotNull(result.getSteps()),
-				() -> assertEquals(6, result.getSteps().size()),
-				() -> result.getSteps().stream().forEach(step -> {
-					assertNotNull(step.isFailed());
-					assertNotNull(step.getPhase());
-					assertNotNull(step.getOrder());
-					assertNotNull(step.getStart());
-					assertNotNull(step.getEnd());
-					assertNull(step.getError());
-				}),
+				() -> assertNotNull(result.getCollecedSteps()),
+				() -> assertNotNull(result.getExecutedSteps()),
+				() -> assertEquals(3, result.getCollecedSteps().size()),
+				() -> assertEquals(3, result.getExecutedSteps().size()),
+				() -> result.getCollecedSteps()
+					.stream()
+					.forEach(step -> {
+						assertNotNull(step.getMethod());
+						assertNotNull(step.getActionValue());
+						assertNotNull(step.getStepValue());
+						assertNotNull(step.hasSuccess());
+						assertNotNull(step.getStart());
+						assertNotNull(step.getEnd());
+						assertNull(step.getError());
+					}),
+				() -> result.getExecutedSteps()
+					.stream()
+					.forEach(step -> {
+						assertNotNull(step.getMethod());
+						assertNotNull(step.getActionValue());
+						assertNotNull(step.getStepValue());
+						assertNotNull(step.hasSuccess());
+						assertNotNull(step.getStart());
+						assertNotNull(step.getEnd());
+						assertNull(step.getError());
+					}),
 				() -> assertEquals(ExecutionStatus.PASSED, result.getStatus()));
 	}
 

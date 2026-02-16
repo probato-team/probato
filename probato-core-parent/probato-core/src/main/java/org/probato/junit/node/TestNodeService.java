@@ -8,16 +8,16 @@ import org.probato.model.Browser;
 
 public interface TestNodeService {
 
-	public static DynamicNode createScriptTestNode(Script script, List<DynamicNode> subList) {
-		return new ScriptTestNode(script, subList.stream()).create();
+	public static DynamicNode createScriptTestNode(Script script, Class<?> scriptClazz, List<DynamicNode> nodes) {
+		return new ScriptTestNode(script, scriptClazz, nodes.stream()).create();
 	}
 
-	public static DynamicNode createScriptTestNode(Class<?> scriptClazz, List<DynamicNode> subList) {
-		return new ScriptTestNode(scriptClazz, subList.stream()).create();
+	public static DynamicNode createScriptTestNode(Class<?> scriptClazz, List<DynamicNode> nodes) {
+		return new ScriptTestNode(scriptClazz, nodes.stream()).create();
 	}
 
-	public static DynamicNode createDatasetTestNode(int numberLine, List<DynamicNode> subList) {
-		return new DatasetTestNode(numberLine, subList.stream()).create();
+	public static DynamicNode createDatasetTestNode(int numberLine, List<DynamicNode> nodes) {
+		return new DatasetTestNode(numberLine, nodes.stream()).create();
 	}
 
 	public static DynamicNode createBrowserTestNode(Browser browser, Class<?> suiteClazz, Class<?> scriptClazz, Integer datasetLine) {

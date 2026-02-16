@@ -40,16 +40,16 @@ public class ProcedureService {
 		}
 	}
 
-	public List<ProcedureDefinition> discover(Class<?> scriptClazz) {
+	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits) {
+		return procedureExecution.execute(context, driver, executableUnits);
+	}
+
+	private List<ProcedureDefinition> discover(Class<?> scriptClazz) {
 		return procedureDiscovery.discover(scriptClazz);
 	}
 
-	public List<ExecutableUnit> build(List<ProcedureDefinition> procedures, Class<?> scriptClazz) {
+	private List<ExecutableUnit> build(List<ProcedureDefinition> procedures, Class<?> scriptClazz) {
 		return procedureBuilder.build(procedures, scriptClazz);
-	}
-
-	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits) {
-		return procedureExecution.execute(context, driver, executableUnits);
 	}
 
 }

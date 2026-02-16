@@ -123,12 +123,48 @@ class AnnotationLoaderTest {
 	}
 
 	@Test
+	@DisplayName("Should check is suite successfully")
+	void shouldCheckIsSuiteSuccessfully() throws Exception {
+
+		var isSuite = AnnotationLoader.isSuite(UC01_Suite.class);
+
+		assertTrue(isSuite);
+	}
+
+	@Test
+	@DisplayName("Should check is not suite successfully")
+	void shouldCheckIsNotSuiteSuccessfully() throws Exception {
+
+		var isSuite = AnnotationLoader.isSuite(UC01TC01_Script.class);
+
+		assertFalse(isSuite);
+	}
+
+	@Test
 	@DisplayName("Should get suite successfully")
 	void shouldGetSuiteSuccessfully() throws Exception {
 
 		var suite = AnnotationLoader.getSuite(UC01_Suite.class).orElseThrow(() -> new Exception("Not found"));
 
 		assertEquals("UC01", suite.code());
+	}
+
+	@Test
+	@DisplayName("Should is script successfully")
+	void shouldCheckIsScriptSuccessfully() throws Exception {
+
+		var isScript = AnnotationLoader.isScript(UC01TC01_Script.class);
+
+		assertTrue(isScript);
+	}
+
+	@Test
+	@DisplayName("Should is not script successfully")
+	void shouldCheckIsNotScriptSuccessfully() throws Exception {
+
+		var isScript = AnnotationLoader.isScript(UC01_Suite.class);
+
+		assertFalse(isScript);
 	}
 
 	@Test
