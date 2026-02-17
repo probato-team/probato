@@ -53,7 +53,7 @@ class ProcedureServiceTest {
 
 	@Test
 	@DisplayName("Should execute procedures by script class")
-	void shouldExecuteProceduresSuccessfully() {
+	void shouldExecuteProceduresSuccessfully() { // NOSONAR
 
 		var context = new ExecutionContext(null, UC01_Suite.class, UC01TC01_Script.class, 0);
 
@@ -64,9 +64,11 @@ class ProcedureServiceTest {
 
 		assertAll("Validate data",
 				() -> assertNotNull(result.getStatus()),
-				() -> assertNotNull(result.getStart()),
-				() -> assertNotNull(result.getEnd()),
+				() -> assertTrue(result.hasSuccess()),
+				() -> assertNotNull(result.getCurrentPhase()),
 				() -> assertNotNull(result.getRuntime()),
+				() -> assertNull(result.getMotive()),
+				() -> assertNull(result.getMotiveMessage()),
 				() -> assertNotNull(result.getCollecedSteps()),
 				() -> assertNotNull(result.getExecutedSteps()),
 				() -> assertEquals(3, result.getCollecedSteps().size()),

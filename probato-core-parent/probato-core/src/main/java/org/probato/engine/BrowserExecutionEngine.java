@@ -60,6 +60,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 			screenRecorder.stopCapture();
 			browserSession.destroy();
 		}
+
 	}
 
 	@Override
@@ -70,6 +71,10 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		var execution = buildExecution();
 
 		recordService.save(suite, script, execution);
+
+		if (!result.hasSuccess()) {
+			throw result.getMotive();
+		}
 	}
 
 	private Object getDriver() {
@@ -134,6 +139,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
 				.procedures(result.getCollecedSteps()
@@ -142,6 +152,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
 				.postconditions(result.getCollecedSteps()
@@ -150,6 +165,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
 				.stepsPreconditions(result.getExecutedSteps()
@@ -158,6 +178,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
 				.stepsProcedures(result.getExecutedSteps()
@@ -166,6 +191,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
 				.stepsPostconditions(result.getExecutedSteps()
@@ -174,8 +204,14 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 						.map(step -> Step.builder()
 								.sequence(step.getSequence())
 								.text(step.getStepValue())
+								.start(step.getStart())
+								.end(step.getEnd())
+								.clazz(step.getClazz())
+								.method(step.getMethod())
+								.error(step.getError())
 								.build())
 						.collect(Collectors.toList()))
+				.motive(result.getMotiveMessage())
 				.build();
 	}
 

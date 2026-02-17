@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.probato.engine.ExecutionContext;
+import org.probato.exception.ExecutionException;
 import org.probato.type.ExecutionStatus;
 import org.probato.type.PhaseType;
 
 public class ProcedureExecution {
+
+	private static final String MSG_COLLECT_DATA_ERROR = "An error occurred while trying to collect test data: {0}";
+	private static final String MSG_EXECUTE_ERROR = "An error occurred while running test: {0}";
 
 	private ProcedureExecution() {}
 
@@ -18,17 +22,25 @@ public class ProcedureExecution {
 	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits) {
 
 		var result = new ExecutionResult();
+		result.start();
+
 		try {
-
-			result.start();
-
 			collectData(context, driver, executableUnits, result);
-			execute(context, driver, executableUnits, result);
-
-			result.markFinished(ExecutionStatus.PASSED);
-
 		} catch (Throwable ex) { // NOSONAR
-			result.markFinished(ExecutionStatus.FAILED);
+			result.markFinished(
+					ExecutionStatus.ERROR,
+					new ExecutionException(MSG_COLLECT_DATA_ERROR, ex.getCause().toString()));
+
+			return result;
+		}
+
+		try {
+			execute(context, driver, executableUnits, result);
+			result.markFinished(ExecutionStatus.PASSED);
+		} catch (Throwable ex) { // NOSONAR
+			result.markFinished(
+					ExecutionStatus.FAILED,
+					new ExecutionException(MSG_EXECUTE_ERROR, ex.getCause().toString()));
 		}
 
 		return result;
@@ -73,16 +85,7 @@ public class ProcedureExecution {
 
 		result.currentPhase(phase);
 		for (var unit : getUnits(phase, units)) {
-			try {
-
-				unit.execute(driver, context.getDatasetLine(), result);
-
-			} catch (Throwable ex) { // NOSONAR
-				result.markFinished(ExecutionStatus.FAILED);
-				throw ex;
-			}
-
-			result.markFinished(ExecutionStatus.PASSED);
+			unit.execute(driver, context.getDatasetLine(), result);
 		}
 	}
 

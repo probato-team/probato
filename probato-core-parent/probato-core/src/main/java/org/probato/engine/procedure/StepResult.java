@@ -3,12 +3,14 @@ package org.probato.engine.procedure;
 import java.lang.reflect.Method;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.probato.type.PhaseType;
 
 public class StepResult {
 
-	private int sequence;
+	private Integer sequence;
+	private Class<?> clazz;
 	private Method method;
 	private String actionValue;
 	private String stepValue;
@@ -20,6 +22,9 @@ public class StepResult {
 	public StepResult(Method method, PhaseType phase) {
 		this.method = method;
 		this.phase = phase;
+		this.clazz = Optional.ofNullable(method)
+				.map(Method::getDeclaringClass)
+				.orElse(null);
 	}
 
 	public void start() {
@@ -30,9 +35,10 @@ public class StepResult {
 		this.end = Instant.now();
 	}
 
-	public void error(Throwable error) {
+	public Throwable error(Throwable error) {
 		this.error = error;
 		this.end = Instant.now();
+		return error;
 	}
 
 	public void sequence(int sequence) {
@@ -47,20 +53,24 @@ public class StepResult {
 		this.stepValue = stepValue;
 	}
 
-	public void phase(PhaseType phase) {
-		this.phase = phase;
-	}
-
 	public Boolean hasSuccess() {
 		return Objects.isNull(error);
 	}
 
-	public int getSequence() {
+	public Integer getSequence() {
 		return sequence;
 	}
 
-	public Method getMethod() {
-		return method;
+	public String getClazz() {
+		return Optional.ofNullable(clazz)
+				.map(Class::getName)
+				.orElse(null);
+	}
+
+	public String getMethod() {
+		return Optional.ofNullable(method)
+				.map(Method::getName)
+				.orElse(null);
 	}
 
 	public String getActionValue() {
@@ -79,8 +89,10 @@ public class StepResult {
 		return end;
 	}
 
-	public Throwable getError() {
-		return error;
+	public String getError() {
+		return Optional.ofNullable(error)
+				.map(Throwable::toString)
+				.orElse(null);
 	}
 
 	public PhaseType getPhase() {

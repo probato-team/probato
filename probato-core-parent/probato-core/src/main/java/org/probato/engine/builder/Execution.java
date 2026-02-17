@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.probato.loader.AnnotationLoader;
@@ -80,7 +79,7 @@ public class Execution implements Serializable {
 		this.start = builder.start;
 		this.end = builder.end;
 		this.runtime = builder.runtime;
-		this.motive = Optional.ofNullable(builder.motive).map(Throwable::getMessage).orElse(null);
+		this.motive = builder.motive;
 		this.image = builder.image;
 		this.video = builder.video;
 		this.datasetFilePath = builder.datasetFilePath;
@@ -251,7 +250,7 @@ public class Execution implements Serializable {
 		private ZonedDateTime start;
 		private ZonedDateTime end;
 		private Long runtime;
-		private Throwable motive;
+		private String motive;
 		private UUID image;
 		private UUID video;
 		private List<String> datasetFilePath;
@@ -392,7 +391,7 @@ public class Execution implements Serializable {
 			return this;
 		}
 
-		public ExecutionBuilder motive(Throwable motive) {
+		public ExecutionBuilder motive(String motive) {
 			this.motive = motive;
 			return this;
 		}

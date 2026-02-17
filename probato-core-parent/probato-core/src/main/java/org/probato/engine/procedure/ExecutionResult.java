@@ -4,7 +4,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.probato.exception.ExecutionException;
 import org.probato.type.ExecutionStatus;
 import org.probato.type.PhaseType;
 
@@ -13,11 +15,14 @@ public class ExecutionResult {
 	private final List<StepResult> collecedSteps;
 	private final List<StepResult> executedSteps;
 
+	private int collecedStepCount = 0;
+	private int executedStepCount = 0;
 	private boolean collectMode;
 	private Instant start;
 	private Instant end;
 	private ExecutionStatus status;
 	private PhaseType currentPhase;
+	private ExecutionException motive;
 
 	public ExecutionResult() {
 		collecedSteps = new ArrayList<>();
@@ -25,11 +30,13 @@ public class ExecutionResult {
 	}
 
 	public StepResult addCollectedStep(StepResult step) {
+		step.sequence(++collecedStepCount);
 		collecedSteps.add(step);
 		return step;
 	}
 
 	public StepResult addExecutedStep(StepResult step) {
+		step.sequence(++executedStepCount);
 		executedSteps.add(step);
 		return step;
 	}
@@ -50,9 +57,18 @@ public class ExecutionResult {
 		collectMode = Boolean.FALSE;
 	}
 
+	public void markFinished(ExecutionStatus status, ExecutionException motive) {
+		markFinished(status);
+		this.motive = motive;
+	}
+
 	public void markFinished(ExecutionStatus status) {
 		this.status = status;
 		this.end = Instant.now();
+	}
+
+	public boolean hasSuccess() {
+		return ExecutionStatus.PASSED.equals(getStatus());
 	}
 
 	public Duration getRuntime() {
@@ -71,20 +87,22 @@ public class ExecutionResult {
 		return collectMode;
 	}
 
-	public Instant getStart() {
-		return start;
-	}
-
-	public Instant getEnd() {
-		return end;
-	}
-
 	public ExecutionStatus getStatus() {
 		return status;
 	}
 
 	public PhaseType getCurrentPhase() {
 		return currentPhase;
+	}
+
+	public ExecutionException getMotive() {
+		return motive;
+	}
+
+	public String getMotiveMessage() {
+		return Optional.ofNullable(motive)
+				.map(Throwable::toString)
+				.orElse(null);
 	}
 
 }

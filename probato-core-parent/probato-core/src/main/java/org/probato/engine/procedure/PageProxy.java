@@ -49,6 +49,7 @@ public class PageProxy implements InvocationHandler {
 		} catch (Throwable ex) { // NOSONAR
 
 			throwsError(step, ex);
+			throw ex;
 
 		} finally {
 
@@ -58,9 +59,8 @@ public class PageProxy implements InvocationHandler {
 					stepValue = replaceParam(actionValue, item.getKey(), item.getValue());
 				}
 			}
+			addStepAction(step, method, actionValue, stepValue);
 		}
-
-		addStepAction(step, method, actionValue, stepValue);
 
 		return data;
 	}
@@ -84,14 +84,8 @@ public class PageProxy implements InvocationHandler {
 	}
 
 	private void throwsError(StepResult step, Throwable ex) throws Throwable { // NOSONAR
-		if (Objects.nonNull(ex.getCause())) {
-			step.error(ex.getCause());
-			throw ex.getCause();
-		} else {
-
-			step.error(ex);
-			throw ex;
-		}
+		step.error(ex.getCause());
+		throw ex.getCause();
 	}
 
 	private void addStepAction(StepResult step, Method method, String actionValue, String stepValue) {

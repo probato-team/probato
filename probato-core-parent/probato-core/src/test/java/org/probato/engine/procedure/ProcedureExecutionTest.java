@@ -1,6 +1,9 @@
 package org.probato.engine.procedure;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,9 +41,35 @@ class ProcedureExecutionTest {
 
 		var procedures = discovery.discover(script);
 		var units = builder.build(procedures, script);
-		execution.execute(data, procedures, units);
+		var result = execution.execute(data, procedures, units);
 
-		assertEquals(6, units.size());
+		assertAll("Validate data",
+				() -> assertEquals(6, units.size()));
+
+		result.getCollecedSteps().forEach(step -> {
+			assertAll("Validate data",
+					() -> assertNotNull(step.hasSuccess()),
+					() -> assertNotNull(step.getActionValue()),
+					() -> assertNotNull(step.getStepValue()),
+					() -> assertNotNull(step.getStart()),
+					() -> assertNotNull(step.getEnd()),
+					() -> assertNotNull(step.getSequence()),
+					() -> assertNotNull(step.getMethod()),
+					() -> assertNotNull(step.getPhase()),
+					() -> assertNull(step.getError()));
+		});
+
+		result.getExecutedSteps().forEach(step -> {
+			assertAll("Validate data",
+					() -> assertNotNull(step.getActionValue()),
+					() -> assertNotNull(step.getStepValue()),
+					() -> assertNotNull(step.getStart()),
+					() -> assertNotNull(step.getEnd()),
+					() -> assertNotNull(step.getSequence()),
+					() -> assertNotNull(step.getMethod()),
+					() -> assertNotNull(step.getPhase()),
+					() -> assertNull(step.getError()));
+		});
 	}
 
 	@Test
