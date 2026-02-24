@@ -186,10 +186,9 @@ Configuration reference: 👉 https://probato.org/configuration
 
 ## 🎯 Philosophy
 
-Developers focus on **what to test**.\
-Probato handles **how to execute**.
+Developers focus on **what to test**. Probato handles **how to execute**.
 
-Read more about the philosophy: 👉 https://probato.org/philosophy
+Read more about the philosophy: 👉 http://localhost:8000/#philosophy
 
 ------------------------------------------------------------------------
 
@@ -203,7 +202,7 @@ Contributions are welcome: - Real-world usage reports\
 - Bug reports\
 - Feature proposals
 
-Community & roadmap: 👉 https://probato.org/community
+Community & roadmap: 👉 https://github.com/probato-team/probato/issues
 
 ------------------------------------------------------------------------
 
@@ -211,4 +210,4 @@ Community & roadmap: 👉 https://probato.org/community
 
 See the LICENSE file for details.
 
-For more information, visit: 🌐 https://probato.org
+For more information, visit: 🌐 https://github.com/probato-team/probato/blob/feature/modules/LICENSE
