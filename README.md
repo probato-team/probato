@@ -119,7 +119,7 @@ Dependency reference: 👉 https://probato.org/documentation/project-configurati
 
 ## 🧪 Basic Example
 
-Full example available at: 👉 https://probato.org/examples
+Full example available at: 👉 https://probato.org/documentation/example/
 
 ``` java
 @Suite(
