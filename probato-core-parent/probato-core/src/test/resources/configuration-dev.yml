@@ -1,0 +1,5 @@
+execution:
+  screen: SECONDARY
+  target:
+    url: 'http://dev'
+    version: 1.0.1

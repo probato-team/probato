@@ -1,0 +1,17 @@
+package org.probato.test.procedure;
+
+import org.probato.api.Page;
+import org.probato.api.Run;
+import org.probato.test.page.PrincipalPage;
+
+public class PostconditionRun {
+
+	@Page
+	private PrincipalPage page;
+
+	@Run
+	public void run() {
+		page.action();
+	}
+
+}

@@ -1,0 +1,6 @@
+name,email,sex,password,confirmPassword
+User 01,user01@testano.com,MALE,@senha123,@senha123
+User 02,user02@testano.com,FEMALE,@senha123,@senha123
+User 03,user03@testano.com,MALE,@senha123,@senha123
+User 04,user04@testano.com,MALE,@senha123,@senha123
+User 05,user05@testano.com,MALE,@senha123,@senha123
