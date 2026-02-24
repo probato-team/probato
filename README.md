@@ -180,7 +180,7 @@ datasources:
       password: root
 ```
 
-Configuration reference: 👉 https://probato.org/configuration
+Configuration reference: 👉 https://probato.org/project-configuration/
 
 ------------------------------------------------------------------------
 
@@ -188,7 +188,7 @@ Configuration reference: 👉 https://probato.org/configuration
 
 Developers focus on **what to test**. Probato handles **how to execute**.
 
-Read more about the philosophy: 👉 http://localhost:8000/#philosophy
+Read more about the philosophy: 👉 https://probato.org/#philosophy
 
 ------------------------------------------------------------------------
 
