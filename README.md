@@ -6,13 +6,11 @@
 test automation, built on top of JUnit 5 and designed with a
 declarative, business-oriented, and extensible approach.
 
-🌐 **Official Website:** https://probato.org\  
-📚 **Full Documentation:** https://probato.org/docs\  
-🚀 **Get Started:** https://probato.org/getting-started  
+🌐 **Official Website:** https://probato.org  
+🚀 **Concepts:** https://probato.org/concepts  
+📚 **Full Documentation:** https://probato.org/documentation/  
 
-It does not aim to replace established tools like Selenium or
-Playwright, but to centralize, standardize, and organize automation
-practices into a cohesive structure.
+It does not aim to replace established tools like Selenium or Playwright, but to centralize, standardize, and organize automation practices into a cohesive structure.
 
 ------------------------------------------------------------------------
 
@@ -66,7 +64,7 @@ https://probato.org/architecture
 -   Maven 3+
 -   An IDE (IntelliJ, Eclipse, VS Code, etc.)
 
-Environment setup guide: 👉 https://probato.org/environment-setup
+Environment setup guide: 👉 https://probato.org/documentation
 
 Validate installation:
 
@@ -115,7 +113,7 @@ Add Probato dependencies to your `pom.xml`:
 </dependencies>
 ```
 
-Dependency reference: 👉 https://probato.org/project-configuration
+Dependency reference: 👉 https://probato.org/documentation/project-configuration
 
 ------------------------------------------------------------------------
 
