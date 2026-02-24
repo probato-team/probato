@@ -6,9 +6,9 @@
 test automation, built on top of JUnit 5 and designed with a
 declarative, business-oriented, and extensible approach.
 
-🌐 **Official Website:** https://probato.org\
-📚 **Full Documentation:** https://probato.org/docs\
-🚀 **Get Started:** https://probato.org/getting-started
+🌐 **Official Website:** https://probato.org\  
+📚 **Full Documentation:** https://probato.org/docs\  
+🚀 **Get Started:** https://probato.org/getting-started  
 
 It does not aim to replace established tools like Selenium or
 Playwright, but to centralize, standardize, and organize automation
