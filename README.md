@@ -1,138 +1,216 @@
 # Probato
 
-**Probato** é uma **proposta Open Source** para automação de testes funcionais end-to-end (E2E), focada em tornar a automação **mais viável, sustentável e acessível** para equipes e empresas de diferentes portes e níveis de maturidade.
+## Open Source Test Automation Framework powered by JUnit 5
 
-O projeto não se propõe a ser uma solução definitiva ou completa. Ele nasce como uma **base inicial estruturada**, construída a partir de necessidades reais, e evolui de forma colaborativa com a participação da comunidade.
+**Probato** is an open source framework for end-to-end (E2E) functional
+test automation, built on top of JUnit 5 and designed with a
+declarative, business-oriented, and extensible approach.
 
----
+🌐 **Official Website:** https://probato.org\
+📚 **Full Documentation:** https://probato.org/docs\
+🚀 **Get Started:** https://probato.org/getting-started
 
-## Visão geral
+It does not aim to replace established tools like Selenium or
+Playwright, but to centralize, standardize, and organize automation
+practices into a cohesive structure.
 
-Na prática, a automação de testes funcionais costuma sofrer com:
+------------------------------------------------------------------------
 
-* Alto custo de manutenção
-* Falta de padronização
-* Uso disperso de bibliotecas e utilitários
-* Resultados e evidências fragmentados
-* Pouca visibilidade do valor da automação para além do time técnico
+## 🚀 Why Probato?
 
-O **Probato** surge como uma iniciativa para organizar esse cenário, oferecendo uma abordagem integrada e pragmática para automação E2E.
+Test automation in real-world projects often becomes:
 
----
+-   Hard to maintain\
+-   Poorly standardized\
+-   Highly dependent on local decisions\
+-   Disconnected from observability and reporting
 
-## O que é o Probato
+Probato proposes a structured foundation that:
 
-O Probato é composto por dois componentes independentes e complementares:
+-   Encourages modularity\
+-   Promotes best practices\
+-   Reduces accidental complexity\
+-   Improves organization and scalability
 
-### 📦 Biblioteca Java
+Learn more about the project vision at: 👉 https://probato.org/about
 
-A biblioteca Java é o núcleo da automação. Ela centraliza o uso de soluções consolidadas (como Selenium), adicionando:
+------------------------------------------------------------------------
 
-* Padrões de projeto e boas práticas
-* Estrutura baseada em Page Objects
-* API simples, orientada a anotações
-* Reutilização de código
-* Configuração mínima para execução em múltiplos navegadores
+## 🧱 Core Architecture
 
-A biblioteca pode ser utilizada de forma independente, sem a necessidade da aplicação Web.
+Probato follows a modular structure based on:
 
-➡ Mais detalhes: [Biblioteca Java](https://probato.org/library)
+-   **Suites** -- Functional groupings (features/use cases)
+-   **Scripts** -- Test scenarios
+-   **Procedures** -- Execution logic
+-   **Page Objects** -- UI abstraction layer
+-   **Datasets** -- Externalized test data
+-   **SQL Scripts** -- Database state preparation
 
----
+Example structure:
 
-### 🌐 Aplicação Web
+    src/test/java/
+     └── org.probato.manager.automation
+         ├── model
+         ├── page
+         └── usecase
 
-A aplicação Web tem como objetivo centralizar os dados gerados durante as execuções dos testes, oferecendo:
+Architecture details are available at: 👉
+https://probato.org/architecture
 
-* Armazenamento estruturado de resultados e evidências
-* Histórico de execuções
-* Visualização de métricas e indicadores de qualidade
-* Apoio à análise técnica e tomada de decisão
+------------------------------------------------------------------------
 
-A aplicação é distribuída via Docker e sua adoção é **opcional**.
+## ⚙️ Requirements
 
-➡ Mais detalhes: [Aplicação Web](https://probato.org/web-app)
+-   Java JDK 11+
+-   Maven 3+
+-   An IDE (IntelliJ, Eclipse, VS Code, etc.)
 
----
+Environment setup guide: 👉 https://probato.org/environment-setup
 
-## Para quem é
+Validate installation:
 
-O Probato foi pensado para atender diferentes contextos:
+    java --version
+    mvn -version
 
-* Equipes pequenas que desejam iniciar automação de forma organizada
-* Times maduros que buscam padronização e redução de esforço operacional
-* Empresas com múltiplos projetos e pipelines de CI/CD
-* Ambientes corporativos que precisam de visibilidade e histórico de qualidade
+------------------------------------------------------------------------
 
-A adoção pode ser feita de forma **progressiva**, respeitando o nível de maturidade de cada projeto.
+## 📦 Installation (Maven)
 
----
+Add Probato dependencies to your `pom.xml`:
 
-## O que o Probato não é
+``` xml
+<properties>
+    <probato.version>0.1.0</probato.version>
+</properties>
 
-Para alinhar expectativas, é importante destacar que o Probato:
+<dependencies>
+    <dependency>
+        <groupId>org.probato</groupId>
+        <artifactId>probato-core</artifactId>
+        <version>${probato.version}</version>
+        <scope>test</scope>
+    </dependency>
 
-* Não é um framework definitivo ou fechado
-* Não substitui todo o ecossistema existente de automação
-* Não cobre todos os cenários e contextos possíveis
+    <dependency>
+        <groupId>org.probato</groupId>
+        <artifactId>probato-browser-chrome</artifactId>
+        <version>${probato.version}</version>
+        <scope>test</scope>
+    </dependency>
 
-Trata-se de uma **proposta em evolução**, aberta a ajustes e extensões conforme o uso prático e as contribuições da comunidade.
+    <dependency>
+        <groupId>org.probato</groupId>
+        <artifactId>probato-datasets-csv</artifactId>
+        <version>${probato.version}</version>
+        <scope>test</scope>
+    </dependency>
 
----
+    <dependency>
+        <groupId>org.probato</groupId>
+        <artifactId>probato-database-sql</artifactId>
+        <version>${probato.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
 
-## Começando
+Dependency reference: 👉 https://probato.org/project-configuration
 
-Para um primeiro contato com o projeto, recomenda-se seguir a documentação inicial:
+------------------------------------------------------------------------
 
-➡ [Getting Started](https://probato.org/getting-started)
+## 🧪 Basic Example
 
-Ela apresenta um caminho simples para:
+Full example available at: 👉 https://probato.org/examples
 
-* Utilizar a biblioteca Java
-* Executar os primeiros testes
-* Entender a integração com a aplicação Web
+``` java
+@Suite(
+  code = "UC01",
+  name = "Perform login",
+  description = "Allow user to login")
+class UC01_PerformLogin implements TestSuite {
 
----
+  @TestCase
+  private UC01TC01_PerformLoginSuccessfully loginTest;
+}
+```
 
-## Documentação
+``` java
+@Script(
+  code = "UC01TC01",
+  name = "Perform login successfully",
+  description = "Validate successful login")
+public class UC01TC01_PerformLoginSuccessfully {
 
-A documentação completa do projeto está disponível no site:
+  @Page
+  private LoginPage loginPage;
 
-➡ [https://probato.org](https://probato.org)
+  @Procedure
+  private void procedure(LoginModel model) {
+    loginPage.checkPage();
+    loginPage.fillEmail(model.getEmail());
+    loginPage.fillPassword(model.getPassword());
+    loginPage.pressAccessButton();
+  }
+}
+```
 
-Principais seções:
+------------------------------------------------------------------------
 
-* [Introdução](https://probato.org)
-* [Getting Started](docs/getting-started.md)
-* [Biblioteca Java](docs/library.md)
-* [Aplicação Web](docs/web-app.md)
-* [Sobre o projeto](https://probato.org/about)
+## 🗂 Configuration
 
----
+Create a `configuration.yml` file in:
 
-## Open Source e colaboração
+    src/test/resources/configuration.yml
 
-O Probato é um projeto **Open Source** e assume desde o início que suas decisões técnicas **não são definitivas**.
+Example:
 
-A participação da comunidade é considerada essencial para:
+``` yaml
+execution:
+   target:
+      url: http://localhost:8099
 
-* Evoluir a arquitetura
-* Refinar APIs
-* Discutir métricas e indicadores
-* Ajustar a proposta a diferentes realidades
+browsers:
+-  type: CHROME
+   headless: false
 
-Sugestões, issues, discussões e contribuições são muito bem-vindas.
+datasources:
+   probato:
+      url: jdbc:postgresql://localhost:5444/probato
+      driver: org.postgresql.Driver
+      username: root
+      password: root
+```
 
----
+Configuration reference: 👉 https://probato.org/configuration
 
-## Licença
+------------------------------------------------------------------------
 
-Este projeto é distribuído sob a licença **MIT**.
+## 🎯 Philosophy
 
----
+Developers focus on **what to test**.\
+Probato handles **how to execute**.
 
-## Status do projeto
+Read more about the philosophy: 👉 https://probato.org/philosophy
 
-🚧 Projeto em evolução ativa
+------------------------------------------------------------------------
 
-O Probato está em fase de consolidação da proposta, validação de conceitos e amadurecimento com base no uso real.
+## 🌍 Community & Contribution
+
+Probato is fully **Open Source** and community-driven.
+
+Contributions are welcome: - Real-world usage reports\
+- Architecture discussions\
+- Pattern improvements\
+- Bug reports\
+- Feature proposals
+
+Community & roadmap: 👉 https://probato.org/community
+
+------------------------------------------------------------------------
+
+## 📜 License
+
+See the LICENSE file for details.
+
+For more information, visit: 🌐 https://probato.org

@@ -1,8 +1,8 @@
 package org.probato.api;
 
-import static org.probato.junit.node.TestNodeService.createBrowserTestNode;
-import static org.probato.junit.node.TestNodeService.createDatasetTestNode;
-import static org.probato.junit.node.TestNodeService.createScriptTestNode;
+import static org.probato.engine.junit.TestNodeService.createBrowserTestNode;
+import static org.probato.engine.junit.TestNodeService.createDatasetTestNode;
+import static org.probato.engine.junit.TestNodeService.createScriptTestNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.probato.Probato;
-import org.probato.junit.ProbatoForJUnit5;
-import org.probato.junit.SuiteFactoryDisplayNameGenerator;
+import org.probato.engine.junit.ProbatoForJUnit5;
+import org.probato.engine.junit.SuiteFactoryDisplayNameGenerator;
 import org.probato.loader.AnnotationLoader;
 
 @DisplayNameGeneration(SuiteFactoryDisplayNameGenerator.class)
@@ -37,7 +37,7 @@ public abstract class TestSuite {
 
 	DynamicNode buildScriptTestNode(Class<?> scriptClazz) {
 		return Probato.loadScript(scriptClazz)
-			.map(item -> createScriptTestNode(item, getClass(), buildDatasetTestNode(scriptClazz)))
+			.map(item -> createScriptTestNode(scriptClazz, buildDatasetTestNode(scriptClazz)))
 			.orElse(createScriptTestNode(scriptClazz, buildDatasetTestNode(scriptClazz)));
 	}
 
@@ -50,9 +50,9 @@ public abstract class TestSuite {
 	List<DynamicNode> buildDatasetTestNode(Class<?> scriptClazz, Dataset dataset) {
 
 		var list = new ArrayList<DynamicNode>();
-		IntStream.range(0, Probato.getCsvCounterLines(dataset))
+		IntStream.rangeClosed(1, Probato.getCsvCounterLines(dataset))
 			.forEach(numberLine -> list
-				.add(createDatasetTestNode(++numberLine, buildTestNode(scriptClazz, numberLine))));
+				.add(createDatasetTestNode(scriptClazz, numberLine, buildTestNode(scriptClazz, numberLine))));
 
 		if (list.isEmpty()) {
 			list.addAll(buildTestNode(scriptClazz, 0));

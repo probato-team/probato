@@ -1,4 +1,4 @@
-package org.probato.junit;
+package org.probato.engine.junit;
 
 import static org.junit.jupiter.api.DisplayNameGenerator.parameterTypesAsString;
 

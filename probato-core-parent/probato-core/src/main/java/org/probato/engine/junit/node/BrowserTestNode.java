@@ -1,9 +1,16 @@
-package org.probato.junit.node;
+package org.probato.engine.junit.node;
 
+import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
+
+import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DynamicNode;
-import org.junit.jupiter.api.DynamicTest;
+import org.probato.loader.AnnotationLoader;
 import org.probato.model.Browser;
 import org.probato.type.DimensionMode;
 
@@ -26,12 +33,26 @@ public class BrowserTestNode extends TestNode {
 
 	@Override
 	protected URI getURI() {
-		return null;
+		return AnnotationLoader.getProceduresMethod(scriptClazz)
+				.stream()
+				.map(method -> URI.create(
+						"method:"
+						.concat(scriptClazz.getName())
+						.concat("#")
+						.concat(buildMethodSignature(method))))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
 	protected DynamicNode createNode() {
-		return DynamicTest.dynamicTest(buildText(), getURI(), buildTestExecutable());
+		return dynamicContainer(
+				buildText(),
+				getURI(),
+				Stream.of(dynamicTest(
+						buildText(),
+						getURI(),
+						buildTestExecutable())));
 	}
 
 	private String buildText() {
@@ -57,6 +78,26 @@ public class BrowserTestNode extends TestNode {
 
 	private TestNodeExecutable buildTestExecutable() {
 		return new TestNodeExecutable(browser, suiteClazz, scriptClazz, datasetLine);
+	}
+
+	private String buildMethodSignature(Method method) {
+		return new StringBuilder( method.getName())
+				.append("(")
+				.append(Arrays
+					.stream(method.getParameterTypes())
+					.map(this::toJvmName)
+					.collect(Collectors.joining(",")))
+				.append(")")
+				.toString();
+	}
+
+	private String toJvmName(Class<?> type) {
+		if (type.isArray()) {
+			return toJvmName(type.getComponentType()) + "[]";
+		}
+		return type.isPrimitive()
+				? type.getName()
+				: type.getCanonicalName();
 	}
 
 }

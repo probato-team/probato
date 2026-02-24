@@ -1,4 +1,4 @@
-package org.probato.junit.node;
+package org.probato.engine.junit.node;
 
 import java.net.URI;
 import java.text.MessageFormat;

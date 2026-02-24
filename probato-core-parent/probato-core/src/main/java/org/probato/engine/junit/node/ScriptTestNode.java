@@ -1,4 +1,4 @@
-package org.probato.junit.node;
+package org.probato.engine.junit.node;
 
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 
@@ -19,12 +19,6 @@ public class ScriptTestNode extends TestNode {
 	private final Script script;
 	private final Stream<? extends DynamicNode> nodes;
 
-	public ScriptTestNode(Script script, Class<?> scriptClazz,  Stream<? extends DynamicNode> nodes) {
-		this.scriptClazz = scriptClazz;
-		this.script = script;
-		this.nodes = nodes;
-	}
-
 	public ScriptTestNode(Class<?> scriptClazz, Stream<? extends DynamicNode> nodes) {
 		this.scriptClazz = scriptClazz;
 		this.script = AnnotationLoader.getScript(scriptClazz).orElse(null);
@@ -33,7 +27,8 @@ public class ScriptTestNode extends TestNode {
 
 	@Override
 	protected URI getURI() {
-		return Optional.ofNullable(scriptClazz)
+		return Optional
+				.ofNullable(scriptClazz)
 				.map(clazz -> URI.create("class:" + clazz.getName()))
 				.orElse(null);
 	}
@@ -49,11 +44,10 @@ public class ScriptTestNode extends TestNode {
 							item.name()),
 						getURI(),
 						nodes))
-				.orElse(dynamicContainer(buildText(CLAZZ_TEXT, scriptClazz), getURI(), nodes));
-	}
-
-	public Class<?> getScriptClazz() {
-		return scriptClazz;
+				.orElse(dynamicContainer(
+						buildText(CLAZZ_TEXT, scriptClazz),
+						getURI(),
+						nodes));
 	}
 
 }

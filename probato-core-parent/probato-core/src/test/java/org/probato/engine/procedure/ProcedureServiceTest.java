@@ -23,6 +23,7 @@ import org.probato.test.script.UC18TC01_ScriptPostconditionFailure;
 import org.probato.test.script.UC19TC01_ScriptPreconditionError;
 import org.probato.test.script.UC20TC01_ScriptProcedureError;
 import org.probato.test.script.UC21TC01_ScriptPostconditionError;
+import org.probato.test.script.UC24TC01_ScriptWithPreconditionPageError;
 import org.probato.test.suite.UC01_Suite;
 import org.probato.type.ExecutionStatus;
 
@@ -118,26 +119,30 @@ class ProcedureServiceTest {
 		return Stream.of(
 				Arguments.of(
 					UC16TC01_ScriptPreconditionFailure.class,
-					ExecutionStatus.FAILED
+					ExecutionStatus.ERROR
 				),
 				Arguments.of(
 					UC17TC01_ScriptProcedureFailure.class,
-					ExecutionStatus.FAILED
+					ExecutionStatus.ERROR
 				),
 				Arguments.of(
 					UC18TC01_ScriptPostconditionFailure.class,
-					ExecutionStatus.FAILED
+					ExecutionStatus.ERROR
 				),
 				Arguments.of(
 					UC19TC01_ScriptPreconditionError.class,
-					ExecutionStatus.FAILED
+					ExecutionStatus.ERROR
 				),
 				Arguments.of(
 					UC20TC01_ScriptProcedureError.class,
-					ExecutionStatus.FAILED
+					ExecutionStatus.ERROR
 				),
 				Arguments.of(
 					UC21TC01_ScriptPostconditionError.class,
+					ExecutionStatus.ERROR
+				),
+				Arguments.of(
+					UC24TC01_ScriptWithPreconditionPageError.class,
 					ExecutionStatus.FAILED
 				));
 	}

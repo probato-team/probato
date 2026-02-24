@@ -1,6 +1,7 @@
 package org.probato.engine.procedure;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.probato.engine.ExecutionContext;
@@ -29,7 +30,7 @@ public class ProcedureExecution {
 		} catch (Throwable ex) { // NOSONAR
 			result.markFinished(
 					ExecutionStatus.ERROR,
-					new ExecutionException(MSG_COLLECT_DATA_ERROR, ex.getCause().toString()));
+					new ExecutionException(MSG_COLLECT_DATA_ERROR, getMessageError(ex)));
 
 			return result;
 		}
@@ -40,7 +41,7 @@ public class ProcedureExecution {
 		} catch (Throwable ex) { // NOSONAR
 			result.markFinished(
 					ExecutionStatus.FAILED,
-					new ExecutionException(MSG_EXECUTE_ERROR, ex.getCause().toString()));
+					new ExecutionException(MSG_EXECUTE_ERROR, getMessageError(ex)));
 		}
 
 		return result;
@@ -93,6 +94,12 @@ public class ProcedureExecution {
 		return units.stream()
 				.filter(unit -> phase.equals(unit.getPhase()))
 				.collect(Collectors.toList());
+	}
+
+	private String getMessageError(Throwable ex) {
+		return Optional.ofNullable(ex.getCause())
+				.orElse(ex)
+				.toString();
 	}
 
 }

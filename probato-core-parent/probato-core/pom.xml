@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.probato</groupId>
 		<artifactId>probato-core-parent</artifactId>
-		<version>0.2.0</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<artifactId>probato-core</artifactId>
@@ -67,16 +67,6 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
 		</dependency>
-
-<!--		<dependency>-->
-<!--	        <groupId>org.junit.jupiter</groupId>-->
-<!--	        <artifactId>junit-jupiter</artifactId>-->
-<!--	    </dependency>-->
-
-<!--		<dependency>-->
-<!--		    <groupId>org.junit.platform</groupId>-->
-<!--		    <artifactId>junit-platform-engine</artifactId>-->
-<!--		</dependency>-->
 
 		<!-- Utils -->
 		<dependency>

@@ -1,8 +1,9 @@
-package org.probato.junit.node;
+package org.probato.engine.junit.node;
 
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DynamicNode;
@@ -11,17 +12,22 @@ public class DatasetTestNode extends TestNode {
 
 	private static final String TEXT = "Dataset {0}";
 
+	private final Class<?> scriptClazz;
 	private final int numberLine;
 	private final Stream<? extends DynamicNode> nodes;
 
-	public DatasetTestNode(int numberLine, Stream<? extends DynamicNode> nodes) {
+	public DatasetTestNode(Class<?> scriptClazz, int numberLine, Stream<? extends DynamicNode> nodes) {
+		this.scriptClazz = scriptClazz;
 		this.numberLine = numberLine;
 		this.nodes = nodes;
 	}
 
 	@Override
 	protected URI getURI() {
-		return null;
+		return Optional
+				.ofNullable(scriptClazz)
+				.map(clazz -> URI.create("class:" + clazz.getName()))
+				.orElse(null);
 	}
 
 	@Override
@@ -31,11 +37,7 @@ public class DatasetTestNode extends TestNode {
 					TEXT,
 					numberLine),
 				getURI(),
-				getTests());
-	}
-
-	private Stream<? extends DynamicNode> getTests() {
-		return nodes;
+				nodes);
 	}
 
 }

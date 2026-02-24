@@ -1,4 +1,4 @@
-package org.probato.junit.node;
+package org.probato.engine.junit.node;
 
 import org.junit.jupiter.api.function.Executable;
 import org.probato.engine.ExecutionContext;
