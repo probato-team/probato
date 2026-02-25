@@ -40,7 +40,6 @@ class ExecutionTest {
 		var complexity = Complexity.MEDIUM;
 		var flow = Flow.MAIN;
 		var inclusion = "AUTOMATIC";
-		var so = "Windows 11";
 		var browserName = "browserName";
 		var browserVersion = "browserVersion";
 		var browserMode = DimensionMode.CUSTOM;

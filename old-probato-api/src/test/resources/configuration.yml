@@ -23,9 +23,6 @@ execution:
         quality: HIGH
         frameRate: 40
 
-    directory:
-        temp: D:/temp
-
 browsers:
 
 -  type: CHROME

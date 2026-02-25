@@ -17,21 +17,20 @@ import org.probato.exception.IntegrityException;
 import org.probato.loader.ConfigurationContext;
 import org.probato.model.Browser;
 import org.probato.model.Configuration;
+import org.probato.model.Configuration.ConfigurationBuilder;
 import org.probato.model.Delay;
 import org.probato.model.Dimension;
-import org.probato.model.Directory;
 import org.probato.model.Execution;
 import org.probato.model.Manager;
 import org.probato.model.Target;
 import org.probato.model.Video;
-import org.probato.model.Configuration.ConfigurationBuilder;
+import org.probato.test.suite.UC00_NoSuite;
+import org.probato.test.suite.UC01_Suite;
 import org.probato.type.BrowserType;
 import org.probato.type.ComponentValidatorType;
 import org.probato.type.DimensionMode;
 import org.probato.type.Quality;
 import org.probato.type.Screen;
-import org.probato.test.suite.UC00_NoSuite;
-import org.probato.test.suite.UC01_Suite;
 
 @DisplayName("Test - BrowserComponentValidator")
 class BrowserComponentValidatorTest {
@@ -140,9 +139,6 @@ class BrowserComponentValidatorTest {
 								.enabled(Boolean.FALSE)
 								.frameRate(10D)
 								.quality(Quality.MEDIUM)
-								.build())
-						.directory(Directory.builder()
-								.temp("/testano/temp")
 								.build())
 						.build())
 				.browsers(new Browser[] {

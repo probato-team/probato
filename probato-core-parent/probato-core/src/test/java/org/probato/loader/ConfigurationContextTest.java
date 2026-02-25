@@ -68,7 +68,7 @@ class ConfigurationContextTest {
 
 		var config = ConfigurationContext.get();
 
-		assertEquals("D:/temp", config.getExecution().getDirectory().getTemp());
+		assertTrue(config.getExecution().getDirectory().getTemp().contains(".probato"));
 	}
 
 	@Test

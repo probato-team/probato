@@ -21,9 +21,6 @@ execution:
         token: 89caa226caa52436d25a0f94bb42ee7ef0ac92c42154c6fe775ba230ad83417b
         submit: TRUE
 
-    directory:
-        temp: D:/temp
-
 browsers:
 
 -  type: CHROME

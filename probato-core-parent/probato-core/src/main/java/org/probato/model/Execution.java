@@ -22,8 +22,7 @@ public class Execution {
 			Target target,
 			Manager manager,
 			Delay delay,
-			Video video,
-			Directory directory) {
+			Video video) {
 
 		this();
 		this.engine = engine;
@@ -33,7 +32,7 @@ public class Execution {
 		this.manager = manager;
 		this.delay = delay;
 		this.video = video;
-		this.directory = directory;
+		this.directory = new Directory();
 	}
 
 	public Execution(ExecutionBuilder builder) {
@@ -45,7 +44,7 @@ public class Execution {
 		this.manager = builder.manager;
 		this.delay = builder.delay;
 		this.video = builder.video;
-		this.directory = builder.directory;
+		this.directory = new Directory();
 	}
 
 	public String getEngine() {
@@ -125,7 +124,6 @@ public class Execution {
 		private Manager manager;
 		private Delay delay;
 		private Video video;
-		private Directory directory;
 
 		private ExecutionBuilder() {}
 
@@ -161,11 +159,6 @@ public class Execution {
 
 		public ExecutionBuilder video(Video video) {
 			this.video = video;
-			return this;
-		}
-
-		public ExecutionBuilder directory(Directory directory) {
-			this.directory = directory;
 			return this;
 		}
 

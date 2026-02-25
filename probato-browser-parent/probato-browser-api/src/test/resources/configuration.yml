@@ -9,8 +9,6 @@ execution:
     submit: true
     url: 'http://localhost:8099'
     token: 89caa226caa52436d25a0f94bb42ee7ef0ac92c42154c6fe775ba230ad83417b
-  directory:
-    temp: 'D:/temp'
   delay:
     waitingTimeout: 1
     actionInterval: 1
