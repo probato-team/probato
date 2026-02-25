@@ -51,7 +51,7 @@ class ExecutionTest {
 		var video = UUID.randomUUID();
 		var datasetFilePath = List.of("data/csv/UC01TC01.csv");
 		var datasetHeaders = List.of();
-		var datasetContent = List.of();
+		var datasetContent = "[]";
 		var sqlFilesPath = new HashMap<String, List<String>>();
 		var preconditions = List.<Step>of();
 		var procedures = List.<Step>of();

@@ -11,12 +11,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.probato.exception.IntegrityException;
 import org.probato.loader.DatasetLoader;
-import org.probato.test.datamodel.Data;
+import org.probato.test.datamodel.LoginModel;
 import org.probato.test.script.UC01TC01_ScriptDataset;
 import org.probato.test.script.UC02TC01_ScriptDatasetNotFound;
 
-@DisplayName("UT - CsvDatasetService")
-class CsvDatasetServiceTest {
+@DisplayName("UT - JsonDatasetService")
+class JsonDatasetServiceTest {
 
 	private DatasetService service;
 
@@ -27,12 +27,12 @@ class CsvDatasetServiceTest {
 
 	@ParameterizedTest
 	@CsvSource({
-		"file.csv,true",
-		"FILE.CSV,true",
-		"file.json,false",
-		"FILE.json,false",
+		"file.json,true",
+		"FILE.JSON,true",
+		"file.csv,false",
+		"FILE.CSV,false",
 	})
-	@DisplayName("Should accepted file CSV successfully")
+	@DisplayName("Should accepted file JSON successfully")
 	void shouldAcceptedSuccessfully(String path, boolean expected) {
 
 		var result = service.accepted(path);
@@ -41,7 +41,7 @@ class CsvDatasetServiceTest {
 	}
 
 	@Test
-	@DisplayName("Should count lines file CSV successfully")
+	@DisplayName("Should count lines file JSON successfully")
 	void shouldCountSuccessfully() throws Exception {
 
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
@@ -49,17 +49,17 @@ class CsvDatasetServiceTest {
 
 		int lines = service.counterLines(dataset);
 
-		assertEquals(5, lines);
+		assertEquals(2, lines);
 	}
 
 	@Test
-	@DisplayName("Should dataline file CSV successfully")
+	@DisplayName("Should dataline file JSON successfully")
 	void shouldDatalineSuccessfully() throws Exception {
 
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
 				.orElseThrow(() -> new Exception("Not found"));
 
-		var datamodel = service.getDatamodel(dataset, Data.class, 0);
+		var datamodel = service.getDatamodel(dataset, LoginModel.class, 0);
 
 		assertNotNull(datamodel);
 	}
@@ -71,11 +71,11 @@ class CsvDatasetServiceTest {
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
 				.orElseThrow(() -> new Exception("Not found"));
 
-		assertThrows(IndexOutOfBoundsException.class, () -> service.getDatamodel(dataset, Data.class, 99));
+		assertThrows(IndexOutOfBoundsException.class, () -> service.getDatamodel(dataset, LoginModel.class, 99));
 	}
 
 	@Test
-	@DisplayName("Should datalines file CSV successfully")
+	@DisplayName("Should datalines file JSON successfully")
 	void shouldDatalinesSuccessfully() throws Exception {
 
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
@@ -83,7 +83,7 @@ class CsvDatasetServiceTest {
 
 		var datamodels = service.getDatamodels(dataset);
 
-		assertEquals(5, datamodels.size());
+		assertEquals(2, datamodels.size());
 	}
 
 	@Test
@@ -94,7 +94,7 @@ class CsvDatasetServiceTest {
 				.orElseThrow(() -> new Exception("Not found"));
 
 		var exception = assertThrows(IntegrityException.class, () -> service.counterLines(dataset));
-		assertEquals("Load file 'path/to/file-not-found.csv' error: File not found", exception.getMessage());
+		assertEquals("Load file 'path/to/file-not-found.json' error: File not found", exception.getMessage());
 	}
 
 	@Test
@@ -105,11 +105,11 @@ class CsvDatasetServiceTest {
 				.orElseThrow(() -> new Exception("Not found"));
 
 		var exception = assertThrows(IntegrityException.class, () -> service.getDatamodels(dataset));
-		assertEquals("Load file 'path/to/file-not-found.csv' error: File not found", exception.getMessage());
+		assertEquals("Load file 'path/to/file-not-found.json' error: File not found", exception.getMessage());
 	}
 
 	@Test
-	@DisplayName("Should content file CSV successfully")
+	@DisplayName("Should content file JSON successfully")
 	void shouldContentSuccessfully() throws Exception {
 
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
@@ -121,28 +121,17 @@ class CsvDatasetServiceTest {
 	}
 
 	@Test
-	@DisplayName("Should content line file CSV successfully")
+	@DisplayName("Should content line file JSON successfully")
 	void shouldContentLineSuccessfully() throws Exception {
 
 		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
 				.orElseThrow(() -> new Exception("Not found"));
 
-		var content = service.getContent(dataset, 2);
+		var content = service.getContent(dataset, 1);
 
 		assertNotNull(content);
 	}
 
-	@Test
-	@DisplayName("Should datamodel line file CSV successfully")
-	void shouldDatamodelLineSuccessfully() throws Exception {
-
-		var dataset = DatasetLoader.getDataset(UC01TC01_ScriptDataset.class)
-				.orElseThrow(() -> new Exception("Not found"));
-
-		var content = service.getDatamodel(dataset, UC01TC01_ScriptDataset.class, -1);
-
-		assertNotNull(content);
-	}
 
 	@Test
 	@DisplayName("Should validate content file not found")
@@ -151,8 +140,8 @@ class CsvDatasetServiceTest {
 		var dataset = DatasetLoader.getDataset(UC02TC01_ScriptDatasetNotFound.class)
 				.orElseThrow(() -> new Exception("Not found"));
 
-		var exception = assertThrows(IntegrityException.class, () -> service.getContent(dataset, 0));
-		assertEquals("Load file 'path/to/file-not-found.csv' error: File not found", exception.getMessage());
+		var exception = assertThrows(IntegrityException.class, () -> service.getContent(dataset, 1));
+		assertEquals("Load file 'path/to/file-not-found.json' error: File not found", exception.getMessage());
 	}
 
 }

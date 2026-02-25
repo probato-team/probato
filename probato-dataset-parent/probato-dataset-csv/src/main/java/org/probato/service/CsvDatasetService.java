@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.probato.api.Dataset;
@@ -25,8 +26,14 @@ import com.opencsv.bean.MappingStrategy;
 
 public class CsvDatasetService implements DatasetService {
 
+	private static final String CSV_EXTENSION = ".csv";
 	private static final String MSG_LOAD_ERROR = "Load file ''{0}'' error: {1}";
 	private static final String MSG_MUST_DEFAULT_CONSTRUCTOR = "Class must have default constructor: ''{0}''";
+
+	@Override
+    public boolean accepted(String path) {
+        return Objects.nonNull(path) && path.toLowerCase().endsWith(CSV_EXTENSION);
+    }
 
 	@Override
 	public int counterLines(Dataset dataset) {
@@ -41,12 +48,10 @@ public class CsvDatasetService implements DatasetService {
 	@Override
 	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
 		var models = new ArrayList<T>();
-		for (var path: dataset.value()) {
+		for (var path: getPaths(dataset)) {
 			try (var reader = readFile(path)) {
-
 				models.addAll(getObjectMapperBuilder(reader, clazz).parse());
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new IntegrityException(MSG_LOAD_ERROR, path, ex.getMessage());
 			}
 		}
@@ -71,17 +76,25 @@ public class CsvDatasetService implements DatasetService {
 		return newInstance(Content.class);
 	}
 
-	@SuppressWarnings("resource")
 	public List<String[]> getContent(Dataset dataset) {
 		var models = new ArrayList<String[]>();
-		for (var path: dataset.value()) {
-			try (FileReader reader = readFile(path)) {
-				models.addAll(new CSVReader(reader).readAll());
+		for (var path: getPaths(dataset)) {
+			try (var reader = readFile(path); var csv = new CSVReader(reader)) {
+				models.addAll(csv.readAll());
 			} catch (Exception ex) {
-				throw new IntegrityException(MSG_LOAD_ERROR, dataset.value(), ex.getMessage());
+				throw new IntegrityException(MSG_LOAD_ERROR, path, ex.getMessage());
 			}
 		}
 		return models;
+	}
+
+	private String[] getPaths(Dataset dataset) {
+
+		if (dataset == null || dataset.value() == null || dataset.value().length == 0) {
+			throw new IntegrityException("Dataset path not defined");
+		}
+
+		return dataset.value();
 	}
 
 	private FileReader readFile(String path) throws FileNotFoundException, URISyntaxException {
