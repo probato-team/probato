@@ -12,10 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.probato.exception.ExecutionException;
 import org.probato.model.Dimension;
 import org.probato.model.Video;
+import org.probato.test.util.IgnoreIfWorkflow;
 import org.probato.type.DimensionMode;
 import org.probato.type.Quality;
 import org.probato.type.Screen;
 
+@IgnoreIfWorkflow
 @DisplayName("UT - ProbatoRecordProvider")
 class ProbatoRecordProviderTest {
 

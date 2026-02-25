@@ -20,7 +20,6 @@ import org.probato.model.Configuration;
 import org.probato.model.Configuration.ConfigurationBuilder;
 import org.probato.model.Delay;
 import org.probato.model.Dimension;
-import org.probato.model.Directory;
 import org.probato.model.Execution;
 import org.probato.model.Manager;
 import org.probato.model.Target;
@@ -77,9 +76,6 @@ class ManagerConfigurationComponentValidatorTest {
 									.actionInterval(1)
 									.waitingTimeout(1)
 									.build())
-								.directory(Directory.builder()
-									.temp("/probato/temp")
-									.build())
 								.target(Target.builder()
 									.url("http://localhost:8080")
 									.version("V1.0.0")
@@ -94,9 +90,6 @@ class ManagerConfigurationComponentValidatorTest {
 								.delay(Delay.builder()
 									.actionInterval(1)
 									.waitingTimeout(1)
-									.build())
-								.directory(Directory.builder()
-									.temp("/probato/temp")
 									.build())
 								.target(Target.builder()
 									.url("http://localhost:8080")
@@ -114,9 +107,6 @@ class ManagerConfigurationComponentValidatorTest {
 								.delay(Delay.builder()
 									.actionInterval(1)
 									.waitingTimeout(1)
-									.build())
-								.directory(Directory.builder()
-									.temp("/probato/temp")
 									.build())
 								.target(Target.builder()
 									.url("http://localhost:8080")
@@ -153,9 +143,6 @@ class ManagerConfigurationComponentValidatorTest {
 								.enabled(Boolean.FALSE)
 								.frameRate(10D)
 								.quality(Quality.MEDIUM)
-								.build())
-						.directory(Directory.builder()
-								.temp("/probato/temp")
 								.build())
 						.build())
 				.browsers(new Browser[] {

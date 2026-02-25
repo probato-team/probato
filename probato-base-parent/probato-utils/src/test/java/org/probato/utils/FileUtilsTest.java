@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.probato.model.Directory;
 
 @DisplayName("UT - FileUtils")
 class FileUtilsTest {
@@ -16,8 +17,10 @@ class FileUtilsTest {
 	@DisplayName("Should create temp directory successfully")
 	void shouldCreateTempDirectorySuccessfully() throws IOException {
 
-		FileUtils.delete(new File("C:/tempo"));
-		FileUtils.createTempDir("C:/tempo");
+		var directory = new Directory();
+
+		FileUtils.delete(new File(directory.getTemp()));
+		FileUtils.createTempDir(directory.getTemp());
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -26,7 +29,9 @@ class FileUtilsTest {
 	@DisplayName("Should save file successfully")
 	void shouldSaveFileSuccessfully() throws IOException {
 
-		FileUtils.save("C:/temp", "test-file-save.txt", "this is a simple test");
+		var directory = new Directory();
+
+		FileUtils.save(directory.getTemp(), "test-file-save.txt", "this is a simple test");
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -35,7 +40,9 @@ class FileUtilsTest {
 	@DisplayName("Should load files successfully")
 	void shouldLoadFilesSuccessfully() {
 
-		FileUtils.loadFiles("C:/temp");
+		var directory = new Directory();
+
+		FileUtils.loadFiles(directory.getTemp() + "/temp");
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -44,7 +51,9 @@ class FileUtilsTest {
 	@DisplayName("Should get content file successfully")
 	void shouldGetContenFileSuccessfully() throws IOException {
 
-		FileUtils.getContent(new File("C:/temp/test-file-save.txt"));
+		var directory = new Directory();
+
+		FileUtils.getContent(new File(directory.getTemp() + "/test-file-save.txt"));
 
 		assertTrue(Boolean.TRUE);
 	}

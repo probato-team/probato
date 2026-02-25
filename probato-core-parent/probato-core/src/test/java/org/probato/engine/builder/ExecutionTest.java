@@ -2,7 +2,7 @@ package org.probato.engine.builder;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -40,14 +40,12 @@ class ExecutionTest {
 		var complexity = Complexity.MEDIUM;
 		var flow = Flow.MAIN;
 		var inclusion = "AUTOMATIC";
-		var so = "Windows 11";
 		var browserName = "browserName";
 		var browserVersion = "browserVersion";
 		var browserMode = DimensionMode.CUSTOM;
 		var browserHeadless = Boolean.FALSE;
 		var start = ZonedDateTime.now();
 		var end = ZonedDateTime.now();
-		var runtime = 0L;
 		var motive = "motive";
 		var image = UUID.randomUUID();
 		var video = UUID.randomUUID();
@@ -105,17 +103,16 @@ class ExecutionTest {
 				() -> assertEquals(complexity, model.getComplexity()),
 				() -> assertEquals(flow, model.getFlow()),
 				() -> assertEquals(inclusion, model.getInclusion()),
-				() -> assertTrue(model.getSo().startsWith("Windows")),
+				() -> assertNotNull(model.getSo()),
 				() -> assertEquals(browserName, model.getBrowserName()),
 				() -> assertEquals(browserVersion, model.getBrowserVersion()),
 				() -> assertEquals(browserMode, model.getBrowserMode()),
 				() -> assertEquals(browserHeadless, model.getBrowserHeadless()),
 				() -> assertEquals(start, model.getStart()),
 				() -> assertEquals(end, model.getEnd()),
-				() -> assertEquals(runtime, model.getRuntime()),
+				() -> assertNotNull(model.getRuntime()),
 				() -> assertEquals(motive, model.getMotive()),
 				() -> assertEquals(image, model.getImage()),
-				() -> assertEquals(runtime, model.getRuntime()),
 				() -> assertEquals(video, model.getVideo()),
 				() -> assertEquals(datasetFilePath, model.getDatasetFilePath()),
 				() -> assertEquals(datasetHeaders, model.getDatasetHeaders()),

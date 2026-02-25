@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,7 +77,17 @@ public class FileUtils {
 
 	public static void delete(File file) throws IOException {
 		if (exists(file)) {
-			Files.delete(file.toPath());
+			try (var walk = Files.walk(file.toPath())) {
+				walk.sorted(Comparator.reverseOrder())
+					.filter(path -> !path.equals(file.toPath()))
+					.forEach(path -> {
+						try {
+							Files.deleteIfExists(path);
+						} catch (IOException ex) {
+							throw new RuntimeException(ex);
+						}
+					});
+			}
 		}
 	}
 

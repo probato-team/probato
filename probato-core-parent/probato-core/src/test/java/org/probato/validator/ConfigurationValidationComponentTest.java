@@ -20,7 +20,6 @@ import org.probato.model.Configuration;
 import org.probato.model.Configuration.ConfigurationBuilder;
 import org.probato.model.Delay;
 import org.probato.model.Dimension;
-import org.probato.model.Directory;
 import org.probato.model.Execution;
 import org.probato.model.Manager;
 import org.probato.model.Target;
@@ -126,46 +125,7 @@ class ConfigurationValidationComponentTest {
 								.build())
 							.build())
 						.build(),
-						"Property 'execution.delay.waitingTimeout' should be declared in 'configuration.yml' file"),
-				Arguments.of(
-						getConfiguration()
-						.execution(Execution.builder()
-								.target(Target.builder()
-										.url("http://localhost:8080")
-										.version("V1.0.0")
-										.build())
-								.manager(Manager.builder()
-										.submit(Boolean.TRUE)
-										.url("http://localhost:8080")
-										.token("token")
-										.build())
-								.delay(Delay.builder()
-										.actionInterval(1000)
-										.waitingTimeout(1000)
-										.build())
-								.build())
-						.build(),
-						"Property 'execution.directory.temp' should be declared in 'configuration.yml' file"),
-				Arguments.of(
-						getConfiguration()
-						.execution(Execution.builder()
-								.target(Target.builder()
-										.url("http://localhost:8080")
-										.version("V1.0.0")
-										.build())
-								.manager(Manager.builder()
-										.submit(Boolean.TRUE)
-										.url("http://localhost:8080")
-										.token("token")
-										.build())
-								.delay(Delay.builder()
-										.actionInterval(1000)
-										.waitingTimeout(1000)
-										.build())
-								.directory(Directory.builder().build())
-								.build())
-						.build(),
-						"Property 'execution.directory.temp' should be declared in 'configuration.yml' file"));
+						"Property 'execution.delay.waitingTimeout' should be declared in 'configuration.yml' file"));
 	}
 
 	private static ConfigurationBuilder getConfiguration() {
@@ -190,9 +150,6 @@ class ConfigurationValidationComponentTest {
 								.enabled(Boolean.FALSE)
 								.frameRate(10D)
 								.quality(Quality.MEDIUM)
-								.build())
-						.directory(Directory.builder()
-								.temp("/testano/temp")
 								.build())
 						.build())
 				.browsers(new Browser[] {

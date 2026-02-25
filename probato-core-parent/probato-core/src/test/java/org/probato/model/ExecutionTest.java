@@ -2,6 +2,7 @@ package org.probato.model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,9 +22,8 @@ class ExecutionTest {
 		var manager = new Manager();
 		var delay = new Delay();
 		var video = new Video();
-		var directory = new Directory();
 
-		var model = new Execution(engine, increment, screen, target, manager, delay, video, directory);
+		var model = new Execution(engine, increment, screen, target, manager, delay, video);
 
 		assertAll("Validate value",
 				() -> assertEquals(engine, model.getEngine()),
@@ -33,7 +33,7 @@ class ExecutionTest {
 				() -> assertEquals(manager, model.getManager()),
 				() -> assertEquals(delay, model.getDelay()),
 				() -> assertEquals(video, model.getVideo()),
-				() -> assertEquals(directory, model.getDirectory()));
+				() -> assertNotNull(model.getDirectory()));
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class ExecutionTest {
 				() -> assertEquals(manager, model.getManager()),
 				() -> assertEquals(delay, model.getDelay()),
 				() -> assertEquals(video, model.getVideo()),
-				() -> assertEquals(directory, model.getDirectory()));
+				() -> assertNotNull(model.getDirectory()));
 	}
 
 	@Test
@@ -81,7 +81,6 @@ class ExecutionTest {
 		var manager = new Manager();
 		var delay = new Delay();
 		var video = new Video();
-		var directory = new Directory();
 
 		var model = Execution.builder()
 				.engine(engine)
@@ -91,7 +90,6 @@ class ExecutionTest {
 				.manager(manager)
 				.delay(delay)
 				.video(video)
-				.directory(directory)
 				.build();
 
 		assertAll("Validate value",
@@ -102,7 +100,7 @@ class ExecutionTest {
 				() -> assertEquals(manager, model.getManager()),
 				() -> assertEquals(delay, model.getDelay()),
 				() -> assertEquals(video, model.getVideo()),
-				() -> assertEquals(directory, model.getDirectory()));
+				() -> assertNotNull(model.getDirectory()));
 	}
 
 }
