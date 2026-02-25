@@ -11,9 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.exception.ExecutionException;
 import org.probato.model.Dimension;
+import org.probato.test.util.IgnoreIfWorkflow;
 import org.probato.type.DimensionMode;
 import org.probato.type.Screen;
 
+@IgnoreIfWorkflow
 @DisplayName("UT - Screenshot")
 class ScreenshotTest {
 
