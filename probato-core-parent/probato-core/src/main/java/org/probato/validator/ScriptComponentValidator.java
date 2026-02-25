@@ -81,7 +81,7 @@ public class ScriptComponentValidator extends ComponentValidator {
 	private void validateDescription(Script script, Class<?> scriptClazz) {
 		var description = script.description();
 		if (isValidDescriptionMaxLength(description)) {
-			throw new IntegrityException(SCRIPT_DESC_MAX_LENGTH_MSG, SCRIPT_DESC_MAX_LENGTH, getName(scriptClazz));
+			throw new IntegrityException(SCRIPT_DESC_MAX_LENGTH_MSG, SCRIPT_DESC_MAX_LENGTH.toString(), getName(scriptClazz));
 		}
 	}
 

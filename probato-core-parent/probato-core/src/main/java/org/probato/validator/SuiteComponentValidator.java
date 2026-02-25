@@ -70,7 +70,7 @@ public class SuiteComponentValidator extends ComponentValidator {
 	private void validateDescription(Suite suite, Class<?> suiteClazz) {
 		var description = suite.description();
 		if (isValidDescritpionMaxLength(description)) {
-			throw new IntegrityException(SUITE_DESCRIPTION_MAX_LENGTH_MSG, getName(suiteClazz), SUITE_DESCRIPTION_MAX_LEN);
+			throw new IntegrityException(SUITE_DESCRIPTION_MAX_LENGTH_MSG, getName(suiteClazz), SUITE_DESCRIPTION_MAX_LEN.toString());
 		}
 	}
 

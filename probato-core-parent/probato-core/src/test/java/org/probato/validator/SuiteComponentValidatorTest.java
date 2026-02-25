@@ -83,7 +83,7 @@ class SuiteComponentValidatorTest {
 						"Suite name must be between 3 and 60 characters long: 'org.probato.test.suite.UC06_SuiteNameMaxLenght'"),
 				Arguments.of(
 						UC07_SuiteDescriptionMaxLenght.class,
-						"Suite description must not be more than 2.000 characters in length: 'org.probato.test.suite.UC07_SuiteDescriptionMaxLenght'"),
+						"Suite description must not be more than 2000 characters in length: 'org.probato.test.suite.UC07_SuiteDescriptionMaxLenght'"),
 				Arguments.of(
 						UC08_SuiteEmptyTestCase.class,
 						"Suite must have at least 1 test case: 'org.probato.test.suite.UC08_SuiteEmptyTestCase'"));

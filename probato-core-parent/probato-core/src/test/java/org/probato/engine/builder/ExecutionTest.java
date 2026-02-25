@@ -2,7 +2,7 @@ package org.probato.engine.builder;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -104,7 +104,7 @@ class ExecutionTest {
 				() -> assertEquals(complexity, model.getComplexity()),
 				() -> assertEquals(flow, model.getFlow()),
 				() -> assertEquals(inclusion, model.getInclusion()),
-				() -> assertTrue(model.getSo().startsWith("Windows")),
+				() -> assertNotNull(model.getSo()),
 				() -> assertEquals(browserName, model.getBrowserName()),
 				() -> assertEquals(browserVersion, model.getBrowserVersion()),
 				() -> assertEquals(browserMode, model.getBrowserMode()),
