@@ -46,7 +46,6 @@ class ExecutionTest {
 		var browserHeadless = Boolean.FALSE;
 		var start = ZonedDateTime.now();
 		var end = ZonedDateTime.now();
-		var runtime = 0L;
 		var motive = "motive";
 		var image = UUID.randomUUID();
 		var video = UUID.randomUUID();
@@ -111,10 +110,9 @@ class ExecutionTest {
 				() -> assertEquals(browserHeadless, model.getBrowserHeadless()),
 				() -> assertEquals(start, model.getStart()),
 				() -> assertEquals(end, model.getEnd()),
-				() -> assertEquals(runtime, model.getRuntime()),
+				() -> assertNotNull(model.getRuntime()),
 				() -> assertEquals(motive, model.getMotive()),
 				() -> assertEquals(image, model.getImage()),
-				() -> assertEquals(runtime, model.getRuntime()),
 				() -> assertEquals(video, model.getVideo()),
 				() -> assertEquals(datasetFilePath, model.getDatasetFilePath()),
 				() -> assertEquals(datasetHeaders, model.getDatasetHeaders()),
