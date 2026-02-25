@@ -33,7 +33,7 @@ class FirefoxSessionFactoryTest {
 
 		assertNotNull(session);
 		assertTrue(session instanceof PlaywrightFirefoxSession,
-				"Expected PlaywrightChromeSession when execution.engine=playwright");
+				"Expected PlaywrightFirefoxSession when execution.engine=playwright");
 	}
 
 	@Test
