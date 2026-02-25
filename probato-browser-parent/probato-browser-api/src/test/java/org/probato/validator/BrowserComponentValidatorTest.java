@@ -26,12 +26,14 @@ import org.probato.model.Target;
 import org.probato.model.Video;
 import org.probato.test.suite.UC00_NoSuite;
 import org.probato.test.suite.UC01_Suite;
+import org.probato.test.util.IgnoreIfWorkflow;
 import org.probato.type.BrowserType;
 import org.probato.type.ComponentValidatorType;
 import org.probato.type.DimensionMode;
 import org.probato.type.Quality;
 import org.probato.type.Screen;
 
+@IgnoreIfWorkflow
 @DisplayName("Test - BrowserComponentValidator")
 class BrowserComponentValidatorTest {
 
