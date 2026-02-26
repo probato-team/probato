@@ -172,7 +172,7 @@ public class YamlDatasetProvider implements DatasetProvider {
 			return instance;
 
 		} catch (Exception ex) {
-			throw new IntegrityException("Mapping clazz error {0}: {1}", clazz.getName(), ex.getMessage());
+			throw new IntegrityException("Mapping class error {0}: {1}", clazz.getName(), ex.getMessage());
 		}
 	}
 
