@@ -22,6 +22,7 @@ import org.probato.type.DimensionMode;
 import org.probato.type.Evaluation;
 import org.probato.type.Flow;
 import org.probato.type.Relevance;
+import org.probato.utils.ConverterUtils;
 
 public class Execution implements Serializable {
 
@@ -51,7 +52,7 @@ public class Execution implements Serializable {
 	private UUID video;
 	private List<String> datasetFilePath;
 	private List<String> datasetHeaders;
-	private List<String> datasetContent;
+	private String datasetContent;
 	private Map<String, List<String>> sqlFilesPath;
 	private List<Step> preconditions;
 	private List<Step> procedures;
@@ -194,7 +195,7 @@ public class Execution implements Serializable {
 		return datasetHeaders;
 	}
 
-	public List<String> getDatasetContent() {
+	public String getDatasetContent() {
 		return datasetContent;
 	}
 
@@ -255,7 +256,7 @@ public class Execution implements Serializable {
 		private UUID video;
 		private List<String> datasetFilePath;
 		private List<String> datasetHeaders;
-		private List<String> datasetContent;
+		private String datasetContent;
 		private Map<String, List<String>> sqlFilesPath = new HashMap<>();
 		private List<Step> preconditions = new ArrayList<>();
 		private List<Step> procedures = new ArrayList<>();
@@ -315,12 +316,13 @@ public class Execution implements Serializable {
 		}
 
 		public ExecutionBuilder dataset(Class<?> scriptClazz, Integer datasetLine) {
+			var index = --datasetLine;
 			DatasetLoader.getDataset(scriptClazz)
 				.ifPresent(dataset -> {
-					var content = DatasetService.get().getContent(dataset, datasetLine);
+					var content = DatasetService.get().getContent(dataset, index);
 					this.datasetFilePath = Arrays.asList(dataset.value());
 					this.datasetHeaders = Arrays.asList(content.getHeaders());
-					this.datasetContent = Arrays.asList(content.getData());
+					this.datasetContent = ConverterUtils.toJson(content.getData());
 				});
 			return this;
 		}

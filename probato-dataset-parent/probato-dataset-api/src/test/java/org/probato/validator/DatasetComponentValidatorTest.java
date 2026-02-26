@@ -72,10 +72,10 @@ class DatasetComponentValidatorTest {
 		return Stream.of(
 				Arguments.of(
 						UC02_SuiteWithDatasetNoPaths.class,
-						"List of dataset files must have at least 1 item in the @Dataset annotation: 'org.probato.test.script.UC02TC01_ScriptDatasetNoPaths'"),
+						"The dataset path is required in the @Dataset annotation: 'org.probato.test.script.UC02TC01_ScriptDatasetNoPaths'"),
 				Arguments.of(
 						UC03_SuiteWithDatasetEmptyPath.class,
-						"Dataset path must be required in the @Dataset annotation: 'org.probato.test.script.UC03TC01_ScriptDatasetEmptyPath'"),
+						"The dataset path is required in the @Dataset annotation: 'org.probato.test.script.UC03TC01_ScriptDatasetEmptyPath'"),
 				Arguments.of(
 						UC04_SuiteWithDatasetFileNotFound.class,
 						"Dataset file 'path/to/file-not-found.csv' not found: 'org.probato.test.script.UC04TC01_ScriptDatasetFileNotFound'")				);

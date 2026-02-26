@@ -1,9 +1,11 @@
 package org.probato.model;
 
+import java.util.Map;
+
 public class Content {
 
 	private String[] headers;
-	private String[] data;
+	private Object data;
 
 	public Content() {
 		this.headers = new String[] {};
@@ -16,16 +18,20 @@ public class Content {
 	}
 
 	public Content(ContentBuilder builder) {
-		this();
 		this.headers = builder.headers;
 		this.data = builder.data;
+	}
+
+	public Content(Map<String, Object> map) {
+		this.headers = new String[] {};
+		this.data = map;
 	}
 
 	public String[] getHeaders() {
 		return headers;
 	}
 
-	public String[] getData() {
+	public Object getData() {
 		return data;
 	}
 
@@ -36,7 +42,7 @@ public class Content {
 	public static class ContentBuilder {
 
 		private String[] headers;
-		private String[] data;
+		private Object data;
 
 		private ContentBuilder() {}
 
@@ -45,7 +51,7 @@ public class Content {
 			return this;
 		}
 
-		public ContentBuilder data(String[] data) {
+		public ContentBuilder data(Object data) {
 			this.data = data;
 			return this;
 		}

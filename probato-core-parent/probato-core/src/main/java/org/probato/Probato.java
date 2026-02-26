@@ -57,7 +57,7 @@ public class Probato {
 	}
 
 	public static int getCsvCounterLines(Dataset dataset) {
-		return datasetService.counterLines(dataset);
+		return datasetService.countEntries(dataset);
 	}
 
 	private static void loadExtesions() {

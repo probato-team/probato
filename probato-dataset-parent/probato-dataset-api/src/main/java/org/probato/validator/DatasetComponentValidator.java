@@ -12,8 +12,7 @@ import org.probato.utils.StringUtils;
 
 public class DatasetComponentValidator extends ComponentValidator {
 
-	private static final String DATASET_ANNOTATION_REQUIRED = "List of dataset files must have at least 1 item in the '@Dataset' annotation: ''{0}''";
-	private static final String DATASET_PATH_REQUIRED = "Dataset path must be required in the '@Dataset' annotation: ''{0}''";
+	private static final String DATASET_PATH_REQUIRED = "The dataset path is required in the @Dataset annotation: ''{0}''";
 	private static final String DATASET_FILE_NOT_FOUNT = "Dataset file ''{0}'' not found: ''{1}''";
 
 	@Override
@@ -47,18 +46,11 @@ public class DatasetComponentValidator extends ComponentValidator {
 		DatasetLoader.getDataset(scriptClazz)
 				.ifPresent(dataset -> {
 					var value = dataset.value();
-					validateValue(scriptClazz, dataset.value());
 					Stream.of(value).forEach(path -> {
 						validatePath(scriptClazz, path);
 						validateFile(scriptClazz, path);
 					});
 				});
-	}
-
-	private void validateValue(Class<?> clazz, String [] value) {
-		if (value.length == 0) {
-			throw new IntegrityException(DATASET_ANNOTATION_REQUIRED, getName(clazz));
-		}
 	}
 
 	private void validatePath(Class<?> clazz, String value) {
