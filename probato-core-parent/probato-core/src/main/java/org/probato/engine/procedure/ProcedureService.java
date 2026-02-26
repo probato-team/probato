@@ -40,8 +40,12 @@ public class ProcedureService {
 		}
 	}
 
-	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits) {
-		return procedureExecution.execute(context, driver, executableUnits);
+	public ExecutionResult collectData(ExecutionContext context, List<ExecutableUnit> executableUnits) {
+		return procedureExecution.collectData(context, executableUnits);
+	}
+
+	public void execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) {
+		procedureExecution.execute(context, driver, executableUnits, result);
 	}
 
 	private List<ProcedureDefinition> discover(Class<?> scriptClazz) {

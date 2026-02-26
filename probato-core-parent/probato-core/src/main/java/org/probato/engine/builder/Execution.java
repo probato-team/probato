@@ -338,7 +338,18 @@ public class Execution implements Serializable {
 		}
 
 		public ExecutionBuilder sql(Class<?> clazz) {
-			sqlFilesPath.putAll(SqlLoader.getSqlPaths(clazz));
+			SqlLoader.getSqlPaths(clazz)
+				.forEach((key, paths) ->
+					sqlFilesPath.merge(
+							key,
+							new ArrayList<>(paths),
+							(existing, incoming) -> {
+								incoming.stream()
+								.filter(path -> !existing.contains(path))
+								.forEach(existing::add);
+					return existing;
+				}));
+
 			return this;
 		}
 
