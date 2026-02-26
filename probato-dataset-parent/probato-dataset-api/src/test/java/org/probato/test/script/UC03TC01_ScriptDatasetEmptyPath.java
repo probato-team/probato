@@ -6,7 +6,7 @@ import org.probato.type.Complexity;
 import org.probato.type.Flow;
 import org.probato.type.Relevance;
 
-@Dataset(value = {""})
+@Dataset("")
 @Script(
 	code = "UC03TC01",
 	name = "Test case 01",

@@ -316,9 +316,10 @@ public class Execution implements Serializable {
 		}
 
 		public ExecutionBuilder dataset(Class<?> scriptClazz, Integer datasetLine) {
+			var index = --datasetLine;
 			DatasetLoader.getDataset(scriptClazz)
 				.ifPresent(dataset -> {
-					var content = DatasetService.get().getContent(dataset, datasetLine);
+					var content = DatasetService.get().getContent(dataset, index);
 					this.datasetFilePath = Arrays.asList(dataset.value());
 					this.datasetHeaders = Arrays.asList(content.getHeaders());
 					this.datasetContent = ConverterUtils.toJson(content.getData());

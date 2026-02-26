@@ -1,84 +1,62 @@
 package org.probato.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.ServiceLoader.Provider;
+import java.util.stream.Collectors;
 
 import org.probato.api.Dataset;
-import org.probato.exception.IntegrityException;
+import org.probato.dataset.DatasetProvider;
 import org.probato.model.Content;
 import org.probato.model.Datamodel;
 
-public interface DatasetService {
+public class DatasetService {
 
-	String DATASET_SERVICE_IMPLEMENTATION_NOT_FOUND = "Dataset service implementation not found";
-	String MSG_MUST_DEFAULT_CONSTRUCTOR = "Class must have default constructor: ''{0}''";
+	private List<DatasetProvider> providers;
 
-    public boolean accepted(String path);
-
-	public int counterLines(Dataset dataset);
-
-	public List<Datamodel> getDatamodels(Dataset dataset);
-
-	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz);
-
-	public <T> T getDatamodel(Dataset dataset, Class<T> clazz, int index);
-
-	public Content getContent(Dataset dataset, int index);
-
-	static DatasetService get() {
-		return ServiceLoader.load(DatasetService.class)
-				.stream()
-				.map(Provider::get)
-				.sorted(Comparator.comparing(serviceClazz -> serviceClazz.getClass().getPackageName().equals(DatasetService.class.getClass().getPackageName()), Comparator.reverseOrder()))
-				.findFirst()
-				.orElse(newDefaultInstance());
+	private DatasetService() {
+		load();
 	}
 
-	static DatasetService newDefaultInstance() {
-		return new DatasetService() {
+	public int countEntries(Dataset dataset) {
+		return get(dataset).countEntries(dataset);
+	}
 
-			@Override
-			public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
-				return new ArrayList<>();
-			}
+	public <T> T getDatamodel(Dataset dataset, Class<T> clazz, int index) {
+		return get(dataset).getDatamodel(dataset, clazz, index);
+	}
 
-			@Override
-			public List<Datamodel> getDatamodels(Dataset dataset) {
-				return new ArrayList<>();
-			}
+	public List<Datamodel> getDatamodels(Dataset dataset) {
+		return get(dataset).getDatamodels(dataset);
+	}
 
-			@Override
-			public <T> T getDatamodel(Dataset dataset, Class<T> clazz, int index) {
-				return newInstance(clazz);
-			}
+	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
+		return get(dataset).getDatamodels(dataset, clazz);
+	}
 
-			@Override
-			public Content getContent(Dataset dataset, int index) {
-				return newInstance(Content.class);
-			}
+	public Content getContent(Dataset dataset, int index) {
+		return get(dataset).getContent(dataset, index);
+	}
 
-			@Override
-			public int counterLines(Dataset dataset) {
-				return 0;
-			}
+	public static DatasetService get() {
+		return new DatasetService();
+	}
 
-			private <T> T newInstance(Class<T> clazz) {
-				try {
-					return clazz.getConstructor().newInstance();
-				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException e) {
-					throw new IntegrityException(MSG_MUST_DEFAULT_CONSTRUCTOR, clazz.getName());
-				}
-			}
+	private void load() {
+		if (Objects.isNull(providers)) {
+			providers = ServiceLoader.load(DatasetProvider.class)
+					.stream()
+					.map(Provider::get)
+					.collect(Collectors.toList());
+		}
+	}
 
-			@Override
-			public boolean accepted(String path) {
-				return Boolean.TRUE;
-			}
-		};
+	private DatasetProvider get(Dataset dataset) {
+		return providers.stream()
+				.filter(provider -> provider.accepted(dataset))
+				.findFirst()
+				.orElseGet(DefaultProvider::new);
 	}
 
 }

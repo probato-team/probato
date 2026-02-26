@@ -1,8 +1,7 @@
-package org.probato.service;
+package org.probato.dataset;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -17,6 +16,7 @@ import org.probato.api.Dataset;
 import org.probato.exception.IntegrityException;
 import org.probato.model.Content;
 import org.probato.model.Datamodel;
+import org.probato.utils.StringUtils;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
@@ -24,38 +24,24 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import com.opencsv.bean.MappingStrategy;
 
-public class CsvDatasetService implements DatasetService {
+public class CsvDatasetProvider implements DatasetProvider {
 
 	private static final String CSV_EXTENSION = ".csv";
 	private static final String MSG_LOAD_ERROR = "Load file ''{0}'' error: {1}";
-	private static final String MSG_MUST_DEFAULT_CONSTRUCTOR = "Class must have default constructor: ''{0}''";
 
 	@Override
-    public boolean accepted(String path) {
-        return Objects.nonNull(path) && path.toLowerCase().endsWith(CSV_EXTENSION);
-    }
+	public boolean accepted(Dataset dataset) {
+		return Objects.nonNull(dataset) && dataset.value().toLowerCase().endsWith(CSV_EXTENSION);
+	}
 
 	@Override
-	public int counterLines(Dataset dataset) {
+	public int countEntries(Dataset dataset) {
 		return getDatamodels(dataset).size();
 	}
 
 	@Override
 	public List<Datamodel> getDatamodels(Dataset dataset) {
 		return getDatamodels(dataset, Datamodel.class);
-	}
-
-	@Override
-	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
-		var models = new ArrayList<T>();
-		for (var path: getPaths(dataset)) {
-			try (var reader = readFile(path)) {
-				models.addAll(getObjectMapperBuilder(reader, clazz).parse());
-			} catch (Exception ex) {
-				throw new IntegrityException(MSG_LOAD_ERROR, path, ex.getMessage());
-			}
-		}
-		return models;
 	}
 
 	@Override
@@ -67,38 +53,56 @@ public class CsvDatasetService implements DatasetService {
 	}
 
 	@Override
-	public Content getContent(Dataset dataset, int index) {
-		if (index >= 0) {
-			var headers = getContent(dataset).get(0);
-			var data = getContent(dataset).get(index);
-			return new Content(headers, data);
-		}
-		return newInstance(Content.class);
-	}
+	public <T> List<T> getDatamodels(Dataset dataset, Class<T> clazz) {
 
-	public List<String[]> getContent(Dataset dataset) {
-		var models = new ArrayList<String[]>();
-		for (var path: getPaths(dataset)) {
-			try (var reader = readFile(path); var csv = new CSVReader(reader)) {
-				models.addAll(csv.readAll());
-			} catch (Exception ex) {
-				throw new IntegrityException(MSG_LOAD_ERROR, path, ex.getMessage());
-			}
+		validate(dataset);
+
+		var models = new ArrayList<T>();
+		try (var reader = readFile(dataset)) {
+			models.addAll(getObjectMapperBuilder(reader, clazz).parse());
+		} catch (Exception ex) {
+			throw new IntegrityException(MSG_LOAD_ERROR, dataset.value(), ex.getMessage());
 		}
 		return models;
 	}
 
-	private String[] getPaths(Dataset dataset) {
-
-		if (dataset == null || dataset.value() == null || dataset.value().length == 0) {
-			throw new IntegrityException("Dataset path not defined");
+	@Override
+	public Content getContent(Dataset dataset, int index) {
+		if (index >= 0) {
+			return getContent(dataset).get(index);
 		}
-
-		return dataset.value();
+		return newInstance(Content.class);
 	}
 
-	private FileReader readFile(String path) throws FileNotFoundException, URISyntaxException {
-		return new FileReader(getPath(path).toString());
+	@Override
+	public List<Content> getContent(Dataset dataset) {
+
+		validate(dataset);
+
+		var models = new ArrayList<Content>();
+		try (var reader = readFile(dataset); var csv = new CSVReader(reader)) {
+
+			var list = csv.readAll();
+			var headers = list.get(0);
+			for (int i = 1; i < list.size(); i++) {
+				var data = list.get(i);
+				models.add(new Content(headers, data));
+			}
+
+		} catch (Exception ex) {
+			throw new IntegrityException(MSG_LOAD_ERROR, dataset.value(), ex.getMessage());
+		}
+		return models;
+	}
+
+	private void validate(Dataset dataset) {
+		if (Objects.isNull(dataset) || StringUtils.isBlank(dataset.value())) {
+			throw new IntegrityException("Dataset path not defined");
+		}
+	}
+
+	private FileReader readFile(Dataset dataset) throws FileNotFoundException, URISyntaxException {
+		return new FileReader(getPath(dataset.value()).toString());
 	}
 
 	private Path getPath(String path) throws URISyntaxException {
@@ -125,14 +129,6 @@ public class CsvDatasetService implements DatasetService {
 		var strategy = new HeaderColumnNameMappingStrategy<T>();
 		strategy.setType(clazz);
 		return strategy;
-	}
-
-	private <T> T newInstance(Class<T> clazz) {
-		try {
-			return clazz.getConstructor().newInstance();
-		} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException e) {
-			throw new IntegrityException(MSG_MUST_DEFAULT_CONSTRUCTOR, clazz.getName());
-		}
 	}
 
 }

@@ -30,7 +30,7 @@ class DatasetLoaderTest {
 		var dataset = DatasetLoader.getDataset(TestDatasetLoader.class)
 				.orElseThrow(() -> new Exception("Not found"));
 
-		assertEquals("path/to/none.csv", dataset.value()[0]);
+		assertEquals("path/to/none.csv", dataset.value());
 	}
 
 	@Dataset("path/to/none.csv")
