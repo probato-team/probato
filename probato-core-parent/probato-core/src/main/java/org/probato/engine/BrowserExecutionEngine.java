@@ -15,9 +15,12 @@ import org.probato.engine.builder.Suite;
 import org.probato.engine.procedure.ExecutableUnit;
 import org.probato.engine.procedure.ExecutionResult;
 import org.probato.engine.procedure.ProcedureService;
+import org.probato.exception.ExecutionException;
 import org.probato.record.ScreenRecorder;
 import org.probato.service.BrowserService;
 import org.probato.service.RecordService;
+import org.probato.service.SqlService;
+import org.probato.type.ExecutionStatus;
 import org.probato.type.PhaseType;
 
 public class BrowserExecutionEngine extends ExecutionEngine {
@@ -25,6 +28,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 	private final RecordService recordService;
 	private final BrowserService browserService;
 	private final ProcedureService procedureService;
+	private final SqlService sqlService;
 
 	private UUID executionId;
 	private ExecutionResult result;
@@ -38,10 +42,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		recordService = RecordService.get();
 		browserService = BrowserService.get();
 		procedureService = ProcedureService.get();
+		sqlService = SqlService.get();
 	}
 
 	@Override
-	protected void init(ExecutionContext context) {
+	protected void start(ExecutionContext context) {
 		browserSession = browserService.createSession(context.getBrowser());
 		procedures = procedureService.load(context.getScriptClass());
 		screenRecorder = recordService.createScreenRecord(context.getBrowser().getDimension(), executionId);
@@ -52,15 +57,21 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 	protected void run(ExecutionContext context) {
 		try {
 
+			result = collectData(context);
+			loadSQL(context, result);
+
 			browserSession.run();
 			screenRecorder.startCapture();
-			result = procedureService.execute(context, getDriver(), procedures);
+
+			executeScript(context, result);
+
+		} catch (Exception ex) {
+			// TODO: handle exception
 
 		} finally {
 			screenRecorder.stopCapture();
 			browserSession.destroy();
 		}
-
 	}
 
 	@Override
@@ -68,7 +79,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 
 		var suite = buildSuite(context);
 		var script = buildScript(context);
-		var execution = buildExecution();
+		var execution = buildExecution(context);
 
 		recordService.save(suite, script, execution);
 
@@ -98,6 +109,24 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		return Suite.builder()
 				.clazz(context.getSuiteClass())
 				.build();
+	}
+
+	private ExecutionResult collectData(ExecutionContext context) {
+		return procedureService.collectData(context, procedures);
+	}
+
+	private void executeScript(ExecutionContext context, ExecutionResult result) {
+		procedureService.execute(context, getDriver(), procedures, result);
+	}
+
+	private void loadSQL(ExecutionContext context, ExecutionResult result) {
+		try {
+			sqlService.run(context.getSuiteClass());
+			sqlService.run(context.getScriptClass());
+		} catch (Exception ex) {
+			result.markFinished(ExecutionStatus.ERROR, new ExecutionException(ex.getMessage()));
+			throw ex;
+		}
 	}
 
 	private Script buildScript(ExecutionContext context) {
@@ -130,9 +159,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 				.build();
 	}
 
-	private Execution buildExecution() {
+	private Execution buildExecution(ExecutionContext context) {
 		return executionBuilder
 				.end(ZonedDateTime.now())
+				.sql(context.getSuiteClass())
+				.sql(context.getScriptClass())
 				.preconditions(result.getCollecedSteps()
 						.stream()
 						.filter(step -> PhaseType.PRECONDITION.equals(step.getPhase()))

@@ -20,13 +20,13 @@ public class ProcedureExecution {
 		return new ProcedureExecution();
 	}
 
-	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits) {
+	public ExecutionResult collectData(ExecutionContext context, List<ExecutableUnit> executableUnits) {
 
 		var result = new ExecutionResult();
 		result.start();
 
 		try {
-			collectData(context, driver, executableUnits, result);
+			collectData(context, executableUnits, result);
 		} catch (Throwable ex) { // NOSONAR
 			result.markFinished(
 					ExecutionStatus.ERROR,
@@ -35,8 +35,13 @@ public class ProcedureExecution {
 			return result;
 		}
 
+		return result;
+	}
+
+	public ExecutionResult execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) {
+
 		try {
-			execute(context, driver, executableUnits, result);
+			executeScript(context, driver, executableUnits, result);
 			result.markFinished(ExecutionStatus.PASSED);
 		} catch (Throwable ex) { // NOSONAR
 			result.markFinished(
@@ -47,16 +52,16 @@ public class ProcedureExecution {
 		return result;
 	}
 
-	private void collectData(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
+	private void collectData(ExecutionContext context, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
 
 		result.startCollectMode();
 
-		executePreconditions(context, driver, executableUnits, result);
-		executeProcedures(context, driver, executableUnits, result);
-		executePostconditions(context, driver, executableUnits, result);
+		executePreconditions(context, null, executableUnits, result);
+		executeProcedures(context, null, executableUnits, result);
+		executePostconditions(context, null, executableUnits, result);
 	}
 
-	private void execute(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
+	private void executeScript(ExecutionContext context, Object driver, List<ExecutableUnit> executableUnits, ExecutionResult result) throws Throwable {
 
 		result.stopCollectMode();
 

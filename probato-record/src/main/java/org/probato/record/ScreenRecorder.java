@@ -20,6 +20,7 @@ public final class ScreenRecorder extends AbstractScreen implements Runnable {
 
 	private static final String ERROR_DEFAULT_MSG = "An error occurred while trying to record screen the execution: {0}";
 
+	private boolean recording;
 	private double frameRate;
 	private Robot robot;
 	private IMediaWriter writer;
@@ -28,6 +29,7 @@ public final class ScreenRecorder extends AbstractScreen implements Runnable {
 
 	public ScreenRecorder(String outputFile, Screen screen, Video video, Dimension dimension) throws AWTException {
 		super(screen, video, dimension);
+		this.recording = false;
 		this.frameRate = video.getFrameRate();
 		this.robot = new Robot();
 		this.writer = ToolFactory.makeWriter(outputFile);
@@ -44,6 +46,8 @@ public final class ScreenRecorder extends AbstractScreen implements Runnable {
 			this.startTime = System.nanoTime();
 			this.pool.scheduleAtFixedRate(this, 0L, (long) (1000.0 / this.frameRate), TimeUnit.MILLISECONDS);
 
+			this.recording = true;
+
 		} catch (Exception ex) {
 			Thread.currentThread().interrupt();
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());
@@ -53,7 +57,7 @@ public final class ScreenRecorder extends AbstractScreen implements Runnable {
 	public void stopCapture() {
 		try {
 
-			if (!video.isEnabled()) return;
+			if (!video.isEnabled() || !this.recording) return;
 
 			TimeUnit.SECONDS.sleep(1);
 			this.pool.shutdown();

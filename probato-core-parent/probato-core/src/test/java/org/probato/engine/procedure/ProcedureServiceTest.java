@@ -61,7 +61,8 @@ class ProcedureServiceTest {
 		var service = ProcedureService.get();
 		var executableUnits = service.load(UC01TC01_Script.class);
 
-		var result = service.execute(context, UC01TC01_Script.class, executableUnits);
+		var result = service.collectData(context, executableUnits);
+		service.execute(context, UC01TC01_Script.class, executableUnits, result);
 
 		assertAll("Validate data",
 				() -> assertNotNull(result.getStatus()),
@@ -109,7 +110,10 @@ class ProcedureServiceTest {
 		var service = ProcedureService.get();
 		var executableUnits = service.load(scriptClazz);
 
-		var result = service.execute(context, scriptClazz, executableUnits);
+		var result = service.collectData(context, executableUnits);
+
+		if (!ExecutionStatus.ERROR.equals(result.getStatus()))
+			service.execute(context, scriptClazz, executableUnits, result);
 
 		assertAll("Validate data",
 				() -> assertEquals(expected, result.getStatus()));

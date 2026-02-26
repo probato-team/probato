@@ -41,7 +41,8 @@ class ProcedureExecutionTest {
 
 		var procedures = discovery.discover(script);
 		var units = builder.build(procedures, script);
-		var result = execution.execute(data, procedures, units);
+		var result = execution.collectData(data, units);
+		execution.execute(data, procedures, units, result);
 
 		assertAll("Validate data",
 				() -> assertEquals(6, units.size()));
@@ -84,7 +85,7 @@ class ProcedureExecutionTest {
 
 		var procedures = discovery.discover(script);
 		var units = builder.build(procedures, script);
-		execution.execute(null, procedures, units);
+		execution.collectData(null, units);
 
 		assertEquals(6, units.size());
 	}

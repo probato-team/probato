@@ -3,7 +3,7 @@ package org.probato.engine;
 public abstract class ExecutionEngine {
 
 	public void execute(ExecutionContext context) {
-		init(context);
+		start(context);
 		run(context);
 		finish(context);
 	}
@@ -12,7 +12,7 @@ public abstract class ExecutionEngine {
 		return new BrowserExecutionEngine();
 	}
 
-	protected abstract void init(ExecutionContext context);
+	protected abstract void start(ExecutionContext context);
 
 	protected abstract void run(ExecutionContext context);
 
