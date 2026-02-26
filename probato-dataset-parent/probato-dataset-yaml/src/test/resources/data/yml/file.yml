@@ -1,0 +1,19 @@
+
+- name: Felipe Rudolfe
+  age: 99
+  value: 99
+  current: 99
+  active: true
+  other: other
+  credentials:
+    email: user01@probato.org
+    password: 123
+
+- name: Felipe Rudolfe
+  age: 99
+  value: 99
+  current: 99
+  active: false
+  credentials:
+    email: user02@probato.org
+    password: 456
