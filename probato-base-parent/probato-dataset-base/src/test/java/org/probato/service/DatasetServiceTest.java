@@ -7,14 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.annotation.Annotation;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.api.Dataset;
 import org.probato.datamodel.Data;
 import org.probato.exception.IntegrityException;
 
-@Disabled
 @DisplayName("UT - DatasetService")
 class DatasetServiceTest {
 
