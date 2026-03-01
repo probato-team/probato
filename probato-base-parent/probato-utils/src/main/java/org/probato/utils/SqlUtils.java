@@ -22,8 +22,7 @@ public class SqlUtils {
 	private SqlUtils() {}
 
 	public static boolean isValidFile(String pathname) {
-		return Arrays.asList(getSqlFiles(pathname))
-				.stream()
+		return Arrays.stream(getSqlFiles(pathname))
 				.anyMatch(File::exists);
 	}
 
@@ -31,7 +30,7 @@ public class SqlUtils {
 
 		File[] result = null;
 		if (pathname.endsWith(EXT_SQL_FILE)) {
-			File file = FileUtils.getFile(pathname);
+			var file = FileUtils.getFile(pathname);
 			result = Objects.nonNull(file) ? new File[] { file } : new File[] {};
 		}
 
@@ -44,13 +43,13 @@ public class SqlUtils {
 
 	public static List<String> getQueries(File file) throws IOException {
 
-		List<String> result = new ArrayList<>();
 		String queryLine = null;
-		StringBuilder sqlContent = new StringBuilder();
-		try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr);) {
+		var result = new ArrayList<String>();
+		var sqlContent = new StringBuilder();
+		try (var fr = new FileReader(file); var br = new BufferedReader(fr);) {
 			while ((queryLine = br.readLine()) != null) {
 
-				StringBuilder builder = new StringBuilder(queryLine.trim());
+				var builder = new StringBuilder(queryLine.trim());
 				removeComment("#", builder);
 				removeComment("--", builder);
 
@@ -58,7 +57,7 @@ public class SqlUtils {
 			}
 		}
 
-		String[] sqlQueries = sqlContent.toString().split(";");
+		var sqlQueries = sqlContent.toString().split(";");
 		for (String sql : sqlQueries) {
 			if (StringUtils.isBlank(sql)) {
 				continue;
@@ -69,9 +68,9 @@ public class SqlUtils {
 		return result;
 	}
 
-	public static void validateConnection(String url, String username, String password, String driver, String schema) throws SQLException, ClassNotFoundException {
+	public static void validateConnection(String uri, String username, String password, String driver, String schema) throws SQLException, ClassNotFoundException {
 		Class.forName(driver);
-		try (Connection conn = DriverManager.getConnection(url, username, password); Statement stmt = conn.createStatement()) {
+		try (Connection conn = DriverManager.getConnection(uri, username, password); Statement stmt = conn.createStatement()) {
 
 			if (Objects.nonNull(schema)) {
 				conn.setSchema(schema);

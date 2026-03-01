@@ -14,15 +14,17 @@ class DatasourceTest {
 	void shouldCreateConstructorObjectSuccessfully() {
 
 		var url = "url";
+		var database = "database";
 		var schema = "schema";
 		var driver = "driver";
 		var username = "username";
 		var password = "password";
 
-		var model = new Datasource(url, schema, driver, username, password);
+		var model = new Datasource(url, database, schema, driver, username, password);
 
 		assertAll("Validate value",
 				() -> assertEquals(url, model.getUrl()),
+				() -> assertEquals(database, model.getDatabase()),
 				() -> assertEquals(schema, model.getSchema()),
 				() -> assertEquals(driver, model.getDriver()),
 				() -> assertEquals(username, model.getUsername()),
@@ -34,6 +36,7 @@ class DatasourceTest {
 	void shouldCreateDefauldConstructorObjectSuccessfully() {
 
 		var url = "url";
+		var database = "database";
 		var schema = "schema";
 		var driver = "driver";
 		var username = "username";
@@ -41,6 +44,7 @@ class DatasourceTest {
 
 		var model = new Datasource();
 		model.setUrl(url);
+		model.setDatabase(database);
 		model.setSchema(schema);
 		model.setDriver(driver);
 		model.setUsername(username);
@@ -48,6 +52,7 @@ class DatasourceTest {
 
 		assertAll("Validate value",
 				() -> assertEquals(url, model.getUrl()),
+				() -> assertEquals(database, model.getDatabase()),
 				() -> assertEquals(schema, model.getSchema()),
 				() -> assertEquals(driver, model.getDriver()),
 				() -> assertEquals(username, model.getUsername()),
@@ -59,6 +64,7 @@ class DatasourceTest {
 	void shouldCreateBuildObjectSuccessfully() {
 
 		var url = "url";
+		var database = "database";
 		var schema = "schema";
 		var driver = "driver";
 		var username = "username";
@@ -66,6 +72,7 @@ class DatasourceTest {
 
 		var model = Datasource.builder()
 				.url(url)
+				.database(database)
 				.schema(schema)
 				.driver(driver)
 				.username(username)
@@ -74,6 +81,7 @@ class DatasourceTest {
 
 		assertAll("Validate value",
 				() -> assertEquals(url, model.getUrl()),
+				() -> assertEquals(database, model.getDatabase()),
 				() -> assertEquals(schema, model.getSchema()),
 				() -> assertEquals(driver, model.getDriver()),
 				() -> assertEquals(username, model.getUsername()),
