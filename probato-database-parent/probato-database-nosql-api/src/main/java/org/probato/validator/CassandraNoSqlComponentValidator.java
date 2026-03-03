@@ -11,8 +11,8 @@ import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.type.ComponentValidatorType;
 import org.probato.type.DatasourceType;
+import org.probato.utils.CassandraUtils;
 import org.probato.utils.FileUtils;
-import org.probato.utils.MongoDbUtils;
 import org.probato.utils.StringUtils;
 
 public class CassandraNoSqlComponentValidator extends ComponentValidator {
@@ -124,8 +124,8 @@ public class CassandraNoSqlComponentValidator extends ComponentValidator {
 
 			var configuration = ConfigurationContext.get(clazz);
 			var datasource = configuration.getDatasource(datasourceName);
-			var commands = MongoDbUtils.getDocuments(item);
-			MongoDbUtils.validateDocuments(
+			var commands = CassandraUtils.getCommands(item);
+			CassandraUtils.validateCommands(
 					datasource.getUrl(),
 					datasource.getDatabase(),
 					commands);

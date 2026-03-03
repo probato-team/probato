@@ -1,5 +1,13 @@
 package org.probato.database;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.ServiceLoader.Provider;
+import java.util.stream.Collectors;
+
+import org.probato.type.DatasourceType;
+
 /**
  * Contract for executing NoSQL-based operations associated with a given class.
  *
@@ -18,6 +26,13 @@ package org.probato.database;
 public interface NoSqlProvider {
 
 	/**
+     * Returns the datasource type supported by this provider.
+     *
+     * @return the supported {@link DatasourceType}
+     */
+	DatasourceType getType();
+
+	/**
 	 * Executes NoSQL operations associated with the given class.
 	 *
 	 * <p>
@@ -29,5 +44,15 @@ public interface NoSqlProvider {
 	 * @param clazz the reference class used to resolve and execute NoSQL resources
 	 */
 	void run(Class<?> clazz);
+
+	public static List<NoSqlProvider> getInstance(DatasourceType type) {
+		return ServiceLoader
+				.load(NoSqlProvider.class)
+				.stream()
+				.map(Provider::get)
+				.sorted(Comparator.comparing(serviceClazz -> serviceClazz.getClass().getPackageName().equals(DatasourceType.class.getClass().getPackageName()), Comparator.reverseOrder()))
+				.filter(component -> component.getType().equals(type))
+				.collect(Collectors.toList());
+	}
 
 }

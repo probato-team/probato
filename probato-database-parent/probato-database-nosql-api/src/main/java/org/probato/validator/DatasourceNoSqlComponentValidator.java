@@ -9,6 +9,7 @@ import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.type.ComponentValidatorType;
 import org.probato.type.DatasourceType;
+import org.probato.utils.CassandraUtils;
 import org.probato.utils.MongoDbUtils;
 import org.probato.utils.StringUtils;
 
@@ -96,7 +97,9 @@ public class DatasourceNoSqlComponentValidator extends ComponentValidator {
 			}
 
 			if (DatasourceType.CASSANDRA.equals(datasource.getType())) {
-
+				CassandraUtils.validateConnection(
+						datasource.getUrl(),
+						datasource.getDatabase());
 			}
 
 		} catch (Exception ex) {

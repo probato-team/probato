@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,9 +76,11 @@ public class CassandraUtils {
 		return result;
 	}
 
-	public static void validateConnection(String host, int port, String keyspace) {
+	public static void validateConnection(String uri, String keyspace) {
+
+		var parsed = URI.create(uri);
 		try (var session = CqlSession.builder()
-				.addContactPoint(new InetSocketAddress(host, port))
+				.addContactPoint(new InetSocketAddress(parsed.getHost(), parsed.getPort()))
 				.withLocalDatacenter(DATACENTER_TXT)
 				.withKeyspace(keyspace)
 				.build()) {
@@ -86,9 +89,11 @@ public class CassandraUtils {
 		}
 	}
 
-	public static void validateCommands(String host, int port, String keyspace, List<String> commands) {
+	public static void validateCommands(String uri, String keyspace, List<String> commands) {
+
+		var parsed = URI.create(uri);
 		try (var session = CqlSession.builder()
-				.addContactPoint(new InetSocketAddress(host, port))
+				.addContactPoint(new InetSocketAddress(parsed.getHost(), parsed.getPort()))
 				.withLocalDatacenter(DATACENTER_TXT)
 				.withKeyspace(keyspace)
 				.build()) {
@@ -103,9 +108,11 @@ public class CassandraUtils {
 		}
 	}
 
-	public static void executeCommands(String host, int port, String keyspace, List<String> commands) {
+	public static void executeCommands(String uri,  String keyspace, List<String> commands) {
+
+		var parsed = URI.create(uri);
 		try (var session = CqlSession.builder()
-				.addContactPoint(new InetSocketAddress(host, port))
+				.addContactPoint(new InetSocketAddress(parsed.getHost(), parsed.getPort()))
 				.withLocalDatacenter(DATACENTER_TXT)
 				.withKeyspace(keyspace)
 				.build()) {

@@ -2,10 +2,14 @@ package org.probato.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import java.time.Duration;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,10 +23,43 @@ import org.probato.test.suite.UC16_SuiteWithCassandraNoSQL;
 import org.probato.test.suite.UC27_SuiteWithCassandraNoSQLEmptyPath;
 import org.probato.test.suite.UC28_SuiteWithCassandraNoSQLBlankPath;
 import org.probato.test.suite.UC29_SuiteWithCassandraNoSQLNotFound;
+import org.probato.test.support.DockerSupport;
 import org.probato.type.ComponentValidatorType;
+import org.testcontainers.containers.CassandraContainer;
+
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 
 @DisplayName("UT - CassandraNoSqlComponentValidator")
 class CassandraNoSqlComponentValidatorTest {
+
+	private static CassandraContainer<?> cassandra;
+
+	@SuppressWarnings("resource")
+	@BeforeAll
+	static void setup() {
+
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
+				"Docker not available - skipping Testcontainers tests");
+
+		cassandra = new CassandraContainer<>("cassandra:4.1")
+				.withStartupTimeout(Duration.ofMinutes(2))
+				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
+						.withPortBindings(new PortBinding(
+								Ports.Binding.bindPort(9042),
+								new ExposedPort(9042))));
+
+		cassandra.start();
+	}
+
+	@AfterAll
+	static void teardown() {
+		if (cassandra != null) {
+			cassandra.stop();
+		}
+	}
 
 	@Test
 	@DisplayName("Should execute validator successfully")

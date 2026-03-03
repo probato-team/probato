@@ -4,11 +4,17 @@ import org.probato.exception.IntegrityException;
 import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.model.Datasource;
+import org.probato.type.DatasourceType;
 import org.probato.utils.MongoDbUtils;
 
 public class CassandraNoSqlProvider implements NoSqlProvider {
 
 	private static final String NOSQL_COMMAND_ERROR_MSG = "An error occurred while executing NoSQL command: ''{0}'' {1}";
+
+	@Override
+	public DatasourceType getType() {
+		return DatasourceType.CASSANDRA;
+	}
 
 	@Override
 	public void run(Class<?> clazz) {

@@ -42,9 +42,9 @@ datasources:
         database: testdb
 
     probato-cassandra:
-        url: mongodb://localhost:27017
+        url: cassandra://localhost:9042
         type: CASSANDRA
-        database: testdb
+        database: testks
 
     without-url:
         database: testdb

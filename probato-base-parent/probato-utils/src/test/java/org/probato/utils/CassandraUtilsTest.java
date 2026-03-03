@@ -24,6 +24,7 @@ class CassandraUtilsTest {
 	private static final String KEYSPACE = "testks";
 
 	private static CassandraContainer<?> cassandra;
+	private static String uri;
 
 	@BeforeAll
 	static void beforeAll() {
@@ -34,6 +35,8 @@ class CassandraUtilsTest {
 
 		cassandra = new CassandraContainer<>("cassandra:4.1");
 		cassandra.start();
+
+		uri = String.format("cassandra://%s:%d", cassandra.getHost(), cassandra.getFirstMappedPort());
 	}
 
 	@BeforeEach
@@ -95,8 +98,7 @@ class CassandraUtilsTest {
 	void shouldValidateConnectionSuccessfully() {
 
 		CassandraUtils.validateConnection(
-				cassandra.getHost(),
-				cassandra.getFirstMappedPort(),
+				uri,
 				KEYSPACE);
 
 		assertTrue(Boolean.TRUE);
@@ -109,8 +111,7 @@ class CassandraUtilsTest {
 		var commands = CassandraUtils.getCommands("data/nosql/cassandra/file.cql");
 
 		CassandraUtils.validateCommands(
-				cassandra.getHost(),
-				cassandra.getFirstMappedPort(),
+				uri,
 				KEYSPACE,
 				commands);
 
@@ -124,8 +125,7 @@ class CassandraUtilsTest {
 		var commands = CassandraUtils.getCommands("data/nosql/cassandra/file.cql");
 
 		CassandraUtils.executeCommands(
-				cassandra.getHost(),
-				cassandra.getFirstMappedPort(),
+				uri,
 				KEYSPACE,
 				commands);
 

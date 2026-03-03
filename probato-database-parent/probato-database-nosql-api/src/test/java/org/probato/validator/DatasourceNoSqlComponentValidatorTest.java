@@ -38,6 +38,7 @@ class DatasourceNoSqlComponentValidatorTest {
 
 	private static MongoDBContainer mongo;
 
+	@SuppressWarnings("resource")
 	@BeforeAll
 	static void setup() {
 
