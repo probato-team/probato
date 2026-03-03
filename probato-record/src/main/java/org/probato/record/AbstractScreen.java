@@ -93,22 +93,22 @@ abstract class AbstractScreen {
 
 		Rectangle rectangle = null;
 
-        var principalGe = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        var screens = Stream.of(ge.getScreenDevices())
-        		.filter(item -> !item.equals(principalGe))
-        		.collect(Collectors.toList());
-        try {
+		var principalGe = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		var screens = Stream.of(ge.getScreenDevices())
+				.filter(item -> !item.equals(principalGe))
+				.collect(Collectors.toList());
+		try {
 
-        	if (Screen.PRIMARY.equals(screen)) {
-        		rectangle = principalGe.getDefaultConfiguration().getBounds();
-        	} else if (!screens.isEmpty()) {
-                rectangle = screens.get(0).getDefaultConfiguration().getBounds();
-            }
-        } catch (IndexOutOfBoundsException ex) {
-        	rectangle = principalGe.getDefaultConfiguration().getBounds();
-        }
+			if (Screen.PRIMARY.equals(screen)) {
+				rectangle = principalGe.getDefaultConfiguration().getBounds();
+			} else if (!screens.isEmpty()) {
+				rectangle = screens.get(0).getDefaultConfiguration().getBounds();
+			}
+		} catch (IndexOutOfBoundsException ex) {
+			rectangle = principalGe.getDefaultConfiguration().getBounds();
+		}
 
-        return rectangle;
-    }
+		return rectangle;
+	}
 }

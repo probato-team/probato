@@ -71,8 +71,8 @@ final class SeleniumFirefoxSession implements NativeBrowserSession<WebDriver> {
 	public void run() {
 
 		if (Objects.nonNull(driver)) {
-	        return;
-	    }
+			return;
+		}
 
 		driver = setup();
 		configure();
@@ -186,37 +186,37 @@ final class SeleniumFirefoxSession implements NativeBrowserSession<WebDriver> {
 
 	private Rectangle getScreenBounds(Screen screen) {
 
-        Rectangle result = null;
+		Rectangle result = null;
 
-        var principalGe = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        var screens = Stream
-        		.of(ge.getScreenDevices())
-        		.filter(item -> !item.equals(principalGe))
-        		.collect(Collectors.toList());
+		var principalGe = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		var screens = Stream
+				.of(ge.getScreenDevices())
+				.filter(item -> !item.equals(principalGe))
+				.collect(Collectors.toList());
 
-        try {
+		try {
 
-        	if (Screen.PRIMARY.equals(screen)) {
-        		result = principalGe
-        				.getDefaultConfiguration()
-        				.getBounds();
-        	} else if (!screens.isEmpty()) {
-                result = screens
-                		.get(0)
-                		.getDefaultConfiguration()
-                		.getBounds();
-            }
+			if (Screen.PRIMARY.equals(screen)) {
+				result = principalGe
+						.getDefaultConfiguration()
+						.getBounds();
+			} else if (!screens.isEmpty()) {
+				result = screens
+						.get(0)
+						.getDefaultConfiguration()
+						.getBounds();
+			}
 
-        } catch (IndexOutOfBoundsException ex) {
-        	result = principalGe.getDefaultConfiguration().getBounds();
-        }
+		} catch (IndexOutOfBoundsException ex) {
+			result = principalGe.getDefaultConfiguration().getBounds();
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 	private boolean isSecondary(Screen screen) {
-	    return !Screen.PRIMARY.equals(screen);
+		return !Screen.PRIMARY.equals(screen);
 	}
 
 }

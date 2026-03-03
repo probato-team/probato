@@ -51,7 +51,7 @@ class CassandraNoSqlProviderTest {
 
 		try (var session = CqlSession.builder()
 				.addContactPoint(cassandra.getContactPoint())
-	            .withLocalDatacenter(cassandra.getLocalDatacenter())
+				.withLocalDatacenter(cassandra.getLocalDatacenter())
 				.build()) {
 
 			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);

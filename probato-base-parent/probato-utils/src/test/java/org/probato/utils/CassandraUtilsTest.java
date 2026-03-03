@@ -31,7 +31,7 @@ class CassandraUtilsTest {
 
 		assumeTrue(
 				DockerSupport.isDockerAvailable(),
-	            "Docker not available - skipping Testcontainers tests");
+				"Docker not available - skipping Testcontainers tests");
 
 		cassandra = new CassandraContainer<>("cassandra:4.1");
 		cassandra.start();
@@ -44,7 +44,7 @@ class CassandraUtilsTest {
 
 		try (var session = CqlSession.builder()
 				.addContactPoint(cassandra.getContactPoint())
-	            .withLocalDatacenter(cassandra.getLocalDatacenter())
+				.withLocalDatacenter(cassandra.getLocalDatacenter())
 				.build()) {
 
 			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);

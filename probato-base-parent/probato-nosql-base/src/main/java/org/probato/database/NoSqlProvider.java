@@ -26,10 +26,10 @@ import org.probato.type.DatasourceType;
 public interface NoSqlProvider {
 
 	/**
-     * Returns the datasource type supported by this provider.
-     *
-     * @return the supported {@link DatasourceType}
-     */
+	 * Returns the datasource type supported by this provider.
+	 *
+	 * @return the supported {@link DatasourceType}
+	 */
 	DatasourceType getType();
 
 	/**
@@ -46,13 +46,13 @@ public interface NoSqlProvider {
 	void run(Class<?> clazz);
 
 	public static List<NoSqlProvider> getInstance(DatasourceType type) {
-		return ServiceLoader
-				.load(NoSqlProvider.class)
-				.stream()
-				.map(Provider::get)
-				.sorted(Comparator.comparing(serviceClazz -> serviceClazz.getClass().getPackageName().equals(DatasourceType.class.getClass().getPackageName()), Comparator.reverseOrder()))
-				.filter(component -> component.getType().equals(type))
-				.collect(Collectors.toList());
+		return ServiceLoader.load(NoSqlProvider.class).stream().map(Provider::get)
+				.sorted(Comparator
+						.comparing(
+								serviceClazz -> serviceClazz.getClass().getPackageName()
+										.equals(DatasourceType.class.getClass().getPackageName()),
+								Comparator.reverseOrder()))
+				.filter(component -> component.getType().equals(type)).collect(Collectors.toList());
 	}
 
 }

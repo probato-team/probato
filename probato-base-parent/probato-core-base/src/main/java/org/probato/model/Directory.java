@@ -8,10 +8,10 @@ public class Directory {
 
 	public Directory() {
 		this.temp = Paths.get(System.getProperty("user.home"))
-	             .resolve(".probato")
-	             .toAbsolutePath()
-	             .normalize()
-	             .toString();
+				.resolve(".probato")
+				.toAbsolutePath()
+				.normalize()
+				.toString();
 	}
 
 	public String getTemp() {

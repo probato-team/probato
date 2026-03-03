@@ -24,7 +24,7 @@ public final class EdgeBrowserProvider implements BrowserProvider {
 	 */
 	@Override
 	public BrowserSession createSession(BrowserSessionData data) {
-	    return EdgeSessionFactory.create(data);
+		return EdgeSessionFactory.create(data);
 	}
 
 }

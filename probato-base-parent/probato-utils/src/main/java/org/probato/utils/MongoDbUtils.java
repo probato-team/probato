@@ -49,19 +49,19 @@ public class MongoDbUtils {
 
 			String line;
 
-            while ((line = br.readLine()) != null) {
+			while ((line = br.readLine()) != null) {
 
-                var builder = new StringBuilder(line.trim());
+				var builder = new StringBuilder(line.trim());
 
-                removeComment("#", builder);
-                removeComment("//", builder);
+				removeComment("#", builder);
+				removeComment("//", builder);
 
-                if (StringUtils.isBlank(builder.toString())) {
-                    continue;
-                }
+				if (StringUtils.isBlank(builder.toString())) {
+					continue;
+				}
 
-                result.add(Document.parse(builder.toString()));
-            }
+				result.add(Document.parse(builder.toString()));
+			}
 		}
 
 		return result;

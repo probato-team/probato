@@ -13,10 +13,10 @@ package org.probato.browser;
 public interface NativeBrowserSession<T> extends BrowserSession {
 
 	/**
-     * Returns the native automation driver instance.
-     *
-     * @return native driver
-     */
+	 * Returns the native automation driver instance.
+	 *
+	 * @return native driver
+	 */
 	T driver();
 
 }

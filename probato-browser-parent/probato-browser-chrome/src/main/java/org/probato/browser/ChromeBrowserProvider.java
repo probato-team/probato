@@ -6,8 +6,8 @@ import org.probato.type.BrowserType;
  * Chrome browser provider implementation.
  *
  * <p>
- * This provider supports Chrome browser sessions and dynamically selects
- * the underlying automation framework (e.g. Selenium or Playwright).
+ * This provider supports Chrome browser sessions and dynamically selects the
+ * underlying automation framework (e.g. Selenium or Playwright).
  * </p>
  */
 public final class ChromeBrowserProvider implements BrowserProvider {
@@ -18,13 +18,14 @@ public final class ChromeBrowserProvider implements BrowserProvider {
 	}
 
 	/**
-	 * Creates a Chrome browser session based on the current execution configuration.
+	 * Creates a Chrome browser session based on the current execution
+	 * configuration.
 	 *
 	 * @throws IllegalStateException if no suitable automation engine is available
 	 */
 	@Override
 	public BrowserSession createSession(BrowserSessionData data) {
-	    return ChromeSessionFactory.create(data);
+		return ChromeSessionFactory.create(data);
 	}
 
 }
