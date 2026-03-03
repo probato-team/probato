@@ -28,47 +28,47 @@ class CassandraNoSqlProviderTest {
 
 	private static CassandraContainer<?> cassandra;
 
-//	@SuppressWarnings("resource")
-//	@BeforeAll
-//	static void setup() {
-//
-//		assumeTrue(
-//				DockerSupport.isDockerAvailable(),
-//				"Docker not available - skipping Testcontainers tests");
-//
-//		cassandra = new CassandraContainer<>("cassandra:4.1")
-//				.withStartupTimeout(Duration.ofMinutes(2))
-//				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
-//						.withPortBindings(new PortBinding(
-//								Ports.Binding.bindPort(9042),
-//								new ExposedPort(9042))));
-//
-//		cassandra.start();
-//	}
-//
-//	@BeforeEach
-//	void beforeEach() {
-//
-//		try (var session = CqlSession.builder()
-//				.addContactPoint(cassandra.getContactPoint())
-//	            .withLocalDatacenter(cassandra.getLocalDatacenter())
-//				.build()) {
-//
-//			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
-//
-//			session.execute(String.format(
-//					"CREATE KEYSPACE %s WITH replication = "
-//					+ "{'class':'SimpleStrategy','replication_factor':1}",
-//					KEYSPACE));
-//		}
-//	}
-//
-//	@AfterAll
-//	static void teardown() {
-//		if (cassandra != null) {
-//			cassandra.stop();
-//		}
-//	}
+	@SuppressWarnings("resource")
+	@BeforeAll
+	static void setup() {
+
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
+				"Docker not available - skipping Testcontainers tests");
+
+		cassandra = new CassandraContainer<>("cassandra:4.1")
+				.withStartupTimeout(Duration.ofMinutes(2))
+				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
+						.withPortBindings(new PortBinding(
+								Ports.Binding.bindPort(9042),
+								new ExposedPort(9042))));
+
+		cassandra.start();
+	}
+
+	@BeforeEach
+	void beforeEach() {
+
+		try (var session = CqlSession.builder()
+				.addContactPoint(cassandra.getContactPoint())
+	            .withLocalDatacenter(cassandra.getLocalDatacenter())
+				.build()) {
+
+			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
+
+			session.execute(String.format(
+					"CREATE KEYSPACE %s WITH replication = "
+					+ "{'class':'SimpleStrategy','replication_factor':1}",
+					KEYSPACE));
+		}
+	}
+
+	@AfterAll
+	static void teardown() {
+		if (cassandra != null) {
+			cassandra.stop();
+		}
+	}
 
 	@Test
 	@DisplayName("Should execute validator successfully")
