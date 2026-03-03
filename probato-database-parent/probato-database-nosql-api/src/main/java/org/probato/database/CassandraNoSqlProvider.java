@@ -5,7 +5,7 @@ import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.model.Datasource;
 import org.probato.type.DatasourceType;
-import org.probato.utils.MongoDbUtils;
+import org.probato.utils.CassandraUtils;
 
 public class CassandraNoSqlProvider implements NoSqlProvider {
 
@@ -31,8 +31,8 @@ public class CassandraNoSqlProvider implements NoSqlProvider {
 	private void executeNoSqlCommand(Datasource datasource, String slqFilepath) {
 		try {
 
-			var  documents = MongoDbUtils.getDocuments(slqFilepath);
-			MongoDbUtils.executeDocuments(
+			var  documents = CassandraUtils.getCommands(slqFilepath);
+			CassandraUtils.executeCommands(
 					datasource.getUrl(),
 					datasource.getDatabase(),
 					documents);
