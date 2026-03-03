@@ -2,6 +2,7 @@ package org.probato.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,45 +22,39 @@ import org.probato.test.suite.UC15_SuiteWithDatasourceNotFound;
 import org.probato.test.suite.UC17_SuiteWithoutUrl;
 import org.probato.test.suite.UC18_SuiteWithoutType;
 import org.probato.test.suite.UC19_SuiteWithoutDatabase;
+import org.probato.test.support.DockerSupport;
 import org.probato.type.ComponentValidatorType;
+import org.testcontainers.containers.MongoDBContainer;
 
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodProcess;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.MongodConfig;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.config.Timeout;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
+import com.mongodb.client.MongoClients;
 
 @DisplayName("UT - DatasourceNoSqlComponentValidator")
 class DatasourceNoSqlComponentValidatorTest {
 
-	private static MongodExecutable mongodExecutable;
-	private static MongodProcess mongodProcess;
+	private static final String DATABASE = "testdb";
+
+	private static MongoDBContainer mongo;
 
 	@BeforeAll
-	static void setup() throws Exception {
+	static void setup() {
 
-		var starter = MongodStarter.getDefaultInstance();
-		int port = 27017;
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
+				"Docker not available - skipping Testcontainers tests");
 
-		var mongodConfig = MongodConfig.builder()
-				.version(Version.Main.V6_0)
-				.timeout(new Timeout(2000))
-				.net(new Net(port, Network.localhostIsIPv6()))
-				.build();
+		mongo = new MongoDBContainer("mongo:6.0");
+		mongo.start();
 
-		mongodExecutable = starter.prepare(mongodConfig);
-		mongodProcess = mongodExecutable.start();
+		try (var client = MongoClients.create(mongo.getConnectionString())) {
+			client.getDatabase(DATABASE).listCollectionNames().first();
+		}
 	}
 
 	@AfterAll
 	static void teardown() {
-		if (mongodProcess != null)
-			mongodProcess.stop();
-		if (mongodExecutable != null)
-			mongodExecutable.stop();
+		if (mongo != null) {
+			mongo.stop();
+		}
 	}
 
 	@Test

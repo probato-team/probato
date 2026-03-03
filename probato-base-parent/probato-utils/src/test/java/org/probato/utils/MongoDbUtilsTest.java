@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.probato.test.datamodel.DockerSupport;
+import org.probato.test.support.DockerSupport;
 import org.testcontainers.containers.MongoDBContainer;
 
 import com.mongodb.client.MongoClients;

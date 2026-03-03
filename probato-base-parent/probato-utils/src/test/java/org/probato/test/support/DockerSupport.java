@@ -1,4 +1,4 @@
-package org.probato.test.datamodel;
+package org.probato.test.support;
 
 import org.testcontainers.DockerClientFactory;
 

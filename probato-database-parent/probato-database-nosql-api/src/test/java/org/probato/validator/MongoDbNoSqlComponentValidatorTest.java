@@ -2,6 +2,7 @@ package org.probato.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,17 +15,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.probato.exception.IntegrityException;
-import org.probato.type.ComponentValidatorType;
-
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodProcess;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.MongodConfig;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.config.Timeout;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
-
 import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
 import org.probato.test.suite.UC13_SuiteWithIgnoredProcedure;
@@ -32,34 +22,39 @@ import org.probato.test.suite.UC14_SuiteWithMongoNoSQL;
 import org.probato.test.suite.UC24_SuiteWithMongoNoSQLEmptyPath;
 import org.probato.test.suite.UC25_SuiteWithMongoNoSQLBlankPath;
 import org.probato.test.suite.UC26_SuiteWithMongoNoSQLNotFound;
+import org.probato.test.support.DockerSupport;
+import org.probato.type.ComponentValidatorType;
+import org.testcontainers.containers.MongoDBContainer;
+
+import com.mongodb.client.MongoClients;
 
 @DisplayName("UT - MongoDbNoSqlComponentValidator")
 class MongoDbNoSqlComponentValidatorTest {
 
-	private static MongodExecutable mongodExecutable;
-	private static MongodProcess mongodProcess;
+	private static final String DATABASE = "testdb";
+
+	private static MongoDBContainer mongo;
 
 	@BeforeAll
-	static void setup() throws Exception {
+	static void setup() {
 
-		var starter = MongodStarter.getDefaultInstance();
-		int port = 27017;
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
+				"Docker not available - skipping Testcontainers tests");
 
-		var mongodConfig = MongodConfig.builder()
-				.version(Version.Main.V6_0)
-				.timeout(new Timeout(2000))
-				.net(new Net(port, Network.localhostIsIPv6())).build();
+		mongo = new MongoDBContainer("mongo:6.0");
+		mongo.start();
 
-		mongodExecutable = starter.prepare(mongodConfig);
-		mongodProcess = mongodExecutable.start();
+		try (var client = MongoClients.create(mongo.getConnectionString())) {
+			client.getDatabase(DATABASE).listCollectionNames().first();
+		}
 	}
 
 	@AfterAll
 	static void teardown() {
-		if (mongodProcess != null)
-			mongodProcess.stop();
-		if (mongodExecutable != null)
-			mongodExecutable.stop();
+		if (mongo != null) {
+			mongo.stop();
+		}
 	}
 
 	@Test
