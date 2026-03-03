@@ -3,6 +3,7 @@ package org.probato.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
 
@@ -10,45 +11,38 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.probato.test.datamodel.DockerSupport;
+import org.testcontainers.containers.MongoDBContainer;
 
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodProcess;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.MongodConfig;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
-import de.flapdoodle.embed.mongo.config.Net;
+import com.mongodb.client.MongoClients;
 
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
-	private static final String URI = "mongodb://localhost:27017";
 	private static final String DATABASE = "testdb";
 
-	private static MongodExecutable mongodExecutable;
-	private static MongodProcess mongodProcess;
+	private static MongoDBContainer mongo;
 
 	@BeforeAll
-	static void setup() throws Exception {
+	static void setup() {
 
-		var starter = MongodStarter.getDefaultInstance();
-		int port = 27017;
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
+				"Docker not available - skipping Testcontainers tests");
 
-		var mongodConfig = MongodConfig.builder()
-				.version(Version.Main.V6_0)
-				.net(new Net(port, Network.localhostIsIPv6()))
-				.build();
+		mongo = new MongoDBContainer("mongo:6.0");
+		mongo.start();
 
-		mongodExecutable = starter.prepare(mongodConfig);
-		mongodProcess = mongodExecutable.start();
+		try (var client = MongoClients.create(mongo.getConnectionString())) {
+			client.getDatabase(DATABASE).listCollectionNames().first();
+		}
 	}
 
 	@AfterAll
 	static void teardown() {
-		if (mongodProcess != null)
-			mongodProcess.stop();
-		if (mongodExecutable != null)
-			mongodExecutable.stop();
+		if (mongo != null) {
+			mongo.stop();
+		}
 	}
 
 	@Test
@@ -85,7 +79,9 @@ class MongoDbUtilsTest {
 	@DisplayName("Should validate connection successfully")
 	void shouldValidateConnectionSuccessfully() {
 
-		MongoDbUtils.validateConnection(URI, DATABASE);
+		MongoDbUtils.validateConnection(
+				mongo.getConnectionString(),
+				DATABASE);
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -96,7 +92,10 @@ class MongoDbUtilsTest {
 
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
-		MongoDbUtils.validateDocuments(URI, DATABASE, docs);
+		MongoDbUtils.validateDocuments(
+				mongo.getConnectionString(),
+				DATABASE,
+				docs);
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -107,7 +106,10 @@ class MongoDbUtilsTest {
 
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
-		MongoDbUtils.executeDocuments(URI, DATABASE, docs);
+		MongoDbUtils.executeDocuments(
+				mongo.getConnectionString(),
+				DATABASE,
+				docs);
 
 		assertTrue(Boolean.TRUE);
 	}

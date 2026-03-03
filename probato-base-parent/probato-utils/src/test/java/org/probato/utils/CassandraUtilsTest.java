@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
@@ -18,6 +19,8 @@ import org.probato.test.datamodel.DockerSupport;
 import org.testcontainers.containers.CassandraContainer;
 
 import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
+import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
 
 @DisplayName("UT - CassandraUtils")
 class CassandraUtilsTest {
@@ -33,18 +36,21 @@ class CassandraUtilsTest {
 				DockerSupport.isDockerAvailable(),
 	            "Docker not available - skipping Testcontainers tests");
 
-		cassandra = new CassandraContainer<>("cassandra:4.1")
-				.withStartupTimeout(Duration.ofMinutes(2));
-
+		cassandra = new CassandraContainer<>("cassandra:4.1");
 		cassandra.start();
 	}
 
 	@BeforeEach
-	void beforeEach() throws InterruptedException {
+	void beforeEach() {
 
 		try (var session = CqlSession.builder()
-				.addContactPoint(cassandra.getContactPoint())
-	            .withLocalDatacenter(cassandra.getLocalDatacenter())
+				.addContactPoint(new InetSocketAddress("localhost", 9042))
+	            .withLocalDatacenter("datacenter1")
+	            .withConfigLoader(
+                    DriverConfigLoader.programmaticBuilder()
+                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(15))
+                        .build()
+                )
 				.build()) {
 
 			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
@@ -53,10 +59,6 @@ class CassandraUtilsTest {
 					"CREATE KEYSPACE %s WITH replication = "
 					+ "{'class':'SimpleStrategy','replication_factor':1}",
 					KEYSPACE));
-
-			while (!session.checkSchemaAgreement()) {
-	            Thread.sleep(200);
-	        }
 		}
 	}
 
@@ -103,7 +105,8 @@ class CassandraUtilsTest {
 
 		CassandraUtils.validateConnection(
 				cassandra.getHost(),
-				cassandra.getFirstMappedPort());
+				cassandra.getFirstMappedPort(),
+				KEYSPACE);
 
 		assertTrue(Boolean.TRUE);
 	}

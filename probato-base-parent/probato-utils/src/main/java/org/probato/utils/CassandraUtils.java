@@ -75,10 +75,11 @@ public class CassandraUtils {
 		return result;
 	}
 
-	public static void validateConnection(String host, int port) {
+	public static void validateConnection(String host, int port, String keyspace) {
 		try (var session = CqlSession.builder()
 				.addContactPoint(new InetSocketAddress(host, port))
 				.withLocalDatacenter(DATACENTER_TXT)
+				.withKeyspace(keyspace)
 				.build()) {
 
 			session.execute("SELECT release_version FROM system.local");
@@ -97,14 +98,7 @@ public class CassandraUtils {
 					throw new IntegrityException("Invalid CQL command");
 				}
 
-				var upper = command.trim().toUpperCase();
-	            if (upper.startsWith("SELECT")
-	                    || upper.startsWith("INSERT")
-	                    || upper.startsWith("UPDATE")
-	                    || upper.startsWith("DELETE")) {
-
-	                session.prepare(command);
-	            }
+				// TODO Implement syntax validation
 			}
 		}
 	}

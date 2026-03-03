@@ -1,8 +1,8 @@
 -- Create table
-CREATE TABLE testks.users (
+CREATE TABLE users (
     id UUID PRIMARY KEY,
     name TEXT
 );
 
-INSERT INTO testks.users (id, name)
+INSERT INTO users (id, name)
 VALUES (uuid(), 'User 01');
