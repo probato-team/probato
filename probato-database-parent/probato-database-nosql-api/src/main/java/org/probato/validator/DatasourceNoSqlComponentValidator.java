@@ -20,6 +20,8 @@ public class DatasourceNoSqlComponentValidator extends ComponentValidator {
 	private static final String DATASOURCE_URL_REQUIRED = "Datasource ''{0}.url'' must be required in the '@NoSQL' annotation: ''{1}''";
 	private static final String DATASOURCE_TYPE_REQUIRED = "Datasource ''{0}.type'' must be required in the '@NoSQL' annotation: ''{1}''";
 	private static final String DATASOURCE_DATABASE_REQUIRED = "Datasource ''{0}.database'' must be required in the '@NoSQL' annotation: ''{1}''";
+	private static final String DATASOURCE_USERNAME_REQUIRED = "Datasource ''{0}.username'' must be required in the '@NoSQL' annotation: ''{1}''";
+	private static final String DATASOURCE_PASSWORD_REQUIRED = "Datasource ''{0}.password'' must be required in the '@NoSQL' annotation: ''{1}''";
 	private static final String DATASOURCE_VALIDATE_CONECTION = "Datasource ''{0}'' Invalid connection validation: ''{1}''";
 
 	@Override
@@ -88,18 +90,30 @@ public class DatasourceNoSqlComponentValidator extends ComponentValidator {
 			throw new IntegrityException(DATASOURCE_DATABASE_REQUIRED, datasourceName, getName(clazz));
 		}
 
+		if (StringUtils.isBlank(datasource.getUsername())) {
+			throw new IntegrityException(DATASOURCE_USERNAME_REQUIRED, datasourceName, getName(clazz));
+		}
+
+		if (StringUtils.isBlank(datasource.getPassword())) {
+			throw new IntegrityException(DATASOURCE_PASSWORD_REQUIRED, datasourceName, getName(clazz));
+		}
+
 		try {
 
 			if (DatasourceType.MONGODB.equals(datasource.getType())) {
 				MongoDbUtils.validateConnection(
 						datasource.getUrl(),
-						datasource.getDatabase());
+						datasource.getDatabase(),
+						datasource.getUsername(),
+						datasource.getPassword());
 			}
 
 			if (DatasourceType.CASSANDRA.equals(datasource.getType())) {
 				CassandraUtils.validateConnection(
 						datasource.getUrl(),
-						datasource.getDatabase());
+						datasource.getDatabase(),
+						datasource.getUsername(),
+						datasource.getPassword());
 			}
 
 		} catch (Exception ex) {

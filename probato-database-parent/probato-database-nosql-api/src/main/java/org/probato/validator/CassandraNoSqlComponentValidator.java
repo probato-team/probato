@@ -128,6 +128,8 @@ public class CassandraNoSqlComponentValidator extends ComponentValidator {
 			CassandraUtils.validateCommands(
 					datasource.getUrl(),
 					datasource.getDatabase(),
+					datasource.getUsername(),
+					datasource.getPassword(),
 					commands);
 
 		} catch (IOException ex) {

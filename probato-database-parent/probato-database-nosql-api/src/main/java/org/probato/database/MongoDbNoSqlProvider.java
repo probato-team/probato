@@ -35,6 +35,8 @@ public class MongoDbNoSqlProvider implements NoSqlProvider {
 			MongoDbUtils.executeDocuments(
 					datasource.getUrl(),
 					datasource.getDatabase(),
+					datasource.getUsername(),
+					datasource.getPassword(),
 					documents);
 
 		} catch (Exception ex) {

@@ -19,10 +19,13 @@ import com.mongodb.client.MongoClients;
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
-	private static final String DATABASE = "testdb";
+	private static final String USERNAME = "probato";
+	private static final String PASSWORD = "secret";
+	private static final String DATABASE = "probato";
 
 	private static MongoDBContainer mongo;
 
+	@SuppressWarnings("resource")
 	@BeforeAll
 	static void setup() {
 
@@ -30,7 +33,11 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:6.0");
+		mongo = new MongoDBContainer("mongo:6.0")
+				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
+				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
+				.withEnv("MONGO_INITDB_DATABASE", DATABASE);
+
 		mongo.start();
 
 		try (var client = MongoClients.create(mongo.getConnectionString())) {
@@ -81,6 +88,8 @@ class MongoDbUtilsTest {
 
 		MongoDbUtils.validateConnection(
 				mongo.getConnectionString(),
+				USERNAME,
+				PASSWORD,
 				DATABASE);
 
 		assertTrue(Boolean.TRUE);
@@ -95,6 +104,8 @@ class MongoDbUtilsTest {
 		MongoDbUtils.validateDocuments(
 				mongo.getConnectionString(),
 				DATABASE,
+				USERNAME,
+				PASSWORD,
 				docs);
 
 		assertTrue(Boolean.TRUE);
@@ -109,6 +120,8 @@ class MongoDbUtilsTest {
 		MongoDbUtils.executeDocuments(
 				mongo.getConnectionString(),
 				DATABASE,
+				USERNAME,
+				PASSWORD,
 				docs);
 
 		assertTrue(Boolean.TRUE);

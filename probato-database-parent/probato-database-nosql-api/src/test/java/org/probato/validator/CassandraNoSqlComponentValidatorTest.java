@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +28,7 @@ import org.probato.test.suite.UC29_SuiteWithCassandraNoSQLNotFound;
 import org.probato.test.support.DockerSupport;
 import org.probato.type.ComponentValidatorType;
 import org.testcontainers.containers.CassandraContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.github.dockerjava.api.model.ExposedPort;
@@ -36,7 +38,9 @@ import com.github.dockerjava.api.model.Ports;
 @DisplayName("UT - CassandraNoSqlComponentValidator")
 class CassandraNoSqlComponentValidatorTest {
 
-	private static final String KEYSPACE = "testks";
+	private static final String USERNAME = "admin";
+	private static final String PASSWORD = "pass123";
+	private static final String KEYSPACE = "system";
 
 	private static CassandraContainer<?> cassandra;
 
@@ -49,6 +53,9 @@ class CassandraNoSqlComponentValidatorTest {
 				"Docker not available - skipping Testcontainers tests");
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
+				.withEnv("CASSANDRA_AUTHENTICATOR", "PasswordAuthenticator")
+				.withEnv("CASSANDRA_AUTHORIZER", "CassandraAuthorizer")
+				.waitingFor(Wait.forListeningPort())
 				.withStartupTimeout(Duration.ofMinutes(2))
 				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
 						.withPortBindings(new PortBinding(
@@ -56,6 +63,29 @@ class CassandraNoSqlComponentValidatorTest {
 								new ExposedPort(9042))));
 
 		cassandra.start();
+
+		try (CqlSession session = CqlSession.builder()
+				.addContactPoint(
+						new InetSocketAddress(
+								cassandra.getHost(),
+								cassandra.getFirstMappedPort()))
+				.withLocalDatacenter(cassandra.getLocalDatacenter())
+				.withAuthCredentials("cassandra", "cassandra")
+				.build()) {
+
+			session.execute(String.format(
+					"CREATE KEYSPACE IF NOT EXISTS %s " +
+					"WITH replication = {'class':'SimpleStrategy','replication_factor':1}",
+					KEYSPACE));
+
+			session.execute(String.format(
+					"CREATE ROLE IF NOT EXISTS %s WITH PASSWORD = '%s' AND LOGIN = true",
+					USERNAME, PASSWORD));
+
+			session.execute(String.format(
+					"GRANT ALL PERMISSIONS ON KEYSPACE %s TO %s",
+					KEYSPACE, USERNAME));
+		}
 	}
 
 	@BeforeEach

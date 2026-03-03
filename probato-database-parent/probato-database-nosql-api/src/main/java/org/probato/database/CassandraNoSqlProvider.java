@@ -35,6 +35,8 @@ public class CassandraNoSqlProvider implements NoSqlProvider {
 			CassandraUtils.executeCommands(
 					datasource.getUrl(),
 					datasource.getDatabase(),
+					datasource.getUsername(),
+					datasource.getPassword(),
 					documents);
 
 		} catch (Exception ex) {

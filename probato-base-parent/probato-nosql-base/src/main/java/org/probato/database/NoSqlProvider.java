@@ -46,7 +46,9 @@ public interface NoSqlProvider {
 	void run(Class<?> clazz);
 
 	public static List<NoSqlProvider> getInstance(DatasourceType type) {
-		return ServiceLoader.load(NoSqlProvider.class).stream().map(Provider::get)
+		return ServiceLoader.load(NoSqlProvider.class)
+				.stream()
+				.map(Provider::get)
 				.sorted(Comparator
 						.comparing(
 								serviceClazz -> serviceClazz.getClass().getPackageName()

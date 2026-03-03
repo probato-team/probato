@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,15 +68,35 @@ public class MongoDbUtils {
 		return result;
 	}
 
-	public static void validateConnection(String uri, String database) {
-		try (var client = MongoClients.create(uri)) {
+	public static void validateConnection(String uri, String database, String username, String password) {
+
+		var parsed = URI.create(uri);
+		var url = buildMongoUri(
+				parsed.getHost(),
+				parsed.getPort(),
+				database,
+				username,
+				password,
+				database);
+
+		try (var client = MongoClients.create(url)) {
 			var db = client.getDatabase(database);
 			db.listCollectionNames().first();
 		}
 	}
 
-	public static void validateDocuments(String uri, String database, List<Document> documents) {
-		try (var client = MongoClients.create(uri)) {
+	public static void validateDocuments(String uri, String database, String username, String password, List<Document> documents) {
+
+		var parsed = URI.create(uri);
+		var url = buildMongoUri(
+				parsed.getHost(),
+				parsed.getPort(),
+				database,
+				username,
+				password,
+				database);
+
+		try (var client = MongoClients.create(url)) {
 			var db = client.getDatabase(database);
 			for (var document : documents) {
 
@@ -88,8 +109,18 @@ public class MongoDbUtils {
 		}
 	}
 
-	public static void executeDocuments(String uri, String database, List<Document> documents) {
-		try (var client = MongoClients.create(uri)) {
+	public static void executeDocuments(String uri, String database, String username, String password, List<Document> documents) {
+
+		var parsed = URI.create(uri);
+		var url = buildMongoUri(
+				parsed.getHost(),
+				parsed.getPort(),
+				database,
+				username,
+				password,
+				database);
+
+		try (var client = MongoClients.create(url)) {
 
 			var db = client.getDatabase(database);
 			for (var document : documents) {
@@ -117,6 +148,31 @@ public class MongoDbUtils {
 				}
 			}
 		}
+	}
+
+	public static String buildMongoUri(
+			String host,
+			int port,
+			String database,
+			String username,
+			String password,
+			String authSource
+	) {
+
+
+			if (authSource == null || authSource.isBlank()) {
+				authSource = database;
+			}
+
+			return String.format(
+					"mongodb://%s:%s@%s:%d/%s?authSource=%s",
+					username,
+					password,
+					host,
+					port,
+					database,
+					authSource
+			);
 	}
 
 	private static void removeComment(String comment, StringBuilder builder) {

@@ -129,6 +129,8 @@ public class MongoDbNoSqlComponentValidator extends ComponentValidator {
 			MongoDbUtils.validateDocuments(
 					datasource.getUrl(),
 					datasource.getDatabase(),
+					datasource.getUsername(),
+					datasource.getPassword(),
 					commands);
 
 		} catch (IOException ex) {
