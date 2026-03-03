@@ -28,7 +28,8 @@ class CassandraUtilsTest {
 	@BeforeAll
 	static void beforeEach() {
 
-		assumeTrue(DockerSupport.isDockerAvailable(),
+		assumeTrue(
+				DockerSupport.isDockerAvailable(),
 	            "Docker not available - skipping Testcontainers tests");
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
@@ -42,6 +43,17 @@ class CassandraUtilsTest {
 
 			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
 
+
+			session.execute(String.format(
+					"CREATE KEYSPACE %s WITH replication = "
+					+ "{'class':'SimpleStrategy','replication_factor':1}",
+					KEYSPACE));
+
+			session.execute(String.format(
+					"CREATE TABLE %s.users ("
+					+ "id UUID PRIMARY KEY, "
+					+ "name TEXT)",
+					KEYSPACE));
 		}
 	}
 
@@ -102,7 +114,7 @@ class CassandraUtilsTest {
 		CassandraUtils.validateCommands(
 				cassandra.getHost(),
 				cassandra.getFirstMappedPort(),
-				"system",
+				KEYSPACE,
 				commands);
 
 		assertTrue(Boolean.TRUE);
@@ -112,13 +124,13 @@ class CassandraUtilsTest {
 	@DisplayName("Should execute documents successfully")
 	void shouldExecuteDocumentsSuccessfully() throws IOException {
 
-//		var commands = CassandraUtils.getCommands("data/nosql/cassandra/file.cql");
+		var commands = CassandraUtils.getCommands("data/nosql/cassandra/file.cql");
 
-//		CassandraUtils.executeCommands(
-//				cassandra.getHost(),
-//				cassandra.getFirstMappedPort(),
-//				"system",
-//				commands);
+		CassandraUtils.executeCommands(
+				cassandra.getHost(),
+				cassandra.getFirstMappedPort(),
+				KEYSPACE,
+				commands);
 
 		assertTrue(Boolean.TRUE);
 	}
