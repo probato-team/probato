@@ -96,7 +96,15 @@ public class CassandraUtils {
 				if (StringUtils.isBlank(command)) {
 					throw new IntegrityException("Invalid CQL command");
 				}
-				session.prepare(command);
+
+				var upper = command.trim().toUpperCase();
+	            if (upper.startsWith("SELECT")
+	                    || upper.startsWith("INSERT")
+	                    || upper.startsWith("UPDATE")
+	                    || upper.startsWith("DELETE")) {
+
+	                session.prepare(command);
+	            }
 			}
 		}
 	}
