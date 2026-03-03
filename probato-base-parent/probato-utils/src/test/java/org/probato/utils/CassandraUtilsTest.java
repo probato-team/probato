@@ -28,7 +28,7 @@ import com.github.dockerjava.api.model.Ports;
 class CassandraUtilsTest {
 
 	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "pass123";
+	private static final String PASSWORD = "secret";
 	private static final String KEYSPACE = "probato";
 
 	private static CassandraContainer<?> cassandra;

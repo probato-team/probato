@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.bson.Document;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -21,11 +23,10 @@ class MongoDbUtilsTest {
 
 	private static final String USERNAME = "probato";
 	private static final String PASSWORD = "secret";
-	private static final String DATABASE = "probato";
+	private static final String DATABASE = "testdb";
 
 	private static MongoDBContainer mongo;
 
-	@SuppressWarnings("resource")
 	@BeforeAll
 	static void setup() {
 
@@ -33,15 +34,21 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:6.0")
-				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
-				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
-				.withEnv("MONGO_INITDB_DATABASE", DATABASE);
-
+		mongo = new MongoDBContainer("mongo:6.0");
 		mongo.start();
 
 		try (var client = MongoClients.create(mongo.getConnectionString())) {
+
 			client.getDatabase(DATABASE).listCollectionNames().first();
+
+			var adminDb = client.getDatabase("admin");
+
+			adminDb.runCommand(
+					new Document("createUser", USERNAME)
+						.append("pwd", PASSWORD)
+						.append("roles", List.of(
+							new Document("role", "readWrite")
+								.append("db", "testdb"))));
 		}
 	}
 
