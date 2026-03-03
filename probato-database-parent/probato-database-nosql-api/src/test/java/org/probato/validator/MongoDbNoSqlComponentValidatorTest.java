@@ -26,6 +26,9 @@ import org.probato.test.support.DockerSupport;
 import org.probato.type.ComponentValidatorType;
 import org.testcontainers.containers.MongoDBContainer;
 
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 import com.mongodb.client.MongoClients;
 
 @DisplayName("UT - MongoDbNoSqlComponentValidator")
@@ -42,7 +45,13 @@ class MongoDbNoSqlComponentValidatorTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:6.0");
+		mongo = new MongoDBContainer("mongo:6.0")
+				.withExposedPorts(27017)
+				.withCreateContainerCmdModifier(cmd -> cmd.withHostConfig(cmd.getHostConfig()
+						.withPortBindings(new PortBinding(
+								Ports.Binding.bindPort(27017),
+								new ExposedPort(27017)))));
+
 		mongo.start();
 
 		try (var client = MongoClients.create(mongo.getConnectionString())) {
