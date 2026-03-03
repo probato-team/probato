@@ -29,7 +29,7 @@ class CassandraUtilsTest {
 
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "pass123";
-	private static final String KEYSPACE = "system";
+	private static final String KEYSPACE = "probato";
 
 	private static CassandraContainer<?> cassandra;
 	private static String uri;
