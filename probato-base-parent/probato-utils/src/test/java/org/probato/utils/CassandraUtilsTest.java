@@ -11,6 +11,7 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.datamodel.DockerSupport;
@@ -26,7 +27,7 @@ class CassandraUtilsTest {
 	private static CassandraContainer<?> cassandra;
 
 	@BeforeAll
-	static void beforeEach() {
+	static void beforeAll() {
 
 		assumeTrue(
 				DockerSupport.isDockerAvailable(),
@@ -34,7 +35,12 @@ class CassandraUtilsTest {
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
 				.withStartupTimeout(Duration.ofMinutes(2));
+
 		cassandra.start();
+	}
+
+	@BeforeEach
+	void beforeEach() {
 
 		try (var session = CqlSession.builder()
 				.addContactPoint(cassandra.getContactPoint())
@@ -43,16 +49,9 @@ class CassandraUtilsTest {
 
 			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
 
-
 			session.execute(String.format(
 					"CREATE KEYSPACE %s WITH replication = "
 					+ "{'class':'SimpleStrategy','replication_factor':1}",
-					KEYSPACE));
-
-			session.execute(String.format(
-					"CREATE TABLE %s.users ("
-					+ "id UUID PRIMARY KEY, "
-					+ "name TEXT)",
 					KEYSPACE));
 		}
 	}
