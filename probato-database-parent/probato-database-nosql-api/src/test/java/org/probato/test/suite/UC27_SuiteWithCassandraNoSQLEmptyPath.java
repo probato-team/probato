@@ -4,12 +4,12 @@ import org.probato.api.NoSQL;
 import org.probato.api.Suite;
 
 @NoSQL(
-	datasource = "probato",
-	scriptPath = { "", "" })
+	datasource = "probato-cassandra",
+	scriptPath = {})
 @Suite(
-	code = "UC25",
-	name = "Suite 25",
+	code = "UC24",
+	name = "Suite 24",
 	description = "This a simple test")
-public class UC25_SuiteWithSQLBlankPath {
+public class UC27_SuiteWithCassandraNoSQLEmptyPath {
 
 }

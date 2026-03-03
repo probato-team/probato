@@ -16,9 +16,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.probato.exception.IntegrityException;
 import org.probato.test.suite.UC09_SuiteIgnored;
 import org.probato.test.suite.UC12_SuiteWithIgnoredScript;
-import org.probato.test.suite.UC14_SuiteWithNoSQL;
+import org.probato.test.suite.UC14_SuiteWithMongoNoSQL;
 import org.probato.test.suite.UC15_SuiteWithDatasourceNotFound;
 import org.probato.test.suite.UC17_SuiteWithoutUrl;
+import org.probato.test.suite.UC18_SuiteWithoutType;
 import org.probato.test.suite.UC19_SuiteWithoutDatabase;
 import org.probato.type.ComponentValidatorType;
 
@@ -27,11 +28,12 @@ import de.flapdoodle.embed.mongo.MongodProcess;
 import de.flapdoodle.embed.mongo.MongodStarter;
 import de.flapdoodle.embed.mongo.config.MongodConfig;
 import de.flapdoodle.embed.mongo.config.Net;
+import de.flapdoodle.embed.mongo.config.Timeout;
 import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 
 @DisplayName("UT - DatasourceNoSqlComponentValidator")
-class DatasourceSqlComponentValidatorTest {
+class DatasourceNoSqlComponentValidatorTest {
 
 	private static MongodExecutable mongodExecutable;
 	private static MongodProcess mongodProcess;
@@ -44,7 +46,9 @@ class DatasourceSqlComponentValidatorTest {
 
 		var mongodConfig = MongodConfig.builder()
 				.version(Version.Main.V6_0)
-				.net(new Net(port, Network.localhostIsIPv6())).build();
+				.timeout(new Timeout(2000))
+				.net(new Net(port, Network.localhostIsIPv6()))
+				.build();
 
 		mongodExecutable = starter.prepare(mongodConfig);
 		mongodProcess = mongodExecutable.start();
@@ -67,7 +71,7 @@ class DatasourceSqlComponentValidatorTest {
 				.filter(DatasourceNoSqlComponentValidator.class::isInstance)
 				.collect(Collectors.toList());
 
-		validators.forEach(validator -> validator.execute(UC14_SuiteWithNoSQL.class));
+		validators.forEach(validator -> validator.execute(UC14_SuiteWithMongoNoSQL.class));
 
 		assertEquals(1, validators.size());
 	}
@@ -124,6 +128,9 @@ class DatasourceSqlComponentValidatorTest {
 				Arguments.of(
 						UC17_SuiteWithoutUrl.class,
 						"Datasource 'without-url.url' must be required in the @NoSQL annotation: 'org.probato.test.suite.UC17_SuiteWithoutUrl'"),
+				Arguments.of(
+						UC18_SuiteWithoutType.class,
+						"Datasource 'without-type.type' must be required in the @NoSQL annotation: 'org.probato.test.suite.UC18_SuiteWithoutType'"),
 				Arguments.of(
 						UC19_SuiteWithoutDatabase.class,
 						"Datasource 'without-database.database' must be required in the @NoSQL annotation: 'org.probato.test.suite.UC19_SuiteWithoutDatabase'"));

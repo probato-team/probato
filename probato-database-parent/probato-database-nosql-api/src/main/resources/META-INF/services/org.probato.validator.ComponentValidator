@@ -1,2 +1,3 @@
 org.probato.validator.DatasourceNoSqlComponentValidator
-org.probato.validator.DatabaseNoSqlComponentValidator
+org.probato.validator.MongoDbNoSqlComponentValidator
+org.probato.validator.CassandraNoSqlComponentValidator

@@ -1,6 +1,4 @@
-
 execution:
-
     screen: PRIMARY
 
     delay:
@@ -22,30 +20,40 @@ execution:
         submit: TRUE
 
 browsers:
+    - type: CHROME
+      headless: TRUE
+      dimension:
+          mode: FULLSCREEN
 
--  type: CHROME
-   headless: TRUE
-   dimension:
-      mode: FULLSCREEN
+    - type: FIREFOX
+      dimension:
+          mode: MAXIMIZED
 
--  type: FIREFOX
-   dimension:
-      mode: MAXIMIZED
-
--  type: EDGE
-   dimension:
-      mode: CUSTOM
-      width: 800
-      height: 600
+    - type: EDGE
+      dimension:
+          mode: CUSTOM
+          width: 800
+          height: 600
 
 datasources:
+    probato-mongo:
+        url: mongodb://localhost:27017
+        type: MONGODB
+        database: testdb
 
-   probato:
-      url: mongodb://localhost:27017
-      database: testdb
+    probato-cassandra:
+        url: mongodb://localhost:27017
+        type: CASSANDRA
+        database: testdb
 
-   without-url:
-      database: testdb
+    without-url:
+        database: testdb
+        type: MONGODB
 
-   without-database:
-      url: mongodb://localhost:27017
+    without-type:
+        url: mongodb://localhost:27017
+        database: testdb
+
+    without-database:
+        url: mongodb://localhost:27017
+        type: MONGODB

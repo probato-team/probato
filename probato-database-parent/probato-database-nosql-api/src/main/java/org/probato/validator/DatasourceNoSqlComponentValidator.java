@@ -8,7 +8,8 @@ import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.type.ComponentValidatorType;
-import org.probato.utils.NoSqlUtils;
+import org.probato.type.DatasourceType;
+import org.probato.utils.MongoDbUtils;
 import org.probato.utils.StringUtils;
 
 public class DatasourceNoSqlComponentValidator extends ComponentValidator {
@@ -16,6 +17,7 @@ public class DatasourceNoSqlComponentValidator extends ComponentValidator {
 	private static final String DATASOURCE_NAME_REQUIRED = "Datasource name must be required in the '@NoSQL' annotation: ''{0}''";
 	private static final String DATASOURCE_NOT_FOUND = "Datasource ''{0}'' not fount";
 	private static final String DATASOURCE_URL_REQUIRED = "Datasource ''{0}.url'' must be required in the '@NoSQL' annotation: ''{1}''";
+	private static final String DATASOURCE_TYPE_REQUIRED = "Datasource ''{0}.type'' must be required in the '@NoSQL' annotation: ''{1}''";
 	private static final String DATASOURCE_DATABASE_REQUIRED = "Datasource ''{0}.database'' must be required in the '@NoSQL' annotation: ''{1}''";
 	private static final String DATASOURCE_VALIDATE_CONECTION = "Datasource ''{0}'' Invalid connection validation: ''{1}''";
 
@@ -77,15 +79,25 @@ public class DatasourceNoSqlComponentValidator extends ComponentValidator {
 			throw new IntegrityException(DATASOURCE_URL_REQUIRED, datasourceName, getName(clazz));
 		}
 
+		if (Objects.isNull(datasource.getType())) {
+			throw new IntegrityException(DATASOURCE_TYPE_REQUIRED, datasourceName, getName(clazz));
+		}
+
 		if (StringUtils.isBlank(datasource.getDatabase())) {
 			throw new IntegrityException(DATASOURCE_DATABASE_REQUIRED, datasourceName, getName(clazz));
 		}
 
 		try {
 
-			NoSqlUtils.validateConnection(
-					datasource.getUrl(),
-					datasource.getDatabase());
+			if (DatasourceType.MONGODB.equals(datasource.getType())) {
+				MongoDbUtils.validateConnection(
+						datasource.getUrl(),
+						datasource.getDatabase());
+			}
+
+			if (DatasourceType.CASSANDRA.equals(datasource.getType())) {
+
+			}
 
 		} catch (Exception ex) {
 			throw new IntegrityException(DATASOURCE_VALIDATE_CONECTION, datasourceName, ex.getMessage());

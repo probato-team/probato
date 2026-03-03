@@ -15,12 +15,12 @@ import org.probato.exception.IntegrityException;
 
 import com.mongodb.client.MongoClients;
 
-public class NoSqlUtils {
+public class MongoDbUtils {
 
 	private static final String EXT_JSON_FILE = ".json";
 	private static final String COLLECTION_TXT = "collection";
 
-	private NoSqlUtils() {}
+	private MongoDbUtils() {}
 
 	public static boolean isValidFile(String pathname) {
 		return Arrays.stream(getNoSqlFiles(pathname))
@@ -92,30 +92,28 @@ public class NoSqlUtils {
 		try (var client = MongoClients.create(uri)) {
 
 			var db = client.getDatabase(database);
-
 			for (var document : documents) {
 
 				var collection = document.getString(COLLECTION_TXT);
 				var operation = document.getString("operation");
-
 				var mongoCollection = db.getCollection(collection);
 
 				switch (operation) {
 
-				case "insertOne":
-					mongoCollection.insertOne((Document) document.get("document"));
-					break;
+					case "insertOne":
+						mongoCollection.insertOne((Document) document.get("document"));
+						break;
 
-				case "deleteMany":
-					mongoCollection.deleteMany((Document) document.get("filter"));
-					break;
+					case "deleteMany":
+						mongoCollection.deleteMany((Document) document.get("filter"));
+						break;
 
-				case "updateMany":
-					mongoCollection.updateMany((Document) document.get("filter"), (Document) document.get("update"));
-					break;
+					case "updateMany":
+						mongoCollection.updateMany((Document) document.get("filter"), (Document) document.get("update"));
+						break;
 
-				default:
-					throw new IntegrityException("Operation not supported: {0}", operation);
+					default:
+						throw new IntegrityException("Operation not supported: {0}", operation);
 				}
 			}
 		}

@@ -1,8 +1,11 @@
 package org.probato.model;
 
+import org.probato.type.DatasourceType;
+
 public class Datasource {
 
 	private String url;
+	private DatasourceType type;
 	private String database;
 	private String schema;
 	private String driver;
@@ -11,9 +14,10 @@ public class Datasource {
 
 	public Datasource() {}
 
-	public Datasource(String url, String database, String schema, String driver, String username, String password) {
+	public Datasource(String url, DatasourceType type, String database, String schema, String driver, String username, String password) {
 		this();
 		this.url = url;
+		this.type = type;
 		this.database = database;
 		this.schema = schema;
 		this.driver = driver;
@@ -24,6 +28,7 @@ public class Datasource {
 	public Datasource(DatasourceBuilder builder) {
 		this();
 		this.url = builder.url;
+		this.type = builder.type;
 		this.database = builder.database;
 		this.schema = builder.schema;
 		this.driver = builder.driver;
@@ -37,6 +42,14 @@ public class Datasource {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public DatasourceType getType() {
+		return type;
+	}
+
+	public void setType(DatasourceType type) {
+		this.type = type;
 	}
 
 	public String getDatabase() {
@@ -86,6 +99,7 @@ public class Datasource {
 	public static class DatasourceBuilder {
 
 		private String url;
+		private DatasourceType type;
 		private String database;
 		private String schema;
 		private String driver;
@@ -96,6 +110,11 @@ public class Datasource {
 
 		public DatasourceBuilder url(String url) {
 			this.url = url;
+			return this;
+		}
+
+		public DatasourceBuilder type(DatasourceType type) {
+			this.type = type;
 			return this;
 		}
 

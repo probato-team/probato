@@ -19,8 +19,8 @@ import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 import de.flapdoodle.embed.mongo.config.Net;
 
-@DisplayName("UT - NoSqlUtils")
-class NoSqlUtilsTest {
+@DisplayName("UT - MongoDbUtils")
+class MongoDbUtilsTest {
 
 	private static final String URI = "mongodb://localhost:27017";
 	private static final String DATABASE = "testdb";
@@ -36,7 +36,8 @@ class NoSqlUtilsTest {
 
 		var mongodConfig = MongodConfig.builder()
 				.version(Version.Main.V6_0)
-				.net(new Net(port, Network.localhostIsIPv6())).build();
+				.net(new Net(port, Network.localhostIsIPv6()))
+				.build();
 
 		mongodExecutable = starter.prepare(mongodConfig);
 		mongodProcess = mongodExecutable.start();
@@ -54,7 +55,7 @@ class NoSqlUtilsTest {
 	@DisplayName("Should file json valid successfully")
 	void shouldFileJsonValidSuccessfully() {
 
-		var value = NoSqlUtils.isValidFile("data/nosql/file.json");
+		var value = MongoDbUtils.isValidFile("data/nosql/mongo/file.json");
 
 		assertTrue(value);
 	}
@@ -63,7 +64,7 @@ class NoSqlUtilsTest {
 	@DisplayName("Should get file json successfully")
 	void shouldGetFileJsonSuccessfully() {
 
-		var value = NoSqlUtils.getNoSqlFiles("data/nosql/file.json");
+		var value = MongoDbUtils.getNoSqlFiles("data/nosql/mongo/file.json");
 
 		assertNotNull(value);
 		assertEquals(1, value.length);
@@ -73,7 +74,7 @@ class NoSqlUtilsTest {
 	@DisplayName("Should get document commands successfully")
 	void shouldGetDocumentsSuccessfully() throws IOException {
 
-		var value = NoSqlUtils.getDocuments("data/nosql/file.json");
+		var value = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
 		assertNotNull(value);
 		assertEquals(1, value.size());
@@ -84,7 +85,7 @@ class NoSqlUtilsTest {
 	@DisplayName("Should validate connection successfully")
 	void shouldValidateConnectionSuccessfully() {
 
-		NoSqlUtils.validateConnection(URI, DATABASE);
+		MongoDbUtils.validateConnection(URI, DATABASE);
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -93,9 +94,9 @@ class NoSqlUtilsTest {
 	@DisplayName("Should validate documents successfully")
 	void shouldValidateDocumentsSuccessfully() throws IOException {
 
-		var docs = NoSqlUtils.getDocuments("data/nosql/file.json");
+		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
-		NoSqlUtils.validateDocuments(URI, DATABASE, docs);
+		MongoDbUtils.validateDocuments(URI, DATABASE, docs);
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -104,9 +105,9 @@ class NoSqlUtilsTest {
 	@DisplayName("Should execute documents successfully")
 	void shouldExecuteDocumentsSuccessfully() throws IOException {
 
-		var docs = NoSqlUtils.getDocuments("data/nosql/file.json");
+		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
-		NoSqlUtils.executeDocuments(URI, DATABASE, docs);
+		MongoDbUtils.executeDocuments(URI, DATABASE, docs);
 
 		assertTrue(Boolean.TRUE);
 	}

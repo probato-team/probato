@@ -4,9 +4,9 @@ import org.probato.exception.IntegrityException;
 import org.probato.loader.ConfigurationContext;
 import org.probato.loader.NoSqlLoader;
 import org.probato.model.Datasource;
-import org.probato.utils.NoSqlUtils;
+import org.probato.utils.MongoDbUtils;
 
-public class DatabaseNoSqlProvider implements NoSqlProvider {
+public class MongoDbNoSqlProvider implements NoSqlProvider {
 
 	private static final String NOSQL_COMMAND_ERROR_MSG = "An error occurred while executing NoSQL command: ''{0}'' {1}";
 
@@ -25,8 +25,8 @@ public class DatabaseNoSqlProvider implements NoSqlProvider {
 	private void executeNoSqlCommand(Datasource datasource, String slqFilepath) {
 		try {
 
-			var  documents = NoSqlUtils.getDocuments(slqFilepath);
-			NoSqlUtils.executeDocuments(
+			var  documents = MongoDbUtils.getDocuments(slqFilepath);
+			MongoDbUtils.executeDocuments(
 					datasource.getUrl(),
 					datasource.getDatabase(),
 					documents);
