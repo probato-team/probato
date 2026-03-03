@@ -40,7 +40,7 @@ class CassandraUtilsTest {
 	}
 
 	@BeforeEach
-	void beforeEach() {
+	void beforeEach() throws InterruptedException {
 
 		try (var session = CqlSession.builder()
 				.addContactPoint(cassandra.getContactPoint())
@@ -53,6 +53,10 @@ class CassandraUtilsTest {
 					"CREATE KEYSPACE %s WITH replication = "
 					+ "{'class':'SimpleStrategy','replication_factor':1}",
 					KEYSPACE));
+
+			while (!session.checkSchemaAgreement()) {
+	            Thread.sleep(200);
+	        }
 		}
 	}
 
