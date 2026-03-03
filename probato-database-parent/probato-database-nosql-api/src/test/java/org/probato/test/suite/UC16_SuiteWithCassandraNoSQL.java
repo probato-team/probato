@@ -7,7 +7,7 @@ import org.probato.test.script.UC016TC01_ScriptWithCassandraNoSQL;
 
 @NoSQL(
 	datasource = "probato-cassandra",
-	scriptPath = { "data/nosql/cassandra/file.json" })
+	scriptPath = { "data/nosql/cassandra/file.cql" })
 @Suite(
 	code = "UC16",
 	name = "Suite 16",

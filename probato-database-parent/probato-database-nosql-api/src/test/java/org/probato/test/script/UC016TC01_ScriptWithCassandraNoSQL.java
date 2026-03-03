@@ -11,7 +11,7 @@ import org.probato.type.Relevance;
 @NoSQLs(
 	@NoSQL(
 		datasource = "probato-cassandra",
-		scriptPath = { "data/nosql/cassandra/file.json" }))
+		scriptPath = { "data/nosql/cassandra/file.cql" }))
 @Script(
 	code = "UC16TC01",
 	name = "Test case 16",
