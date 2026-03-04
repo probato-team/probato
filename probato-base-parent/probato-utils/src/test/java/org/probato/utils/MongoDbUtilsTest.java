@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,7 +40,8 @@ class MongoDbUtilsTest {
 				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
 				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
 				.withEnv("MONGO_INITDB_DATABASE", DATABASE)
-				.withExposedPorts(27017);
+				.withExposedPorts(27017)
+				.withStartupTimeout(Duration.ofMinutes(2));
 
 		mongo.start();
 

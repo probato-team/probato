@@ -11,7 +11,6 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.probato.test.support.DockerSupport;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
-import com.datastax.oss.driver.api.core.CqlSession;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
@@ -27,9 +25,9 @@ import com.github.dockerjava.api.model.Ports;
 @DisplayName("UT - CassandraUtils")
 class CassandraUtilsTest {
 
-	private static final String USERNAME = "probato";
-	private static final String PASSWORD = "probato123";
-	private static final String KEYSPACE = "testks";
+	private static final String USERNAME = "cassandra";
+	private static final String PASSWORD = "cassandra";
+	private static final String KEYSPACE = "system";
 
 	private static CassandraContainer<?> cassandra;
 	private static String uri;
@@ -58,22 +56,6 @@ class CassandraUtilsTest {
 		cassandra.start();
 
 		uri = String.format("cassandra://%s:%d", cassandra.getHost(), cassandra.getFirstMappedPort());
-	}
-
-	@BeforeEach
-	void beforeEach() {
-
-		try (var session = CqlSession.builder()
-				.addContactPoint(cassandra.getContactPoint())
-				.withLocalDatacenter(cassandra.getLocalDatacenter())
-				.withAuthCredentials("cassandra", "cassandra")
-				.build()) {
-
-			session.execute("DROP KEYSPACE IF EXISTS probato");
-			session.execute("CREATE KEYSPACE IF NOT EXISTS probato WITH replication = {'class':'SimpleStrategy','replication_factor':1}");
-			session.execute("CREATE ROLE IF NOT EXISTS probato WITH PASSWORD = 'probato123' AND LOGIN = true");
-			session.execute("GRANT ALL PERMISSIONS ON KEYSPACE testks TO probato");
-		}
 	}
 
 	@AfterAll
