@@ -32,7 +32,7 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:5.0")
+		mongo = new MongoDBContainer("mongo:8.2")
 				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
 				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
 				.withEnv("MONGO_INITDB_DATABASE", DATABASE)
