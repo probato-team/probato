@@ -20,12 +20,12 @@ import com.mongodb.client.MongoClients;
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
-	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "secret";
+	private static final String USERNAME = null;
+	private static final String PASSWORD = null;
 	private static final String DATABASE = "admin";
 
 	private static GenericContainer<?> mongo;
-	private static String uri = "mongodb://localhost:27017?authSource=admin";
+	private static String uri = "mongodb://localhost:27017";
 
 	@SuppressWarnings({ "resource", "rawtypes" })
 	@BeforeAll
