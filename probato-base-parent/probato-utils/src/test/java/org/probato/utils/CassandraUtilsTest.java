@@ -65,6 +65,7 @@ class CassandraUtilsTest {
 		try (var session = CqlSession.builder()
 				.addContactPoint(cassandra.getContactPoint())
 				.withLocalDatacenter(cassandra.getLocalDatacenter())
+				.withAuthCredentials(USERNAME, PASSWORD)
 				.build()) {
 
 			session.execute("DROP KEYSPACE IF EXISTS probato");
