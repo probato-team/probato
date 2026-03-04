@@ -43,11 +43,10 @@ class CassandraUtilsTest {
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
 				.withCommand(
-					"bash", "-c",
-					"sed -i 's/^authenticator:.*/authenticator: PasswordAuthenticator/' /etc/cassandra/cassandra.yaml && "
-					+ "sed -i 's/^authorizer:.*/authorizer: CassandraAuthorizer/' /etc/cassandra/cassandra.yaml && "
-					+ "docker-entrypoint.sh cassandra -f"
-			    )
+						"bash", "-c",
+						"sed -i 's/^authenticator:.*/authenticator: PasswordAuthenticator/' /etc/cassandra/cassandra.yaml && "
+						+ "sed -i 's/^authorizer:.*/authorizer: CassandraAuthorizer/' /etc/cassandra/cassandra.yaml && " +
+						"docker-entrypoint.sh cassandra -f")
 				.waitingFor(Wait.forListeningPort())
 				.withStartupTimeout(Duration.ofMinutes(2))
 				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()

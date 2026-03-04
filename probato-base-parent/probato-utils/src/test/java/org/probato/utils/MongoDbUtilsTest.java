@@ -25,7 +25,6 @@ class MongoDbUtilsTest {
 
 	private static MongoDBContainer mongo;
 
-	@SuppressWarnings("resource")
 	@BeforeAll
 	static void setup() {
 
@@ -33,11 +32,7 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:6.0")
-				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
-				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
-				.withEnv("MONGO_INITDB_DATABASE", DATABASE);
-
+		mongo = new MongoDBContainer("mongo:6.0");
 		mongo.start();
 
 		try (var client = MongoClients.create(mongo.getConnectionString())) {
