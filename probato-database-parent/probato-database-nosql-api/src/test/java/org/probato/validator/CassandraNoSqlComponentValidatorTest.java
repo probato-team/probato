@@ -4,14 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,17 +28,12 @@ import org.probato.type.ComponentValidatorType;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
-import com.datastax.oss.driver.api.core.CqlSession;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 
 @DisplayName("UT - CassandraNoSqlComponentValidator")
 class CassandraNoSqlComponentValidatorTest {
-
-	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "pass123";
-	private static final String KEYSPACE = "system";
 
 	private static CassandraContainer<?> cassandra;
 
@@ -63,46 +56,6 @@ class CassandraNoSqlComponentValidatorTest {
 								new ExposedPort(9042))));
 
 		cassandra.start();
-
-		try (CqlSession session = CqlSession.builder()
-				.addContactPoint(
-						new InetSocketAddress(
-								cassandra.getHost(),
-								cassandra.getFirstMappedPort()))
-				.withLocalDatacenter(cassandra.getLocalDatacenter())
-				.withAuthCredentials("cassandra", "cassandra")
-				.build()) {
-
-			session.execute(String.format(
-					"CREATE KEYSPACE IF NOT EXISTS %s " +
-					"WITH replication = {'class':'SimpleStrategy','replication_factor':1}",
-					KEYSPACE));
-
-			session.execute(String.format(
-					"CREATE ROLE IF NOT EXISTS %s WITH PASSWORD = '%s' AND LOGIN = true",
-					USERNAME, PASSWORD));
-
-			session.execute(String.format(
-					"GRANT ALL PERMISSIONS ON KEYSPACE %s TO %s",
-					KEYSPACE, USERNAME));
-		}
-	}
-
-	@BeforeEach
-	void beforeEach() {
-
-		try (var session = CqlSession.builder()
-				.addContactPoint(cassandra.getContactPoint())
-				.withLocalDatacenter(cassandra.getLocalDatacenter())
-				.build()) {
-
-			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
-
-			session.execute(String.format(
-					"CREATE KEYSPACE %s WITH replication = "
-					+ "{'class':'SimpleStrategy','replication_factor':1}",
-					KEYSPACE));
-		}
 	}
 
 	@AfterAll

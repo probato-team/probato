@@ -44,7 +44,9 @@ datasources:
     probato-cassandra:
         url: cassandra://localhost:9042
         type: CASSANDRA
-        database: testks
+        database: system
+        username: probato
+        password: secret
 
     without-url:
         database: testdb

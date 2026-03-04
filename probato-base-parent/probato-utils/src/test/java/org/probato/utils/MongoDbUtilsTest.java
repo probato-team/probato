@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.support.DockerSupport;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.MongoDBContainer;
 
 import com.mongodb.client.MongoClients;
 
@@ -25,10 +24,10 @@ class MongoDbUtilsTest {
 	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "testdb";
 
-	private static GenericContainer mongo;
+	private static GenericContainer<?> mongo;
 	private static String uri = "mongodb://localhost:27017";
 
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "rawtypes" })
 	@BeforeAll
 	static void setup() {
 

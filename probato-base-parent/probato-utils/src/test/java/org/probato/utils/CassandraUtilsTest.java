@@ -41,11 +41,8 @@ class CassandraUtilsTest {
 				"Docker not available - skipping Testcontainers tests");
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
-				.withCommand(
-						"bash", "-c",
-						"sed -i 's/^authenticator:.*/authenticator: PasswordAuthenticator/' /etc/cassandra/cassandra.yaml && "
-						+ "sed -i 's/^authorizer:.*/authorizer: CassandraAuthorizer/' /etc/cassandra/cassandra.yaml && " +
-						"docker-entrypoint.sh cassandra -f")
+				.withEnv("CASSANDRA_AUTHENTICATOR", "PasswordAuthenticator")
+				.withEnv("CASSANDRA_AUTHORIZER", "CassandraAuthorizer")
 				.waitingFor(Wait.forListeningPort())
 				.withStartupTimeout(Duration.ofMinutes(2))
 				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
