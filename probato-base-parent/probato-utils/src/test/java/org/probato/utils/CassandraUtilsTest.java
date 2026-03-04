@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
@@ -43,8 +42,12 @@ class CassandraUtilsTest {
 				"Docker not available - skipping Testcontainers tests");
 
 		cassandra = new CassandraContainer<>("cassandra:4.1")
-				.withEnv("CASSANDRA_AUTHENTICATOR", "PasswordAuthenticator")
-				.withEnv("CASSANDRA_AUTHORIZER", "CassandraAuthorizer")
+				.withCommand(
+					"bash", "-c",
+					"sed -i 's/^authenticator:.*/authenticator: PasswordAuthenticator/' /etc/cassandra/cassandra.yaml && "
+					+ "sed -i 's/^authorizer:.*/authorizer: CassandraAuthorizer/' /etc/cassandra/cassandra.yaml && "
+					+ "docker-entrypoint.sh cassandra -f"
+			    )
 				.waitingFor(Wait.forListeningPort())
 				.withStartupTimeout(Duration.ofMinutes(2))
 				.withCreateContainerCmdModifier(cmd -> cmd.getHostConfig()
