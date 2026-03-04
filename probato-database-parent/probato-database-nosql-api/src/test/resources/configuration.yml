@@ -37,16 +37,18 @@ browsers:
 
 datasources:
     probato-mongo:
-        url: mongodb://localhost:27017
+        url: mongodb://localhost:27017?authSource=admin
         type: MONGODB
-        database: testdb
+        database: admin
+        username: admin
+        password: secret
 
     probato-cassandra:
         url: cassandra://localhost:9042
         type: CASSANDRA
         database: system
-        username: probato
-        password: secret
+        username: cassandra
+        password: cassandra
 
     without-url:
         database: testdb
