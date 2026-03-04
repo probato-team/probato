@@ -15,17 +15,15 @@ import org.junit.jupiter.api.Test;
 import org.probato.test.support.DockerSupport;
 import org.testcontainers.containers.GenericContainer;
 
-import com.mongodb.client.MongoClients;
-
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
-	private static final String USERNAME = null;
-	private static final String PASSWORD = null;
+	private static final String USERNAME = "admin";
+	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "admin";
 
 	private static GenericContainer<?> mongo;
-	private static String uri = "mongodb://localhost:27017";
+	private static String uri = "mongodb://localhost:27017?authSource=admin";
 
 	@SuppressWarnings({ "resource", "rawtypes" })
 	@BeforeAll
@@ -43,10 +41,6 @@ class MongoDbUtilsTest {
 				.withStartupTimeout(Duration.ofMinutes(2));
 
 		mongo.start();
-
-		try (var client = MongoClients.create(uri)) {
-			client.getDatabase(DATABASE).listCollectionNames().first();
-		}
 	}
 
 	@AfterAll
