@@ -27,7 +27,7 @@ import com.github.dockerjava.api.model.Ports;
 @DisplayName("UT - CassandraUtils")
 class CassandraUtilsTest {
 
-	private static final String USERNAME = "admin";
+	private static final String USERNAME = "probato";
 	private static final String PASSWORD = "secret";
 	private static final String KEYSPACE = "probato";
 
@@ -54,29 +54,6 @@ class CassandraUtilsTest {
 
 		cassandra.start();
 
-		try (CqlSession session = CqlSession.builder()
-				.addContactPoint(
-						new InetSocketAddress(
-								cassandra.getHost(),
-								cassandra.getFirstMappedPort()))
-				.withLocalDatacenter(cassandra.getLocalDatacenter())
-				.withAuthCredentials("cassandra", "cassandra")
-				.build()) {
-
-			session.execute(String.format(
-					"CREATE KEYSPACE IF NOT EXISTS %s " +
-					"WITH replication = {'class':'SimpleStrategy','replication_factor':1}",
-					KEYSPACE));
-
-			session.execute(String.format(
-					"CREATE ROLE IF NOT EXISTS %s WITH PASSWORD = '%s' AND LOGIN = true",
-					USERNAME, PASSWORD));
-
-			session.execute(String.format(
-					"GRANT ALL PERMISSIONS ON KEYSPACE %s TO %s",
-					KEYSPACE, USERNAME));
-		}
-
 		uri = String.format("cassandra://%s:%d", cassandra.getHost(), cassandra.getFirstMappedPort());
 	}
 
@@ -88,12 +65,10 @@ class CassandraUtilsTest {
 				.withLocalDatacenter(cassandra.getLocalDatacenter())
 				.build()) {
 
-			session.execute("DROP KEYSPACE IF EXISTS " + KEYSPACE);
-
-			session.execute(String.format(
-					"CREATE KEYSPACE %s WITH replication = "
-					+ "{'class':'SimpleStrategy','replication_factor':1}",
-					KEYSPACE));
+			session.execute("DROP KEYSPACE IF EXISTS probato");
+			session.execute("CREATE KEYSPACE IF NOT EXISTS probato WITH replication = {'class':'SimpleStrategy','replication_factor':1}");
+			session.execute("CREATE ROLE IF NOT EXISTS probato WITH PASSWORD = 'secret' AND LOGIN = true");
+			session.execute("GRANT ALL PERMISSIONS ON ALL KEYSPACES TO probato");
 		}
 	}
 
