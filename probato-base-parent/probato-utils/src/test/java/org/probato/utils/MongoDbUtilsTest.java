@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.support.DockerSupport;
-import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.MongoDBContainer;
 
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
@@ -22,10 +22,9 @@ class MongoDbUtilsTest {
 	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "admin";
 
-	private static GenericContainer<?> mongo;
-	private static String uri = "mongodb://localhost:27017";
+	private static MongoDBContainer mongo;
 
-	@SuppressWarnings({ "resource", "rawtypes" })
+	@SuppressWarnings({ "resource" })
 	@BeforeAll
 	static void setup() {
 
@@ -33,7 +32,7 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new GenericContainer("mongo:6.0")
+		mongo = new MongoDBContainer("mongo:6.0")
 				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
 				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
 				.withEnv("MONGO_INITDB_DATABASE", DATABASE)
@@ -85,7 +84,7 @@ class MongoDbUtilsTest {
 	void shouldValidateConnectionSuccessfully() {
 
 		MongoDbUtils.validateConnection(
-				uri,
+				mongo.getReplicaSetUrl(),
 				USERNAME,
 				PASSWORD,
 				DATABASE);
@@ -100,7 +99,7 @@ class MongoDbUtilsTest {
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
 		MongoDbUtils.validateDocuments(
-				uri,
+				mongo.getReplicaSetUrl(),
 				DATABASE,
 				USERNAME,
 				PASSWORD,
@@ -116,7 +115,7 @@ class MongoDbUtilsTest {
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
 		MongoDbUtils.executeDocuments(
-				uri,
+				mongo.getReplicaSetUrl(),
 				DATABASE,
 				USERNAME,
 				PASSWORD,
