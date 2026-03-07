@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.support.DockerSupport;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MongoDBContainer;
 
 @DisplayName("UT - MongoDbUtils")
@@ -22,7 +23,7 @@ class MongoDbUtilsTest {
 	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "admin";
 
-	private static MongoDBContainer mongo;
+	private static GenericContainer<?> mongo;
 
 	@SuppressWarnings({ "resource" })
 	@BeforeAll
@@ -32,12 +33,11 @@ class MongoDbUtilsTest {
 				DockerSupport.isDockerAvailable(),
 				"Docker not available - skipping Testcontainers tests");
 
-		mongo = new MongoDBContainer("mongo:8.2")
-				.withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
-				.withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
-				.withEnv("MONGO_INITDB_DATABASE", DATABASE)
-				.withExposedPorts(27017)
-				.withStartupTimeout(Duration.ofMinutes(2));
+		mongo = new GenericContainer<>("mongo:6.0")
+		        .withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
+		        .withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
+		        .withExposedPorts(27017)
+		        .withStartupTimeout(Duration.ofMinutes(2));
 
 		mongo.start();
 	}
