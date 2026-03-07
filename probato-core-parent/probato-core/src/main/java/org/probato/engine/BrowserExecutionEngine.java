@@ -18,6 +18,7 @@ import org.probato.engine.procedure.ProcedureService;
 import org.probato.exception.ExecutionException;
 import org.probato.record.ScreenRecorder;
 import org.probato.service.BrowserService;
+import org.probato.service.NoSqlService;
 import org.probato.service.RecordService;
 import org.probato.service.SqlService;
 import org.probato.type.ExecutionStatus;
@@ -29,6 +30,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 	private final BrowserService browserService;
 	private final ProcedureService procedureService;
 	private final SqlService sqlService;
+	private final NoSqlService noSqlService;
 
 	private UUID executionId;
 	private ExecutionResult result;
@@ -43,6 +45,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		browserService = BrowserService.get();
 		procedureService = ProcedureService.get();
 		sqlService = SqlService.get();
+		noSqlService = NoSqlService.get();
 	}
 
 	@Override

@@ -40,8 +40,8 @@ final class PlaywrightFirefoxSession implements NativeBrowserSession<Page> {
 	public void run() {
 
 		if (Objects.nonNull(driver)) {
-	        return;
-	    }
+			return;
+		}
 
 		setup();
 		configure();
@@ -50,29 +50,29 @@ final class PlaywrightFirefoxSession implements NativeBrowserSession<Page> {
 	@Override
 	public void destroy() {
 
-	    if (context != null) {
-	        context.close();
-	        context = null;
-	    }
+		if (context != null) {
+			context.close();
+			context = null;
+		}
 
-	    if (browserInstance != null) {
-	        browserInstance.close();
-	        browserInstance = null;
-	    }
+		if (browserInstance != null) {
+			browserInstance.close();
+			browserInstance = null;
+		}
 
-	    if (playwright != null) {
-	        playwright.close();
-	        playwright = null;
-	    }
+		if (playwright != null) {
+			playwright.close();
+			playwright = null;
+		}
 
-	    driver = null;
+		driver = null;
 	}
 
 	@Override
 	public String description() {
 
 		if (Objects.isNull(driver)) {
-		    return "Mozilla Firefox (not started)";
+			return "Mozilla Firefox (not started)";
 		}
 
 		var browserName = "Mozilla Firefox";
@@ -126,7 +126,7 @@ final class PlaywrightFirefoxSession implements NativeBrowserSession<Page> {
 			contextOptions.setViewportSize(null);
 		}
 
-	    context = browserInstance.newContext(contextOptions);
+		context = browserInstance.newContext(contextOptions);
 		context.setDefaultTimeout(data.getDelay().getActionInterval());
 		context.setDefaultNavigationTimeout(data.getDelay().getWaitingTimeout());
 
@@ -152,7 +152,7 @@ final class PlaywrightFirefoxSession implements NativeBrowserSession<Page> {
 	}
 
 	private boolean shouldStartMaximized() {
-	    return data.getBrowser().getDimension().getMode() != DimensionMode.CUSTOM;
+		return data.getBrowser().getDimension().getMode() != DimensionMode.CUSTOM;
 	}
 
 	@SuppressWarnings("unchecked")

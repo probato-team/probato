@@ -32,6 +32,8 @@
 		<guava.version>33.3.1-jre</guava.version>
 		<xuggler.version>5.4</xuggler.version>
 		<h2.version>2.3.232</h2.version>
+		<mongodb.vesion>4.11.1</mongodb.vesion>
+		<cassandra.vesion>4.17.0</cassandra.vesion>
 	</properties>
 
 	<dependencyManagement>
@@ -185,12 +187,28 @@
 				<version>${log4j.version}</version>
 			</dependency>
 
-			<!-- Tests -->
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>bson</artifactId>
+				<version>${mongodb.vesion}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongodb-driver-sync</artifactId>
+				<version>${mongodb.vesion}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-core</artifactId>
+				<version>${cassandra.vesion}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 		</dependencies>

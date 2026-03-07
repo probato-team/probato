@@ -28,22 +28,22 @@ public class ProcedureDiscovery {
 				.stream()
 				.flatMap(List::stream)
 				.collect(Collectors.toList());
-    }
+	}
 
 	private List<ProcedureDefinition> discover(Class<?> scriptClazz, PhaseType phase) {
 
 		var order = 0;
 		var procedures = new ArrayList<ProcedureDefinition>();
 		var members = getMembers(scriptClazz, phase);
-        for (var member : members) {
-        	if (member instanceof Method) {
-        		procedures.add(ProcedureDefinition .forMethod(phase, (Method) member, order++));
-        	} else {
-        		procedures.add(ProcedureDefinition .forField(phase, (Field) member, order++));
-        	}
-        }
+		for (var member : members) {
+			if (member instanceof Method) {
+				procedures.add(ProcedureDefinition .forMethod(phase, (Method) member, order++));
+			} else {
+				procedures.add(ProcedureDefinition .forField(phase, (Field) member, order++));
+			}
+		}
 
-        return procedures;
+		return procedures;
 	}
 
 	private List<Object> getMembers(Class<?> scriptClazz, PhaseType phase) {

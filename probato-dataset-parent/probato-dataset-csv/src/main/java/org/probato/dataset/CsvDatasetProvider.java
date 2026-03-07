@@ -120,9 +120,9 @@ public class CsvDatasetProvider implements DatasetProvider {
 
 	private <T> CsvToBean<T> getObjectMapperBuilder(FileReader reader, Class<T> clazz) {
 		return new CsvToBeanBuilder<T>(reader)
-		          .withType(clazz)
-		          .withMappingStrategy(getObjectMapperStrategy(clazz))
-		          .build();
+				.withType(clazz)
+				.withMappingStrategy(getObjectMapperStrategy(clazz))
+				.build();
 	}
 
 	private <T> MappingStrategy<T> getObjectMapperStrategy(Class<T> clazz) {

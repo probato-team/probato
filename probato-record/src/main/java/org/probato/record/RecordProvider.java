@@ -12,13 +12,13 @@ import org.probato.type.Screen;
 public interface RecordProvider {
 
 	/**
-     * Create a screen recording.
-     */
+	 * Create a screen recording.
+	 */
 	ScreenRecorder createScreenRecord(Screen screen, Video video, Dimension dimension, String outputFile);
 
 	/**
-     * Create a screenshot.
-     */
+	 * Create a screenshot.
+	 */
 	Screenshot createScreenshot(Screen screen, Dimension dimension, String outputFile);
 
 }

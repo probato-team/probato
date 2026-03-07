@@ -36,15 +36,15 @@ class ChromeBrowserProviderIT {
 				() -> assertEquals(BrowserType.CHROME, provider.getType()),
 				() -> assertEquals(BrowserType.CHROME.description(), provider.getType().description()));
 
-        var session = provider.createSession(data);
+		var session = provider.createSession(data);
 
-        assertAll("Validate session",
-        		() -> assertNotNull(session),
-        		() -> assertNotNull(session.description()),
-        		() -> assertNotNull(session.version()));
+		assertAll("Validate session",
+				() -> assertNotNull(session),
+				() -> assertNotNull(session.description()),
+				() -> assertNotNull(session.version()));
 
-        session.run();
-        session.run();
+		session.run();
+		session.run();
 
 		var navigation = (NativeBrowserSession<WebDriver>) session;
 
@@ -53,7 +53,7 @@ class ChromeBrowserProviderIT {
 				() -> assertNotNull(session.description()),
 				() -> assertNotNull(session.version()));
 
-        session.destroy();
+		session.destroy();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -64,28 +64,28 @@ class ChromeBrowserProviderIT {
 
 		var provider = new ChromeBrowserProvider();
 
-        assertAll("Validate provider",
+		assertAll("Validate provider",
 				() -> assertNotNull(provider),
 				() -> assertEquals(BrowserType.CHROME, provider.getType()),
 				() -> assertEquals(BrowserType.CHROME.description(), provider.getType().description()));
 
-        var session = provider.createSession(data);
-        assertAll("Validate session",
-        		() -> assertNotNull(session),
-        		() -> assertNotNull(session.description()),
-        		() -> assertNotNull(session.version()));
+		var session = provider.createSession(data);
+		assertAll("Validate session",
+				() -> assertNotNull(session),
+				() -> assertNotNull(session.description()),
+				() -> assertNotNull(session.version()));
 
-        session.run();
-        session.run();
+		session.run();
+		session.run();
 
-        var navigation = (NativeBrowserSession<Page>) session;
+		var navigation = (NativeBrowserSession<Page>) session;
 
-        assertAll("Validate navigation",
+		assertAll("Validate navigation",
 				() -> assertNotNull(navigation.driver()),
 				() -> assertNotNull(session.description()),
 				() -> assertNotNull(session.version()));
 
-        session.destroy();
+		session.destroy();
 	}
 
 	private static Stream<Arguments> getParams() {

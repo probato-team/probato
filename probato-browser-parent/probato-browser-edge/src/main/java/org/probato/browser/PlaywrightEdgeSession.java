@@ -40,8 +40,8 @@ final class PlaywrightEdgeSession implements NativeBrowserSession<Page> {
 	public void run() {
 
 		if (Objects.nonNull(driver)) {
-	        return;
-	    }
+			return;
+		}
 
 		setup();
 		configure();
@@ -50,29 +50,29 @@ final class PlaywrightEdgeSession implements NativeBrowserSession<Page> {
 	@Override
 	public void destroy() {
 
-	    if (context != null) {
-	        context.close();
-	        context = null;
-	    }
+		if (context != null) {
+			context.close();
+			context = null;
+		}
 
-	    if (browserInstance != null) {
-	        browserInstance.close();
-	        browserInstance = null;
-	    }
+		if (browserInstance != null) {
+			browserInstance.close();
+			browserInstance = null;
+		}
 
-	    if (playwright != null) {
-	        playwright.close();
-	        playwright = null;
-	    }
+		if (playwright != null) {
+			playwright.close();
+			playwright = null;
+		}
 
-	    driver = null;
+		driver = null;
 	}
 
 	@Override
 	public String description() {
 
 		if (Objects.isNull(driver)) {
-		    return "Microsoft Edge (not started)";
+			return "Microsoft Edge (not started)";
 		}
 
 		var browserName = "Microsoft Edge";
@@ -113,9 +113,9 @@ final class PlaywrightEdgeSession implements NativeBrowserSession<Page> {
 		browserInstance = playwright.
 				chromium()
 				.launch(new BrowserType.LaunchOptions()
-		                .setChannel("msedge")
-		                .setHeadless(data.getBrowser().isHeadless())
-		                .setArgs(args));
+						.setChannel("msedge")
+						.setHeadless(data.getBrowser().isHeadless())
+						.setArgs(args));
 
 		var contextOptions = new Browser.NewContextOptions();
 		if (args.isEmpty()) {
@@ -128,7 +128,7 @@ final class PlaywrightEdgeSession implements NativeBrowserSession<Page> {
 			contextOptions.setViewportSize(null);
 		}
 
-	    context = browserInstance.newContext(contextOptions);
+		context = browserInstance.newContext(contextOptions);
 		context.setDefaultTimeout(data.getDelay().getActionInterval());
 		context.setDefaultNavigationTimeout(data.getDelay().getWaitingTimeout());
 
@@ -154,7 +154,7 @@ final class PlaywrightEdgeSession implements NativeBrowserSession<Page> {
 	}
 
 	private boolean shouldStartMaximized() {
-	    return data.getBrowser().getDimension().getMode() != DimensionMode.CUSTOM;
+		return data.getBrowser().getDimension().getMode() != DimensionMode.CUSTOM;
 	}
 
 	@SuppressWarnings("unchecked")

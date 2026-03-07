@@ -1,0 +1,2 @@
+org.probato.database.MongoDbNoSqlProvider
+org.probato.database.CassandraNoSqlProvider

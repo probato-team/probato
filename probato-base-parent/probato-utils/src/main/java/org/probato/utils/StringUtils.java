@@ -299,7 +299,7 @@ public class StringUtils {
 	}
 
 	public static boolean isBlank(CharSequence text) {
-        return org.apache.commons.lang3.StringUtils.isBlank(text);
-    }
+		return org.apache.commons.lang3.StringUtils.isBlank(text);
+	}
 
 }

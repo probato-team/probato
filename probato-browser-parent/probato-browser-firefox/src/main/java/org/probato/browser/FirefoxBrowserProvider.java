@@ -24,7 +24,7 @@ public final class FirefoxBrowserProvider implements BrowserProvider {
 	 */
 	@Override
 	public BrowserSession createSession(BrowserSessionData data) {
-	    return FirefoxSessionFactory.create(data);
+		return FirefoxSessionFactory.create(data);
 	}
 
 }

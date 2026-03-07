@@ -117,7 +117,8 @@ public interface DatasetProvider {
 	public default <T> T newInstance(Class<T> clazz) {
 		try {
 			return clazz.getConstructor().newInstance();
-		} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException e) {
+		} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException
+				| InstantiationException | IllegalAccessException e) {
 			throw new IntegrityException(MSG_MUST_DEFAULT_CONSTRUCTOR, clazz.getName());
 		}
 	}
