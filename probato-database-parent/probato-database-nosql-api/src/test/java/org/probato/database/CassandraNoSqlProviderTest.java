@@ -14,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.suite.UC16_SuiteWithCassandraNoSQL;
 import org.probato.test.support.DockerSupport;
+import org.probato.test.util.IgnoreIfWorkflow;
 import org.probato.type.DatasourceType;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -23,6 +24,7 @@ import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 
+@IgnoreIfWorkflow
 @DisplayName("UT - CassandraNoSqlProvider")
 class CassandraNoSqlProviderTest {
 
