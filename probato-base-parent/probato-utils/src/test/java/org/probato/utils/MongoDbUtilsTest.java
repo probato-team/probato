@@ -19,6 +19,7 @@ import org.testcontainers.containers.MongoDBContainer;
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
+	private static final String URI = "mongodb://localhost:27017?authSource=admin";
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "admin";
@@ -84,7 +85,7 @@ class MongoDbUtilsTest {
 	void shouldValidateConnectionSuccessfully() {
 
 		MongoDbUtils.validateConnection(
-				mongo.getReplicaSetUrl(),
+				URI,
 				USERNAME,
 				PASSWORD,
 				DATABASE);
@@ -99,7 +100,7 @@ class MongoDbUtilsTest {
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
 		MongoDbUtils.validateDocuments(
-				mongo.getReplicaSetUrl(),
+				URI,
 				DATABASE,
 				USERNAME,
 				PASSWORD,
@@ -115,7 +116,7 @@ class MongoDbUtilsTest {
 		var docs = MongoDbUtils.getDocuments("data/nosql/mongo/file.json");
 
 		MongoDbUtils.executeDocuments(
-				mongo.getReplicaSetUrl(),
+				URI,
 				DATABASE,
 				USERNAME,
 				PASSWORD,
