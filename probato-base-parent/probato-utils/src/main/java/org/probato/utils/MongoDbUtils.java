@@ -80,8 +80,7 @@ public class MongoDbUtils {
 				database);
 
 		try (var client = MongoClients.create(url)) {
-			var db = client.getDatabase(database);
-			db.listCollectionNames().first();
+			client.getDatabase(database);
 		}
 	}
 

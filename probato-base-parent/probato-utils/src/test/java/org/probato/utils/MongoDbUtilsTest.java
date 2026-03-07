@@ -3,52 +3,21 @@ package org.probato.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
-import java.time.Duration;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.probato.test.support.DockerSupport;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.MongoDBContainer;
+import org.probato.test.util.IgnoreIfWorkflow;
 
+@IgnoreIfWorkflow
 @DisplayName("UT - MongoDbUtils")
 class MongoDbUtilsTest {
 
-	private static final String URI = "mongodb://localhost:27017?authSource=admin";
+	private static final String URI = "mongodb://localhost:27017/authSource=admin";
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "secret";
 	private static final String DATABASE = "admin";
-
-	private static GenericContainer<?> mongo;
-
-	@SuppressWarnings({ "resource" })
-	@BeforeAll
-	static void setup() {
-
-		assumeTrue(
-				DockerSupport.isDockerAvailable(),
-				"Docker not available - skipping Testcontainers tests");
-
-		mongo = new GenericContainer<>("mongo:6.0")
-		        .withEnv("MONGO_INITDB_ROOT_USERNAME", USERNAME)
-		        .withEnv("MONGO_INITDB_ROOT_PASSWORD", PASSWORD)
-		        .withExposedPorts(27017)
-		        .withStartupTimeout(Duration.ofMinutes(2));
-
-		mongo.start();
-	}
-
-	@AfterAll
-	static void teardown() {
-		if (mongo != null) {
-			mongo.stop();
-		}
-	}
 
 	@Test
 	@DisplayName("Should file json valid successfully")
