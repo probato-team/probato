@@ -10,14 +10,8 @@
 		<version>0.1.0</version>
 	</parent>
 
-	<artifactId>probato-record</artifactId>
-
-	<repositories>
-		<repository>
-			<id>xuggle repo</id>
-			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
-		</repository>
-	</repositories>
+	<artifactId>probato-manager</artifactId>
+	<name>Probato Manager</name>
 
 	<!-- IMPORT DO BOM -->
 	<dependencyManagement>
@@ -52,11 +46,6 @@
 
 		<!-- Utils -->
 		<dependency>
-			<groupId>xuggle</groupId>
-			<artifactId>xuggle-xuggler</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j2-impl</artifactId>
 		</dependency>
@@ -78,6 +67,24 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <scope>test</scope>
 		</dependency>
 
 	</dependencies>

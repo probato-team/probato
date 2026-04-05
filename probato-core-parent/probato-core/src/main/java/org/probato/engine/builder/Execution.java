@@ -322,7 +322,7 @@ public class Execution implements Serializable {
 					var content = DatasetService.get().getContent(dataset, index);
 					this.datasetFilePath = Arrays.asList(dataset.value());
 					this.datasetHeaders = Arrays.asList(content.getHeaders());
-					this.datasetContent = ConverterUtils.toJson(content.getData());
+					 this.datasetContent = ConverterUtils.toJson(content.getData());
 				});
 			return this;
 		}

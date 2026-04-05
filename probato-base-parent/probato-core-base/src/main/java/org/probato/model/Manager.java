@@ -15,7 +15,7 @@ public class Manager {
 		this.submit = submit;
 	}
 
-	private Manager(ProjectBuilder builder) {
+	private Manager(ManagerBuilder builder) {
 		this();
 		this.url = builder.url;
 		this.token = builder.token;
@@ -46,29 +46,29 @@ public class Manager {
 		this.submit = submit;
 	}
 
-	public static ProjectBuilder builder() {
-		return new ProjectBuilder();
+	public static ManagerBuilder builder() {
+		return new ManagerBuilder();
 	}
 
-	public static class ProjectBuilder {
+	public static class ManagerBuilder {
 
 		private String url;
 		private String token;
 		private boolean submit = Boolean.FALSE;
 
-		private ProjectBuilder() {}
+		private ManagerBuilder() {}
 
-		public ProjectBuilder url(String url) {
+		public ManagerBuilder url(String url) {
 			this.url = url;
 			return this;
 		}
 
-		public ProjectBuilder token(String token) {
+		public ManagerBuilder token(String token) {
 			this.token = token;
 			return this;
 		}
 
-		public ProjectBuilder submit(Boolean submit) {
+		public ManagerBuilder submit(Boolean submit) {
 			this.submit = submit;
 			return this;
 		}

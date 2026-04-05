@@ -45,6 +45,7 @@
 		<module>probato-dataset-parent</module>
 		<module>probato-core-parent</module>
 		<module>probato-record</module>
+		<module>probato-manager</module>
 	</modules>
 
 	<properties>

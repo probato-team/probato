@@ -29,7 +29,7 @@ public final class ProbatoForJUnit5
 
 	@Override
 	public void afterEach(ExtensionContext context) throws Exception {
-		Probato.finish();
+		Probato.teardown();
 	}
 
 	@Override

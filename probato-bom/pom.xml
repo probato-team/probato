@@ -34,6 +34,7 @@
 		<h2.version>2.3.232</h2.version>
 		<mongodb.vesion>4.11.1</mongodb.vesion>
 		<cassandra.vesion>4.17.0</cassandra.vesion>
+		<wiremock.version>3.13.1</wiremock.version>
 	</properties>
 
 	<dependencyManagement>
@@ -73,6 +74,12 @@
 			<dependency>
 				<groupId>org.probato</groupId>
 				<artifactId>probato-record</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.probato</groupId>
+				<artifactId>probato-manager</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -137,6 +144,12 @@
 			    <groupId>com.fasterxml.jackson.core</groupId>
 			    <artifactId>jackson-databind</artifactId>
 			    <version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-annotations</artifactId>
+			    <version>2.21</version>
 			</dependency>
 
 			<dependency>
@@ -209,6 +222,12 @@
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.wiremock</groupId>
+				<artifactId>wiremock</artifactId>
+				<version>${wiremock.version}</version>
 			</dependency>
 
 		</dependencies>
