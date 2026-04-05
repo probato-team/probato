@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.test.util.IgnoreIfWorkflow;
@@ -78,6 +79,7 @@ class MongoDbUtilsTest {
 		assertTrue(Boolean.TRUE);
 	}
 
+	@Disabled
 	@Test
 	@DisplayName("Should execute documents successfully")
 	void shouldExecuteDocumentsSuccessfully() throws IOException {

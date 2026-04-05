@@ -61,17 +61,18 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		try {
 
 			result = collectData(context);
-			loadSQL(context, result);
+			loadSQL(context);
 
 			browserSession.run();
 			screenRecorder.startCapture();
 
-			executeScript(context, result);
+			executeScript(context);
 
 		} catch (Exception ex) {
 			// TODO: handle exception
 
 		} finally {
+
 			screenRecorder.stopCapture();
 			browserSession.destroy();
 		}
@@ -118,11 +119,11 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 		return procedureService.collectData(context, procedures);
 	}
 
-	private void executeScript(ExecutionContext context, ExecutionResult result) {
+	private void executeScript(ExecutionContext context) {
 		procedureService.execute(context, getDriver(), procedures, result);
 	}
 
-	private void loadSQL(ExecutionContext context, ExecutionResult result) {
+	private void loadSQL(ExecutionContext context) {
 		try {
 			sqlService.run(context.getSuiteClass());
 			sqlService.run(context.getScriptClass());
@@ -164,6 +165,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 
 	private Execution buildExecution(ExecutionContext context) {
 		return executionBuilder
+				.evaluation(result.getStatus().getEvaluation())
 				.end(ZonedDateTime.now())
 				.sql(context.getSuiteClass())
 				.sql(context.getScriptClass())

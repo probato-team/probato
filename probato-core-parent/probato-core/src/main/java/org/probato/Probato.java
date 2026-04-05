@@ -10,34 +10,45 @@ import org.probato.loader.AnnotationLoader;
 import org.probato.loader.ConfigurationContext;
 import org.probato.loader.DatasetLoader;
 import org.probato.model.Browser;
+import org.probato.model.Configuration;
 import org.probato.service.DatasetService;
+import org.probato.service.ManagerService;
+import org.probato.service.RecordService;
 import org.probato.service.ValidationService;
-import org.probato.type.ExecutionPhase;
 
 public class Probato {
 
 	private static ValidationService validationService;
 	private static DatasetService datasetService;
-//	private static List<ExternalService> integrationsService;
+	private static RecordService recordService;
+	private static ManagerService managerService;
+	private static Configuration configuration;
 
 	private Probato() {}
 
 	public static void init(Class<?> clazz) {
 		loadExtesions();
 		validate(clazz);
-		runIntegration(ExecutionPhase.BEFORE_ALL);
+		init();
+	}
+
+	public static void init() {
+		managerService.managerHealthCheck();
 	}
 
 	public static void setup() {
-		runIntegration(ExecutionPhase.BEFORE_EACH);
+		managerService.loadIncrementProject();
 	}
 
-	public static void finish() {
-		runIntegration(ExecutionPhase.AFTER_EACH);
+	public static void teardown() {
+		managerService.sendExecutionData();
+		recordService.deleteExecutionData(
+				configuration.getExecution().getTarget(),
+				configuration.getExecution().getDirectory());
 	}
 
 	public static void destroy() {
-		runIntegration(ExecutionPhase.AFTER_ALL);
+		// TODO execute
 	}
 
 	public static Stream<Class<?>> getTestsCase(Class<?> suiteClazz) {
@@ -62,6 +73,10 @@ public class Probato {
 
 	private static void loadExtesions() {
 
+		if (Objects.isNull(configuration)) {
+			configuration = ConfigurationContext.get();
+		}
+
 		if (Objects.isNull(validationService)) {
 			validationService = ValidationService.get();
 		}
@@ -70,20 +85,17 @@ public class Probato {
 			datasetService = DatasetService.get();
 		}
 
-//		if (Objects.isNull(integrationsService)) {
-//			integrationsService = ExternalService.getInstance();
-//		}
+		if (Objects.isNull(recordService)) {
+			recordService = RecordService.get();
+		}
+
+		if (Objects.isNull(managerService)) {
+			managerService = ManagerService.get();
+		}
 	}
 
 	private static void validate(Class<?> clazz) {
 		validationService.execute(clazz);
 	}
-
-	private static void runIntegration(ExecutionPhase type) {
-//		integrationsService.stream()
-//			.filter(service -> service.accepted(type))
-//			.forEach(ExternalService::run);
-	}
-
 
 }

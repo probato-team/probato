@@ -25,6 +25,7 @@ public class ExecutionResult {
 	private ExecutionException motive;
 
 	public ExecutionResult() {
+		status = ExecutionStatus.SKIPPED;
 		collecedSteps = new ArrayList<>();
 		executedSteps = new ArrayList<>();
 	}

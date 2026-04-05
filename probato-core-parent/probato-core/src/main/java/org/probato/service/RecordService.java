@@ -14,6 +14,8 @@ import org.probato.exception.ExecutionException;
 import org.probato.loader.ConfigurationContext;
 import org.probato.model.Configuration;
 import org.probato.model.Dimension;
+import org.probato.model.Directory;
+import org.probato.model.Target;
 import org.probato.record.RecordProvider;
 import org.probato.record.ScreenRecorder;
 import org.probato.record.Screenshot;
@@ -75,6 +77,16 @@ public class RecordService {
 			var outputFile = directory.concat("/").concat(name);
 
 			return provider.createScreenshot(screen, dimension, outputFile);
+
+		} catch (Exception ex) {
+			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());
+		}
+	}
+
+	public void deleteExecutionData(Target target, Directory directory) {
+		try {
+
+			provider.deleteExecutionData(target, directory);
 
 		} catch (Exception ex) {
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());

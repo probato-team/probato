@@ -5,17 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.probato.exception.ExecutionException;
 import org.probato.model.Dimension;
+import org.probato.model.Directory;
+import org.probato.model.Target;
 import org.probato.model.Video;
 import org.probato.test.util.IgnoreIfWorkflow;
 import org.probato.type.DimensionMode;
 import org.probato.type.Quality;
 import org.probato.type.Screen;
+import org.probato.utils.FileUtils;
 
 @IgnoreIfWorkflow
 @DisplayName("UT - ProbatoRecordProvider")
@@ -120,6 +124,46 @@ class ProbatoRecordProviderTest {
 		var exception = assertThrows(ExecutionException.class, () -> provider.createScreenshot(screen, null, null));
 
 		assertTrue(exception.getMessage().startsWith("An error occurred while trying to record screen the execution:"));
+	}
+
+
+	@Test
+	@DisplayName("Should delete files execution data successfully")
+	void shouldFilesExecutionDataSuccessfully() throws Exception {
+
+		var projectId = "9f12de88-56ba-45de-8a69-d3038011b357";
+		var directory = Directory.builder()
+				.keepClean(Boolean.TRUE)
+				.build();
+		var target = Target.builder()
+				.projectId(UUID.fromString("9f12de88-56ba-45de-8a69-d3038011b357"))
+				.url("http://localhost:9999")
+				.version("1.0.0")
+				.build();
+
+		var tempDir = directory.getTemp() + "/" + projectId + "/1.0.0";
+
+		var files = FileUtils.loadFiles(tempDir);
+		for (File file : files) {
+			FileUtils.delete(file);
+		}
+
+		var provider = new ProbatoRecordProvider();
+
+		provider.deleteExecutionData(target, directory);
+
+		assertTrue(Boolean.TRUE);
+	}
+
+	@Test
+	@DisplayName("Should validate when an delete execution data error occurs")
+	void shouldValidateDeleteExecutionDataError() {
+
+		var provider = new ProbatoRecordProvider();
+
+		var exception = assertThrows(ExecutionException.class, () -> provider.deleteExecutionData(null, null));
+
+		assertTrue(exception.getMessage().startsWith("An error occurred when trying to invoke the web application:"));
 	}
 
 }

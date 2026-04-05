@@ -79,7 +79,6 @@ public class FileUtils {
 		if (exists(file)) {
 			try (var walk = Files.walk(file.toPath())) {
 				walk.sorted(Comparator.reverseOrder())
-					.filter(path -> !path.equals(file.toPath()))
 					.forEach(path -> {
 						try {
 							Files.deleteIfExists(path);
