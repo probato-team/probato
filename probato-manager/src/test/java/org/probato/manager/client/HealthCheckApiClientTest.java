@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,6 +24,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.probato.exception.IntegrationException;
 import org.probato.model.Manager;
+import org.probato.model.Target;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -70,7 +73,13 @@ class HealthCheckApiClientTest {
 				.url("http://localhost:" + wireMockServer.port())
 				.build();
 
-		client.execute(manager);
+		var target = Target.builder()
+				.projectId(UUID.randomUUID())
+				.version("1.0.0")
+				.url("http://google.com")
+				.build();
+
+		client.execute(manager, target);
 
 		assertTrue(Boolean.TRUE);
 	}
@@ -91,12 +100,18 @@ class HealthCheckApiClientTest {
 				.url("http://localhost:" + wireMockServer.port())
 				.build();
 
+		var target = Target.builder()
+				.projectId(UUID.randomUUID())
+				.version("1.0.0")
+				.url("http://google.com")
+				.build();
+
 		stubFor(get(urlEqualTo("/health"))
                 .willReturn(aResponse()
                         .withBody(response)));
 
 		var exception = assertThrows(IntegrationException.class,
-				() -> client.execute(manager));
+				() -> client.execute(manager, target));
 
 		assertEquals("An error occurred when trying to invoke the web application: Web application is currently unavailable", exception.getMessage());
 	}

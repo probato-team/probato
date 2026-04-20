@@ -8,7 +8,7 @@ import org.probato.model.Target;
 
 public interface ManagerProvider {
 
-	public void managerHealthCheck(Manager manager);
+	public void managerHealthCheck(Manager manager, Target target);
 
 	public void loadIncrementProject(Manager manager);
 

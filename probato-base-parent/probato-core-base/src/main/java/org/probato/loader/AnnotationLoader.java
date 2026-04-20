@@ -44,12 +44,24 @@ public class AnnotationLoader {
 		return field.isAnnotationPresent(Disabled.class);
 	}
 
+	public static boolean isDisabled(Class<?> clazz) {
+		return clazz.isAnnotationPresent(Disabled.class);
+	}
+
 	public static Optional<Disabled> getDisabled(Field field) {
 		return Optional.ofNullable(field.getAnnotation(Disabled.class));
 	}
 
+	public static Optional<Disabled> getDisabled(Class<?> clazz) {
+		return Optional.ofNullable(clazz.getAnnotation(Disabled.class));
+	}
+
 	public static String getDisabledMotive(Field field) {
 		return getDisabled(field).map(Disabled::value).orElse("");
+	}
+
+	public static String getDisabledMotive(Class<?> clazz) {
+		return getDisabled(clazz).map(Disabled::value).orElse("");
 	}
 
 	public static boolean isTestCase(Field field) {
@@ -59,6 +71,7 @@ public class AnnotationLoader {
 	public static Stream<Class<?>> getTestsCase(Class<?> clazz) {
 		return Stream.of(clazz.getDeclaredFields())
 				.filter(AnnotationLoader::isTestCase)
+				.filter(field -> !field.isAnnotationPresent(Ignore.class) && !field.getType().isAnnotationPresent(Ignore.class))
 				.map(Field::getType);
 	}
 

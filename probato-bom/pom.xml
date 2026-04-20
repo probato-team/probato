@@ -30,7 +30,7 @@
 		<log4j.version>2.20.0</log4j.version>
 		<wiremock.version>3.9.1</wiremock.version>
 		<guava.version>33.3.1-jre</guava.version>
-		<xuggler.version>5.4</xuggler.version>
+		<javacv.version>1.5.10</javacv.version>
 		<h2.version>2.3.232</h2.version>
 		<mongodb.vesion>4.11.1</mongodb.vesion>
 		<cassandra.vesion>4.17.0</cassandra.vesion>
@@ -171,9 +171,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>xuggle</groupId>
-				<artifactId>xuggle-xuggler</artifactId>
-				<version>${xuggler.version}</version>
+				<groupId>org.bytedeco</groupId>
+				<artifactId>javacv-platform</artifactId>
+				<version>${javacv.version}</version>
 			</dependency>
 
 			<dependency>

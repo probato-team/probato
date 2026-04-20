@@ -43,11 +43,17 @@ public class ScriptTestNode extends TestNode {
 							item.code(),
 							item.name()),
 						getURI(),
-						nodes))
+						getNodes()))
 				.orElse(dynamicContainer(
 						buildText(CLAZZ_TEXT, scriptClazz),
 						getURI(),
-						nodes));
+						getNodes()));
+	}
+
+	protected Stream<? extends DynamicNode> getNodes() {
+		return AnnotationLoader.isDisabled(scriptClazz)
+				? Stream.empty()
+				: nodes;
 	}
 
 }

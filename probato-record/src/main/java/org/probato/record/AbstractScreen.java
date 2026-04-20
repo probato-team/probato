@@ -91,13 +91,13 @@ abstract class AbstractScreen {
 
 	protected static Rectangle getScreen(Screen screen) {
 
-		Rectangle rectangle = null;
-
 		var principalGe = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		var screens = Stream.of(ge.getScreenDevices())
 				.filter(item -> !item.equals(principalGe))
 				.collect(Collectors.toList());
+
+		Rectangle rectangle = null;
 		try {
 
 			if (Screen.PRIMARY.equals(screen)) {

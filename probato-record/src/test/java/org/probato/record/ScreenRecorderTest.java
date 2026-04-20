@@ -3,7 +3,6 @@ package org.probato.record;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.awt.AWTException;
 import java.io.File;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +30,7 @@ class ScreenRecorderTest {
 
 	@Test
 	@DisplayName("Should record successfully")
-	void shouldRecordSuccessfully() throws AWTException {
+	void shouldRecordSuccessfully() throws Exception {
 
 		var video = new Video();
 		video.setEnabled(Boolean.TRUE);
@@ -52,7 +51,7 @@ class ScreenRecorderTest {
 
 	@Test
 	@DisplayName("Should validate when data error")
-	void shouldValidateData() throws AWTException {
+	void shouldValidateData() throws Exception {
 
 		var video = new Video();
 		video.setEnabled(Boolean.TRUE);

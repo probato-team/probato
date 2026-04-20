@@ -33,7 +33,7 @@ public class ManagerService {
 	public void managerHealthCheck() {
 		try {
 
-			provider.managerHealthCheck(getManager());
+			provider.managerHealthCheck(getManager(), getTarget());
 
 		} catch (Exception ex) {
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());

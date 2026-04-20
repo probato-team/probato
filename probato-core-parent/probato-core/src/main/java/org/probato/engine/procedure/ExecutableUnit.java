@@ -23,7 +23,7 @@ public interface ExecutableUnit {
 
 	default void initializePagesObject(Object driver, Class<?> clazz, Object object, ExecutionResult result) throws Exception {
 		for (var page : AnnotationLoader.getPages(clazz)) {
-			var pageObject = intancePageObjectProxy(page.getType(), result);
+			var pageObject = intancePageObjectProxy(page.getType(), driver, result);
 			((PageObject) pageObject).setDriver(driver);
 			page.setAccessible(Boolean.TRUE); // NOSONAR
 			page.set(object, pageObject); // NOSONAR
@@ -31,14 +31,19 @@ public interface ExecutableUnit {
 	}
 
 	@SuppressWarnings({ "deprecation" })
-	default <T> T intancePageObjectProxy(Class<T> clazz, ExecutionResult result) throws InstantiationException, IllegalAccessException {
+	default <T> T intancePageObjectProxy(Class<T> clazz, Object driver, ExecutionResult result) throws InstantiationException, IllegalAccessException {
+
+		var pageObject = clazz.newInstance();
+		((PageObject) pageObject).setDriver(driver);
+
 		return new ByteBuddy()
 				.subclass(clazz)
 				.method(ElementMatchers.any())
-				.intercept(InvocationHandlerAdapter.of(new PageProxy(clazz.newInstance(), result)))
+				.intercept(InvocationHandlerAdapter.of(new PageProxy(pageObject, result)))
 				.make()
 				.load(clazz.getClassLoader())
-				.getLoaded().newInstance();
+				.getLoaded()
+				.newInstance();
 	}
 
 	default void executeMethod(Class<?> scriptClazz, Integer datasetLine, Object object, Method method) throws Exception { // NOSONAR

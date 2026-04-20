@@ -52,8 +52,8 @@
 
 		<!-- Utils -->
 		<dependency>
-			<groupId>xuggle</groupId>
-			<artifactId>xuggle-xuggler</artifactId>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacv-platform</artifactId>
 		</dependency>
 
 		<dependency>

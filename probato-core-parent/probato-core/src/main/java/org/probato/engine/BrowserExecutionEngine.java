@@ -62,8 +62,9 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 
 			result = collectData(context);
 			loadSQL(context);
-
+			
 			browserSession.run();
+
 			screenRecorder.startCapture();
 
 			executeScript(context);

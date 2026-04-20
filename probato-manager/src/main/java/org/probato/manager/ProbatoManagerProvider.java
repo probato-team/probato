@@ -22,8 +22,8 @@ public class ProbatoManagerProvider implements ManagerProvider {
 	}
 
 	@Override
-	public void managerHealthCheck(Manager manager) {
-		healthCheckApiClient.execute(manager);
+	public void managerHealthCheck(Manager manager, Target target) {
+		healthCheckApiClient.execute(manager, target);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import org.probato.model.Datamodel;
  *
  * <p>
  * Each implementation must declare whether it supports a given dataset source
- * through the {@link #accepted(String)} method.
+ * through the {@link #accepted(Dataset)} method.
  * </p>
  *
  * <p>
@@ -42,7 +42,7 @@ public interface DatasetProvider {
 	 * any other identifier.
 	 * </p>
 	 *
-	 * @param path dataset source path (e.g., file location)
+	 * @param dataset source path (e.g., file location)
 	 * @return {@code true} if this provider can handle the dataset; {@code false}
 	 *         otherwise
 	 */
@@ -55,7 +55,7 @@ public interface DatasetProvider {
 	 * This is typically used for indexed access to datamodels.
 	 * </p>
 	 *
-	 * @param path dataset source path
+	 * @param dataset source path
 	 * @return number of entries found in the dataset
 	 */
 	int countEntries(Dataset dataset);
@@ -64,7 +64,7 @@ public interface DatasetProvider {
 	 * Retrieves all datamodel entries from the dataset source and maps them to the
 	 * specified target class.
 	 *
-	 * @param path  dataset source path
+	 * @param dataset source path
 	 * @param clazz target class used for mapping
 	 * @param <T>   mapped datamodel type
 	 * @return list of mapped datamodel instances
@@ -74,7 +74,7 @@ public interface DatasetProvider {
 	/**
 	 * Retrieves all datamodel entries from the dataset source.
 	 *
-	 * @param path dataset source path
+	 * @param dataset source path
 	 * @return list of {@link Datamodel} instances
 	 */
 	List<Datamodel> getDatamodels(Dataset dataset);
@@ -83,7 +83,7 @@ public interface DatasetProvider {
 	 * Retrieves a specific datamodel entry by index and maps it to the specified
 	 * target class.
 	 *
-	 * @param path  dataset source path
+	 * @param dataset source path
 	 * @param clazz target class used for mapping
 	 * @param index entry position
 	 * @param <T>   mapped datamodel type
@@ -94,7 +94,7 @@ public interface DatasetProvider {
 	/**
 	 * Retrieves the raw {@link Content} associated with a dataset entry.
 	 *
-	 * @param path  dataset source path
+	 * @param dataset source path
 	 * @param index entry position
 	 * @return content associated with the specified index
 	 */
@@ -109,7 +109,7 @@ public interface DatasetProvider {
 	 * CSV, spreadsheet-like data, etc.).
 	 * </p>
 	 *
-	 * @param path dataset source path
+	 * @param dataset source path
 	 * @return list of content entries extracted from the dataset
 	 */
 	List<Content> getContent(Dataset dataset);

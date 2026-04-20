@@ -110,7 +110,7 @@ class AnnotationLoaderTest {
 
 		var testsCase = AnnotationLoader.getTestsCase(TestAnnotationLoader.class);
 
-		assertEquals(2, testsCase.collect(Collectors.toList()).size());
+		assertEquals(1, testsCase.collect(Collectors.toList()).size());
 	}
 
 	@Test

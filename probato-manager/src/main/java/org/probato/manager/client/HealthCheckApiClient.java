@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.probato.exception.IntegrationException;
 import org.probato.manager.client.dto.HealthCheckResponse;
 import org.probato.model.Manager;
+import org.probato.model.Target;
 
 public class HealthCheckApiClient extends AbstractApiClient {
 
@@ -14,7 +15,7 @@ public class HealthCheckApiClient extends AbstractApiClient {
 	private static final String HEALTHCHECK_UP_RESPONSE = "UP";
 	private static final String HEALTHCHECK_NO_UP_MSG = "Web application is currently unavailable";
 
-	public void execute(Manager manager) {
+	public void execute(Manager manager, Target target) {
 		try {
 
 			if (!isSubmit(manager)) return;
@@ -29,6 +30,8 @@ public class HealthCheckApiClient extends AbstractApiClient {
 			if (!isUP(data)) {
 				throw new IntegrationException(HEALTHCHECK_NO_UP_MSG);
 			}
+
+			setTarget(target);
 
 		} catch (Exception ex) { // NOSONAR
 			throw new IntegrationException(ERRO_INVOKE_MSG, ex.getMessage());

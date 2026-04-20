@@ -1,5 +1,7 @@
 package org.probato.page;
 
+import java.util.Objects;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.probato.model.PageObject;
@@ -18,7 +20,9 @@ public abstract class WebPage implements PageObject {
 	}
 
 	private final void setup() {
-		PageFactory.initElements(driver(), this);
+		if (Objects.nonNull(driver())) {
+			PageFactory.initElements(driver(), this);
+		}
 	}
 
 }

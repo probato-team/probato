@@ -74,7 +74,13 @@ class ProbatoManagerProviderTest {
 				.url("http://localhost:" + wireMockServer.port())
 				.build();
 
-		managerProvider.managerHealthCheck(manager);
+		var target = Target.builder()
+				.projectId(UUID.randomUUID())
+				.version("1.0.0")
+				.url("http://google.com")
+				.build();
+
+		managerProvider.managerHealthCheck(manager, target);
 
 		assertTrue(Boolean.TRUE);
 	}
