@@ -62,7 +62,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 
 			result = collectData(context);
 			loadSQL(context);
-			
+
 			browserSession.run();
 
 			screenRecorder.startCapture();
@@ -70,7 +70,8 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 			executeScript(context);
 
 		} catch (Exception ex) {
-			// TODO: handle exception
+
+			result.markFinished(ExecutionStatus.ERROR, ex);
 
 		} finally {
 
@@ -170,6 +171,8 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 				.end(ZonedDateTime.now())
 				.sql(context.getSuiteClass())
 				.sql(context.getScriptClass())
+				.video(executionId)// TODO: Check exists screen recording
+				// .image(executionId)// TODO: Check exists screenshot
 				.preconditions(result.getCollecedSteps()
 						.stream()
 						.filter(step -> PhaseType.PRECONDITION.equals(step.getPhase()))
