@@ -15,7 +15,7 @@ import org.probato.type.Screen;
 
 abstract class AbstractScreen {
 
-	private static final String TESTANO_TEXT_SCREEN = "PROBATO.ORG";
+	private static final String PROBATO_TEXT_SCREEN = "PROBATO.ORG";
 	private static final Integer TEXT_SIZE = 16;
 	private static final Integer WIDTH_TEXT_POSITION = 135;
 	private static final Integer HEIGHT_TEXT_POSITION = 15;
@@ -38,10 +38,10 @@ abstract class AbstractScreen {
 	protected final BufferedImage addText(BufferedImage image) {
 
 		var graphics = image.createGraphics();
-		var textColor = Color.GRAY;
+		var textColor = Color.RED;
 		graphics.setColor(textColor);
 		graphics.setFont(new Font(null, Font.BOLD, TEXT_SIZE));
-		graphics.drawString(TESTANO_TEXT_SCREEN, width - WIDTH_TEXT_POSITION, height - HEIGHT_TEXT_POSITION);
+		graphics.drawString(PROBATO_TEXT_SCREEN, width - WIDTH_TEXT_POSITION, height - HEIGHT_TEXT_POSITION);
 
 		return image;
 	}

@@ -86,7 +86,7 @@ public class RecordService {
 	public void deleteExecutionData(Target target, Directory directory) {
 		try {
 
-			provider.deleteExecutionData(target, directory);
+//			provider.deleteExecutionData(target, directory);
 
 		} catch (Exception ex) {
 			throw new ExecutionException(ERROR_DEFAULT_MSG, ex.getMessage());

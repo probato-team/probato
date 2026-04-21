@@ -62,7 +62,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 
 			result = collectData(context);
 			loadSQL(context);
-			
+
 			browserSession.run();
 
 			screenRecorder.startCapture();
@@ -170,6 +170,7 @@ public class BrowserExecutionEngine extends ExecutionEngine {
 				.end(ZonedDateTime.now())
 				.sql(context.getSuiteClass())
 				.sql(context.getScriptClass())
+				.video(executionId)
 				.preconditions(result.getCollecedSteps()
 						.stream()
 						.filter(step -> PhaseType.PRECONDITION.equals(step.getPhase()))
