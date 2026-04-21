@@ -63,6 +63,11 @@ public class ExecutionResult {
 		this.motive = motive;
 	}
 
+	public void markFinished(ExecutionStatus status, Exception motive) {
+		markFinished(status);
+		this.motive = new ExecutionException(motive.getMessage());
+	}
+
 	public void markFinished(ExecutionStatus status) {
 		this.status = status;
 		this.end = Instant.now();
